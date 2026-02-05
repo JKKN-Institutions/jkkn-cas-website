@@ -1,0 +1,78 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: 'Labs | JKKN College of Arts and Science',
+  description: 'State-of-the-art laboratory facilities at JKKN Educational Institutions covering physics, chemistry, biology, and engineering with the latest technology and equipment.',
+};
+
+export default function LabsPage() {
+  return (
+    <div className="min-h-screen bg-brand-cream">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {/* Page Title */}
+        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-12">
+          Labs
+        </h1>
+
+        {/* Lab Images Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden bg-gray-200 flex items-center justify-center">
+            {/* <Image
+              src="/images/labs/lab-1.jpg"
+              alt="Chemistry and Biology laboratory with students in white coats conducting experiments"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            /> */}
+            <div className="text-gray-500 text-center p-4">
+              <p className="font-semibold">Chemistry/Biology Lab</p>
+              <p className="text-sm">Image placeholder</p>
+            </div>
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden bg-gray-200 flex items-center justify-center">
+            {/* <Image
+              src="/images/labs/lab-2.jpg"
+              alt="Modern equipment and research laboratory with advanced technology"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            /> */}
+            <div className="text-gray-500 text-center p-4">
+              <p className="font-semibold">Equipment/Research Lab</p>
+              <p className="text-sm">Image placeholder</p>
+            </div>
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden bg-gray-200 flex items-center justify-center">
+            {/* <Image
+              src="/images/labs/lab-3.jpg"
+              alt="Computer laboratory with students working at modern computer stations"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            /> */}
+            <div className="text-gray-500 text-center p-4">
+              <p className="font-semibold">Computer Lab</p>
+              <p className="text-sm">Image placeholder</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Paragraphs */}
+        <div className="space-y-6 text-base md:text-lg leading-relaxed text-gray-700">
+          <p className="text-justify">
+            When it comes to quality education, the availability of advanced laboratory facilities is essential. At JKKN Educational Institutions, we understand the importance of providing our students with top-of-the-line laboratory facilities that cater to their academic and research needs. Our state-of-the-art laboratory facilities are designed to meet the requirements of our students and provide them with the best learning experience.
+          </p>
+
+          <p className="text-justify">
+            We have various laboratory facilities that cover various topics, including physics, chemistry, biology, and engineering. Our laboratories are equipped with the latest technology and equipment, allowing our students to conduct experiments and research in a safe and controlled environment. Our facilities are constantly updated to keep up with the latest developments in the field and ensure that our students have access to the most advanced tools and techniques available.
+          </p>
+
+          <p className="text-justify">
+            Our laboratory facilities are managed by a team of experienced professionals who are dedicated to providing our students with the support they need. They work closely with our faculty to ensure that the laboratory facilities are fully utilized to enhance the learning experience of our students. Our team of professionals is always available to assist our students with any questions or concerns they may have.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

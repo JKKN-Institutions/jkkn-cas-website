@@ -1,0 +1,87 @@
+import { Metadata } from 'next';
+import Image from 'next/image';
+import { CheckCircle2 } from 'lucide-react';
+import FloatingChatButtons from '@/components/ui/FloatingChatButtons';
+
+export const metadata: Metadata = {
+  title: 'Food Court | JKKN College of Arts and Science',
+  description: 'Diverse dining options at JKKN Educational Institutions food court with fresh, healthy, and affordable meals in a welcoming social hub for students.',
+};
+
+const features = [
+  'Diverse menu',
+  'Quality ingredients',
+  'Healthy options',
+  'Affordable prices',
+  'Hygiene and safety',
+];
+
+export default function FoodCourtPage() {
+  return (
+    <div className="min-h-screen bg-brand-cream">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {/* Title */}
+        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-12">
+          FOOD COURT
+        </h1>
+
+        {/* Image Grid - 3 columns on desktop, 1 on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/food-court/exterior.jpg"
+              alt="Food court building exterior view"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/food-court/interior-1.jpg"
+              alt="Food court dining area with seating"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/food-court/interior-2.jpg"
+              alt="Food court interior seating and atmosphere"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Content Paragraphs */}
+        <div className="space-y-6 text-base md:text-lg leading-relaxed text-gray-700 mb-8">
+          <p className="text-justify">
+            Our canteen is more than just a place to grab a quick bite. It&apos;s a social hub where students can come together to relax, catch up with friends, and recharge before diving back into their studies. With comfortable seating and a warm and welcoming atmosphere, it&apos;s the perfect place to take a break and refuel.
+          </p>
+          <p className="text-justify">
+            And speaking of refueling, you won&apos;t be disappointed with the variety of options available in our canteen. From fresh salads and sandwiches to hearty hot meals and snacks, we&apos;ve got something for everyone. Our menu is designed to cater to a range of dietary needs and preferences, so you can feel confident that you&apos;ll find something delicious and satisfying no matter what your tastes.
+          </p>
+        </div>
+
+        {/* Bullet Points with CheckCircle2 icons */}
+        <div className="space-y-3">
+          {features.map((feature, index) => (
+            <div key={index} className="flex items-center gap-3">
+              <CheckCircle2 className="h-5 w-5 text-brand-green flex-shrink-0" />
+              <span className="text-base md:text-lg text-gray-700">{feature}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Floating Chat Buttons */}
+        <FloatingChatButtons
+          facebookUrl="https://m.me/jkkncas"
+          whatsappNumber="919345855001"
+        />
+      </div>
+    </div>
+  );
+}

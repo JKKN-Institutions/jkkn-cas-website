@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
   GraduationCap,
@@ -701,7 +703,7 @@ export default function BScZoologyPage() {
 
 // Component: Quick Info Card
 function QuickInfoCard({ icon, title, highlight, description }: {
-  icon: React.ReactNode;
+  icon: React.ReactElement<{ className?: string }>;
   title: string;
   highlight?: string;
   description: string;
@@ -710,7 +712,7 @@ function QuickInfoCard({ icon, title, highlight, description }: {
     <div className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
       <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-[#ffde59] to-[#ffd740] rounded-lg flex items-center justify-center">
         <div className="text-[#0b6d41]">
-          {React.cloneElement(icon as React.ReactElement, { className: 'w-7 h-7' })}
+          {React.cloneElement(icon, { className: 'w-7 h-7' })}
         </div>
       </div>
       <h3 className="text-base font-bold text-[#0b6d41] mb-2">{title}</h3>
@@ -723,12 +725,12 @@ function QuickInfoCard({ icon, title, highlight, description }: {
 }
 
 // Component: Highlight Item
-function HighlightItem({ icon, text }: { icon: React.ReactNode; text: string }) {
+function HighlightItem({ icon, text }: { icon: React.ReactElement<{ className?: string }>; text: string }) {
   return (
     <div className="flex items-center gap-3">
       <div className="w-10 h-10 bg-[#0b6d41] rounded-lg flex items-center justify-center flex-shrink-0">
         <div className="text-white">
-          {React.cloneElement(icon as React.ReactElement, { className: 'w-5 h-5' })}
+          {React.cloneElement(icon, { className: 'w-5 h-5' })}
         </div>
       </div>
       <span className="text-gray-700 font-medium">{text}</span>
@@ -748,7 +750,7 @@ function LabFeature({ text }: { text: string }) {
 
 // Component: Eligibility Card
 function EligibilityCard({ icon, title, items }: {
-  icon: React.ReactNode;
+  icon: React.ReactElement<{ className?: string }>;
   title: string;
   items: string[];
 }) {
@@ -756,7 +758,7 @@ function EligibilityCard({ icon, title, items }: {
     <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
       <div className="w-12 h-12 bg-[#0b6d41] rounded-lg flex items-center justify-center mb-4">
         <div className="text-white">
-          {React.cloneElement(icon as React.ReactElement, { className: 'w-6 h-6' })}
+          {React.cloneElement(icon, { className: 'w-6 h-6' })}
         </div>
       </div>
       <h3 className="text-xl font-bold text-[#0b6d41] mb-4">{title}</h3>
@@ -796,7 +798,7 @@ function SemesterCard({ semester, subjects }: {
 
 // Component: Outcome Card
 function OutcomeCard({ icon, title, description }: {
-  icon: React.ReactNode;
+  icon: React.ReactElement<{ className?: string }>;
   title: string;
   description: string;
 }) {
@@ -804,7 +806,7 @@ function OutcomeCard({ icon, title, description }: {
     <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
       <div className="w-12 h-12 bg-[#ffde59] rounded-lg flex items-center justify-center mb-4">
         <div className="text-[#0b6d41]">
-          {React.cloneElement(icon as React.ReactElement, { className: 'w-6 h-6' })}
+          {React.cloneElement(icon, { className: 'w-6 h-6' })}
         </div>
       </div>
       <h3 className="text-lg font-bold text-[#0b6d41] mb-3">{title}</h3>
@@ -815,7 +817,7 @@ function OutcomeCard({ icon, title, description }: {
 
 // Component: Career Card
 function CareerCard({ icon, title, description }: {
-  icon: React.ReactNode;
+  icon: React.ReactElement<{ className?: string }>;
   title: string;
   description: string;
 }) {
@@ -823,7 +825,7 @@ function CareerCard({ icon, title, description }: {
     <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
       <div className="w-12 h-12 bg-[#0b6d41] rounded-lg flex items-center justify-center mb-4">
         <div className="text-white">
-          {React.cloneElement(icon as React.ReactElement, { className: 'w-6 h-6' })}
+          {React.cloneElement(icon, { className: 'w-6 h-6' })}
         </div>
       </div>
       <h3 className="text-lg font-bold text-[#0b6d41] mb-2">{title}</h3>
@@ -844,7 +846,7 @@ function SectorTag({ text }: { text: string }) {
 // Component: Facility Card
 function FacilityCard({ color, icon, title, features, iconColor = 'text-white', textColor = 'text-white' }: {
   color: string;
-  icon: React.ReactNode;
+  icon: React.ReactElement<{ className?: string }>;
   title: string;
   features: string[];
   iconColor?: string;
@@ -854,7 +856,7 @@ function FacilityCard({ color, icon, title, features, iconColor = 'text-white', 
     <div className={`${color} rounded-xl p-6 ${textColor} shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
       <div className="text-center mb-4">
         <div className={iconColor}>
-          {React.cloneElement(icon as React.ReactElement, { className: 'w-12 h-12 mx-auto mb-3' })}
+          {React.cloneElement(icon, { className: 'w-12 h-12 mx-auto mb-3' })}
         </div>
         <h3 className="text-xl font-bold">{title}</h3>
       </div>
@@ -872,7 +874,7 @@ function FacilityCard({ color, icon, title, features, iconColor = 'text-white', 
 
 // Component: Why Choose Card
 function WhyChooseCard({ icon, title, description }: {
-  icon: React.ReactNode;
+  icon: React.ReactElement<{ className?: string }>;
   title: string;
   description: string;
 }) {
@@ -880,7 +882,7 @@ function WhyChooseCard({ icon, title, description }: {
     <div className="bg-[#fbfbee] rounded-xl p-6 border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
       <div className="w-12 h-12 bg-[#ffde59] rounded-lg flex items-center justify-center mb-4">
         <div className="text-[#0b6d41]">
-          {React.cloneElement(icon as React.ReactElement, { className: 'w-6 h-6' })}
+          {React.cloneElement(icon, { className: 'w-6 h-6' })}
         </div>
       </div>
       <h4 className="text-lg font-bold text-[#0b6d41] mb-3">{title}</h4>

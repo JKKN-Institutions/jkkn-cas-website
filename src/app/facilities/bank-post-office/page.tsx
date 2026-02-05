@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
-import FloatingChatButtons from '@/components/layout/FloatingChatButtons';
+import FloatingChatButtons from '@/components/ui/FloatingChatButtons';
 
 export const metadata: Metadata = {
   title: 'Bank & Post Office | JKKN College of Arts and Science',

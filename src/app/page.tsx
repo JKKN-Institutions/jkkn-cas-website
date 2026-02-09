@@ -29,107 +29,67 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import HeroSection from '@/components/home/HeroSection';
+import StatsSection from '@/components/home/StatsSection';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-brand-green via-brand-green to-[#095c37] overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4wNSIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9nPjwvc3ZnPg==')] opacity-20"></div>
+      {/* Hero Section - Fits exactly one screen */}
+      <HeroSection />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20 md:pt-16 md:pb-28">
-          {/* Top Badge */}
-          <div className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-            <Award className="h-4 w-4 text-brand-yellow" />
-            <span className="text-sm font-medium text-white">
-              NAAC A+ Accredited | UGC Recognized | Periyar University Affiliated
-            </span>
-          </div>
-
-          {/* Main Heading */}
-          <div className="mb-8">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 leading-tight">
-              <span className="text-white">JKKN College for</span><br />
-              <span className="text-brand-yellow">Arts & Science</span><br />
-              <span className="text-white/90 text-3xl md:text-4xl lg:text-5xl">(Autonomous)</span>
-            </h1>
-          </div>
-
-          {/* Description */}
-          <p className="text-base md:text-xl mb-10 text-white/90 leading-relaxed max-w-3xl">
-            Empowering excellence since 1995. Unlock your potential with industry-integrated programs in Science, Commerce, Computer Applications, and Management. Join 3500+ Learners building successful careers with 95%+ placement at TCS, Infosys, Wipro & more.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <button className="bg-brand-yellow text-brand-green px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-yellow/90 transition shadow-xl hover:shadow-2xl hover:scale-105 transform">
-              Apply for 2025-26
-            </button>
-            <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition backdrop-blur-sm">
-              Explore Programs
-            </button>
-          </div>
-
-          {/* Stats Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/20">
-            <div className="text-center md:text-left">
-              <div className="text-4xl md:text-5xl font-bold text-brand-yellow mb-1">95%+</div>
-              <div className="text-sm md:text-base text-white/80">Placement Rate</div>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-4xl md:text-5xl font-bold text-brand-yellow mb-1">18+</div>
-              <div className="text-sm md:text-base text-white/80">UG & PG Programs</div>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-4xl md:text-5xl font-bold text-brand-yellow mb-1">3500+</div>
-              <div className="text-sm md:text-base text-white/80">Learners</div>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-4xl md:text-5xl font-bold text-brand-yellow mb-1">100+</div>
-              <div className="text-sm md:text-base text-white/80">Top Recruiters</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Stats Section - Counting animation */}
+      <StatsSection />
 
       {/* About JKKN Arts & Science Section */}
       <section className="py-16 md:py-24 bg-[#fbfbee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left Content */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+            {/* Left - Image */}
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
+                <img
+                  src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&h=600&fit=crop"
+                  alt="JKKN College Campus"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Accent decoration */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-yellow rounded-2xl -z-10 hidden lg:block"></div>
+              <div className="absolute -top-4 -left-4 w-20 h-20 bg-brand-green/10 rounded-2xl -z-10 hidden lg:block"></div>
+            </div>
+
+            {/* Right - Content */}
             <div>
               {/* Section Label */}
               <div className="text-[#0b6d41] text-sm font-semibold tracking-wide uppercase mb-4">
-                ABOUT JKKN ARTS & SCIENCE
+                ABOUT JKKN ARTS &amp; SCIENCE
               </div>
 
               {/* Main Title */}
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-8 leading-tight">
-                Nurturing Future Leaders<br />
-                Through Progressive<br />
-                Education
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-6 leading-tight">
+                Nurturing Future Leaders Through Progressive Education
               </h2>
 
-              {/* Description Paragraphs */}
-              <div className="space-y-6 text-base md:text-lg text-gray-700 leading-relaxed">
+              {/* Description Paragraphs - black color only */}
+              <div className="space-y-4 text-sm sm:text-base md:text-lg text-black leading-relaxed">
                 <p>
-                  <span className="text-[#0b6d41] font-semibold">J.K.K. Nattraja College of Arts and Science</span>, established in 1995, is a premier institution committed to transforming lives through accessible, <span className="text-[#0b6d41] font-semibold">progressive education</span>. As part of J.K.K. Nattraja Educational Institutions' 100-year legacy <span className="text-[#0b6d41] font-semibold">(JKKN100)</span>, we blend <span className="text-[#0b6d41] font-semibold">traditional values with modern</span>, industry-ready curriculum.
+                  J.K.K. Nattraja College of Arts and Science, established in 1995, is a premier institution committed to transforming lives through accessible, progressive education. As part of J.K.K. Nattraja Educational Institutions&apos; 100-year legacy (JKKN100), we blend traditional values with modern, industry-ready curriculum.
                 </p>
                 <p>
-                  Our <span className="text-[#0b6d41] font-semibold">NAAC A+ accreditation</span> and <span className="text-[#0b6d41] font-semibold">UGC recognition</span> reflect our commitment to academic excellence. With experienced <span className="text-[#0b6d41] font-semibold">Learning Facilitators</span>, state-of-the-art infrastructure, and strong industry partnerships, we prepare Learners not just for jobs, but for <span className="text-[#0b6d41] font-semibold">successful careers</span>.
+                  Our NAAC A+ accreditation and UGC recognition reflect our commitment to academic excellence. With experienced Learning Facilitators, state-of-the-art infrastructure, and strong industry partnerships, we prepare Learners not just for jobs, but for successful careers.
                 </p>
               </div>
 
               {/* Feature Grid */}
-              <div className="grid grid-cols-2 gap-6 mt-10">
+              <div className="grid grid-cols-2 gap-4 sm:gap-5 mt-8">
                 <div className="flex items-start gap-3">
                   <div className="bg-green-100 p-2.5 rounded-lg flex-shrink-0">
                     <BookOpen className="h-5 w-5 text-[#0b6d41]" />
                   </div>
                   <div>
-                    <div className="font-bold text-gray-900 mb-1">18+ Programs</div>
-                    <div className="text-sm text-gray-600">Science, Commerce, IT & Management</div>
+                    <div className="font-bold text-black text-sm sm:text-base mb-0.5">18+ Programs</div>
+                    <div className="text-xs sm:text-sm text-black/60">Science, Commerce, IT &amp; Management</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -137,8 +97,8 @@ export default function Home() {
                     <Users className="h-5 w-5 text-[#0b6d41]" />
                   </div>
                   <div>
-                    <div className="font-bold text-gray-900 mb-1">150+ Learning Facilitators</div>
-                    <div className="text-sm text-gray-600">PhD & Industry Experts</div>
+                    <div className="font-bold text-black text-sm sm:text-base mb-0.5">150+ Learning Facilitators</div>
+                    <div className="text-xs sm:text-sm text-black/60">PhD &amp; Industry Experts</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -146,8 +106,8 @@ export default function Home() {
                     <Briefcase className="h-5 w-5 text-[#0b6d41]" />
                   </div>
                   <div>
-                    <div className="font-bold text-gray-900 mb-1">Industry Partnerships</div>
-                    <div className="text-sm text-gray-600">TCS, Infosys, Wipro & More</div>
+                    <div className="font-bold text-black text-sm sm:text-base mb-0.5">Industry Partnerships</div>
+                    <div className="text-xs sm:text-sm text-black/60">TCS, Infosys, Wipro &amp; More</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -155,30 +115,10 @@ export default function Home() {
                     <Globe className="h-5 w-5 text-[#0b6d41]" />
                   </div>
                   <div>
-                    <div className="font-bold text-gray-900 mb-1">Global Alumni</div>
-                    <div className="text-sm text-gray-600">25,000+ Successful Graduates</div>
+                    <div className="font-bold text-black text-sm sm:text-base mb-0.5">Global Alumni</div>
+                    <div className="text-xs sm:text-sm text-black/60">25,000+ Successful Graduates</div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Right Content - Info Box */}
-            <div className="lg:mt-16">
-              <div className="bg-gradient-to-br from-yellow-50 to-white p-8 rounded-2xl border border-yellow-100 shadow-lg">
-                <div className="flex items-start gap-3 mb-6">
-                  <div className="bg-[#0b6d41] p-2 rounded-lg">
-                    <GraduationCap className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      J.K.K. Nattraja College of Arts and Science Campus, with modern <span className="text-[#0b6d41]">facilities</span> and green <span className="text-green-600">environment</span>.
-                    </h3>
-                  </div>
-                </div>
-                <button className="bg-[#0b6d41] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#095c37] transition shadow-md flex items-center gap-2">
-                  EXPLORE
-                  <span className="border-l border-white/30 pl-3 ml-1">EST. 1995</span>
-                </button>
               </div>
             </div>
           </div>

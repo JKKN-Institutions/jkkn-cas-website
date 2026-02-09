@@ -1,72 +1,214 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import {
   GraduationCap,
-  Users,
-  BookOpen,
-  TrendingUp,
-  CheckCircle,
-  Award,
-  Briefcase,
-  Target,
-  Clock,
   Calendar,
-  FileText,
-  BarChart,
-  DollarSign,
-  Globe,
-  Building,
-  UserCheck,
-  Brain,
-  Lightbulb,
-  PieChart,
-  Calculator,
-  Database,
-  LineChart,
-  Shield,
-  Zap,
+  BookOpen,
+  Users,
+  Award,
+  CheckCircle,
   ChevronDown,
-  Download,
-  ExternalLink
+  TrendingUp,
+  DollarSign,
+  Building,
+  BarChart,
+  FileText,
+  Shield,
+  Database,
+  Briefcase,
+  UserCheck,
+  Sparkles,
+  ArrowRight,
+  Clock
 } from 'lucide-react';
+import CountUp from '@/components/ui/CountUp';
+import Marquee from '@/components/ui/Marquee';
+
+// Helper function for scroll reveal animation
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
+// Reusable reveal section component
+function RevealSection({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// Glassmorphism card component
+function GlassCard({ children, className = '', hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
+  return (
+    <div className={`bg-white/40 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(11,109,65,0.08)] border border-white/60 ${hover ? 'hover:bg-white/60 hover:shadow-[0_8px_32px_rgba(11,109,65,0.15)] hover:-translate-y-2' : ''} transition-all duration-300 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+// Section badge component
+function SectionBadge({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 bg-brand-green/10 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-green/15 text-brand-green mb-4">
+      <Sparkles className="w-3.5 h-3.5" />
+      {text}
+    </span>
+  );
+}
 
 export default function BComCAPage() {
   const [activeYear, setActiveYear] = useState(1);
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-
-    // Spotlight effect for cards
-    const handleMouseMove = (e: MouseEvent) => {
-      const cards = document.querySelectorAll('.spotlight-card');
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        (card as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
-        (card as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
-      });
-    };
-
-    const cards = document.querySelectorAll('.spotlight-card');
-    cards.forEach((card) => {
-      card.addEventListener('mousemove', handleMouseMove as EventListener);
-    });
-
-    return () => {
-      cards.forEach((card) => {
-        card.removeEventListener('mousemove', handleMouseMove as EventListener);
-      });
-    };
-  }, []);
 
   const toggleFAQ = (index: number) => {
     setActiveFAQ(activeFAQ === index ? null : index);
   };
 
+  // Faculty data
+  const facultyMembers = [
+    {
+      name: "Dr. Sundarajan Rajan",
+      designation: "HOD & Assistant Professor",
+      education: "PhD in Commerce, M.Com, CA Inter",
+      image: "/images/faculties/faculty-placeholder.jpg"
+    },
+    {
+      name: "Prof. Kavitha Murugan",
+      designation: "Assistant Professor",
+      education: "M.Com, M.Phil, NET Qualified",
+      image: "/images/faculties/faculty-placeholder.jpg"
+    },
+    {
+      name: "Dr. Krishnan Iyer",
+      designation: "Associate Professor",
+      education: "PhD in Finance, CMA, M.Com",
+      image: "/images/faculties/faculty-placeholder.jpg"
+    },
+    {
+      name: "Ms. Priya Lakshmi",
+      designation: "Assistant Professor",
+      education: "M.Com, CA Foundation, Tally Certified",
+      image: "/images/faculties/faculty-placeholder.jpg"
+    }
+  ];
+
+  // Curriculum data
+  const curriculum = {
+    1: {
+      year: "First Year",
+      semesters: [
+        {
+          semester: "Semester I",
+          subjects: [
+            { code: "ACC101", name: "Financial Accounting I" },
+            { code: "ECO101", name: "Business Economics" },
+            { code: "MAT101", name: "Business Mathematics" },
+            { code: "ENG101", name: "Business Communication" },
+            { code: "MGT101", name: "Principles of Management" },
+            { code: "EVS101", name: "Environmental Studies" }
+          ]
+        },
+        {
+          semester: "Semester II",
+          subjects: [
+            { code: "ACC102", name: "Financial Accounting II" },
+            { code: "STA101", name: "Business Statistics" },
+            { code: "BNK101", name: "Banking Theory & Practice" },
+            { code: "LAW101", name: "Business Law" },
+            { code: "MGT102", name: "Organizational Behaviour" },
+            { code: "CAB101", name: "Computer Applications in Business" }
+          ]
+        }
+      ]
+    },
+    2: {
+      year: "Second Year",
+      semesters: [
+        {
+          semester: "Semester III",
+          subjects: [
+            { code: "ACC201", name: "Corporate Accounting I" },
+            { code: "ACC202", name: "Cost Accounting" },
+            { code: "LAW201", name: "Company Law" },
+            { code: "CSE201", name: "Database Management Systems" },
+            { code: "MKT201", name: "Marketing Management" },
+            { code: "FIN201", name: "Financial Markets & Services" }
+          ]
+        },
+        {
+          semester: "Semester IV",
+          subjects: [
+            { code: "ACC203", name: "Corporate Accounting II" },
+            { code: "ACC204", name: "Management Accounting" },
+            { code: "TAX201", name: "Income Tax Law & Practice" },
+            { code: "CSE202", name: "Programming in C/C++" },
+            { code: "HRM201", name: "Human Resource Management" },
+            { code: "RES201", name: "Research Methodology" }
+          ]
+        }
+      ]
+    },
+    3: {
+      year: "Third Year",
+      semesters: [
+        {
+          semester: "Semester V",
+          subjects: [
+            { code: "FIN301", name: "Financial Management" },
+            { code: "AUD301", name: "Auditing & Corporate Governance" },
+            { code: "TAX301", name: "Goods & Services Tax (GST)" },
+            { code: "ECM301", name: "E-Commerce" },
+            { code: "ACS301", name: "Accounting Software (Tally)" },
+            { code: "BAN301", name: "Business Analytics" }
+          ]
+        },
+        {
+          semester: "Semester VI",
+          subjects: [
+            { code: "FIN302", name: "Advanced Financial Management" },
+            { code: "AUD302", name: "Advanced Auditing" },
+            { code: "TAX302", name: "Indirect Taxation" },
+            { code: "DGM301", name: "Digital Marketing" },
+            { code: "ERP301", name: "ERP Systems (SAP)" },
+            { code: "PRJ301", name: "Project Work & Internship" }
+          ]
+        }
+      ]
+    }
+  };
+
+  // FAQ data
   const faqs = [
     {
       question: "What is the difference between B.Com CA and regular B.Com?",
@@ -96,828 +238,450 @@ export default function BComCAPage() {
 
   return (
     <>
-      {/* SEO Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Course",
-            "name": "Bachelor of Commerce in Computer Application",
-            "description": "A comprehensive 3-year undergraduate programme integrating commerce principles with computer applications, covering accounting, finance, taxation, and business technology.",
-            "provider": {
-              "@type": "CollegeOrUniversity",
-              "name": "J.K.K. Nattraja College of Arts and Science",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Kumarapalayam",
-                "addressRegion": "Tamil Nadu",
-                "addressCountry": "India"
-              }
-            },
-            "educationalCredentialAwarded": "Bachelor of Commerce in Computer Application",
-            "timeToComplete": "P3Y",
-            "occupationalCredentialAwarded": "UGC Recognized Degree"
-          })
-        }}
-      />
+      {/* Hero Banner Section */}
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+        {/* Background image */}
+        <Image
+          src="/images/programmes/bcom-ca-hero.jpg"
+          alt="B.Com CA programme"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
 
-      <div className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section className="relative bg-[#eaf1e2] overflow-hidden">
-          {/* Decorative Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#0b6d41]/5"></div>
-          </div>
-
-          <div className="container relative z-10 mx-auto px-4 md:px-6 py-12 md:py-16">
-            <div className="max-w-5xl mx-auto text-center">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-[#0b6d41]/10 backdrop-blur-sm px-5 py-2.5 rounded-full text-sm font-medium mb-6 border border-[#0b6d41]/20">
-                <GraduationCap className="w-4 h-4 text-[#0b6d41]" />
-                <span className="text-[#0b6d41]">UGC Recognized Programme</span>
-              </div>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#0b6d41] leading-tight">
-                Bachelor of Commerce in<br />Accounting and Finance
+        <div className="container mx-auto px-4 relative z-10">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-white/90 text-gray-900">
+                <GraduationCap className="w-4 h-4 text-brand-green" />
+                Self-Finance Programme
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+                Bachelor of Commerce in{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Computer Application
+                </span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-700 mb-10 font-light">
-                Master the Art of Financial Excellence and Strategic Business Management
+              <p className="text-xl md:text-2xl font-medium mb-6 text-gray-700">
+                Master Financial Excellence & Strategic Business Management
               </p>
 
-              {/* Meta Info */}
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Clock className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">3 Years Duration</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Users className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">Full-Time Programme</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Calendar className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">6 Semesters</span>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
               <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <button className="bg-[#ffde59] hover:bg-[#f5d447] text-[#0b6d41] px-8 py-3.5 rounded-lg font-bold transition-all hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
-                  Apply Now
-                </button>
-                <button className="bg-white border-2 border-[#0b6d41] hover:bg-[#0b6d41] hover:text-white text-[#0b6d41] px-8 py-3.5 rounded-lg font-semibold transition-all flex items-center gap-2 shadow-sm">
-                  <FileText className="w-5 h-5" />
-                  View Curriculum
-                </button>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <Clock className="w-5 h-5 text-brand-green" />
+                  <span>3 Years Duration</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <BookOpen className="w-5 h-5 text-brand-green" />
+                  <span>6 Semesters</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <Users className="w-5 h-5 text-brand-green" />
+                  <span>Full-Time Programme</span>
+                </div>
               </div>
 
-              {/* Highlight Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-                {[
-                  {
-                    icon: GraduationCap,
-                    title: "NAAC",
-                    subtitle: "Accredited Institution",
-                    description: "Quality assured education",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: DollarSign,
-                    title: "CA/CMA",
-                    subtitle: "Foundation Ready",
-                    description: "Professional exam preparation",
-                    color: "bg-[#ffde59]"
-                  },
-                  {
-                    icon: Briefcase,
-                    title: "90%+",
-                    subtitle: "Placement Record",
-                    description: "Top corporate recruiters",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: CheckCircle,
-                    title: "Industry",
-                    subtitle: "Internships",
-                    description: "Real-world exposure",
-                    color: "bg-[#ffde59]"
-                  }
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="spotlight-card relative bg-white text-gray-800 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 overflow-hidden"
-                    style={{
-                      opacity: isVisible ? 1 : 0,
-                      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                      transition: `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`
-                    }}
-                  >
-                    {/* Spotlight Effect - CSS Only */}
-                    <div
-                      className="spotlight-effect absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                      style={{
-                        background: item.color === 'bg-[#ffde59]'
-                          ? 'radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 222, 89, 0.2), transparent 70%)'
-                          : 'radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(11, 109, 65, 0.2), transparent 70%)'
-                      }}
-                    />
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="#admission" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-7 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                  Apply Now
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href="#curriculum" className="inline-flex items-center gap-2 bg-white/70 hover:bg-brand-green text-gray-900 hover:text-white border-2 border-white/80 hover:border-brand-green px-7 py-3 rounded-lg font-semibold backdrop-blur-sm transition-all">
+                  View Curriculum
+                </a>
+              </div>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
 
-                    {/* Card Content */}
-                    <div className="relative z-10">
-                      <div className="flex justify-center mb-4">
-                        <div className={`${item.color} w-14 h-14 rounded-full flex items-center justify-center shadow-lg`}>
-                          <item.icon className={`w-7 h-7 ${item.color === 'bg-[#ffde59]' ? 'text-[#0b6d41]' : 'text-white'}`} />
-                        </div>
-                      </div>
-                      <h3 className={`text-xl font-bold mb-1 ${item.color === 'bg-[#ffde59]' ? 'text-[#ffde59]' : 'text-[#0b6d41]'}`}>{item.title}</h3>
-                      <h4 className="font-semibold text-gray-800 mb-2">{item.subtitle}</h4>
-                      <p className="text-sm text-gray-600">{item.description}</p>
-                    </div>
+      {/* Quick Stats Section */}
+      <section className="py-16 bg-white relative">
+        <div className="container mx-auto px-4 md:px-6">
+          <RevealSection>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <GlassCard className="p-6 text-center">
+                  <div className="text-4xl font-bold text-brand-green mb-2">
+                    <CountUp end={70} duration={2000} />+
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">Years of Excellence</div>
+                </GlassCard>
+                <GlassCard className="p-6 text-center">
+                  <div className="text-4xl font-bold text-brand-green mb-2">
+                    <CountUp end={90} duration={2000} />%
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">Placement Record</div>
+                </GlassCard>
+                <GlassCard className="p-6 text-center">
+                  <div className="text-4xl font-bold text-brand-green mb-2">CA/CMA</div>
+                  <div className="text-sm text-gray-600 font-medium">Foundation Ready</div>
+                </GlassCard>
+                <GlassCard className="p-6 text-center">
+                  <div className="text-4xl font-bold text-brand-green mb-2">Big 4</div>
+                  <div className="text-sm text-gray-600 font-medium">Firm Placements</div>
+                </GlassCard>
+              </div>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* Programme Overview */}
+      <section className="py-16 bg-brand-cream">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
+            <RevealSection className="lg:col-span-3">
+              <SectionBadge text="About the Programme" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Programme{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Overview
+                </span>
+              </h2>
+              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+                The Bachelor of Commerce in Computer Application is a comprehensive three-year undergraduate programme designed to provide learners with in-depth knowledge of financial accounting, corporate finance, taxation, auditing, and financial management integrated with advanced computer applications. This UGC-recognized programme offers a perfect blend of theoretical foundations and practical business experience, preparing graduates for diverse career pathways in the financial and technology sectors.
+              </p>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                Our progressive education philosophy ensures that learners develop analytical thinking, professional competence, and ethical values through experiential learning. The curriculum integrates classical accounting principles with modern financial technologies including Tally, SAP, and financial modeling software, equipping graduates with skills demanded by accounting firms, banks, corporations, and financial institutions.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                {['Industry-Aligned Curriculum', 'Tally & SAP Training', 'CA/CMA Foundation Support', 'Mandatory Internships'].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="w-5 h-5 text-emerald-500" />
+                    <span>{item}</span>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
+            </RevealSection>
 
-        {/* Programme Overview */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="max-w-5xl mx-auto">
-                {/* Main Content */}
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-2">Programme Overview</h2>
-                  <div className="w-16 h-1 bg-[#ffde59] mb-8 rounded"></div>
-
-                  <div className="space-y-4 mb-10">
-                    <p className="text-gray-700 leading-relaxed">
-                      The Bachelor of Commerce in Accounting and Finance is a comprehensive three-year undergraduate programme designed to provide learners with in-depth knowledge of financial accounting, corporate finance, taxation, auditing, and financial management. This UGC-recognized programme offers a perfect blend of theoretical foundations and practical business experience, preparing graduates for diverse career pathways in the financial sector.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed">
-                      Our progressive education philosophy ensures that learners develop analytical thinking, professional competence, and ethical values through experiential learning. The curriculum integrates classical accounting principles with modern financial technologies including Tally, SAP, and financial modeling software, equipping graduates with skills demanded by accounting firms, banks, corporations, and financial institutions.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid - 2x2 */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#ffde59]">
-                      <CheckCircle className="w-5 h-5 text-[#ffde59] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Industry-aligned curriculum with Tally & SAP training</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#ffde59]">
-                      <CheckCircle className="w-5 h-5 text-[#ffde59] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">CA/CMA/CFA foundation preparation support</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#ffde59]">
-                      <CheckCircle className="w-5 h-5 text-[#ffde59] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Mandatory internship with leading firms</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#ffde59]">
-                      <CheckCircle className="w-5 h-5 text-[#ffde59] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Guest lectures by industry professionals</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <RevealSection className="lg:col-span-2" delay={200}>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/programmes/bcom-ca-hero.jpg"
+                  alt="Commerce Computer Lab"
+                  width={600}
+                  height={450}
+                  className="w-full h-auto object-cover"
+                />
+                <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                  Since 1954
+                </span>
               </div>
-            </div>
+            </RevealSection>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Eligibility & Admission Criteria */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
+      {/* Eligibility & Admission Criteria */}
+      <section className="py-16 bg-white" id="eligibility">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
               <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Eligibility & Admission Criteria
+                <SectionBadge text="Admissions" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Eligibility &{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Admission Criteria
+                  </span>
                 </h2>
-                <p className="text-gray-600 text-lg">
-                  Requirements and pathways to join our B.Com Accounting and Finance programme
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Requirements for joining the B.Com Computer Application programme
                 </p>
               </div>
+            </RevealSection>
 
-              {/* Grid of 6 Cards */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Academic Qualification */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <GraduationCap className="w-7 h-7 text-white" />
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  icon: <GraduationCap className="w-8 h-8 text-white" />,
+                  title: 'Academic Qualification',
+                  items: ['Higher Secondary (10+2) from recognized board', 'Commerce/Science/Arts stream eligible', 'Minimum 50% aggregate marks', '45% for OBC, 40% for SC/ST']
+                },
+                {
+                  icon: <FileText className="w-8 h-8 text-white" />,
+                  title: 'Accepted Streams',
+                  items: ['Commerce stream preferred', 'Science with basic mathematics', 'Arts with accounting knowledge', 'Basic computer literacy required']
+                },
+                {
+                  icon: <BookOpen className="w-8 h-8 text-white" />,
+                  title: 'Documents Required',
+                  items: ['10th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photographs', 'Aadhaar Card Copy']
+                }
+              ].map((card, idx) => (
+                <RevealSection key={idx} delay={idx * 150}>
+                  <GlassCard className="p-8 h-full">
+                    <div className="w-16 h-16 bg-gradient-to-br from-brand-green to-emerald-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20">
+                      {card.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Academic Qualification
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Higher Secondary (10+2) from a recognized board in any stream. Commerce background preferred but not mandatory.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Candidates from Science or Arts streams with basic mathematics are also eligible.</span>
-                      </li>
+                    <h3 className="text-xl font-bold text-brand-green mb-4">{card.title}</h3>
+                    <ul className="space-y-2 text-gray-700">
+                      {card.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-emerald-500 mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
                     </ul>
-                  </div>
-                </div>
-
-                {/* Card 2: Minimum Marks */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <FileText className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Minimum Marks
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>General Category: 50% aggregate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>OBC Category: 45% aggregate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>SC/ST Category: 40% aggregate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Differently Abled: 40% aggregate</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 3: Age Criteria */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <UserCheck className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Age Criteria
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>No upper age limit for admission.</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Candidates who have completed 17 years of age as on December 31st of the admission year are eligible to apply for the programme.</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 4: Required Documents */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <FileText className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Required Documents
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>10th & 12th Mark Sheets</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Transfer Certificate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Community Certificate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Passport Size Photographs</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 5: Admission Process */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <Calendar className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Admission Process
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Online/Offline Application</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Document Verification</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Merit-based Selection</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Fee Payment & Enrollment</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 6: Scholarships Available */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <DollarSign className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Scholarships Available
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Merit Scholarships (Top 10%)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Government Scholarships</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Financial Aid for EWS</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Sports Quota Benefits</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                  </GlassCard>
+                </RevealSection>
+              ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Course Curriculum with Tabs */}
-        <section className="py-16 md:py-20">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-12 text-center">Course Curriculum</h2>
+      {/* Curriculum Section */}
+      <section className="py-20 bg-gradient-to-br from-emerald-50 via-brand-cream to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Academic Structure" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Course Curriculum
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
+            </div>
+          </RevealSection>
 
-            {/* Tab Navigation */}
-            <div className="flex justify-center mb-8">
-              <div className="inline-flex bg-white border border-gray-200 rounded-xl p-1 shadow-sm">
+          <RevealSection>
+            <div className="max-w-6xl mx-auto">
+              {/* Year Selector */}
+              <div className="flex flex-wrap justify-center gap-4 mb-12">
                 {[1, 2, 3].map((year) => (
                   <button
                     key={year}
                     onClick={() => setActiveYear(year)}
-                    className={`px-8 py-3 rounded-lg font-semibold transition-all ${
+                    className={`px-8 py-3 rounded-xl font-semibold transition-all ${
                       activeYear === year
-                        ? 'bg-[#0b6d41] text-white shadow-md'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-[#fbfbee]'
+                        ? 'bg-brand-green text-white shadow-xl shadow-brand-green/25 scale-105'
+                        : 'bg-white/60 backdrop-blur-sm text-gray-700 hover:bg-white/80 border border-gray-200'
                     }`}
                   >
                     Year {year}
                   </button>
                 ))}
               </div>
-            </div>
 
-            {/* Tab Content */}
-            <div className="max-w-7xl mx-auto">
-              {/* Year 1 */}
-              {activeYear === 1 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester I */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester I</h3>
+              {/* Semesters Content */}
+              <div className="grid md:grid-cols-2 gap-8">
+                {curriculum[activeYear as keyof typeof curriculum].semesters.map((sem, idx) => (
+                  <GlassCard key={idx} className="p-8" hover={false}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <BookOpen className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-brand-green">{sem.semester}</h3>
                     </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Financial Accounting I", code: "ACC101" },
-                        { name: "Business Economics", code: "ECO101" },
-                        { name: "Business Mathematics", code: "MAT101" },
-                        { name: "Business Communication", code: "ENG101" },
-                        { name: "Principles of Management", code: "MGT101" },
-                        { name: "Environmental Studies", code: "EVS101" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
+                    <div className="space-y-3">
+                      {sem.subjects.map((subject, subIdx) => (
+                        <div
+                          key={subIdx}
+                          className="flex items-center justify-between py-3 px-4 rounded-xl bg-white/50 hover:bg-white/80 transition-colors border border-white/60"
+                        >
+                          <span className="text-gray-700 font-medium">{subject.name}</span>
+                          <span className="text-brand-green font-semibold text-sm">{subject.code}</span>
                         </div>
                       ))}
                     </div>
-                  </div>
-
-                  {/* Semester II */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester II</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Financial Accounting II", code: "ACC102" },
-                        { name: "Business Statistics", code: "STA101" },
-                        { name: "Banking Theory & Practice", code: "BNK101" },
-                        { name: "Business Law", code: "LAW101" },
-                        { name: "Organizational Behaviour", code: "MGT102" },
-                        { name: "Computer Applications in Business", code: "CAB101" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Year 2 */}
-              {activeYear === 2 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester III */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester III</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Corporate Accounting I", code: "ACC201" },
-                        { name: "Cost Accounting", code: "ACC202" },
-                        { name: "Company Law", code: "LAW201" },
-                        { name: "Database Management Systems", code: "CSE201" },
-                        { name: "Marketing Management", code: "MKT201" },
-                        { name: "Financial Markets & Services", code: "FIN201" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Semester IV */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester IV</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Corporate Accounting II", code: "ACC203" },
-                        { name: "Management Accounting", code: "ACC204" },
-                        { name: "Income Tax Law & Practice", code: "TAX201" },
-                        { name: "Programming in C/C++", code: "CSE202" },
-                        { name: "Human Resource Management", code: "HRM201" },
-                        { name: "Research Methodology", code: "RES201" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Year 3 */}
-              {activeYear === 3 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester V */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester V</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Financial Management", code: "FIN301" },
-                        { name: "Auditing & Corporate Governance", code: "AUD301" },
-                        { name: "Goods & Services Tax (GST)", code: "TAX301" },
-                        { name: "E-Commerce", code: "ECM301" },
-                        { name: "Accounting Software (Tally)", code: "ACS301" },
-                        { name: "Business Analytics", code: "BAN301" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Semester VI */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester VI</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Advanced Financial Management", code: "FIN302" },
-                        { name: "Advanced Auditing", code: "AUD302" },
-                        { name: "Indirect Taxation", code: "TAX302" },
-                        { name: "Digital Marketing", code: "DGM301" },
-                        { name: "ERP Systems (SAP)", code: "ERP301" },
-                        { name: "Project Work & Internship", code: "PRJ301" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* Programme Learning Outcomes */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Programme Learning Outcomes
-                </h2>
-                <p className="text-gray-600 text-lg">
-                  Skills and competencies you will develop through this programme
-                </p>
+                  </GlassCard>
+                ))}
               </div>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
 
-              {/* Grid of 6 Cards */}
+      {/* Learning Outcomes */}
+      <section className="py-20 bg-white relative">
+        <div className="container mx-auto px-4 md:px-6">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="What You'll Gain" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Programme Learning Outcomes
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
+              <p className="text-lg text-gray-700">
+                Skills and competencies you will develop through this programme
+              </p>
+            </div>
+          </RevealSection>
+
+          <RevealSection>
+            <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Financial Expertise */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <DollarSign className="w-6 h-6 text-[#0b6d41]" />
-                    </div>
-                    <span className="text-[#ffde59] text-sm font-bold">01</span>
+                {/* Financial Expertise */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <DollarSign className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Financial Expertise
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Financial Expertise</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">
                     Master comprehensive accounting principles, financial reporting standards, and advanced bookkeeping techniques following Indian Accounting Standards (Ind AS) and IFRS.
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 2: Analytical Proficiency */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <BarChart className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">02</span>
+                {/* Analytical Proficiency */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <BarChart className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Analytical Proficiency
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Analytical Proficiency</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">
                     Develop strong analytical skills for financial statement analysis, ratio analysis, budgeting, forecasting, and strategic financial decision-making.
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 3: Taxation Knowledge */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <FileText className="w-6 h-6 text-[#0b6d41]" />
-                    </div>
-                    <span className="text-[#ffde59] text-sm font-bold">03</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Taxation Knowledge
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Acquire comprehensive understanding of direct and indirect taxation including Income Tax, GST, tax planning strategies, and compliance requirements.
-                  </p>
-                </div>
-
-                {/* Card 4: Auditing Competence */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Shield className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">04</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Auditing Competence
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Learn systematic approaches to internal and external auditing, risk assessment, internal controls, and audit documentation as per auditing standards.
-                  </p>
-                </div>
-
-                {/* Card 5: Technology Proficiency */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Database className="w-6 h-6 text-[#0b6d41]" />
-                    </div>
-                    <span className="text-[#ffde59] text-sm font-bold">05</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Technology Proficiency
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Apply modern accounting software including Tally Prime, SAP, Excel advanced functions, and financial modeling tools for efficient financial management.
-                  </p>
-                </div>
-
-                {/* Card 6: Professional Ethics */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">06</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Professional Ethics
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Develop strong ethical foundation, professional communication skills, and leadership qualities essential for finance professionals and chartered accountants.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Career Opportunities */}
-        <section className="py-16 md:py-20 bg-[#eaf1e2]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#0b6d41]">
-                  Career Opportunities
-                </h2>
-                <p className="text-gray-700 text-lg">
-                  Diverse career pathways await B.Com Accounting and Finance graduates
-                </p>
-              </div>
-
-              {/* Grid of 8 Career Cards */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                {/* Card 1: Chartered Accountant */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#ffde59] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <DollarSign className="w-7 h-7 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Chartered Accountant
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    CA Foundation & Intermediate preparation
-                  </p>
-                </div>
-
-                {/* Card 2: Banking Professional */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Building className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Banking Professional
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Public & Private sector banks
-                  </p>
-                </div>
-
-                {/* Card 3: Financial Analyst */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#ffde59] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <BarChart className="w-7 h-7 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Financial Analyst
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Investment research & analysis
-                  </p>
-                </div>
-
-                {/* Card 4: Tax Consultant */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
+                {/* Taxation Knowledge */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                     <FileText className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Tax Consultant
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Income Tax & GST advisory
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Taxation Knowledge</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">
+                    Acquire comprehensive understanding of direct and indirect taxation including Income Tax, GST, tax planning strategies, and compliance requirements.
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 5: Auditor */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#ffde59] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Shield className="w-7 h-7 text-[#0b6d41]" />
+                {/* Auditing Competence */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <Shield className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Auditor
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Internal & External auditing
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Auditing Competence</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">
+                    Learn systematic approaches to internal and external auditing, risk assessment, internal controls, and audit documentation as per auditing standards.
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 6: Cost Accountant */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
+                {/* Technology Proficiency */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <Database className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Technology Proficiency</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">
+                    Apply modern accounting software including Tally Prime, SAP, Excel advanced functions, and financial modeling tools for efficient financial management.
+                  </p>
+                </GlassCard>
+
+                {/* Professional Ethics */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <Users className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Professional Ethics</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">
+                    Develop strong ethical foundation, professional communication skills, and leadership qualities essential for finance professionals and chartered accountants.
+                  </p>
+                </GlassCard>
+              </div>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* Career Opportunities */}
+      <section className="py-20 bg-gradient-to-br from-brand-cream via-emerald-50/30 to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Future Prospects" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Career Opportunities
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
+              <p className="text-lg text-gray-700">
+                Diverse career pathways await B.Com Accounting and Finance graduates
+              </p>
+            </div>
+          </RevealSection>
+
+          <RevealSection>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                {/* Chartered Accountant */}
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <DollarSign className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Chartered Accountant</h3>
+                  <p className="text-gray-600 text-sm">CA Foundation & Intermediate preparation</p>
+                </GlassCard>
+
+                {/* Banking Professional */}
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Building className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Banking Professional</h3>
+                  <p className="text-gray-600 text-sm">Public & Private sector banks</p>
+                </GlassCard>
+
+                {/* Financial Analyst */}
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <BarChart className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Financial Analyst</h3>
+                  <p className="text-gray-600 text-sm">Investment research & analysis</p>
+                </GlassCard>
+
+                {/* Tax Consultant */}
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <FileText className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Tax Consultant</h3>
+                  <p className="text-gray-600 text-sm">Income Tax & GST advisory</p>
+                </GlassCard>
+
+                {/* Auditor */}
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Shield className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Auditor</h3>
+                  <p className="text-gray-600 text-sm">Internal & External auditing</p>
+                </GlassCard>
+
+                {/* Cost Accountant */}
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <CheckCircle className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Cost Accountant
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    CMA professional pathway
-                  </p>
-                </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Cost Accountant</h3>
+                  <p className="text-gray-600 text-sm">CMA professional pathway</p>
+                </GlassCard>
 
-                {/* Card 7: Corporate Finance */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#ffde59] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Briefcase className="w-7 h-7 text-[#0b6d41]" />
+                {/* Corporate Finance */}
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Briefcase className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Corporate Finance
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Finance manager roles in MNCs
-                  </p>
-                </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Corporate Finance</h3>
+                  <p className="text-gray-600 text-sm">Finance manager roles in MNCs</p>
+                </GlassCard>
 
-                {/* Card 8: Academia */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
+                {/* Academia */}
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <GraduationCap className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Academia
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Teaching & Research positions
-                  </p>
-                </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Academia</h3>
+                  <p className="text-gray-600 text-sm">Teaching & Research positions</p>
+                </GlassCard>
               </div>
 
               {/* Recruiting Sectors */}
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-6 text-[#0b6d41]">Recruiting Sectors</h3>
+              <GlassCard className="p-8" hover={false}>
+                <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Recruiting Sectors</h3>
                 <div className="flex flex-wrap justify-center gap-3">
                   {[
                     "Big 4 Accounting Firms",
@@ -935,154 +699,166 @@ export default function BComCAPage() {
                   ].map((sector, idx) => (
                     <span
                       key={idx}
-                      className="bg-white border border-gray-300 text-gray-700 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-white hover:shadow-md transition-all"
+                      className="bg-white/60 backdrop-blur-sm border border-brand-green/20 text-gray-700 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-white/80 hover:shadow-md transition-all"
                     >
                       {sector}
                     </span>
                   ))}
                 </div>
-              </div>
+              </GlassCard>
             </div>
-          </div>
-        </section>
+          </RevealSection>
+        </div>
+      </section>
 
-        {/* Department Facilities */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+      {/* Department Facilities */}
+      <section className="py-20 bg-white relative">
+        <div className="container mx-auto px-4 md:px-6">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Infrastructure" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Department Facilities
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
+              <p className="text-lg text-gray-700">
+                State-of-the-art infrastructure for comprehensive learning
+              </p>
+            </div>
+          </RevealSection>
+
+          <RevealSection>
             <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Department Facilities
-                </h2>
-                <p className="text-gray-600 text-lg">
-                  State-of-the-art infrastructure for comprehensive learning
-                </p>
-              </div>
-
-              {/* Grid of 6 Facility Cards */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Computer Lab */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] p-8 text-center">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Computer Lab */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 text-center">
                     <h3 className="text-2xl font-bold text-white">Computer Lab</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Computer Lab with Accounting Software
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Fully equipped labs with Tally Prime, SAP, Advanced Excel, and financial modeling software for hands-on practical training.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 2: Digital Library */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#ffde59] to-[#f5d447] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Digital Library</h3>
+                {/* Digital Library */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-white/60 backdrop-blur-sm p-8 text-center border-b-4 border-brand-green">
+                    <h3 className="text-2xl font-bold text-brand-green">Digital Library</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Digital Library & E-Resources
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Access to ICAI study materials, financial databases, e-journals, and online resources for research and competitive exam preparation.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 3: Smart Classroom */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] p-8 text-center">
+                {/* Smart Classroom */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 text-center">
                     <h3 className="text-2xl font-bold text-white">Smart Classroom</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Smart Learning Studios
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Air-conditioned learning studios equipped with smart boards, projectors, and modern teaching aids for interactive learning.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 4: Seminar Hall */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] p-8 text-center">
+                {/* Seminar Hall */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 text-center">
                     <h3 className="text-2xl font-bold text-white">Seminar Hall</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Seminar Hall & Conference Room
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Dedicated spaces for seminars, guest lectures by industry experts, workshops, and professional development programs.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 5: Placement Cell */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#ffde59] to-[#f5d447] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Placement Cell</h3>
+                {/* Placement Cell */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-white/60 backdrop-blur-sm p-8 text-center border-b-4 border-brand-green">
+                    <h3 className="text-2xl font-bold text-brand-green">Placement Cell</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Placement & Career Guidance Cell
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Dedicated placement cell facilitating campus recruitment, career counseling, resume building, and interview preparation.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 6: CA Study Center */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] p-8 text-center">
+                {/* CA Study Center */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 text-center">
                     <h3 className="text-2xl font-bold text-white">CA Study Center</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       CA/CMA Study Center
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Dedicated coaching facility for CA Foundation, CMA Foundation, and other professional certification examinations.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
               </div>
             </div>
-          </div>
-        </section>
+          </RevealSection>
+        </div>
+      </section>
 
-        {/* Why Choose JKKN */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
+      {/* Why Choose Section */}
+      <section className="py-20 bg-gradient-to-br from-brand-cream via-white to-emerald-50/30 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/dots.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Left Side - Dark Box */}
-                <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] rounded-2xl p-16 flex items-center justify-center min-h-[500px]">
-                  <h3 className="text-4xl font-bold text-white text-center">
-                    Why Choose JKKN
-                  </h3>
+                {/* Left Side */}
+                <div className="relative">
+                  <GlassCard className="p-16 min-h-[500px] flex items-center justify-center bg-gradient-to-br from-brand-green/90 to-emerald-600/90" hover={false}>
+                    <div className="text-center">
+                      <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Why Choose JKKN
+                      </h3>
+                      <div className="w-24 h-1.5 bg-white/80 mx-auto rounded-full"></div>
+                    </div>
+                  </GlassCard>
                 </div>
 
-                {/* Right Side - Content */}
+                {/* Right Side */}
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-2">
+                  <SectionBadge text="Our Advantages" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
                     Why Choose Our B.Com Accounting and Finance Programme?
                   </h2>
-                  <div className="w-16 h-1 bg-[#ffde59] mb-8 rounded"></div>
+                  <div className="w-16 h-1 bg-brand-green rounded-full mb-8"></div>
 
                   <div className="space-y-6">
-                    {/* Reason 1 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <GraduationCap className="w-6 h-6 text-[#0b6d41]" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <GraduationCap className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           70+ Years of Academic Excellence
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1091,13 +867,12 @@ export default function BComCAPage() {
                       </div>
                     </div>
 
-                    {/* Reason 2 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <CheckCircle className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Industry-Integrated Curriculum
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1106,13 +881,12 @@ export default function BComCAPage() {
                       </div>
                     </div>
 
-                    {/* Reason 3 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Users className="w-6 h-6 text-[#0b6d41]" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <Users className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Experienced Learning Facilitators
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1121,13 +895,12 @@ export default function BComCAPage() {
                       </div>
                     </div>
 
-                    {/* Reason 4 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <TrendingUp className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Strong Placement Record
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1136,13 +909,12 @@ export default function BComCAPage() {
                       </div>
                     </div>
 
-                    {/* Reason 5 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Award className="w-6 h-6 text-[#0b6d41]" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <Award className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Professional Certification Support
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1151,13 +923,12 @@ export default function BComCAPage() {
                       </div>
                     </div>
 
-                    {/* Reason 6 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <Briefcase className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Industry Internships
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1169,28 +940,80 @@ export default function BComCAPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </RevealSection>
+        </div>
+      </section>
 
-        {/* FAQ Section with Accordion */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-12 text-center">Frequently Asked Questions</h2>
+      {/* Faculty Section */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Our Team" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Expert Faculty Members
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Learn from experienced faculty with CA/CMA qualifications and industry experience.
+              </p>
+            </div>
+          </RevealSection>
 
+          <RevealSection>
+            <div className="max-w-7xl mx-auto">
+              <Marquee pauseOnHover className="[--duration:40s]">
+                {facultyMembers.map((faculty, index) => (
+                  <GlassCard key={index} className="w-80 mx-4">
+                    <div className="p-6">
+                      <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-brand-green/20">
+                        <Image
+                          src={faculty.image}
+                          alt={faculty.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold text-brand-green mb-2">{faculty.name}</h3>
+                        <p className="text-sm font-semibold text-gray-600 mb-2">{faculty.designation}</p>
+                        <p className="text-xs text-gray-500">{faculty.education}</p>
+                      </div>
+                    </div>
+                  </GlassCard>
+                ))}
+              </Marquee>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gradient-to-br from-emerald-50 via-brand-cream to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Got Questions?" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Frequently Asked Questions
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
+            </div>
+          </RevealSection>
+
+          <RevealSection>
             <div className="max-w-4xl mx-auto space-y-4">
               {faqs.map((faq, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-lg shadow-sm border-l-4 border-[#0b6d41] overflow-hidden"
-                >
+                <GlassCard key={index} className="overflow-hidden" hover={false}>
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full p-6 text-left flex items-center justify-between hover:bg-[#fbfbee] transition-colors"
+                    className="w-full p-6 text-left flex items-center justify-between hover:bg-white/60 transition-colors"
                     aria-expanded={activeFAQ === index}
                   >
-                    <h3 className="font-semibold text-[#0b6d41] pr-4">{faq.question}</h3>
+                    <h3 className="font-semibold text-brand-green pr-4">{faq.question}</h3>
                     <ChevronDown
-                      className={`w-5 h-5 text-[#ffde59] flex-shrink-0 transition-transform ${
+                      className={`w-5 h-5 text-brand-green flex-shrink-0 transition-transform ${
                         activeFAQ === index ? 'rotate-180' : ''
                       }`}
                     />
@@ -1204,47 +1027,38 @@ export default function BComCAPage() {
                       {faq.answer}
                     </div>
                   </div>
-                </div>
+                </GlassCard>
               ))}
             </div>
-          </div>
-        </section>
+          </RevealSection>
+        </div>
+      </section>
 
-        {/* Final CTA Section */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0b6d41]">Ready to Start Your Accounting & Finance Journey?</h2>
-            <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-              Join JKKN's B.Com CA programme and build a successful career in accounting, finance, and technology
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-[#ffde59] hover:bg-[#f5d447] text-[#0b6d41] px-8 py-4 rounded-lg font-bold text-lg transition-all hover:shadow-xl hover:-translate-y-1">
-                Apply Now
-              </button>
-              <button className="bg-white border-2 border-[#0b6d41] hover:bg-[#0b6d41] hover:text-white text-[#0b6d41] px-8 py-4 rounded-lg font-semibold text-lg transition-all">
-                Schedule Campus Visit
-              </button>
+      {/* Final CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-brand-green to-emerald-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
+        <div className="container mx-auto px-4 md:px-6 text-center relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                Ready to Start Your Accounting & Finance Journey?
+              </h2>
+              <p className="text-xl text-emerald-50 mb-8 leading-relaxed">
+                Join JKKN's B.Com CA programme and build a successful career in accounting, finance, and technology
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <button className="group bg-white hover:bg-brand-cream text-brand-green px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-2xl hover:-translate-y-1 flex items-center gap-2">
+                  Apply Now
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button className="bg-transparent border-2 border-white hover:bg-white hover:text-brand-green text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                  Schedule Campus Visit
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out;
-        }
-      `}</style>
+          </RevealSection>
+        </div>
+      </section>
     </>
   );
 }

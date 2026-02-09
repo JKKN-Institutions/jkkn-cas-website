@@ -1350,6 +1350,14 @@ export default function Navigation() {
                                     >
                                       B.Sc Visual Communication
                                     </Link>
+                                    <Link
+                                      href="/programmes/self-finance/ug/bsc-microbiology"
+                                      role="menuitem"
+                                      tabIndex={0}
+                                      className="block px-4 py-2 text-gray-700 hover:bg-brand-green hover:text-white transition text-sm"
+                                    >
+                                      B.Sc Microbiology
+                                    </Link>
                                   </div>
                                 </div>
                               )}
@@ -2700,6 +2708,13 @@ export default function Navigation() {
                                   className="block py-2 px-12 text-gray-500 hover:bg-brand-cream hover:text-brand-green rounded-lg transition"
                                 >
                                   B.Sc Visual Communication
+                                </Link>
+                                <Link
+                                  href="/programmes/self-finance/ug/bsc-microbiology"
+                                  onClick={toggleMobileMenu}
+                                  className="block py-2 px-12 text-gray-500 hover:bg-brand-cream hover:text-brand-green rounded-lg transition"
+                                >
+                                  B.Sc Microbiology
                                 </Link>
                               </div>
                             )}

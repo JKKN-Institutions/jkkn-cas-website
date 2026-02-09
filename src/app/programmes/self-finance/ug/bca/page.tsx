@@ -1,1111 +1,890 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import {
+  GraduationCap,
+  Calendar,
+  BookOpen,
+  Users,
+  Award,
+  CheckCircle,
+  ChevronDown,
+  TrendingUp,
   Code,
-  Terminal,
   Cloud,
   Database,
   Smartphone,
-  Cpu,
-  GitBranch,
-  Server,
-  Lock,
-  Brain,
-  GraduationCap,
-  Users,
-  TrendingUp,
-  Award,
   Briefcase,
-  CheckCircle,
-  Calendar,
+  Sparkles,
+  ArrowRight,
   Clock,
-  FileText,
-  ChevronDown,
-  Zap,
-  DollarSign,
-  Building,
   Target,
-  Lightbulb,
-  Globe
+  Globe,
+  FileText
 } from 'lucide-react';
+import CountUp from '@/components/ui/CountUp';
+import Marquee from '@/components/ui/Marquee';
 
-export default function BCAPage() {
-  const [activeYear, setActiveYear] = useState<1 | 2 | 3>(1);
-  const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+// Helper function for scroll reveal animation
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
+
+  return { ref, isVisible };
+}
+
+// Reusable reveal section component
+function RevealSection({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// Glassmorphism card component
+function GlassCard({ children, className = '', hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
+  return (
+    <div className={`bg-white/40 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(11,109,65,0.08)] border border-white/60 ${hover ? 'hover:bg-white/60 hover:shadow-[0_8px_32px_rgba(11,109,65,0.15)] hover:-translate-y-2' : ''} transition-all duration-300 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+// Section badge component
+function SectionBadge({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 bg-brand-green/10 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-green/15 text-brand-green mb-4">
+      <Sparkles className="w-3.5 h-3.5" />
+      {text}
+    </span>
+  );
+}
+
+export default function BCAPage() {
+  const [activeYear, setActiveYear] = useState(1);
+  const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
     setActiveFAQ(activeFAQ === index ? null : index);
   };
 
+  // Faculty data
+  const facultyMembers = [
+    {
+      name: "Dr. Rajesh Kumar",
+      designation: "HOD & Associate Professor",
+      education: "PhD in Computer Science, M.Tech (AI & ML)",
+      image: "/images/faculties/faculty-placeholder.jpg"
+    },
+    {
+      name: "Prof. Anitha Lakshmi",
+      designation: "Assistant Professor",
+      education: "M.C.A, M.Phil, Pursuing PhD",
+      image: "/images/faculties/faculty-placeholder.jpg"
+    },
+    {
+      name: "Mr. Karthik Venkatesh",
+      designation: "Assistant Professor",
+      education: "M.Tech (Cloud Computing), AWS Certified",
+      image: "/images/faculties/faculty-placeholder.jpg"
+    },
+    {
+      name: "Ms. Priya Dharshini",
+      designation: "Assistant Professor",
+      education: "M.C.A, Oracle Certified Professional",
+      image: "/images/faculties/faculty-placeholder.jpg"
+    }
+  ];
+
+  // Curriculum data
+  const curriculum = {
+    1: {
+      year: "First Year",
+      semesters: [
+        {
+          semester: "Semester I",
+          subjects: [
+            { code: "BCA101", name: "Programming in C" },
+            { code: "BCA102", name: "Digital Electronics" },
+            { code: "BCA103", name: "Computer Organization" },
+            { code: "BCA104", name: "Mathematics - I (Discrete Mathematics)" },
+            { code: "BCA105", name: "Communication Skills" },
+            { code: "BCA106", name: "Environmental Studies" }
+          ]
+        },
+        {
+          semester: "Semester II",
+          subjects: [
+            { code: "BCA201", name: "Programming in C++" },
+            { code: "BCA202", name: "Data Structures" },
+            { code: "BCA203", name: "Computer Networks" },
+            { code: "BCA204", name: "Mathematics - II (Linear Algebra)" },
+            { code: "BCA205", name: "Web Technologies (HTML, CSS, JavaScript)" },
+            { code: "BCA206", name: "Financial Accounting" }
+          ]
+        }
+      ]
+    },
+    2: {
+      year: "Second Year",
+      semesters: [
+        {
+          semester: "Semester III",
+          subjects: [
+            { code: "BCA301", name: "Java Programming" },
+            { code: "BCA302", name: "Database Management Systems (MySQL)" },
+            { code: "BCA303", name: "Operating Systems" },
+            { code: "BCA304", name: "Software Engineering" },
+            { code: "BCA305", name: "Object Oriented Analysis and Design" },
+            { code: "BCA306", name: "Mathematics - III (Statistics & Probability)" }
+          ]
+        },
+        {
+          semester: "Semester IV",
+          subjects: [
+            { code: "BCA401", name: "Advanced Java (J2EE, Servlets, JSP)" },
+            { code: "BCA402", name: "Python Programming" },
+            { code: "BCA403", name: "Computer Graphics & Multimedia" },
+            { code: "BCA404", name: "Mobile Application Development (Android)" },
+            { code: "BCA405", name: "Full Stack Development - I (MERN Stack Basics)" },
+            { code: "BCA406", name: "Entrepreneurship Development" }
+          ]
+        }
+      ]
+    },
+    3: {
+      year: "Third Year",
+      semesters: [
+        {
+          semester: "Semester V",
+          subjects: [
+            { code: "BCA501", name: "Cloud Computing (AWS, Azure)" },
+            { code: "BCA502", name: "Machine Learning & AI Fundamentals" },
+            { code: "BCA503", name: "Cyber Security & Ethical Hacking" },
+            { code: "BCA504", name: "Full Stack Development - II (React, Node.js, MongoDB)" },
+            { code: "BCA505", name: "DevOps & CI/CD (Docker, Kubernetes)" },
+            { code: "BCA506", name: "Elective - I (Blockchain / IoT / Data Science)" }
+          ]
+        },
+        {
+          semester: "Semester VI",
+          subjects: [
+            { code: "BCA601", name: "Advanced Cloud Technologies (Serverless, Microservices)" },
+            { code: "BCA602", name: "Big Data Analytics" },
+            { code: "BCA603", name: "Project Work & Internship" },
+            { code: "BCA604", name: "Soft Skills & Interview Preparation" },
+            { code: "BCA605", name: "Elective - II (Advanced Python / React Native / Flutter)" },
+            { code: "BCA606", name: "Industry Certification Training (AWS / Azure / Google Cloud)" }
+          ]
+        }
+      ]
+    }
+  };
+
+  // FAQ data
   const faqs = [
     {
-      question: "What programming languages are taught in BCA?",
-      answer: "The BCA programme covers a comprehensive range of programming languages including C, C++, Java, Python, and JavaScript. You'll also learn modern frameworks like React, Node.js, Angular, and technologies such as HTML5, CSS3, and SQL. The curriculum is designed to make you proficient in both traditional and cutting-edge programming paradigms."
+      question: "What programming languages will I learn in BCA?",
+      answer: "You'll learn C, C++, Java, Python, JavaScript, and modern frameworks like React, Node.js, and React Native. The curriculum covers both fundamental and advanced programming concepts."
     },
     {
-      question: "Can I pursue MCA or MBA after BCA?",
-      answer: "Yes, absolutely! BCA graduates are eligible for MCA (Master of Computer Applications) which is a natural progression for software development careers. You can also pursue MBA specializing in IT Management, Data Analytics, or general management. Many students also opt for MS in Computer Science at universities abroad."
+      question: "What are the career prospects after BCA?",
+      answer: "BCA graduates can work as Software Developers, Web Developers, Mobile App Developers, Data Analysts, Cloud Engineers, DevOps Engineers, Database Administrators, and System Analysts. Average starting packages range from ₹3.5 to 6 LPA."
     },
     {
-      question: "What is the average salary after BCA?",
-      answer: "Fresh BCA graduates typically start with packages ranging from ₹3.5 to ₹6 LPA in IT companies. With cloud certifications (AWS/Azure) and full-stack skills, packages can go up to ₹8-15 LPA. Software developers with 2-3 years experience often earn ₹10-20 LPA in product companies and startups."
+      question: "Does the programme include cloud computing and modern technologies?",
+      answer: "Yes! The curriculum includes AWS, Azure, Cloud Computing, DevOps, Docker, Kubernetes, Machine Learning, AI, Blockchain, and Full Stack Development (MERN Stack)."
     },
     {
-      question: "Are internships mandatory in BCA?",
-      answer: "Yes, the BCA programme includes a mandatory software development internship in the final year. Students work on real projects at IT companies, startups, or product development firms. The internship provides hands-on experience in live coding environments, agile workflows, and professional development practices."
+      question: "Are there internship opportunities?",
+      answer: "Yes, internships are integrated into the programme in Semester VI. Students work on live industry projects and gain hands-on experience with leading tech companies and startups."
     },
     {
-      question: "What certifications should I pursue alongside BCA?",
-      answer: "We recommend cloud certifications like AWS Certified Solutions Architect, Azure Fundamentals, or Google Cloud Associate. Programming certifications from Oracle (Java), Microsoft (C#/.NET), or MongoDB are valuable. GitHub Student Pack provides free access to many professional tools and certifications."
+      question: "What certifications can I pursue alongside BCA?",
+      answer: "We support preparation for AWS Certified Cloud Practitioner, Azure Fundamentals, Oracle Java SE Certification, MongoDB Certified Developer, and Google Cloud certifications through dedicated training."
     },
     {
-      question: "Do I need prior coding experience for admission?",
-      answer: "No prior coding experience is required for BCA admission. The programme starts with programming fundamentals and gradually builds to advanced topics. However, curiosity about technology, logical thinking, and willingness to learn are important. Students from any stream (Science/Commerce/Arts) can join and excel."
+      question: "Is there placement support?",
+      answer: "Yes, we have a dedicated placement cell with 90%+ placement record. Top recruiters include TCS, Infosys, Wipro, Cognizant, Accenture, and various startups and product-based companies."
+    },
+    {
+      question: "Can Commerce or Arts students join BCA?",
+      answer: "Yes! BCA is open to students from Science (PCM/PCB/Computer Science), Commerce, Arts, and Diploma holders. Mathematics in 10+2 is preferred but not mandatory at JKKN."
+    },
+    {
+      question: "What is the difference between BCA and B.Sc Computer Science?",
+      answer: "BCA focuses more on application development, programming, and software engineering, while B.Sc CS has a stronger theoretical foundation. BCA is more industry-oriented with practical training."
+    },
+    {
+      question: "Will I learn mobile app development?",
+      answer: "Yes! The curriculum includes Android development, React Native, and Flutter for building cross-platform mobile applications."
+    },
+    {
+      question: "Are there hackathons and coding competitions?",
+      answer: "Yes, students regularly participate in national hackathons, coding competitions, and tech fests. We also organize internal hackathons and project showcases."
     }
   ];
 
   return (
     <>
-      {/* SEO Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Course",
-            "name": "Bachelor of Computer Applications (BCA)",
-            "description": "A comprehensive 3-year undergraduate programme in software development, covering programming, full-stack development, cloud computing, DevOps, and modern software engineering practices.",
-            "provider": {
-              "@type": "CollegeOrUniversity",
-              "name": "J.K.K. Nattraja College of Arts and Science",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Kumarapalayam",
-                "addressRegion": "Tamil Nadu",
-                "addressCountry": "India"
-              }
-            },
-            "educationalCredentialAwarded": "Bachelor of Computer Applications",
-            "timeToComplete": "P3Y",
-            "occupationalCredentialAwarded": "UGC Recognized Degree"
-          })
-        }}
-      />
+      {/* Hero Banner Section */}
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+        {/* Background image */}
+        <Image
+          src="/images/programmes/bca-hero.jpg"
+          alt="BCA programme"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
 
-      {/* FAQ Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-              }
-            }))
-          })
-        }}
-      />
-
-      <div className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section className="relative min-h-[650px] flex items-center bg-[#eaf1e2] text-gray-800 overflow-hidden">
-          {/* Decorative Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-white/10"></div>
-          </div>
-
-          <div className="container relative z-10 mx-auto px-4 md:px-6 py-20">
-            <div className="max-w-5xl mx-auto text-center">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-[#0b6d41] px-5 py-2.5 rounded-full text-sm font-medium mb-6 border border-[#0b6d41] text-white">
-                <GraduationCap className="w-4 h-4 text-white" />
-                <span>UGC Recognized Programme</span>
-              </div>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#0b6d41] leading-tight">
-                Bachelor of Computer Applications<br />(BCA)
+        <div className="container mx-auto px-4 relative z-10">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-white/90 text-gray-900">
+                <GraduationCap className="w-4 h-4 text-brand-green" />
+                Self-Finance Programme
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+                Bachelor of{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Computer Applications
+                </span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-700 mb-10 font-light">
-                Build the Future with Code, Cloud, and Innovation
+              <p className="text-xl md:text-2xl font-medium mb-6 text-gray-700">
+                Build a Successful Career in Software Development & Technology
               </p>
 
-              {/* Meta Info */}
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
-                <div className="flex items-center gap-2 bg-white px-5 py-2.5 rounded-lg border border-gray-300 shadow-sm">
-                  <Clock className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">3 Years Duration</span>
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <Clock className="w-5 h-5 text-brand-green" />
+                  <span>3 Years Duration</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white px-5 py-2.5 rounded-lg border border-gray-300 shadow-sm">
-                  <Users className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">Full-Time Programme</span>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <BookOpen className="w-5 h-5 text-brand-green" />
+                  <span>6 Semesters</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white px-5 py-2.5 rounded-lg border border-gray-300 shadow-sm">
-                  <Calendar className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">6 Semesters</span>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <Users className="w-5 h-5 text-brand-green" />
+                  <span>Full-Time Programme</span>
                 </div>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap justify-center gap-4 mb-16">
-                <button className="bg-[#0b6d41] hover:bg-[#085830] text-white px-8 py-3.5 rounded-lg font-semibold transition-all hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="#admission" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-7 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                   Apply Now
-                </button>
-                <button className="bg-white border-2 border-[#0b6d41] hover:bg-[#0b6d41] hover:text-white text-[#0b6d41] px-8 py-3.5 rounded-lg font-semibold transition-all flex items-center gap-2">
-                  <FileText className="w-5 h-5" />
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href="#curriculum" className="inline-flex items-center gap-2 bg-white/70 hover:bg-brand-green text-gray-900 hover:text-white border-2 border-white/80 hover:border-brand-green px-7 py-3 rounded-lg font-semibold backdrop-blur-sm transition-all">
                   View Curriculum
-                </button>
+                </a>
               </div>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
 
-              {/* Highlight Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-                {[
-                  {
-                    icon: GraduationCap,
-                    title: "NAAC",
-                    subtitle: "Accredited",
-                    description: "Quality assured education",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: Cloud,
-                    title: "Industry",
-                    subtitle: "Tools",
-                    description: "AWS, Azure, React, Node.js",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: Briefcase,
-                    title: "90%+",
-                    subtitle: "Placement",
-                    description: "Software companies & IT firms",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: Code,
-                    title: "Live",
-                    subtitle: "Projects",
-                    description: "Real-world development",
-                    color: "bg-[#0b6d41]"
-                  }
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="bg-white text-gray-800 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
-                    style={{
-                      opacity: isVisible ? 1 : 0,
-                      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                      transition: `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`
-                    }}
-                  >
-                    <div className="flex justify-center mb-4">
-                      <div className={`${item.color} w-14 h-14 rounded-full flex items-center justify-center shadow-lg`}>
-                        <item.icon className="w-7 h-7 text-white" />
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-1">{item.title}</h3>
-                    <h4 className="font-semibold text-gray-800 mb-2">{item.subtitle}</h4>
-                    <p className="text-sm text-gray-600">{item.description}</p>
+      {/* Quick Stats Section */}
+      <section className="py-16 bg-white relative">
+        <div className="container mx-auto px-4 md:px-6">
+          <RevealSection>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <GlassCard className="p-6 text-center">
+                  <div className="text-4xl font-bold text-brand-green mb-2">
+                    <CountUp end={70} duration={2000} />+
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">Years of Excellence</div>
+                </GlassCard>
+                <GlassCard className="p-6 text-center">
+                  <div className="text-4xl font-bold text-brand-green mb-2">
+                    <CountUp end={90} duration={2000} />%
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">Placement Record</div>
+                </GlassCard>
+                <GlassCard className="p-6 text-center">
+                  <div className="text-4xl font-bold text-brand-green mb-2">
+                    <CountUp end={6} duration={2000} />+
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">Specialized Labs</div>
+                </GlassCard>
+                <GlassCard className="p-6 text-center">
+                  <div className="text-4xl font-bold text-brand-green mb-2">
+                    <CountUp end={100} duration={2000} />+
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">Industry Partners</div>
+                </GlassCard>
+              </div>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* Programme Overview */}
+      <section className="py-16 bg-brand-cream">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
+            <RevealSection className="lg:col-span-3">
+              <SectionBadge text="About the Programme" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Programme{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Overview
+                </span>
+              </h2>
+              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+                The Bachelor of Computer Applications (BCA) is a comprehensive three-year undergraduate programme designed to prepare learners for exciting careers in software development, cloud computing, and emerging technologies. This programme offers an in-depth exploration of programming languages, web development, mobile applications, database management, and modern technologies like AI/ML, cloud computing, and DevOps.
+              </p>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                Our progressive education philosophy ensures that learners receive holistic development through experiential learning, industry exposure, and skill-based training. The curriculum integrates theoretical foundations with practical applications, preparing graduates for diverse career pathways in IT services, software development, and technology innovation with hands-on experience through 10+ live projects and industry internships.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                {['Industry-Aligned Curriculum', 'AWS & Azure Certified Labs', 'Expert Learning Facilitators', 'Live Projects & Internships'].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle className="w-5 h-5 text-emerald-500" />
+                    <span>{item}</span>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
+            </RevealSection>
 
-        {/* Programme Overview */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="max-w-5xl mx-auto">
-                {/* Main Content */}
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-2">Programme Overview</h2>
-                  <div className="w-16 h-1 bg-[#0b6d41] mb-8 rounded"></div>
-
-                  <div className="space-y-4 mb-10">
-                    <p className="text-gray-700 leading-relaxed">
-                      The Bachelor of Computer Applications (BCA) is a comprehensive three-year undergraduate programme designed to transform you into a skilled software developer ready for the modern IT industry. This UGC-recognized programme offers an intensive curriculum covering programming fundamentals, full-stack web development, cloud computing, mobile app development, and cutting-edge technologies like DevOps, AI, and blockchain.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed">
-                      Our industry-aligned curriculum ensures you master programming languages from C and Java to Python and JavaScript, while gaining hands-on experience with modern frameworks like React, Node.js, Angular, and cloud platforms including AWS and Azure. Through live coding projects, hackathons, collaborative development, and a mandatory software internship, you'll build a strong portfolio that makes you job-ready from day one.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid - 2x2 */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#0b6d41]">
-                      <CheckCircle className="w-5 h-5 text-[#0b6d41] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Industry-ready curriculum with latest tech stack (MERN, Cloud, DevOps)</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#0b6d41]">
-                      <CheckCircle className="w-5 h-5 text-[#0b6d41] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Cloud platform training with AWS Academy & Azure certifications</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#0b6d41]">
-                      <CheckCircle className="w-5 h-5 text-[#0b6d41] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Mandatory software development internship with IT companies</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#0b6d41]">
-                      <CheckCircle className="w-5 h-5 text-[#0b6d41] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Regular coding bootcamps, hackathons, and tech workshops</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <RevealSection className="lg:col-span-2" delay={200}>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/programmes/bca-hero.jpg"
+                  alt="BCA Computer Lab"
+                  width={600}
+                  height={450}
+                  className="w-full h-auto object-cover"
+                />
+                <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                  Since 1954
+                </span>
               </div>
-            </div>
+            </RevealSection>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Key Highlights */}
-        <section className="py-16 md:py-20 bg-[#0b6d41] text-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Key Highlights</h2>
-
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Code className="w-8 h-8 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">Core Programming</h3>
-                  <p className="text-white/90">
-                    Master C, C++, Java, Python, JavaScript with data structures, algorithms, and design patterns
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Globe className="w-8 h-8 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">Full-Stack Development</h3>
-                  <p className="text-white/90">
-                    Build complete web applications with MERN/MEAN stack, React, Node.js, MongoDB, and REST APIs
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Cloud className="w-8 h-8 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">Cloud & DevOps</h3>
-                  <p className="text-white/90">
-                    Deploy scalable apps on AWS, Azure with Docker, Kubernetes, CI/CD pipelines, and automation
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Eligibility & Admission Criteria */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
+      {/* Eligibility & Admission Criteria */}
+      <section className="py-16 bg-white" id="eligibility">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
               <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Eligibility & Admission Criteria
+                <SectionBadge text="Admissions" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Eligibility &{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Admission Criteria
+                  </span>
                 </h2>
-                <p className="text-gray-600 text-lg">
-                  Requirements and pathways to join our BCA programme
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Requirements for joining the BCA programme
                 </p>
               </div>
+            </RevealSection>
 
-              {/* Grid of 6 Cards */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Academic Qualification */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="h-1 bg-[#0b6d41]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <GraduationCap className="w-7 h-7 text-white" />
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  icon: <GraduationCap className="w-8 h-8 text-white" />,
+                  title: 'Academic Qualification',
+                  items: ['Higher Secondary (10+2) from recognized board', 'Science/Commerce/Arts stream eligible', 'Minimum 50% aggregate marks', '45% for reserved categories']
+                },
+                {
+                  icon: <FileText className="w-8 h-8 text-white" />,
+                  title: 'Accepted Streams',
+                  items: ['Science (PCM/PCB/CS) preferred', 'Commerce with Mathematics', 'Arts with basic computer literacy', 'Diploma holders eligible for lateral entry']
+                },
+                {
+                  icon: <BookOpen className="w-8 h-8 text-white" />,
+                  title: 'Documents Required',
+                  items: ['10th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photographs', 'Aadhaar Card Copy']
+                }
+              ].map((card, idx) => (
+                <RevealSection key={idx} delay={idx * 150}>
+                  <GlassCard className="p-8 h-full">
+                    <div className="w-16 h-16 bg-gradient-to-br from-brand-green to-emerald-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20">
+                      {card.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Academic Qualification
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Higher Secondary (10+2) from recognized board in any stream</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Science stream with Mathematics preferred but not mandatory</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Commerce and Arts stream students also eligible</span>
-                      </li>
+                    <h3 className="text-xl font-bold text-brand-green mb-4">{card.title}</h3>
+                    <ul className="space-y-2 text-gray-700">
+                      {card.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-emerald-500 mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
                     </ul>
-                  </div>
-                </div>
-
-                {/* Card 2: Minimum Marks */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="h-1 bg-[#0b6d41]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <FileText className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Minimum Marks
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>General Category: 50% aggregate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>OBC Category: 45% aggregate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>SC/ST/DA Category: 40% aggregate</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 3: Age Criteria */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="h-1 bg-[#0b6d41]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <Calendar className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Age Criteria
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>No upper age limit for admission</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Minimum 17 years of age as on December 31st of admission year</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 4: Required Documents */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="h-1 bg-[#0b6d41]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <FileText className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Required Documents
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>10th & 12th Mark Sheets</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Transfer Certificate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Community Certificate (if applicable)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Passport Size Photographs</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 5: Admission Process */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="h-1 bg-[#0b6d41]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <Target className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Admission Process
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Online/Offline Application Submission</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Aptitude Test (Basic Programming Logic)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Merit-based Selection & Counseling</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Fee Payment & Enrollment</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 6: Scholarships Available */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
-                  <div className="h-1 bg-[#0b6d41]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <DollarSign className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Scholarships Available
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Merit Scholarships (Top 10% students)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Government Scholarships (SC/ST/OBC)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Financial Aid for EWS Students</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#0b6d41] mt-1.5">•</span>
-                        <span>Sports Quota Benefits</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                  </GlassCard>
+                </RevealSection>
+              ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Course Curriculum with Tabs */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-12 text-center">Course Curriculum</h2>
+      {/* Curriculum Section */}
+      <section className="py-20 bg-gradient-to-br from-emerald-50 via-brand-cream to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Academic Structure" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Comprehensive Curriculum
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                A carefully designed 3-year programme with modern technology stack covering programming, development, cloud computing, and emerging technologies.
+              </p>
+            </div>
+          </RevealSection>
 
-            {/* Tab Navigation */}
-            <div className="flex justify-center mb-8">
-              <div className="inline-flex bg-white border border-gray-200 rounded-xl p-1 shadow-sm">
+          <RevealSection>
+            <div className="max-w-6xl mx-auto">
+              {/* Year Selector */}
+              <div className="flex flex-wrap justify-center gap-4 mb-12">
                 {[1, 2, 3].map((year) => (
                   <button
                     key={year}
-                    onClick={() => setActiveYear(year as 1 | 2 | 3)}
-                    className={`px-8 py-3 rounded-lg font-semibold transition-all ${
+                    onClick={() => setActiveYear(year)}
+                    className={`px-8 py-3 rounded-xl font-semibold transition-all ${
                       activeYear === year
-                        ? 'bg-[#0b6d41] text-white shadow-md'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-[#fbfbee]'
+                        ? 'bg-brand-green text-white shadow-xl shadow-brand-green/25 scale-105'
+                        : 'bg-white/60 backdrop-blur-sm text-gray-700 hover:bg-white/80 border border-gray-200'
                     }`}
                   >
-                    Year {year}
+                    {curriculum[year as keyof typeof curriculum].year}
                   </button>
                 ))}
               </div>
-            </div>
 
-            {/* Tab Content */}
-            <div className="max-w-7xl mx-auto">
-              {/* Year 1 */}
-              {activeYear === 1 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester I */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester I</h3>
+              {/* Semesters Content */}
+              <div className="grid md:grid-cols-2 gap-8">
+                {curriculum[activeYear as keyof typeof curriculum].semesters.map((sem, idx) => (
+                  <GlassCard key={idx} className="p-8" hover={false}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <BookOpen className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-brand-green">{sem.semester}</h3>
                     </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Fundamentals of Information Technology", code: "BCA101" },
-                        { name: "Programming in C", code: "BCA102" },
-                        { name: "Digital Logic & Computer Organization", code: "BCA103" },
-                        { name: "Mathematics I (Discrete Mathematics)", code: "MAT101" },
-                        { name: "English Communication Skills", code: "ENG101" },
-                        { name: "Environmental Studies", code: "EVS101" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#0b6d41]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
+                    <div className="space-y-3">
+                      {sem.subjects.map((subject, subIdx) => (
+                        <div
+                          key={subIdx}
+                          className="flex items-start gap-3 p-3 rounded-xl bg-white/50 hover:bg-white/80 transition-colors border border-white/60"
+                        >
+                          <div className="w-6 h-6 bg-brand-green/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="text-xs font-bold text-brand-green">{subIdx + 1}</span>
                           </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-xs font-semibold text-brand-green/70 mb-1">{subject.code}</div>
+                            <div className="text-sm font-semibold text-gray-700 leading-snug">{subject.name}</div>
+                          </div>
                         </div>
                       ))}
                     </div>
-                  </div>
-
-                  {/* Semester II */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester II</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Data Structures using C++", code: "BCA104" },
-                        { name: "Database Management Systems", code: "BCA105" },
-                        { name: "Operating Systems Concepts", code: "BCA106" },
-                        { name: "Mathematics II (Statistics & Probability)", code: "MAT102" },
-                        { name: "Web Technologies (HTML, CSS, JavaScript)", code: "BCA107" },
-                        { name: "Computer Organization & Architecture", code: "BCA108" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#0b6d41]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Year 2 */}
-              {activeYear === 2 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester III */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester III</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Object-Oriented Programming with Java", code: "BCA201" },
-                        { name: "RDBMS & SQL Programming", code: "BCA202" },
-                        { name: "Software Engineering", code: "BCA203" },
-                        { name: "Discrete Mathematics & Graph Theory", code: "MAT201" },
-                        { name: "Web Technologies (Advanced JavaScript)", code: "BCA204" },
-                        { name: "Computer Networks", code: "BCA205" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#0b6d41]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Semester IV */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester IV</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Python Programming & Libraries", code: "BCA206" },
-                        { name: "Web Frameworks (React/Angular)", code: "BCA207" },
-                        { name: "Data Structures & Algorithms", code: "BCA208" },
-                        { name: "Statistics for Data Analysis", code: "MAT202" },
-                        { name: "Unix/Linux System Administration", code: "BCA209" },
-                        { name: "Mobile Application Development", code: "BCA210" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#0b6d41]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Year 3 */}
-              {activeYear === 3 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester V */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester V</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Full-Stack Development (MERN Stack)", code: "BCA301" },
-                        { name: "Cloud Computing (AWS/Azure)", code: "BCA302" },
-                        { name: "Machine Learning Fundamentals", code: "BCA303" },
-                        { name: "NoSQL Databases (MongoDB)", code: "BCA304" },
-                        { name: "DevOps & CI/CD Practices", code: "BCA305" },
-                        { name: "Cyber Security Fundamentals", code: "BCA306" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#0b6d41]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Semester VI */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester VI</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Advanced Web Development", code: "BCA307" },
-                        { name: "Microservices Architecture", code: "BCA308" },
-                        { name: "Artificial Intelligence & NLP", code: "BCA309" },
-                        { name: "Blockchain Technology", code: "BCA310" },
-                        { name: "Major Project Work & Internship", code: "BCA311" },
-                        { name: "Elective (IoT/Big Data/AR-VR)", code: "BCA312" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#0b6d41]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* Programme Learning Outcomes */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Programme Learning Outcomes
-                </h2>
-                <p className="text-gray-600 text-lg">
-                  Skills and competencies you will develop through this programme
-                </p>
+                  </GlassCard>
+                ))}
               </div>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
 
-              {/* Grid of 6 Cards */}
+      {/* Learning Outcomes */}
+      <section className="py-20 bg-white relative">
+        <div className="container mx-auto px-4 md:px-6">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="What You'll Gain" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Learning Outcomes
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
+            </div>
+          </RevealSection>
+
+          <RevealSection>
+            <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Software Development Skills */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Code className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">01</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Software Development Skills
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Master multiple programming paradigms (procedural, OOP, functional), design patterns, SOLID principles, and industry-standard coding best practices for scalable software.
-                  </p>
-                </div>
-
-                {/* Card 2: Full-Stack Development */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Globe className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">02</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Full-Stack Development
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Build complete web applications from scratch using MERN/MEAN stack, handling frontend (React/Angular), backend (Node.js/Express), and database integration.
-                  </p>
-                </div>
-
-                {/* Card 3: Database Design & Management */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Database className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">03</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Database Design & Management
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Design normalized relational databases (SQL), work with NoSQL databases (MongoDB), understand ACID properties, indexing, query optimization, and cloud database services.
-                  </p>
-                </div>
-
-                {/* Card 4: Cloud & DevOps */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Cloud className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">04</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Cloud & DevOps
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Deploy applications on AWS and Azure, implement CI/CD pipelines, containerize apps with Docker, orchestrate with Kubernetes, and automate infrastructure.
-                  </p>
-                </div>
-
-                {/* Card 5: Problem Solving & Algorithms */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Brain className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">05</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Problem Solving & Algorithms
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Apply algorithmic thinking, analyze time/space complexity, implement efficient data structures, solve competitive programming challenges, and optimize code performance.
-                  </p>
-                </div>
-
-                {/* Card 6: Professional IT Skills */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">06</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Professional IT Skills
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Use Git version control, practice Agile/Scrum methodologies, write technical documentation, collaborate in teams, participate in code reviews, and work in professional development environments.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Career Opportunities */}
-        <section className="py-16 md:py-20 bg-[#0b6d41] text-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3">
-                  Career Opportunities
-                </h2>
-                <p className="text-blue-100 text-lg">
-                  Diverse career pathways await BCA graduates in the tech industry
-                </p>
-              </div>
-
-              {/* Grid of 8 Career Cards */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                {/* Card 1: Software Developer */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="bg-white w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
+                {/* Outcome 1 */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                     <Code className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">
-                    Software Developer
-                  </h3>
-                  <p className="text-blue-100 text-sm">
-                    Full-stack web & mobile development
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Programming Mastery</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Proficiency in C, C++, Java, Python, JavaScript, and modern frameworks like React and Node.js.
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 2: Web Developer */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="bg-white w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
+                {/* Outcome 2 */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                     <Globe className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">
-                    Web Developer
-                  </h3>
-                  <p className="text-blue-100 text-sm">
-                    Frontend/backend specialist
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Full Stack Development</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Ability to build complete web applications using MERN stack (MongoDB, Express, React, Node.js).
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 3: Mobile App Developer */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="bg-white w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Smartphone className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2">
-                    Mobile App Developer
-                  </h3>
-                  <p className="text-blue-100 text-sm">
-                    Android/iOS/React Native
-                  </p>
-                </div>
-
-                {/* Card 4: Data Analyst */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="bg-white w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <TrendingUp className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2">
-                    Data Analyst
-                  </h3>
-                  <p className="text-blue-100 text-sm">
-                    Business intelligence & analytics
-                  </p>
-                </div>
-
-                {/* Card 5: Cloud Engineer */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="bg-white w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
+                {/* Outcome 3 */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                     <Cloud className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">
-                    Cloud Engineer
-                  </h3>
-                  <p className="text-blue-100 text-sm">
-                    AWS/Azure solutions architect
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Cloud Computing Skills</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Hands-on experience with AWS, Azure, serverless architecture, Docker, and Kubernetes.
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 6: DevOps Engineer */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="bg-white w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Server className="w-7 h-7 text-white" />
+                {/* Outcome 4 */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <Smartphone className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">
-                    DevOps Engineer
-                  </h3>
-                  <p className="text-blue-100 text-sm">
-                    CI/CD & automation specialist
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Mobile App Development</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Create native and cross-platform mobile applications using Android, React Native, and Flutter.
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 7: Database Administrator */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="bg-white w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
+                {/* Outcome 5 */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                     <Database className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">
-                    Database Administrator
-                  </h3>
-                  <p className="text-blue-100 text-sm">
-                    SQL/NoSQL management
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Database Management</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Design and manage databases using MySQL, MongoDB, and understanding of Big Data technologies.
                   </p>
-                </div>
+                </GlassCard>
 
-                {/* Card 8: System Analyst */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="bg-white w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Cpu className="w-7 h-7 text-white" />
+                {/* Outcome 6 */}
+                <GlassCard className="p-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-green to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <Target className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2">
-                    System Analyst
-                  </h3>
-                  <p className="text-blue-100 text-sm">
-                    IT consulting & solutions
+                  <h3 className="text-xl font-bold text-brand-green mb-3">Problem Solving & Logic</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Strong analytical thinking, data structures, algorithms, and software engineering principles.
                   </p>
-                </div>
-              </div>
-
-              {/* Recruiting Sectors */}
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-6">Recruiting Sectors</h3>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {[
-                    "Product Companies",
-                    "IT Services (TCS/Infosys/Wipro)",
-                    "Startups & Unicorns",
-                    "Banking & FinTech",
-                    "E-commerce Platforms",
-                    "Cloud Service Providers",
-                    "Consulting Firms",
-                    "Healthcare IT",
-                    "EdTech Companies",
-                    "Government IT Projects",
-                    "Gaming Industry",
-                    "Cyber Security Firms"
-                  ].map((sector, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-white/20 transition-all"
-                    >
-                      {sector}
-                    </span>
-                  ))}
-                </div>
+                </GlassCard>
               </div>
             </div>
-          </div>
-        </section>
+          </RevealSection>
+        </div>
+      </section>
 
-        {/* Department Facilities */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+      {/* Career Opportunities */}
+      <section className="py-20 bg-gradient-to-br from-brand-cream via-emerald-50/30 to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Future Prospects" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Career Opportunities
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                BCA graduates have diverse career paths in software development, IT services, and emerging technology sectors with competitive packages (₹3.5-6 LPA average starting).
+              </p>
+            </div>
+          </RevealSection>
+
+          <RevealSection>
             <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Department Facilities
-                </h2>
-                <p className="text-gray-600 text-lg">
-                  State-of-the-art infrastructure for comprehensive learning
-                </p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                {/* Career 1 */}
+                <GlassCard className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                    <Code className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Software Developer</h3>
+                  <p className="text-sm text-gray-600">
+                    Design and develop software applications for various platforms and industries.
+                  </p>
+                </GlassCard>
+
+                {/* Career 2 */}
+                <GlassCard className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                    <Globe className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Web Developer</h3>
+                  <p className="text-sm text-gray-600">
+                    Create dynamic websites and web applications using modern frameworks.
+                  </p>
+                </GlassCard>
+
+                {/* Career 3 */}
+                <GlassCard className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                    <Smartphone className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Mobile App Developer</h3>
+                  <p className="text-sm text-gray-600">
+                    Build native and cross-platform mobile applications for iOS and Android.
+                  </p>
+                </GlassCard>
+
+                {/* Career 4 */}
+                <GlassCard className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Data Analyst</h3>
+                  <p className="text-sm text-gray-600">
+                    Analyze data trends and provide insights using statistical tools and visualization.
+                  </p>
+                </GlassCard>
+
+                {/* Career 5 */}
+                <GlassCard className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                    <Cloud className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Cloud Engineer</h3>
+                  <p className="text-sm text-gray-600">
+                    Design and manage cloud infrastructure on AWS, Azure, or Google Cloud.
+                  </p>
+                </GlassCard>
+
+                {/* Career 6 */}
+                <GlassCard className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                    <Target className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">DevOps Engineer</h3>
+                  <p className="text-sm text-gray-600">
+                    Automate deployment pipelines and manage CI/CD infrastructure.
+                  </p>
+                </GlassCard>
+
+                {/* Career 7 */}
+                <GlassCard className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                    <Database className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">Database Administrator</h3>
+                  <p className="text-sm text-gray-600">
+                    Manage and maintain database systems ensuring data security and performance.
+                  </p>
+                </GlassCard>
+
+                {/* Career 8 */}
+                <GlassCard className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                    <Briefcase className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-green mb-2">System Analyst</h3>
+                  <p className="text-sm text-gray-600">
+                    Analyze business requirements and design technical solutions.
+                  </p>
+                </GlassCard>
               </div>
 
-              {/* Grid of 6 Facility Cards */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Computer Lab */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-[#0b6d41] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Computer Lab</h3>
+              {/* Top Recruiters */}
+              <GlassCard className="p-8" hover={false}>
+                <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Top Recruiting Companies</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                  <div className="text-gray-700 font-semibold">TCS</div>
+                  <div className="text-gray-700 font-semibold">Infosys</div>
+                  <div className="text-gray-700 font-semibold">Wipro</div>
+                  <div className="text-gray-700 font-semibold">Cognizant</div>
+                  <div className="text-gray-700 font-semibold">Accenture</div>
+                  <div className="text-gray-700 font-semibold">HCL Technologies</div>
+                  <div className="text-gray-700 font-semibold">Tech Mahindra</div>
+                  <div className="text-gray-700 font-semibold">Capgemini</div>
+                </div>
+              </GlassCard>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* Department Facilities */}
+      <section className="py-20 bg-white relative">
+        <div className="container mx-auto px-4 md:px-6">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Infrastructure" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                State-of-the-Art Facilities
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
+            </div>
+          </RevealSection>
+
+          <RevealSection>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Facility 1 */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 text-center">
+                    <h3 className="text-2xl font-bold text-white">Computer Lab</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Advanced Computing Lab
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
-                      100+ high-performance workstations with latest IDEs (VS Code, IntelliJ, PyCharm), development tools, and 24/7 lab access for coding practice.
+                      100+ high-performance workstations with latest hardware, dual monitors, licensed software (VS Code, IntelliJ IDEA, PyCharm), and 24/7 internet access.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 2: Cloud Lab */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-white p-8 text-center border-t-4 border-[#0b6d41]">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Cloud Lab</h3>
+                {/* Facility 2 */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-white/60 backdrop-blur-sm p-8 text-center border-b-4 border-brand-green">
+                    <h3 className="text-2xl font-bold text-brand-green">Cloud Lab</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Cloud Computing Lab
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       AWS Academy certified lab with Azure student access, hands-on training in Docker, Kubernetes, serverless computing, and cloud deployment.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 3: Software Library */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-[#0b6d41] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Software Library</h3>
+                {/* Facility 3 */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 text-center">
+                    <h3 className="text-2xl font-bold text-white">Software Library</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Software & Dev Tools Access
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       GitHub Education Pack, JetBrains licenses, Microsoft Azure Dev Tools for Teaching, and access to premium learning platforms.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 4: Innovation Center */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-[#0b6d41] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Innovation Center</h3>
+                {/* Facility 4 */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 text-center">
+                    <h3 className="text-2xl font-bold text-white">Innovation Center</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Innovation & Incubation Hub
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Dedicated space for hackathons, project incubation, startup ideation, maker activities, and collaborative coding sessions.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 5: Tech Seminars */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-white p-8 text-center border-t-4 border-[#0b6d41]">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Tech Seminars</h3>
+                {/* Facility 5 */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-white/60 backdrop-blur-sm p-8 text-center border-b-4 border-brand-green">
+                    <h3 className="text-2xl font-bold text-brand-green">Tech Seminars</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Industry Expert Sessions
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Regular guest lectures by software architects, tech meetups, coding competitions, and workshops on emerging technologies.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
 
-                {/* Card 6: Placement Cell */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-[#0b6d41] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Placement Cell</h3>
+                {/* Facility 6 */}
+                <GlassCard className="overflow-hidden" hover={false}>
+                  <div className="bg-gradient-to-br from-brand-green to-emerald-600 p-8 text-center">
+                    <h3 className="text-2xl font-bold text-white">Placement Cell</h3>
                   </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-brand-green mb-3">
                       Career Support & Placement
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       Dedicated placement cell with job portal access, mock technical interviews, resume building, coding test preparation, and company connections.
                     </p>
                   </div>
-                </div>
+                </GlassCard>
               </div>
             </div>
-          </div>
-        </section>
+          </RevealSection>
+        </div>
+      </section>
 
-        {/* Why Choose JKKN */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
+      {/* Why Choose Section */}
+      <section className="py-20 bg-gradient-to-br from-brand-cream via-white to-emerald-50/30 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/dots.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Left Side - Dark Box */}
-                <div className="bg-[#0b6d41] rounded-2xl p-16 flex items-center justify-center min-h-[500px]">
-                  <h3 className="text-4xl font-bold text-white text-center">
-                    Why Choose JKKN
-                  </h3>
+                {/* Left Side - Image/Graphic Box */}
+                <div className="relative">
+                  <GlassCard className="p-16 min-h-[500px] flex items-center justify-center bg-gradient-to-br from-brand-green/90 to-emerald-600/90" hover={false}>
+                    <div className="text-center">
+                      <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Why Choose JKKN
+                      </h3>
+                      <div className="w-24 h-1.5 bg-white/80 mx-auto rounded-full"></div>
+                    </div>
+                  </GlassCard>
                 </div>
 
                 {/* Right Side - Content */}
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-2">
+                  <SectionBadge text="Our Advantages" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
                     Why Choose Our BCA Programme?
                   </h2>
-                  <div className="w-16 h-1 bg-[#0b6d41] mb-8 rounded"></div>
+                  <div className="w-16 h-1 bg-brand-green rounded-full mb-8"></div>
 
                   <div className="space-y-6">
                     {/* Reason 1 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <GraduationCap className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           70+ Years of Academic Excellence
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1116,11 +895,11 @@ export default function BCAPage() {
 
                     {/* Reason 2 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <CheckCircle className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Industry-Aligned Curriculum
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1131,11 +910,11 @@ export default function BCAPage() {
 
                     {/* Reason 3 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <Users className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Expert Faculty & Mentors
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1146,11 +925,11 @@ export default function BCAPage() {
 
                     {/* Reason 4 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <TrendingUp className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Strong Placement Record
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1161,11 +940,11 @@ export default function BCAPage() {
 
                     {/* Reason 5 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <Award className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Hands-on Project Experience
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1176,11 +955,11 @@ export default function BCAPage() {
 
                     {/* Reason 6 */}
                     <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <Briefcase className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
+                        <h4 className="text-lg font-bold text-brand-green mb-2">
                           Industry Certifications
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -1192,28 +971,80 @@ export default function BCAPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </RevealSection>
+        </div>
+      </section>
 
-        {/* FAQ Section with Accordion */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-12 text-center">Frequently Asked Questions</h2>
+      {/* Faculty Section */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Our Team" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Expert Faculty Members
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Learn from industry-certified professionals with expertise in software development, cloud computing, and emerging technologies.
+              </p>
+            </div>
+          </RevealSection>
 
+          <RevealSection>
+            <div className="max-w-7xl mx-auto">
+              <Marquee pauseOnHover className="[--duration:40s]">
+                {facultyMembers.map((faculty, index) => (
+                  <GlassCard key={index} className="w-80 mx-4">
+                    <div className="p-6">
+                      <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-brand-green/20">
+                        <Image
+                          src={faculty.image}
+                          alt={faculty.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold text-brand-green mb-2">{faculty.name}</h3>
+                        <p className="text-sm font-semibold text-gray-600 mb-2">{faculty.designation}</p>
+                        <p className="text-xs text-gray-500">{faculty.education}</p>
+                      </div>
+                    </div>
+                  </GlassCard>
+                ))}
+              </Marquee>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gradient-to-br from-emerald-50 via-brand-cream to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <SectionBadge text="Got Questions?" />
+              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+                Frequently Asked Questions
+              </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
+            </div>
+          </RevealSection>
+
+          <RevealSection>
             <div className="max-w-4xl mx-auto space-y-4">
               {faqs.map((faq, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-lg shadow-sm border-l-4 border-[#0b6d41] overflow-hidden"
-                >
+                <GlassCard key={index} className="overflow-hidden" hover={false}>
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full p-6 text-left flex items-center justify-between hover:bg-[#fbfbee] transition-colors"
+                    className="w-full p-6 text-left flex items-center justify-between hover:bg-white/60 transition-colors"
                     aria-expanded={activeFAQ === index}
                   >
-                    <h3 className="font-semibold text-[#0b6d41] pr-4">{faq.question}</h3>
+                    <h3 className="font-semibold text-brand-green pr-4">{faq.question}</h3>
                     <ChevronDown
-                      className={`w-5 h-5 text-[#0b6d41] flex-shrink-0 transition-transform ${
+                      className={`w-5 h-5 text-brand-green flex-shrink-0 transition-transform ${
                         activeFAQ === index ? 'rotate-180' : ''
                       }`}
                     />
@@ -1227,48 +1058,38 @@ export default function BCAPage() {
                       {faq.answer}
                     </div>
                   </div>
-                </div>
+                </GlassCard>
               ))}
             </div>
-          </div>
-        </section>
+          </RevealSection>
+        </div>
+      </section>
 
-        {/* Final CTA Section */}
-        <section className="py-16 md:py-20 bg-[#0b6d41] text-white">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Software Development Journey?</h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join JKKN's BCA programme and build a successful career in software development, cloud computing, and technology innovation
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-white hover:bg-gray-100 text-[#0b6d41] px-8 py-4 rounded-lg font-semibold text-lg transition-all hover:shadow-xl hover:-translate-y-1">
-                Apply Now
-              </button>
-              <button className="bg-transparent border-2 border-white hover:bg-white hover:text-[#0b6d41] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all">
-                Schedule Campus Visit
-              </button>
+      {/* Final CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-brand-green to-emerald-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
+        <div className="container mx-auto px-4 md:px-6 text-center relative">
+          <RevealSection>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                Ready to Start Your Software Development Journey?
+              </h2>
+              <p className="text-xl text-emerald-50 mb-8 leading-relaxed">
+                Join JKKN's BCA programme and build a successful career in software development, cloud computing, and technology innovation
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <button className="group bg-white hover:bg-brand-cream text-brand-green px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-2xl hover:-translate-y-1 flex items-center gap-2">
+                  Apply Now
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button className="bg-transparent border-2 border-white hover:bg-white hover:text-brand-green text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                  Schedule Campus Visit
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
-
-      </div>
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out;
-        }
-      `}</style>
+          </RevealSection>
+        </div>
+      </section>
     </>
   );
 }

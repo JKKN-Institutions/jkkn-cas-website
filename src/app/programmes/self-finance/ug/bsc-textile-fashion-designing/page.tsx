@@ -1,135 +1,67 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import {
-  GraduationCap,
-  Users,
-  BookOpen,
-  TrendingUp,
-  CheckCircle,
-  Award,
-  Briefcase,
-  Target,
-  Clock,
-  Calendar,
-  FileText,
-  BarChart,
-  DollarSign,
-  Globe,
-  Building,
-  UserCheck,
-  Brain,
-  Lightbulb,
-  PieChart,
-  Calculator,
-  Database,
-  LineChart,
-  Shield,
-  Zap,
-  ChevronDown,
-  Download,
-  ExternalLink,
-  Scissors,
-  Palette,
-  Ruler,
-  Shirt,
-  Sparkles,
-  PenTool,
-  Layers
-} from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { BookOpen, Users, Award, Briefcase, GraduationCap, Building2, CheckCircle2, Clock, FileText, Globe, ChevronDown, ArrowRight, Sparkles, Target, Palette, Scissors, Ruler, Shirt, PenTool, Layers, TrendingUp, Calendar, UserCheck, DollarSign, Database, LineChart } from 'lucide-react';
 
-export default function BSCTextileFashionDesigningPage() {
-  const [activeYear, setActiveYear] = useState(1);
-  const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+/* ─── Scroll-reveal hook ─── */
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
-
-    // Spotlight effect for cards
-    const handleMouseMove = (e: MouseEvent) => {
-      const cards = document.querySelectorAll('.spotlight-card');
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        (card as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
-        (card as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
-      });
-    };
-
-    const cards = document.querySelectorAll('.spotlight-card');
-    cards.forEach((card) => {
-      card.addEventListener('mousemove', handleMouseMove as EventListener);
-    });
-
-    return () => {
-      cards.forEach((card) => {
-        card.removeEventListener('mousemove', handleMouseMove as EventListener);
-      });
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
   }, []);
 
-  const toggleFAQ = (index: number) => {
-    setActiveFAQ(activeFAQ === index ? null : index);
-  };
+  return { ref, isVisible };
+}
 
-  const curriculum = {
-    year1: {
-      semester1: [
-        { name: "Elements of Fashion Design", code: "TFD101" },
-        { name: "Textile Science Fundamentals", code: "TFD102" },
-        { name: "Fashion Illustration I", code: "TFD103" },
-        { name: "Pattern Making Basics", code: "TFD104" },
-        { name: "Practical: Sewing Techniques", code: "TFD105P" },
-        { name: "Environmental Studies", code: "EVS101" }
-      ],
-      semester2: [
-        { name: "History of Costumes & Textiles", code: "TFD201" },
-        { name: "Fabric Study & Analysis", code: "TFD202" },
-        { name: "Fashion Illustration II", code: "TFD203" },
-        { name: "Garment Construction I", code: "TFD204" },
-        { name: "Practical: Draping Techniques", code: "TFD205P" },
-        { name: "Value Education", code: "VAL101" }
-      ]
-    },
-    year2: {
-      semester3: [
-        { name: "Surface Ornamentation I", code: "TFD301" },
-        { name: "Traditional Indian Textiles", code: "TFD302" },
-        { name: "Computer Aided Design (CAD)", code: "TFD303" },
-        { name: "Garment Construction II", code: "TFD304" },
-        { name: "Practical: Embroidery Techniques", code: "TFD305P" },
-        { name: "Soft Skills Development", code: "SKL301" }
-      ],
-      semester4: [
-        { name: "Surface Ornamentation II", code: "TFD401" },
-        { name: "Textile Dyeing & Printing", code: "TFD402" },
-        { name: "Fashion Merchandising", code: "TFD403" },
-        { name: "Advanced Pattern Making", code: "TFD404" },
-        { name: "Practical: Print Design Lab", code: "TFD405P" },
-        { name: "Extension Activities", code: "EXT401" }
-      ]
-    },
-    year3: {
-      semester5: [
-        { name: "Apparel Production Management", code: "TFD501" },
-        { name: "Fashion Marketing & Branding", code: "TFD502" },
-        { name: "Sustainable Fashion Design", code: "TFD503" },
-        { name: "Costume Design for Media", code: "TFD504" },
-        { name: "Practical: Portfolio Development", code: "TFD505P" },
-        { name: "Elective: Accessory Design / Knitwear", code: "TFD506E" }
-      ],
-      semester6: [
-        { name: "Fashion Entrepreneurship", code: "TFD601" },
-        { name: "Visual Merchandising & Retail", code: "TFD602" },
-        { name: "Fashion Forecasting & Trends", code: "TFD603" },
-        { name: "Industry Internship", code: "TFD604" },
-        { name: "Final Collection Project", code: "TFD605P" },
-        { name: "Elective: Fashion Journalism / Styling", code: "TFD606E" }
-      ]
-    }
-  };
+/* ─── Reveal wrapper ─── */
+function RevealSection({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ─── GlassCard component ─── */
+function GlassCard({ children, className = '', hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
+  return (
+    <div className={`bg-white/40 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(11,109,65,0.08)] border border-white/60 ${hover ? 'hover:bg-white/60 hover:shadow-[0_8px_32px_rgba(11,109,65,0.15)] hover:-translate-y-2' : ''} transition-all duration-300 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+/* ─── Section badge ─── */
+function SectionBadge({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 bg-brand-green/10 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-green/15 text-brand-green mb-4">
+      <Sparkles className="w-3.5 h-3.5" />
+      {text}
+    </span>
+  );
+}
+
+export default function BSCTextileFashionDesigningPage() {
+  const [activeYear, setActiveYear] = useState(1);
+  const [activeFAQ, setActiveFAQ] = useState(0);
 
   const faqs = [
     {
@@ -191,444 +123,433 @@ export default function BSCTextileFashionDesigningPage() {
       />
 
       <div className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section className="relative bg-[#eaf1e2] overflow-hidden">
-          {/* Decorative Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#0b6d41]/5"></div>
-          </div>
+        {/* Hero Banner Section */}
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+          <Image
+            src="/images/programmes/bsc-textile-fashion-designing/hero.jpg"
+            alt="B.Sc Textile and Fashion Design programme"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
 
-          <div className="container relative z-10 mx-auto px-4 md:px-6 py-12 md:py-16">
-            <div className="max-w-5xl mx-auto text-center">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-[#0b6d41]/10 backdrop-blur-sm px-5 py-2.5 rounded-full text-sm font-medium mb-6 border border-[#0b6d41]/20">
-                <GraduationCap className="w-4 h-4 text-[#0b6d41]" />
-                <span className="text-[#0b6d41]">UGC Recognized Programme</span>
-              </div>
+          <div className="container mx-auto px-4 relative z-10">
+            <RevealSection>
+              <div className="max-w-4xl mx-auto text-center">
+                <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-white/90 text-gray-900">
+                  <GraduationCap className="w-4 h-4 text-brand-green" />
+                  UGC Recognized Programme
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+                  Bachelor of Science in{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Textile and Fashion Design
+                  </span>
+                </h1>
+                <p className="text-xl md:text-2xl font-medium mb-6 text-gray-700">
+                  Design Your Future in Fashion & Textile Innovation
+                </p>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#0b6d41] leading-tight">
-                Bachelor of Science in<br />Textile and Fashion Design
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-700 mb-10 font-light">
-                Design Your Future in Fashion & Textile Innovation
-              </p>
-
-              {/* Meta Info */}
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Clock className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">3 Years Duration</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Users className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">Full-Time Programme</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Calendar className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">6 Semesters</span>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <button className="bg-[#ffde59] hover:bg-[#f5d447] text-[#0b6d41] px-8 py-3.5 rounded-lg font-bold transition-all hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
-                  Apply Now
-                </button>
-                <button className="bg-white border-2 border-[#0b6d41] hover:bg-[#0b6d41] hover:text-white text-[#0b6d41] px-8 py-3.5 rounded-lg font-semibold transition-all flex items-center gap-2 shadow-sm">
-                  <FileText className="w-5 h-5" />
-                  View Curriculum
-                </button>
-              </div>
-
-              {/* Highlight Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-                {[
-                  {
-                    icon: GraduationCap,
-                    title: "NAAC",
-                    subtitle: "Accredited",
-                    description: "Quality assured education",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: Palette,
-                    title: "Design",
-                    subtitle: "Studios",
-                    description: "State-of-art facilities",
-                    color: "bg-[#ffde59]"
-                  },
-                  {
-                    icon: Briefcase,
-                    title: "90%+",
-                    subtitle: "Placement",
-                    description: "Top fashion brands",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: Sparkles,
-                    title: "Fashion",
-                    subtitle: "Shows & Events",
-                    description: "Annual exhibitions",
-                    color: "bg-[#ffde59]"
-                  }
-                ].map((card, index) => (
-                  <div
-                    key={index}
-                    className={`spotlight-card relative overflow-hidden ${card.color} ${
-                      card.color === 'bg-[#ffde59]' ? 'text-[#0b6d41]' : 'text-white'
-                    } p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
-                    style={{
-                      opacity: isVisible ? 1 : 0,
-                      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                      transition: `all 0.6s ease-out ${index * 0.1}s`
-                    }}
-                  >
-                    <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                      style={{
-                        background: `radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.15), transparent 50%)`
-                      }}
-                    />
-                    <div className="relative z-10">
-                      <card.icon className="w-8 h-8 mb-3 mx-auto" />
-                      <h3 className="text-2xl font-bold mb-1">{card.title}</h3>
-                      <p className="text-sm font-semibold mb-1 opacity-90">{card.subtitle}</p>
-                      <p className="text-xs opacity-80">{card.description}</p>
-                    </div>
+                <div className="flex flex-wrap justify-center gap-4 mb-8">
+                  <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                    <Clock className="w-5 h-5 text-brand-green" />
+                    <span>3 Years Duration</span>
                   </div>
-                ))}
+                  <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                    <FileText className="w-5 h-5 text-brand-green" />
+                    <span>6 Semesters</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                    <Users className="w-5 h-5 text-brand-green" />
+                    <span>Full-Time Programme</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-4">
+                  <a href="#admission" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-7 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                    Apply Now
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                  <a href="#curriculum" className="inline-flex items-center gap-2 bg-white/70 hover:bg-brand-green text-gray-900 hover:text-white border-2 border-white/80 hover:border-brand-green px-7 py-3 rounded-lg font-semibold backdrop-blur-sm transition-all">
+                    View Curriculum
+                  </a>
+                </div>
               </div>
+            </RevealSection>
+          </div>
+        </section>
+
+        {/* Quick Info Cards */}
+        <section className="relative z-10 -mt-12 pb-8">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+              {[
+                { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC', title: 'Accredited', desc: 'Quality assured education' },
+                { icon: <Palette className="w-7 h-7" />, stat: 'Design', title: 'Studios', desc: 'State-of-art facilities' },
+                { icon: <Briefcase className="w-7 h-7" />, stat: '90%+', title: 'Placement', desc: 'Top fashion brands' },
+                { icon: <Sparkles className="w-7 h-7" />, stat: 'Fashion', title: 'Shows & Events', desc: 'Annual exhibitions' },
+              ].map((card, idx) => (
+                <RevealSection key={idx} delay={idx * 100}>
+                  <GlassCard className="p-6 text-center">
+                    <div className="w-14 h-14 mx-auto mb-4 bg-brand-green/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-brand-green/15 text-brand-green group-hover:text-emerald-600 transition-colors">
+                      {card.icon}
+                    </div>
+                    <span className="block text-3xl font-bold text-brand-green mb-1">{card.stat}</span>
+                    <h3 className="font-bold text-brand-green mb-1">{card.title}</h3>
+                    <p className="text-sm text-gray-600">{card.desc}</p>
+                  </GlassCard>
+                </RevealSection>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Programme Overview */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Programme Overview
+        <section className="py-16 bg-brand-cream">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
+              <RevealSection className="lg:col-span-3">
+                <SectionBadge text="About the Programme" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                  Programme{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Overview
+                  </span>
                 </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto"></div>
-              </div>
-
-              <div className="prose prose-lg max-w-none mb-12">
-                <p className="text-gray-700 leading-relaxed mb-6">
+                <p className="text-lg text-gray-700 mb-4 leading-relaxed">
                   The B.Sc. in Textile and Fashion Design is a dynamic undergraduate programme that blends creative artistry with technical expertise in textile science and fashion innovation. This comprehensive course equips students with the skills to conceptualize, design, and create fashion garments while understanding the science behind fabrics, production processes, and sustainable practices.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   Students gain hands-on experience through state-of-the-art design studios, CAD laboratories, and industry internships. The curriculum covers everything from fashion illustration and pattern making to merchandising, branding, and entrepreneurship, preparing graduates for diverse roles in the global fashion and textile industry.
                 </p>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  {
-                    title: "Creative & Technical Excellence",
-                    description: "Master both artistic design principles and technical garment construction skills through integrated coursework and practical sessions."
-                  },
-                  {
-                    title: "Industry-Standard Software Training",
-                    description: "Proficiency in Adobe Creative Suite, CAD/CAM software, and 3D design tools used by leading fashion houses worldwide."
-                  },
-                  {
-                    title: "Sustainable Fashion Focus",
-                    description: "Learn eco-friendly design practices, ethical sourcing, and sustainable production methods aligned with global fashion trends."
-                  },
-                  {
-                    title: "Real-World Industry Exposure",
-                    description: "Mandatory internships, fashion shows, industry visits, and collaborative projects with fashion brands and textile manufacturers."
-                  }
-                ].map((feature, index) => (
-                  <div key={index} className="flex gap-4 p-6 bg-[#eaf1e2] rounded-lg hover:shadow-md transition-shadow">
-                    <div className="flex-shrink-0">
-                      <CheckCircle className="w-6 h-6 text-[#0b6d41]" />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {['Creative & Technical Excellence', 'Industry-Standard Software Training', 'Sustainable Fashion Focus', 'Real-World Industry Exposure'].map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-gray-700">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                      <span>{item}</span>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-[#0b6d41] mb-2">{feature.title}</h3>
-                      <p className="text-gray-700">{feature.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </RevealSection>
+
+              <RevealSection className="lg:col-span-2" delay={200}>
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <img
+                    src="https://placehold.co/600x450/0b6d41/FFFFFF?text=Fashion+Design"
+                    alt="Fashion Design"
+                    className="w-full h-auto"
+                  />
+                  <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                    Since 1954
+                  </span>
+                </div>
+              </RevealSection>
             </div>
           </div>
         </section>
 
-        {/* Eligibility & Admission */}
-        <section className="py-16 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Eligibility & Admission
-                </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto"></div>
-              </div>
+        {/* Eligibility & Admission Criteria */}
+        <section className="py-16 bg-white" id="eligibility">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Admissions" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Eligibility &{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Admission Criteria
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Requirements for joining the B.Sc Textile and Fashion Design programme
+                  </p>
+                </div>
+              </RevealSection>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
                   {
-                    icon: Award,
-                    title: "Basic Eligibility",
-                    description: "10+2 or equivalent from a recognized board with minimum 50% aggregate marks"
+                    icon: <Award className="w-8 h-8 text-white" />,
+                    title: 'Basic Eligibility',
+                    items: ['10+2 or equivalent from a recognized board', 'Minimum 50% aggregate marks']
                   },
                   {
-                    icon: BookOpen,
-                    title: "Stream Acceptance",
-                    description: "Students from Science, Commerce, or Arts streams are eligible to apply"
+                    icon: <BookOpen className="w-8 h-8 text-white" />,
+                    title: 'Stream Acceptance',
+                    items: ['Students from Science, Commerce, or Arts streams are eligible to apply']
                   },
                   {
-                    icon: UserCheck,
-                    title: "Age Criteria",
-                    description: "Candidates should be 17-25 years old at the time of admission"
+                    icon: <UserCheck className="w-8 h-8 text-white" />,
+                    title: 'Age Criteria',
+                    items: ['Candidates should be 17-25 years old at the time of admission']
                   },
                   {
-                    icon: FileText,
-                    title: "Selection Process",
-                    description: "Merit-based admission with portfolio review and personal interview"
+                    icon: <FileText className="w-8 h-8 text-white" />,
+                    title: 'Selection Process',
+                    items: ['Merit-based admission with portfolio review and personal interview']
                   },
                   {
-                    icon: Target,
-                    title: "Creative Aptitude",
-                    description: "Interest in art, design, creativity, and fashion trends is essential"
+                    icon: <Target className="w-8 h-8 text-white" />,
+                    title: 'Creative Aptitude',
+                    items: ['Interest in art, design, creativity, and fashion trends is essential']
                   },
                   {
-                    icon: Calendar,
-                    title: "Admission Timeline",
-                    description: "Applications open from May to July with classes commencing in August"
+                    icon: <Calendar className="w-8 h-8 text-white" />,
+                    title: 'Admission Timeline',
+                    items: ['Applications open from May to July', 'Classes commencing in August']
                   }
-                ].map((item, index) => (
-                  <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow border-t-4 border-[#0b6d41]">
-                    <item.icon className="w-10 h-10 text-[#0b6d41] mb-4" />
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-3">{item.title}</h3>
-                    <p className="text-gray-700">{item.description}</p>
-                  </div>
+                ].map((card, idx) => (
+                  <RevealSection key={idx} delay={idx * 100}>
+                    <GlassCard className="p-8 h-full">
+                      <div className="w-16 h-16 bg-gradient-to-br from-brand-green to-emerald-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20">
+                        {card.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-brand-green mb-4">{card.title}</h3>
+                      <ul className="space-y-2 text-gray-700">
+                        {card.items.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-emerald-500 mt-1">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </GlassCard>
+                  </RevealSection>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Course Curriculum */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+        {/* Programme Curriculum */}
+        <section className="py-16 bg-brand-cream" id="curriculum">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Course Curriculum
-                </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto mb-6"></div>
-                <p className="text-gray-600 text-lg">
-                  Comprehensive 6-semester curriculum covering design, technology, and business aspects
-                </p>
-              </div>
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Curriculum" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Programme{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Curriculum
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive 6-semester curriculum covering design, technology, and business aspects
+                  </p>
+                </div>
+              </RevealSection>
 
-              {/* Year Tabs */}
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
-                {[1, 2, 3].map((year) => (
-                  <button
-                    key={year}
-                    onClick={() => setActiveYear(year)}
-                    className={`px-8 py-3 rounded-lg font-bold transition-all ${
-                      activeYear === year
-                        ? 'bg-[#0b6d41] text-white shadow-lg'
-                        : 'bg-white text-[#0b6d41] border-2 border-[#0b6d41] hover:bg-[#0b6d41] hover:text-white'
-                    }`}
-                  >
-                    Year {year}
-                  </button>
-                ))}
-              </div>
+              <RevealSection>
+                <div className="flex justify-center gap-2 mb-8">
+                  {[1, 2, 3].map((year) => (
+                    <button
+                      key={year}
+                      onClick={() => setActiveYear(year)}
+                      className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
+                          ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                          : 'bg-white text-brand-green hover:bg-brand-green/5'
+                        }`}
+                    >
+                      Year {year}
+                    </button>
+                  ))}
+                </div>
+              </RevealSection>
 
-              {/* Curriculum Content */}
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Semester 1 & 2 for Year 1, Semester 3 & 4 for Year 2, Semester 5 & 6 for Year 3 */}
-                {activeYear === 1 && (
-                  <>
-                    <div className="bg-[#eaf1e2] p-8 rounded-xl shadow-md">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-[#0b6d41] text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
-                          I
+              {activeYear === 1 && (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: 'Semester I',
+                      subjects: [
+                        { name: 'Elements of Fashion Design', code: 'TFD101' },
+                        { name: 'Textile Science Fundamentals', code: 'TFD102' },
+                        { name: 'Fashion Illustration I', code: 'TFD103' },
+                        { name: 'Pattern Making Basics', code: 'TFD104' },
+                        { name: 'Practical: Sewing Techniques', code: 'TFD105P' },
+                        { name: 'Environmental Studies', code: 'EVS101' }
+                      ]
+                    },
+                    {
+                      title: 'Semester II',
+                      subjects: [
+                        { name: 'History of Costumes & Textiles', code: 'TFD201' },
+                        { name: 'Fabric Study & Analysis', code: 'TFD202' },
+                        { name: 'Fashion Illustration II', code: 'TFD203' },
+                        { name: 'Garment Construction I', code: 'TFD204' },
+                        { name: 'Practical: Draping Techniques', code: 'TFD205P' },
+                        { name: 'Value Education', code: 'VAL101' }
+                      ]
+                    }
+                  ].map((sem, idx) => (
+                    <RevealSection key={idx} delay={idx * 150}>
+                      <GlassCard className="overflow-hidden" hover={false}>
+                        <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                          <h4 className="text-xl font-bold">{sem.title}</h4>
                         </div>
-                        <h3 className="text-2xl font-bold text-[#0b6d41]">Semester I</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {curriculum.year1.semester1.map((subject, index) => (
-                          <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div className="flex justify-between items-start">
-                              <span className="font-medium text-gray-800">{subject.name}</span>
-                              <span className="text-sm text-[#0b6d41] font-semibold ml-2 whitespace-nowrap">{subject.code}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="bg-[#eaf1e2] p-8 rounded-xl shadow-md">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-[#ffde59] text-[#0b6d41] w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
-                          II
+                        <div className="p-6">
+                          <ul className="space-y-3">
+                            {sem.subjects.map((subject, i) => (
+                              <li key={i} className="flex items-center justify-between text-gray-700">
+                                <div className="flex items-start gap-2">
+                                  <span className="text-emerald-500 mt-1">•</span>
+                                  <span>{subject.name}</span>
+                                </div>
+                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                        <h3 className="text-2xl font-bold text-[#0b6d41]">Semester II</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {curriculum.year1.semester2.map((subject, index) => (
-                          <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div className="flex justify-between items-start">
-                              <span className="font-medium text-gray-800">{subject.name}</span>
-                              <span className="text-sm text-[#0b6d41] font-semibold ml-2 whitespace-nowrap">{subject.code}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
+                      </GlassCard>
+                    </RevealSection>
+                  ))}
+                </div>
+              )}
 
-                {activeYear === 2 && (
-                  <>
-                    <div className="bg-[#eaf1e2] p-8 rounded-xl shadow-md">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-[#0b6d41] text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
-                          III
+              {activeYear === 2 && (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: 'Semester III',
+                      subjects: [
+                        { name: 'Surface Ornamentation I', code: 'TFD301' },
+                        { name: 'Traditional Indian Textiles', code: 'TFD302' },
+                        { name: 'Computer Aided Design (CAD)', code: 'TFD303' },
+                        { name: 'Garment Construction II', code: 'TFD304' },
+                        { name: 'Practical: Embroidery Techniques', code: 'TFD305P' },
+                        { name: 'Soft Skills Development', code: 'SKL301' }
+                      ]
+                    },
+                    {
+                      title: 'Semester IV',
+                      subjects: [
+                        { name: 'Surface Ornamentation II', code: 'TFD401' },
+                        { name: 'Textile Dyeing & Printing', code: 'TFD402' },
+                        { name: 'Fashion Merchandising', code: 'TFD403' },
+                        { name: 'Advanced Pattern Making', code: 'TFD404' },
+                        { name: 'Practical: Print Design Lab', code: 'TFD405P' },
+                        { name: 'Extension Activities', code: 'EXT401' }
+                      ]
+                    }
+                  ].map((sem, idx) => (
+                    <RevealSection key={idx} delay={idx * 150}>
+                      <GlassCard className="overflow-hidden" hover={false}>
+                        <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                          <h4 className="text-xl font-bold">{sem.title}</h4>
                         </div>
-                        <h3 className="text-2xl font-bold text-[#0b6d41]">Semester III</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {curriculum.year2.semester3.map((subject, index) => (
-                          <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div className="flex justify-between items-start">
-                              <span className="font-medium text-gray-800">{subject.name}</span>
-                              <span className="text-sm text-[#0b6d41] font-semibold ml-2 whitespace-nowrap">{subject.code}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                        <div className="p-6">
+                          <ul className="space-y-3">
+                            {sem.subjects.map((subject, i) => (
+                              <li key={i} className="flex items-center justify-between text-gray-700">
+                                <div className="flex items-start gap-2">
+                                  <span className="text-emerald-500 mt-1">•</span>
+                                  <span>{subject.name}</span>
+                                </div>
+                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </GlassCard>
+                    </RevealSection>
+                  ))}
+                </div>
+              )}
 
-                    <div className="bg-[#eaf1e2] p-8 rounded-xl shadow-md">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-[#ffde59] text-[#0b6d41] w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
-                          IV
+              {activeYear === 3 && (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: 'Semester V',
+                      subjects: [
+                        { name: 'Apparel Production Management', code: 'TFD501' },
+                        { name: 'Fashion Marketing & Branding', code: 'TFD502' },
+                        { name: 'Sustainable Fashion Design', code: 'TFD503' },
+                        { name: 'Costume Design for Media', code: 'TFD504' },
+                        { name: 'Practical: Portfolio Development', code: 'TFD505P' },
+                        { name: 'Elective: Accessory Design / Knitwear', code: 'TFD506E' }
+                      ]
+                    },
+                    {
+                      title: 'Semester VI',
+                      subjects: [
+                        { name: 'Fashion Entrepreneurship', code: 'TFD601' },
+                        { name: 'Visual Merchandising & Retail', code: 'TFD602' },
+                        { name: 'Fashion Forecasting & Trends', code: 'TFD603' },
+                        { name: 'Industry Internship', code: 'TFD604' },
+                        { name: 'Final Collection Project', code: 'TFD605P' },
+                        { name: 'Elective: Fashion Journalism / Styling', code: 'TFD606E' }
+                      ]
+                    }
+                  ].map((sem, idx) => (
+                    <RevealSection key={idx} delay={idx * 150}>
+                      <GlassCard className="overflow-hidden" hover={false}>
+                        <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                          <h4 className="text-xl font-bold">{sem.title}</h4>
                         </div>
-                        <h3 className="text-2xl font-bold text-[#0b6d41]">Semester IV</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {curriculum.year2.semester4.map((subject, index) => (
-                          <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div className="flex justify-between items-start">
-                              <span className="font-medium text-gray-800">{subject.name}</span>
-                              <span className="text-sm text-[#0b6d41] font-semibold ml-2 whitespace-nowrap">{subject.code}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {activeYear === 3 && (
-                  <>
-                    <div className="bg-[#eaf1e2] p-8 rounded-xl shadow-md">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-[#0b6d41] text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
-                          V
+                        <div className="p-6">
+                          <ul className="space-y-3">
+                            {sem.subjects.map((subject, i) => (
+                              <li key={i} className="flex items-center justify-between text-gray-700">
+                                <div className="flex items-start gap-2">
+                                  <span className="text-emerald-500 mt-1">•</span>
+                                  <span>{subject.name}</span>
+                                </div>
+                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                        <h3 className="text-2xl font-bold text-[#0b6d41]">Semester V</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {curriculum.year3.semester5.map((subject, index) => (
-                          <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div className="flex justify-between items-start">
-                              <span className="font-medium text-gray-800">{subject.name}</span>
-                              <span className="text-sm text-[#0b6d41] font-semibold ml-2 whitespace-nowrap">{subject.code}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="bg-[#eaf1e2] p-8 rounded-xl shadow-md">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-[#ffde59] text-[#0b6d41] w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
-                          VI
-                        </div>
-                        <h3 className="text-2xl font-bold text-[#0b6d41]">Semester VI</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {curriculum.year3.semester6.map((subject, index) => (
-                          <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div className="flex justify-between items-start">
-                              <span className="font-medium text-gray-800">{subject.name}</span>
-                              <span className="text-sm text-[#0b6d41] font-semibold ml-2 whitespace-nowrap">{subject.code}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
+                      </GlassCard>
+                    </RevealSection>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>
 
         {/* Programme Learning Outcomes */}
-        <section className="py-16 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-white" id="outcomes">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Programme Learning Outcomes
-                </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto mb-6"></div>
-                <p className="text-gray-600 text-lg">
-                  Skills and competencies you will develop
-                </p>
-              </div>
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Outcomes" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Programme Learning{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Outcomes
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Skills and competencies you will develop
+                  </p>
+                </div>
+              </RevealSection>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  {
-                    icon: Palette,
-                    title: "Creative Design Thinking",
-                    description: "Develop innovative design concepts and translate creative ideas into wearable fashion collections with aesthetic appeal and market relevance."
-                  },
-                  {
-                    icon: Ruler,
-                    title: "Technical Proficiency",
-                    description: "Master garment construction, pattern making, draping techniques, and sewing skills to create professional-quality fashion products."
-                  },
-                  {
-                    icon: Layers,
-                    title: "Digital Design Skills",
-                    description: "Gain expertise in CAD/CAM software, Adobe Creative Suite, and 3D design tools for digital fashion illustration and technical drawings."
-                  },
-                  {
-                    icon: Sparkles,
-                    title: "Textile Knowledge",
-                    description: "Understand fiber science, fabric properties, textile testing, dyeing, printing techniques, and sustainable material sourcing."
-                  },
-                  {
-                    icon: PenTool,
-                    title: "Business Acumen",
-                    description: "Learn fashion merchandising, marketing strategies, retail management, branding, and visual merchandising for commercial success."
-                  },
-                  {
-                    icon: Users,
-                    title: "Sustainable Practices",
-                    description: "Apply eco-friendly design principles, ethical sourcing, zero-waste pattern making, and sustainable fashion business models."
-                  }
-                ].map((outcome, index) => (
-                  <div key={index} className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border-t-4 border-[#0b6d41]">
-                    <div className="bg-[#eaf1e2] w-14 h-14 rounded-full flex items-center justify-center mb-4">
-                      <outcome.icon className="w-7 h-7 text-[#0b6d41]" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-3">{outcome.title}</h3>
-                    <p className="text-gray-700 leading-relaxed">{outcome.description}</p>
-                  </div>
+                  { icon: <Palette className="w-6 h-6 text-white" />, title: 'Creative Design Thinking', description: 'Develop innovative design concepts and translate creative ideas into wearable fashion collections with aesthetic appeal and market relevance.' },
+                  { icon: <Ruler className="w-6 h-6 text-white" />, title: 'Technical Proficiency', description: 'Master garment construction, pattern making, draping techniques, and sewing skills to create professional-quality fashion products.' },
+                  { icon: <Layers className="w-6 h-6 text-white" />, title: 'Digital Design Skills', description: 'Gain expertise in CAD/CAM software, Adobe Creative Suite, and 3D design tools for digital fashion illustration and technical drawings.' },
+                  { icon: <Sparkles className="w-6 h-6 text-white" />, title: 'Textile Knowledge', description: 'Understand fiber science, fabric properties, textile testing, dyeing, printing techniques, and sustainable material sourcing.' },
+                  { icon: <PenTool className="w-6 h-6 text-white" />, title: 'Business Acumen', description: 'Learn fashion merchandising, marketing strategies, retail management, branding, and visual merchandising for commercial success.' },
+                  { icon: <Users className="w-6 h-6 text-white" />, title: 'Sustainable Practices', description: 'Apply eco-friendly design principles, ethical sourcing, zero-waste pattern making, and sustainable fashion business models.' }
+                ].map((outcome, idx) => (
+                  <RevealSection key={idx} delay={idx * 100}>
+                    <GlassCard className="relative p-6 group h-full">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 shadow-lg shadow-brand-green/20 group-hover:shadow-brand-green/30 transition-shadow">
+                        {outcome.icon}
+                      </div>
+                      <h3 className="text-lg font-bold text-brand-green mb-2">{outcome.title}</h3>
+                      <p className="text-gray-600 text-sm">{outcome.description}</p>
+                    </GlassCard>
+                  </RevealSection>
                 ))}
               </div>
             </div>
@@ -636,167 +557,105 @@ export default function BSCTextileFashionDesigningPage() {
         </section>
 
         {/* Career Opportunities */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-brand-cream" id="careers">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Career Opportunities
-                </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto mb-6"></div>
-                <p className="text-gray-600 text-lg">
-                  Diverse career paths in the fashion and textile industry
-                </p>
-              </div>
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Careers" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Career{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Opportunities
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Diverse career paths in the fashion and textile industry
+                  </p>
+                </div>
+              </RevealSection>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 {[
-                  {
-                    icon: Palette,
-                    title: "Fashion Designer",
-                    description: "Create original clothing and accessory designs for fashion houses and brands"
-                  },
-                  {
-                    icon: Layers,
-                    title: "Textile Designer",
-                    description: "Design patterns, prints, and textures for fabrics and textile products"
-                  },
-                  {
-                    icon: Ruler,
-                    title: "Costume Designer",
-                    description: "Design costumes for film, television, theater, and media productions"
-                  },
-                  {
-                    icon: Briefcase,
-                    title: "Fashion Stylist",
-                    description: "Style outfits for photoshoots, celebrities, events, and editorial content"
-                  },
-                  {
-                    icon: CheckCircle,
-                    title: "Visual Merchandiser",
-                    description: "Create attractive product displays and store layouts for retail brands"
-                  },
-                  {
-                    icon: Sparkles,
-                    title: "Apparel Merchandiser",
-                    description: "Manage product development, sourcing, and supply chain for fashion brands"
-                  },
-                  {
-                    icon: Shirt,
-                    title: "Fashion Entrepreneur",
-                    description: "Launch your own fashion label, boutique, or online fashion business"
-                  },
-                  {
-                    icon: TrendingUp,
-                    title: "Production Manager",
-                    description: "Oversee garment manufacturing, quality control, and production processes"
-                  }
-                ].map((career, index) => (
-                  <div key={index} className="bg-[#eaf1e2] p-6 rounded-lg hover:shadow-lg transition-all hover:-translate-y-1">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                      <career.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-[#0b6d41] mb-2">{career.title}</h3>
-                    <p className="text-gray-700 text-sm">{career.description}</p>
-                  </div>
+                  { icon: <Palette className="w-6 h-6" />, title: 'Fashion Designer', desc: 'Create original clothing and accessory designs for fashion houses and brands' },
+                  { icon: <Layers className="w-6 h-6" />, title: 'Textile Designer', desc: 'Design patterns, prints, and textures for fabrics and textile products' },
+                  { icon: <Ruler className="w-6 h-6" />, title: 'Costume Designer', desc: 'Design costumes for film, television, theater, and media productions' },
+                  { icon: <Briefcase className="w-6 h-6" />, title: 'Fashion Stylist', desc: 'Style outfits for photoshoots, celebrities, events, and editorial content' },
+                  { icon: <CheckCircle2 className="w-6 h-6" />, title: 'Visual Merchandiser', desc: 'Create attractive product displays and store layouts for retail brands' },
+                  { icon: <Sparkles className="w-6 h-6" />, title: 'Apparel Merchandiser', desc: 'Manage product development, sourcing, and supply chain for fashion brands' },
+                  { icon: <Shirt className="w-6 h-6" />, title: 'Fashion Entrepreneur', desc: 'Launch your own fashion label, boutique, or online fashion business' },
+                  { icon: <TrendingUp className="w-6 h-6" />, title: 'Production Manager', desc: 'Oversee garment manufacturing, quality control, and production processes' }
+                ].map((career, idx) => (
+                  <RevealSection key={idx} delay={idx * 80}>
+                    <GlassCard className="p-6 group h-full">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 text-white group-hover:shadow-lg group-hover:shadow-brand-green/20 transition-all">
+                        {career.icon}
+                      </div>
+                      <h3 className="font-bold text-brand-green mb-2">{career.title}</h3>
+                      <p className="text-sm text-gray-600">{career.desc}</p>
+                    </GlassCard>
+                  </RevealSection>
                 ))}
               </div>
 
-              {/* Employment Sectors */}
-              <div className="bg-[#eaf1e2] p-8 rounded-xl">
-                <h3 className="text-2xl font-bold text-[#0b6d41] mb-6 text-center">Employment Sectors</h3>
-                <div className="flex flex-wrap gap-3 justify-center">
-                  {[
-                    "Fashion Houses",
-                    "Textile Mills",
-                    "Export Houses",
-                    "Retail Brands",
-                    "E-commerce Platforms",
-                    "Film & Television",
-                    "Advertising Agencies",
-                    "Fashion Magazines",
-                    "Design Studios",
-                    "Event Management",
-                    "Bridal & Couture",
-                    "Sustainable Fashion Brands"
-                  ].map((sector, index) => (
-                    <span
-                      key={index}
-                      className="bg-white text-[#0b6d41] px-4 py-2 rounded-full text-sm font-semibold shadow-sm hover:shadow-md transition-shadow"
-                    >
-                      {sector}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <RevealSection>
+                <GlassCard className="p-8" hover={false}>
+                  <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Employment Sectors</h3>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {[
+                      'Fashion Houses', 'Textile Mills', 'Export Houses',
+                      'Retail Brands', 'E-commerce Platforms', 'Film & Television',
+                      'Advertising Agencies', 'Fashion Magazines', 'Design Studios',
+                      'Event Management', 'Bridal & Couture', 'Sustainable Fashion Brands'
+                    ].map((sector, idx) => (
+                      <span key={idx} className="px-4 py-2 bg-brand-green/5 hover:bg-gradient-to-r hover:from-brand-green hover:to-emerald-500 hover:text-white text-brand-green rounded-full text-sm font-medium transition-all cursor-default border border-brand-green/15">
+                        {sector}
+                      </span>
+                    ))}
+                  </div>
+                </GlassCard>
+              </RevealSection>
             </div>
           </div>
         </section>
 
         {/* Department Facilities */}
-        <section className="py-16 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-white" id="facilities">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Department Facilities
-                </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto mb-6"></div>
-                <p className="text-gray-600 text-lg">
-                  State-of-the-art infrastructure for hands-on learning
-                </p>
-              </div>
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Infrastructure" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Department{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Facilities
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    State-of-the-art infrastructure for hands-on learning
+                  </p>
+                </div>
+              </RevealSection>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  {
-                    icon: Palette,
-                    title: "Fashion Design Studio",
-                    description: "Spacious design studio with professional mannequins, dress forms, design boards, and individual workstations for creative exploration and collection development.",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: Database,
-                    title: "CAD/CAM Laboratory",
-                    description: "Computer lab equipped with latest design software including Adobe Creative Suite, CorelDRAW, CAD pattern-making software, and 3D visualization tools.",
-                    color: "bg-[#ffde59]"
-                  },
-                  {
-                    icon: Scissors,
-                    title: "Garment Construction Lab",
-                    description: "Modern sewing lab with industrial sewing machines, overlock machines, button-hole machines, and specialized equipment for garment production.",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: LineChart,
-                    title: "Textile Testing Lab",
-                    description: "Well-equipped lab for fabric analysis, fiber identification, quality testing, and textile performance evaluation with industry-standard instruments.",
-                    color: "bg-[#ffde59]"
-                  },
-                  {
-                    icon: Sparkles,
-                    title: "Embroidery & Print Studio",
-                    description: "Specialized studio for surface ornamentation techniques including hand embroidery, machine embroidery, screen printing, and textile painting.",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: BookOpen,
-                    title: "Fashion Resource Centre",
-                    description: "Comprehensive library with fashion magazines, trend forecasting books, digital resources, fabric swatches, and industry publication subscriptions.",
-                    color: "bg-[#ffde59]"
-                  }
-                ].map((facility, index) => (
-                  <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                    <div className={`${facility.color} ${
-                      facility.color === 'bg-[#ffde59]' ? 'text-[#0b6d41]' : 'text-white'
-                    } p-6`}>
-                      <facility.icon className="w-10 h-10 mb-2" />
-                      <h3 className="text-xl font-bold">{facility.title}</h3>
-                    </div>
-                    <div className="p-6">
-                      <p className="text-gray-700">{facility.description}</p>
-                    </div>
-                  </div>
+                  { title: 'Fashion Design Studio', description: 'Spacious design studio with professional mannequins, dress forms, design boards, and individual workstations for creative exploration and collection development.' },
+                  { title: 'CAD/CAM Laboratory', description: 'Computer lab equipped with latest design software including Adobe Creative Suite, CorelDRAW, CAD pattern-making software, and 3D visualization tools.' },
+                  { title: 'Garment Construction Lab', description: 'Modern sewing lab with industrial sewing machines, overlock machines, button-hole machines, and specialized equipment for garment production.' },
+                  { title: 'Textile Testing Lab', description: 'Well-equipped lab for fabric analysis, fiber identification, quality testing, and textile performance evaluation with industry-standard instruments.' },
+                  { title: 'Embroidery & Print Studio', description: 'Specialized studio for surface ornamentation techniques including hand embroidery, machine embroidery, screen printing, and textile painting.' },
+                  { title: 'Fashion Resource Centre', description: 'Comprehensive library with fashion magazines, trend forecasting books, digital resources, fabric swatches, and industry publication subscriptions.' }
+                ].map((facility, idx) => (
+                  <RevealSection key={idx} delay={idx * 100}>
+                    <GlassCard className="p-6 group h-full">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 text-white shadow-lg shadow-brand-green/20 group-hover:shadow-brand-green/30 transition-shadow">
+                        <Palette className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-lg font-bold text-brand-green mb-2">{facility.title}</h3>
+                      <p className="text-gray-600 text-sm">{facility.description}</p>
+                    </GlassCard>
+                  </RevealSection>
                 ))}
               </div>
             </div>
@@ -804,184 +663,119 @@ export default function BSCTextileFashionDesigningPage() {
         </section>
 
         {/* Why Choose JKKN */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-brand-cream">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Why Choose JKKN for Fashion Design?
-                </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto"></div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  {[
-                    {
-                      icon: Users,
-                      title: "Industry-Experienced Learning Facilitators",
-                      description: "Learn from faculty with extensive experience in fashion design, textile technology, and industry practices"
-                    },
-                    {
-                      icon: Building,
-                      title: "Strong Industry Partnerships",
-                      description: "Collaborations with leading fashion brands, textile manufacturers, and export houses for internships and placements"
-                    },
-                    {
-                      icon: Sparkles,
-                      title: "Annual Fashion Shows",
-                      description: "Showcase your creativity through college fashion shows, exhibitions, and participation in national design competitions"
-                    },
-                    {
-                      icon: Globe,
-                      title: "Global Design Exposure",
-                      description: "Access to international fashion trends, guest lectures from industry experts, and exposure to global design practices"
-                    },
-                    {
-                      icon: TrendingUp,
-                      title: "Entrepreneurship Support",
-                      description: "Incubation facilities and mentorship for students aspiring to launch their own fashion labels and businesses"
-                    }
-                  ].map((reason, index) => (
-                    <div key={index} className="flex gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="bg-[#eaf1e2] w-12 h-12 rounded-full flex items-center justify-center">
-                          <reason.icon className="w-6 h-6 text-[#0b6d41]" />
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-[#0b6d41] mb-2">{reason.title}</h3>
-                        <p className="text-gray-700">{reason.description}</p>
-                      </div>
-                    </div>
-                  ))}
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Why JKKN" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Why Choose JKKN for{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Fashion Design?
+                    </span>
+                  </h2>
                 </div>
+              </RevealSection>
 
-                <div className="relative">
-                  <div className="bg-[#eaf1e2] rounded-2xl p-8 shadow-xl">
-                    <div className="aspect-square bg-gradient-to-br from-[#0b6d41] to-[#ffde59] rounded-xl flex items-center justify-center">
-                      <div className="text-center text-white">
-                        <Palette className="w-24 h-24 mx-auto mb-4" />
-                        <h3 className="text-2xl font-bold mb-2">Design Excellence</h3>
-                        <p className="text-sm opacity-90">Creating Future Fashion Leaders</p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  { icon: <Users className="w-6 h-6 text-white" />, title: 'Industry-Experienced Learning Facilitators', description: 'Learn from faculty with extensive experience in fashion design, textile technology, and industry practices' },
+                  { icon: <Building2 className="w-6 h-6 text-white" />, title: 'Strong Industry Partnerships', description: 'Collaborations with leading fashion brands, textile manufacturers, and export houses for internships and placements' },
+                  { icon: <Sparkles className="w-6 h-6 text-white" />, title: 'Annual Fashion Shows', description: 'Showcase your creativity through college fashion shows, exhibitions, and participation in national design competitions' },
+                  { icon: <Globe className="w-6 h-6 text-white" />, title: 'Global Design Exposure', description: 'Access to international fashion trends, guest lectures from industry experts, and exposure to global design practices' },
+                  { icon: <TrendingUp className="w-6 h-6 text-white" />, title: 'Entrepreneurship Support', description: 'Incubation facilities and mentorship for students aspiring to launch their own fashion labels and businesses' },
+                  { icon: <Award className="w-6 h-6 text-white" />, title: 'NAAC Accreditation', description: 'Quality-assured education with government recognition and industry partnerships ensuring excellent learning outcomes' }
+                ].map((reason, idx) => (
+                  <RevealSection key={idx} delay={idx * 100}>
+                    <GlassCard className="p-6 group h-full">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 shadow-lg shadow-brand-green/20 group-hover:shadow-brand-green/30 transition-shadow">
+                        {reason.icon}
                       </div>
-                    </div>
-                  </div>
-                </div>
+                      <h3 className="text-lg font-bold text-brand-green mb-2">{reason.title}</h3>
+                      <p className="text-gray-600 text-sm">{reason.description}</p>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-white" id="faq">
+          <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Frequently Asked Questions
-                </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto"></div>
-              </div>
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="FAQs" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Frequently Asked{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Questions
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600">
+                    Common queries about the B.Sc Textile and Fashion Design programme
+                  </p>
+                </div>
+              </RevealSection>
 
               <div className="space-y-4">
-                {faqs.map((faq, index) => (
-                  <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button
-                      onClick={() => toggleFAQ(index)}
-                      className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-[#eaf1e2] transition-colors"
-                    >
-                      <span className="font-bold text-[#0b6d41] pr-4">{faq.question}</span>
-                      <ChevronDown
-                        className={`w-5 h-5 text-[#0b6d41] flex-shrink-0 transition-transform ${
-                          activeFAQ === index ? 'transform rotate-180' : ''
-                        }`}
-                      />
-                    </button>
-                    <div
-                      className={`overflow-hidden transition-all duration-300 ${
-                        activeFAQ === index ? 'max-h-96' : 'max-h-0'
-                      }`}
-                    >
-                      <div className="px-6 py-4 bg-[#eaf1e2] text-gray-700">
-                        {faq.answer}
+                {faqs.map((faq, idx) => (
+                  <RevealSection key={idx} delay={idx * 50}>
+                    <GlassCard hover={false} className="overflow-hidden">
+                      <button
+                        onClick={() => setActiveFAQ(activeFAQ === idx ? -1 : idx)}
+                        className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-white/20 transition-colors"
+                      >
+                        <span className="font-semibold text-brand-green pr-4">{faq.question}</span>
+                        <ChevronDown
+                          className={`w-5 h-5 text-emerald-500 flex-shrink-0 transition-transform duration-300 ${activeFAQ === idx ? 'rotate-180' : ''
+                            }`}
+                        />
+                      </button>
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ${activeFAQ === idx ? 'max-h-96' : 'max-h-0'
+                          }`}
+                      >
+                        <div className="px-6 pb-5 text-gray-700 leading-relaxed">
+                          {faq.answer}
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    </GlassCard>
+                  </RevealSection>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Admission CTA */}
-        <section className="py-16 bg-gradient-to-r from-[#0b6d41] to-[#0a5a36]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto text-center text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Ready to Begin Your Fashion Journey?
-              </h2>
-              <p className="text-xl mb-8 opacity-90">
-                Join JKKN's B.Sc Textile and Fashion Design programme and turn your creative passion into a rewarding career
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <button className="bg-[#ffde59] hover:bg-[#f5d447] text-[#0b6d41] px-8 py-4 rounded-lg font-bold text-lg transition-all hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2">
-                  <ExternalLink className="w-5 h-5" />
-                  Apply Online
-                </button>
-                <button className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center gap-2">
-                  <Download className="w-5 h-5" />
-                  Download Brochure
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Related Programmes */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-4">
-                  Related Programmes
+        {/* Final CTA Section */}
+        <section className="py-16 bg-brand-cream" id="admission">
+          <div className="container mx-auto px-4">
+            <RevealSection>
+              <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Begin Your Creative Journey in{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Fashion Design
+                  </span>
                 </h2>
-                <div className="w-24 h-1 bg-[#ffde59] mx-auto"></div>
+                <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+                  Join our B.Sc Textile and Fashion Design programme and turn your creative passion into a rewarding career
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <a href="#" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                    Apply for Admission
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                  <a href="#" className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-brand-green border-2 border-brand-green px-8 py-4 rounded-lg font-semibold transition-all">
+                    Download Brochure
+                  </a>
+                </div>
               </div>
-
-              <div className="grid md:grid-cols-3 gap-6">
-                {[
-                  {
-                    title: "B.Sc Costume Design & Fashion",
-                    description: "Specialized programme focusing on costume design for performing arts and media",
-                    duration: "3 Years"
-                  },
-                  {
-                    title: "B.Des in Fashion Design",
-                    description: "Advanced design programme with focus on innovation and creative leadership",
-                    duration: "4 Years"
-                  },
-                  {
-                    title: "Diploma in Fashion Technology",
-                    description: "Short-term intensive course in garment technology and production management",
-                    duration: "1 Year"
-                  }
-                ].map((programme, index) => (
-                  <div key={index} className="bg-[#eaf1e2] rounded-xl p-6 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <div className="flex items-center gap-2 mb-4">
-                      <GraduationCap className="w-6 h-6 text-[#0b6d41]" />
-                      <span className="text-sm font-semibold text-[#0b6d41]">{programme.duration}</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-3">{programme.title}</h3>
-                    <p className="text-gray-700 mb-4">{programme.description}</p>
-                    <button className="text-[#0b6d41] font-semibold hover:underline flex items-center gap-1">
-                      Learn More
-                      <ExternalLink className="w-4 h-4" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
+            </RevealSection>
           </div>
         </section>
       </div>

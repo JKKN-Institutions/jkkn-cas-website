@@ -1,8 +1,65 @@
 'use client';
 
-import type { Metadata } from 'next';
-import { BookOpen, Users, Award, Briefcase, Library, GraduationCap, Building2, Lightbulb, CheckCircle2, Clock, FileText, Globe } from 'lucide-react';
-import { useState } from 'react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { BookOpen, Users, Award, Briefcase, Library, GraduationCap, Building2, Lightbulb, CheckCircle2, Clock, FileText, Globe, ChevronDown, ArrowRight, Sparkles, Target, Pen, Mic } from 'lucide-react';
+import CountUp from '@/components/ui/CountUp';
+import Marquee from '@/components/ui/Marquee';
+
+/* ─── Scroll-reveal hook ─── */
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
+/* ─── Reveal wrapper ─── */
+function RevealSection({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ─── GlassCard component ─── */
+function GlassCard({ children, className = '', hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
+  return (
+    <div className={`bg-white/40 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(11,109,65,0.08)] border border-white/60 ${hover ? 'hover:bg-white/60 hover:shadow-[0_8px_32px_rgba(11,109,65,0.15)] hover:-translate-y-2' : ''} transition-all duration-300 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+/* ─── Section badge ─── */
+function SectionBadge({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 bg-brand-green/10 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-green/15 text-brand-green mb-4">
+      <Sparkles className="w-3.5 h-3.5" />
+      {text}
+    </span>
+  );
+}
 
 export default function BAEnglishPage() {
   const [activeYear, setActiveYear] = useState(1);
@@ -11,47 +68,61 @@ export default function BAEnglishPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[500px] flex items-center bg-gradient-to-br from-brand-green via-brand-green to-brand-green/90 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(255,222,89,0.15)_0%,_transparent_50%),radial-gradient(circle_at_80%_20%,_rgba(255,222,89,0.15)_0%,_transparent_50%)]"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-white to-transparent"></div>
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+        {/* Background image */}
+        <Image
+          src="/images/programmes/ba-english/ba english.png"
+          alt="BA English programme"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-white/20">
-              <GraduationCap className="w-4 h-4 text-brand-yellow" />
-              UGC Recognized Programme
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 drop-shadow-lg">
-              Bachelor of Arts in English (Honours)
-            </h1>
-            <p className="text-xl md:text-2xl font-medium mb-6 drop-shadow-md text-white/95">
-              Master the Art of Language, Literature & Communication
-            </p>
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-white/90 text-gray-900">
+                <GraduationCap className="w-4 h-4 text-brand-green" />
+                UGC Recognized Programme
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+                Bachelor of Arts in{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  English
+                </span>{' '}
+                (Honours)
+              </h1>
+              <p className="text-xl md:text-2xl font-medium mb-6 text-gray-700">
+                Master the Art of Language, Literature & Communication
+              </p>
 
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <Clock className="w-5 h-5" />
-                <span>3 Years Duration</span>
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <Clock className="w-5 h-5 text-brand-green" />
+                  <span>3 Years Duration</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <FileText className="w-5 h-5 text-brand-green" />
+                  <span>6 Semesters</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <Users className="w-5 h-5 text-brand-green" />
+                  <span>Full-Time Programme</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <FileText className="w-5 h-5" />
-                <span>6 Semesters</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <Users className="w-5 h-5" />
-                <span>Full-Time Programme</span>
+
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="#admission" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-7 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                  Apply Now
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href="#curriculum" className="inline-flex items-center gap-2 bg-white/70 hover:bg-brand-green text-gray-900 hover:text-white border-2 border-white/80 hover:border-brand-green px-7 py-3 rounded-lg font-semibold backdrop-blur-sm transition-all">
+                  View Curriculum
+                </a>
               </div>
             </div>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <a href="#admission" className="inline-flex items-center gap-2 bg-brand-yellow hover:bg-brand-yellow/90 text-brand-green px-7 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                Apply Now
-              </a>
-              <a href="#curriculum" className="inline-flex items-center gap-2 bg-transparent hover:bg-white text-white hover:text-brand-green border-2 border-white/80 px-7 py-3 rounded-lg font-semibold transition-all">
-                View Curriculum
-              </a>
-            </div>
-          </div>
+          </RevealSection>
         </div>
       </section>
 
@@ -59,41 +130,23 @@ export default function BAEnglishPage() {
       <section className="relative z-10 -mt-12 pb-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-            <div className="bg-white rounded-2xl p-6 text-center shadow-xl border border-brand-cream hover:shadow-2xl hover:-translate-y-2 transition-all">
-              <div className="w-14 h-14 mx-auto mb-4 bg-brand-yellow rounded-lg flex items-center justify-center">
-                <GraduationCap className="w-7 h-7 text-brand-green" />
-              </div>
-              <span className="block text-3xl font-bold text-brand-green mb-1">NAAC</span>
-              <h3 className="font-bold text-brand-green mb-1">Accredited Institution</h3>
-              <p className="text-sm text-gray-600">Quality assured education</p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 text-center shadow-xl border border-brand-cream hover:shadow-2xl hover:-translate-y-2 transition-all">
-              <div className="w-14 h-14 mx-auto mb-4 bg-brand-yellow rounded-lg flex items-center justify-center">
-                <Users className="w-7 h-7 text-brand-green" />
-              </div>
-              <span className="block text-3xl font-bold text-brand-green mb-1">15:1</span>
-              <h3 className="font-bold text-brand-green mb-1">Learner-Facilitator Ratio</h3>
-              <p className="text-sm text-gray-600">Personalized attention</p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 text-center shadow-xl border border-brand-cream hover:shadow-2xl hover:-translate-y-2 transition-all">
-              <div className="w-14 h-14 mx-auto mb-4 bg-brand-yellow rounded-lg flex items-center justify-center">
-                <Briefcase className="w-7 h-7 text-brand-green" />
-              </div>
-              <span className="block text-3xl font-bold text-brand-green mb-1">90%+</span>
-              <h3 className="font-bold text-brand-green mb-1">Placement Record</h3>
-              <p className="text-sm text-gray-600">Career opportunities assured</p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 text-center shadow-xl border border-brand-cream hover:shadow-2xl hover:-translate-y-2 transition-all">
-              <div className="w-14 h-14 mx-auto mb-4 bg-brand-yellow rounded-lg flex items-center justify-center">
-                <Award className="w-7 h-7 text-brand-green" />
-              </div>
-              <span className="block text-3xl font-bold text-brand-green mb-1">₹3.5L</span>
-              <h3 className="font-bold text-brand-green mb-1">Average Package</h3>
-              <p className="text-sm text-gray-600">Competitive starting salary</p>
-            </div>
+            {[
+              { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC', title: 'Accredited Institution', desc: 'Quality assured education' },
+              { icon: <Users className="w-7 h-7" />, stat: '15:1', title: 'Learner-Facilitator Ratio', desc: 'Personalized attention' },
+              { icon: <Briefcase className="w-7 h-7" />, stat: '90%+', title: 'Placement Record', desc: 'Career opportunities assured' },
+              { icon: <Award className="w-7 h-7" />, stat: '₹3.5L', title: 'Average Package', desc: 'Competitive starting salary' },
+            ].map((card, idx) => (
+              <RevealSection key={idx} delay={idx * 100}>
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 mx-auto mb-4 bg-brand-green/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-brand-green/15 text-brand-green group-hover:text-emerald-600 transition-colors">
+                    {card.icon}
+                  </div>
+                  <span className="block text-3xl font-bold text-brand-green mb-1">{card.stat}</span>
+                  <h3 className="font-bold text-brand-green mb-1">{card.title}</h3>
+                  <p className="text-sm text-gray-600">{card.desc}</p>
+                </GlassCard>
+              </RevealSection>
+            ))}
           </div>
         </div>
       </section>
@@ -102,9 +155,13 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-brand-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
-            <div className="lg:col-span-3">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-6 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded">
-                Programme Overview
+            <RevealSection className="lg:col-span-3">
+              <SectionBadge text="About the Programme" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Programme{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Overview
+                </span>
               </h2>
               <p className="text-lg text-gray-700 mb-4 leading-relaxed">
                 The Bachelor of Arts in English (Honours) is a comprehensive three-year undergraduate programme designed to develop proficient communicators, critical thinkers, and creative writers. This UGC-recognized programme offers an in-depth exploration of English literature spanning various periods, genres, and cultural contexts while building strong foundations in language studies, linguistics, and professional communication.
@@ -114,37 +171,27 @@ export default function BAEnglishPage() {
               </p>
 
               <div className="grid sm:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2 text-gray-700">
-                  <CheckCircle2 className="w-5 h-5 text-brand-yellow" />
-                  <span>Industry-Aligned Curriculum</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <CheckCircle2 className="w-5 h-5 text-brand-yellow" />
-                  <span>Expert Learning Facilitators</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <CheckCircle2 className="w-5 h-5 text-brand-yellow" />
-                  <span>Practical Skill Development</span>
-                </div>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <CheckCircle2 className="w-5 h-5 text-brand-yellow" />
-                  <span>Research Opportunities</span>
-                </div>
+                {['Industry-Aligned Curriculum', 'Expert Learning Facilitators', 'Practical Skill Development', 'Research Opportunities'].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
-            </div>
+            </RevealSection>
 
-            <div className="lg:col-span-2">
+            <RevealSection className="lg:col-span-2" delay={200}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="https://placehold.co/600x450/0b6d41/FFFFFF?text=English+Literature+Library"
                   alt="English Literature Library"
                   className="w-full h-auto"
                 />
-                <span className="absolute top-4 right-4 bg-brand-yellow text-brand-green px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
                   Since 1954
                 </span>
               </div>
-            </div>
+            </RevealSection>
           </div>
         </div>
       </section>
@@ -153,94 +200,56 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-white" id="eligibility">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded after:mx-auto">
-                Eligibility & Admission Criteria
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Requirements for joining the BA English (Honours) programme
-              </p>
-            </div>
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Admissions" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Eligibility &{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Admission Criteria
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Requirements for joining the BA English (Honours) programme
+                </p>
+              </div>
+            </RevealSection>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-brand-cream rounded-2xl p-8 border border-brand-yellow/20 hover:shadow-xl transition-all">
-                <div className="w-16 h-16 bg-brand-yellow rounded-xl flex items-center justify-center mb-6">
-                  <GraduationCap className="w-8 h-8 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold text-brand-green mb-4">Academic Qualification</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Higher Secondary (10+2) from recognized board</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>English as a compulsory subject</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Minimum 50% aggregate marks</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>45% for reserved categories</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bg-brand-cream rounded-2xl p-8 border border-brand-yellow/20 hover:shadow-xl transition-all">
-                <div className="w-16 h-16 bg-brand-yellow rounded-xl flex items-center justify-center mb-6">
-                  <FileText className="w-8 h-8 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold text-brand-green mb-4">Accepted Streams</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Arts / Humanities stream preferred</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Science stream with English</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Commerce stream with English</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Vocational courses with English</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bg-brand-cream rounded-2xl p-8 border border-brand-yellow/20 hover:shadow-xl transition-all">
-                <div className="w-16 h-16 bg-brand-yellow rounded-xl flex items-center justify-center mb-6">
-                  <BookOpen className="w-8 h-8 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold text-brand-green mb-4">Documents Required</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>10th & 12th Mark Sheets</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Transfer Certificate</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Community Certificate</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Passport Size Photographs</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-brand-yellow mt-1">•</span>
-                    <span>Aadhaar Card Copy</span>
-                  </li>
-                </ul>
-              </div>
+              {[
+                {
+                  icon: <GraduationCap className="w-8 h-8 text-white" />,
+                  title: 'Academic Qualification',
+                  items: ['Higher Secondary (10+2) from recognized board', 'English as a compulsory subject', 'Minimum 50% aggregate marks', '45% for reserved categories']
+                },
+                {
+                  icon: <FileText className="w-8 h-8 text-white" />,
+                  title: 'Accepted Streams',
+                  items: ['Arts / Humanities stream preferred', 'Science stream with English', 'Commerce stream with English', 'Vocational courses with English']
+                },
+                {
+                  icon: <BookOpen className="w-8 h-8 text-white" />,
+                  title: 'Documents Required',
+                  items: ['10th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photographs', 'Aadhaar Card Copy']
+                }
+              ].map((card, idx) => (
+                <RevealSection key={idx} delay={idx * 150}>
+                  <GlassCard className="p-8 h-full">
+                    <div className="w-16 h-16 bg-gradient-to-br from-brand-green to-emerald-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20">
+                      {card.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-brand-green mb-4">{card.title}</h3>
+                    <ul className="space-y-2 text-gray-700">
+                      {card.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-emerald-500 mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </GlassCard>
+                </RevealSection>
+              ))}
             </div>
           </div>
         </div>
@@ -250,178 +259,134 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-brand-cream" id="curriculum">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded after:mx-auto">
-                Programme Curriculum
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Comprehensive syllabus designed to build expertise in English language and literature
-              </p>
-            </div>
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Curriculum" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Programme{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Curriculum
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Comprehensive syllabus designed to build expertise in English language and literature
+                </p>
+              </div>
+            </RevealSection>
 
-            <div className="flex justify-center gap-2 mb-8">
-              {[1, 2, 3].map((year) => (
-                <button
-                  key={year}
-                  onClick={() => setActiveYear(year)}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-                    activeYear === year
-                      ? 'bg-brand-green text-white shadow-lg'
-                      : 'bg-white text-brand-green hover:bg-brand-yellow/20'
-                  }`}
-                >
-                  Year {year}
-                </button>
-              ))}
-            </div>
+            <RevealSection>
+              <div className="flex justify-center gap-2 mb-8">
+                {[1, 2, 3].map((year) => (
+                  <button
+                    key={year}
+                    onClick={() => setActiveYear(year)}
+                    className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
+                        ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                        : 'bg-white text-brand-green hover:bg-brand-green/5'
+                      }`}
+                  >
+                    Year {year}
+                  </button>
+                ))}
+              </div>
+            </RevealSection>
 
             {activeYear === 1 && (
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  <div className="bg-brand-green text-white px-6 py-4">
-                    <h4 className="text-xl font-bold">Semester I</h4>
-                  </div>
-                  <div className="p-6">
-                    <ul className="space-y-3">
-                      {[
-                        'Introduction to Literary Studies',
-                        'English Grammar & Usage',
-                        'British Literature: Poetry',
-                        'Communication Skills I',
-                        'Indian Writing in English',
-                        'Environmental Studies'
-                      ].map((subject, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <span className="text-brand-yellow mt-1">•</span>
-                          <span>{subject}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  <div className="bg-brand-green text-white px-6 py-4">
-                    <h4 className="text-xl font-bold">Semester II</h4>
-                  </div>
-                  <div className="p-6">
-                    <ul className="space-y-3">
-                      {[
-                        'British Literature: Prose',
-                        'Phonetics & Phonology',
-                        'Social History of England',
-                        'Communication Skills II',
-                        'Women\'s Writing',
-                        'Value Education'
-                      ].map((subject, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <span className="text-brand-yellow mt-1">•</span>
-                          <span>{subject}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                {[
+                  {
+                    title: 'Semester I',
+                    subjects: ['Introduction to Literary Studies', 'English Grammar & Usage', 'British Literature: Poetry', 'Communication Skills I', 'Indian Writing in English', 'Environmental Studies']
+                  },
+                  {
+                    title: 'Semester II',
+                    subjects: ['British Literature: Prose', 'Phonetics & Phonology', 'Social History of England', 'Communication Skills II', 'Women\'s Writing', 'Value Education']
+                  }
+                ].map((sem, idx) => (
+                  <RevealSection key={idx} delay={idx * 150}>
+                    <GlassCard className="overflow-hidden" hover={false}>
+                      <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                        <h4 className="text-xl font-bold">{sem.title}</h4>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-3">
+                          {sem.subjects.map((subject, i) => (
+                            <li key={i} className="flex items-start gap-2 text-gray-700">
+                              <span className="text-emerald-500 mt-1">•</span>
+                              <span>{subject}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
             )}
 
             {activeYear === 2 && (
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  <div className="bg-brand-green text-white px-6 py-4">
-                    <h4 className="text-xl font-bold">Semester III</h4>
-                  </div>
-                  <div className="p-6">
-                    <ul className="space-y-3">
-                      {[
-                        'British Literature: Drama',
-                        'American Literature',
-                        'Linguistics I: Morphology & Syntax',
-                        'Literary Criticism',
-                        'Creative Writing',
-                        'Soft Skills Development'
-                      ].map((subject, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <span className="text-brand-yellow mt-1">•</span>
-                          <span>{subject}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  <div className="bg-brand-green text-white px-6 py-4">
-                    <h4 className="text-xl font-bold">Semester IV</h4>
-                  </div>
-                  <div className="p-6">
-                    <ul className="space-y-3">
-                      {[
-                        'British Literature: Fiction',
-                        'Commonwealth Literature',
-                        'Linguistics II: Semantics & Pragmatics',
-                        'Literary Theory',
-                        'Translation Studies',
-                        'Professional Ethics'
-                      ].map((subject, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <span className="text-brand-yellow mt-1">•</span>
-                          <span>{subject}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                {[
+                  {
+                    title: 'Semester III',
+                    subjects: ['British Literature: Drama', 'American Literature', 'Linguistics I: Morphology & Syntax', 'Literary Criticism', 'Creative Writing', 'Soft Skills Development']
+                  },
+                  {
+                    title: 'Semester IV',
+                    subjects: ['British Literature: Fiction', 'Commonwealth Literature', 'Linguistics II: Semantics & Pragmatics', 'Literary Theory', 'Translation Studies', 'Professional Ethics']
+                  }
+                ].map((sem, idx) => (
+                  <RevealSection key={idx} delay={idx * 150}>
+                    <GlassCard className="overflow-hidden" hover={false}>
+                      <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                        <h4 className="text-xl font-bold">{sem.title}</h4>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-3">
+                          {sem.subjects.map((subject, i) => (
+                            <li key={i} className="flex items-start gap-2 text-gray-700">
+                              <span className="text-emerald-500 mt-1">•</span>
+                              <span>{subject}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
             )}
 
             {activeYear === 3 && (
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  <div className="bg-brand-green text-white px-6 py-4">
-                    <h4 className="text-xl font-bold">Semester V</h4>
-                  </div>
-                  <div className="p-6">
-                    <ul className="space-y-3">
-                      {[
-                        'Shakespeare Studies',
-                        'Postcolonial Literature',
-                        'English Language Teaching',
-                        'Journalism & Mass Communication',
-                        'Research Methodology',
-                        'Internship / Project Work'
-                      ].map((subject, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <span className="text-brand-yellow mt-1">•</span>
-                          <span>{subject}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  <div className="bg-brand-green text-white px-6 py-4">
-                    <h4 className="text-xl font-bold">Semester VI</h4>
-                  </div>
-                  <div className="p-6">
-                    <ul className="space-y-3">
-                      {[
-                        'Modern & Contemporary Literature',
-                        'World Literature',
-                        'Business Communication',
-                        'Film Studies',
-                        'Digital Humanities',
-                        'Dissertation / Project'
-                      ].map((subject, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <span className="text-brand-yellow mt-1">•</span>
-                          <span>{subject}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                {[
+                  {
+                    title: 'Semester V',
+                    subjects: ['Shakespeare Studies', 'Postcolonial Literature', 'English Language Teaching', 'Journalism & Mass Communication', 'Research Methodology', 'Internship / Project Work']
+                  },
+                  {
+                    title: 'Semester VI',
+                    subjects: ['Modern & Contemporary Literature', 'World Literature', 'Business Communication', 'Film Studies', 'Digital Humanities', 'Dissertation / Project']
+                  }
+                ].map((sem, idx) => (
+                  <RevealSection key={idx} delay={idx * 150}>
+                    <GlassCard className="overflow-hidden" hover={false}>
+                      <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                        <h4 className="text-xl font-bold">{sem.title}</h4>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-3">
+                          {sem.subjects.map((subject, i) => (
+                            <li key={i} className="flex items-start gap-2 text-gray-700">
+                              <span className="text-emerald-500 mt-1">•</span>
+                              <span>{subject}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
             )}
           </div>
@@ -432,64 +397,39 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-white" id="outcomes">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded after:mx-auto">
-                Programme Learning Outcomes
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Skills and competencies you will develop through this programme
-              </p>
-            </div>
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Outcomes" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Programme Learning{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Outcomes
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Skills and competencies you will develop through this programme
+                </p>
+              </div>
+            </RevealSection>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                {
-                  number: '01',
-                  icon: <GraduationCap className="w-6 h-6 text-brand-green" />,
-                  title: 'Critical Thinking',
-                  description: 'Develop analytical abilities to evaluate literary texts, arguments, and cultural phenomena from multiple perspectives.'
-                },
-                {
-                  number: '02',
-                  icon: <Users className="w-6 h-6 text-brand-green" />,
-                  title: 'Communication Excellence',
-                  description: 'Master written and oral communication skills for professional, academic, and creative contexts.'
-                },
-                {
-                  number: '03',
-                  icon: <BookOpen className="w-6 h-6 text-brand-green" />,
-                  title: 'Literary Knowledge',
-                  description: 'Acquire comprehensive understanding of literature across periods, genres, cultures, and critical frameworks.'
-                },
-                {
-                  number: '04',
-                  icon: <Lightbulb className="w-6 h-6 text-brand-green" />,
-                  title: 'Creative Writing',
-                  description: 'Develop creative expression skills across various genres including fiction, poetry, drama, and digital content.'
-                },
-                {
-                  number: '05',
-                  icon: <FileText className="w-6 h-6 text-brand-green" />,
-                  title: 'Language Proficiency',
-                  description: 'Gain expertise in English language structure, usage, and evolution through linguistic study.'
-                },
-                {
-                  number: '06',
-                  icon: <Globe className="w-6 h-6 text-brand-green" />,
-                  title: 'Global Perspective',
-                  description: 'Understand diverse cultural contexts and develop intercultural competence through world literature studies.'
-                }
+                { icon: <Target className="w-6 h-6 text-white" />, title: 'Critical Thinking', description: 'Develop analytical abilities to evaluate literary texts, arguments, and cultural phenomena from multiple perspectives.' },
+                { icon: <Mic className="w-6 h-6 text-white" />, title: 'Communication Excellence', description: 'Master written and oral communication skills for professional, academic, and creative contexts.' },
+                { icon: <BookOpen className="w-6 h-6 text-white" />, title: 'Literary Knowledge', description: 'Acquire comprehensive understanding of literature across periods, genres, cultures, and critical frameworks.' },
+                { icon: <Pen className="w-6 h-6 text-white" />, title: 'Creative Writing', description: 'Develop creative expression skills across various genres including fiction, poetry, drama, and digital content.' },
+                { icon: <FileText className="w-6 h-6 text-white" />, title: 'Language Proficiency', description: 'Gain expertise in English language structure, usage, and evolution through linguistic study.' },
+                { icon: <Globe className="w-6 h-6 text-white" />, title: 'Global Perspective', description: 'Understand diverse cultural contexts and develop intercultural competence through world literature studies.' }
               ].map((outcome, idx) => (
-                <div key={idx} className="relative bg-brand-cream rounded-2xl p-6 border border-brand-yellow/20 hover:shadow-xl transition-all group">
-                  <span className="absolute top-4 right-4 text-5xl font-bold text-brand-yellow/20 group-hover:text-brand-yellow/30 transition-colors">
-                    {outcome.number}
-                  </span>
-                  <div className="w-12 h-12 bg-brand-yellow rounded-lg flex items-center justify-center mb-4">
-                    {outcome.icon}
-                  </div>
-                  <h3 className="text-lg font-bold text-brand-green mb-2">{outcome.title}</h3>
-                  <p className="text-gray-600 text-sm">{outcome.description}</p>
-                </div>
+                <RevealSection key={idx} delay={idx * 100}>
+                  <GlassCard className="relative p-6 group h-full">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 shadow-lg shadow-brand-green/20 group-hover:shadow-brand-green/30 transition-shadow">
+                      {outcome.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-brand-green mb-2">{outcome.title}</h3>
+                    <p className="text-gray-600 text-sm">{outcome.description}</p>
+                  </GlassCard>
+                </RevealSection>
               ))}
             </div>
           </div>
@@ -500,50 +440,60 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-brand-cream" id="careers">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded after:mx-auto">
-                Career Opportunities
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Diverse pathways await BA English graduates across industries
-              </p>
-            </div>
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Careers" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Career{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Opportunities
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Diverse pathways await BA English graduates across industries
+                </p>
+              </div>
+            </RevealSection>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               {[
-                { icon: <Lightbulb className="w-6 h-6 text-brand-green" />, title: 'Content Writer', desc: 'Create engaging content for websites, blogs, and digital platforms' },
-                { icon: <FileText className="w-6 h-6 text-brand-green" />, title: 'Journalist', desc: 'Report news, write articles for print and digital media' },
-                { icon: <GraduationCap className="w-6 h-6 text-brand-green" />, title: 'English Teacher', desc: 'Teach English language and literature at schools' },
-                { icon: <Users className="w-6 h-6 text-brand-green" />, title: 'Public Relations', desc: 'Manage communications for organizations and brands' },
-                { icon: <BookOpen className="w-6 h-6 text-brand-green" />, title: 'Editor', desc: 'Edit and publish books, magazines, and online content' },
-                { icon: <Globe className="w-6 h-6 text-brand-green" />, title: 'Translator', desc: 'Translate documents and literary works between languages' },
-                { icon: <Briefcase className="w-6 h-6 text-brand-green" />, title: 'Corporate Communications', desc: 'Handle internal and external communications' },
-                { icon: <Award className="w-6 h-6 text-brand-green" />, title: 'Civil Services', desc: 'Prepare for UPSC, TNPSC and other competitive exams' }
+                { icon: <Pen className="w-6 h-6" />, title: 'Content Writer', desc: 'Create engaging content for websites, blogs, and digital platforms' },
+                { icon: <FileText className="w-6 h-6" />, title: 'Journalist', desc: 'Report news, write articles for print and digital media' },
+                { icon: <GraduationCap className="w-6 h-6" />, title: 'English Teacher', desc: 'Teach English language and literature at schools' },
+                { icon: <Users className="w-6 h-6" />, title: 'Public Relations', desc: 'Manage communications for organizations and brands' },
+                { icon: <BookOpen className="w-6 h-6" />, title: 'Editor', desc: 'Edit and publish books, magazines, and online content' },
+                { icon: <Globe className="w-6 h-6" />, title: 'Translator', desc: 'Translate documents and literary works between languages' },
+                { icon: <Briefcase className="w-6 h-6" />, title: 'Corporate Communications', desc: 'Handle internal and external communications' },
+                { icon: <Award className="w-6 h-6" />, title: 'Civil Services', desc: 'Prepare for UPSC, TNPSC and other competitive exams' }
               ].map((career, idx) => (
-                <div key={idx} className="bg-white rounded-xl p-6 hover:shadow-xl transition-all border border-brand-yellow/20">
-                  <div className="w-12 h-12 bg-brand-yellow rounded-lg flex items-center justify-center mb-4">
-                    {career.icon}
-                  </div>
-                  <h3 className="font-bold text-brand-green mb-2">{career.title}</h3>
-                  <p className="text-sm text-gray-600">{career.desc}</p>
-                </div>
+                <RevealSection key={idx} delay={idx * 80}>
+                  <GlassCard className="p-6 group h-full">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 text-white group-hover:shadow-lg group-hover:shadow-brand-green/20 transition-all">
+                      {career.icon}
+                    </div>
+                    <h3 className="font-bold text-brand-green mb-2">{career.title}</h3>
+                    <p className="text-sm text-gray-600">{career.desc}</p>
+                  </GlassCard>
+                </RevealSection>
               ))}
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Employment Sectors</h3>
-              <div className="flex flex-wrap justify-center gap-3">
-                {[
-                  'Publishing Houses', 'Media & Entertainment', 'Education Sector', 'IT & Software',
-                  'Advertising Agencies', 'Government Departments', 'Banking & Finance', 'NGOs & Social Sector',
-                  'E-commerce', 'Healthcare Communications'
-                ].map((sector, idx) => (
-                  <span key={idx} className="px-4 py-2 bg-brand-cream hover:bg-brand-yellow hover:text-brand-green text-brand-green rounded-full text-sm font-medium transition-all cursor-default border border-brand-yellow/20">
-                    {sector}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <RevealSection>
+              <GlassCard className="p-8" hover={false}>
+                <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Employment Sectors</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {[
+                    'Publishing Houses', 'Media & Entertainment', 'Education Sector', 'IT & Software',
+                    'Advertising Agencies', 'Government Departments', 'Banking & Finance', 'NGOs & Social Sector',
+                    'E-commerce', 'Healthcare Communications'
+                  ].map((sector, idx) => (
+                    <span key={idx} className="px-4 py-2 bg-brand-green/5 hover:bg-gradient-to-r hover:from-brand-green hover:to-emerald-500 hover:text-white text-brand-green rounded-full text-sm font-medium transition-all cursor-default border border-brand-green/15">
+                      {sector}
+                    </span>
+                  ))}
+                </div>
+              </GlassCard>
+            </RevealSection>
           </div>
         </div>
       </section>
@@ -552,61 +502,46 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-white" id="facilities">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded after:mx-auto">
-                Learning Facilities
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                State-of-the-art infrastructure to support your academic journey
-              </p>
-            </div>
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Infrastructure" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Learning{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Facilities
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  State-of-the-art infrastructure to support your academic journey
+                </p>
+              </div>
+            </RevealSection>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                {
-                  title: 'Dedicated English Library',
-                  description: 'Over 15,000 books covering British, American, Indian, and World Literature with digital access to JSTOR and other academic databases.',
-                  image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=English+Library'
-                },
-                {
-                  title: 'Language Laboratory',
-                  description: 'Advanced language lab with audio-visual equipment for phonetics training, accent improvement, and communication practice.',
-                  image: 'https://placehold.co/400x200/ffde59/0b6d41?text=Language+Lab'
-                },
-                {
-                  title: 'Digital Content Studio',
-                  description: 'Equipped studio for podcasting, video creation, and multimedia content development for journalism and media courses.',
-                  image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Digital+Studio'
-                },
-                {
-                  title: 'Seminar Hall',
-                  description: 'Air-conditioned seminar hall with modern presentation facilities for literary discussions, guest lectures, and workshops.',
-                  image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Seminar+Hall'
-                },
-                {
-                  title: 'Reading Room',
-                  description: 'Peaceful reading spaces with current periodicals, literary magazines, and research journals for focused academic study.',
-                  image: 'https://placehold.co/400x200/ffde59/0b6d41?text=Reading+Room'
-                },
-                {
-                  title: 'Smart Learning Studios',
-                  description: 'Technology-enabled learning studios with interactive boards, projectors, and high-speed internet connectivity.',
-                  image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Smart+Classroom'
-                }
+                { title: 'Dedicated English Library', description: 'Over 15,000 books covering British, American, Indian, and World Literature with digital access to JSTOR and other academic databases.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=English+Library' },
+                { title: 'Language Laboratory', description: 'Advanced language lab with audio-visual equipment for phonetics training, accent improvement, and communication practice.', image: 'https://placehold.co/400x200/059669/FFFFFF?text=Language+Lab' },
+                { title: 'Digital Content Studio', description: 'Equipped studio for podcasting, video creation, and multimedia content development for journalism and media courses.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Digital+Studio' },
+                { title: 'Seminar Hall', description: 'Air-conditioned seminar hall with modern presentation facilities for literary discussions, guest lectures, and workshops.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Seminar+Hall' },
+                { title: 'Reading Room', description: 'Peaceful reading spaces with current periodicals, literary magazines, and research journals for focused academic study.', image: 'https://placehold.co/400x200/059669/FFFFFF?text=Reading+Room' },
+                { title: 'Smart Learning Studios', description: 'Technology-enabled learning studios with interactive boards, projectors, and high-speed internet connectivity.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Smart+Classroom' }
               ].map((facility, idx) => (
-                <div key={idx} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={facility.image}
-                      alt={facility.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                <RevealSection key={idx} delay={idx * 100}>
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={facility.image}
+                        alt={facility.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-green/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold text-brand-green mb-2">{facility.title}</h3>
+                      <p className="text-gray-600 text-sm">{facility.description}</p>
+                    </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-bold text-brand-green mb-2">{facility.title}</h3>
-                    <p className="text-gray-600 text-sm">{facility.description}</p>
-                  </div>
-                </div>
+                </RevealSection>
               ))}
             </div>
           </div>
@@ -617,33 +552,45 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-brand-cream" id="why-choose">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://placehold.co/600x500/0b6d41/FFFFFF?text=Campus+Life"
-                alt="Campus Life"
-                className="w-full h-auto"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-green/95 to-transparent p-8">
-                <div className="grid grid-cols-3 gap-4 text-center text-white">
-                  <div>
-                    <h4 className="text-3xl font-bold text-brand-yellow mb-1">70+</h4>
-                    <p className="text-xs">Years of Excellence</p>
-                  </div>
-                  <div>
-                    <h4 className="text-3xl font-bold text-brand-yellow mb-1">5000+</h4>
-                    <p className="text-xs">Active Learners</p>
-                  </div>
-                  <div>
-                    <h4 className="text-3xl font-bold text-brand-yellow mb-1">500+</h4>
-                    <p className="text-xs">Learning Facilitators</p>
+            <RevealSection>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://placehold.co/600x500/0b6d41/FFFFFF?text=Campus+Life"
+                  alt="Campus Life"
+                  className="w-full h-auto"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-green/95 to-transparent p-8">
+                  <div className="grid grid-cols-3 gap-4 text-center text-white">
+                    <div>
+                      <h4 className="text-3xl font-bold text-emerald-300 mb-1">
+                        <CountUp end={70} suffix="+" />
+                      </h4>
+                      <p className="text-xs">Years of Excellence</p>
+                    </div>
+                    <div>
+                      <h4 className="text-3xl font-bold text-emerald-300 mb-1">
+                        <CountUp end={5000} suffix="+" />
+                      </h4>
+                      <p className="text-xs">Active Learners</p>
+                    </div>
+                    <div>
+                      <h4 className="text-3xl font-bold text-emerald-300 mb-1">
+                        <CountUp end={500} suffix="+" />
+                      </h4>
+                      <p className="text-xs">Learning Facilitators</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </RevealSection>
 
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded">
-                Why Choose Our BA English Programme?
+            <RevealSection delay={200}>
+              <SectionBadge text="Why Us" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Why Choose Our BA{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  English Programme?
+                </span>
               </h2>
               <p className="text-lg text-gray-600 mb-6">
                 Our progressive education approach ensures holistic development, preparing you for success in academics and career.
@@ -651,30 +598,15 @@ export default function BAEnglishPage() {
 
               <div className="space-y-4">
                 {[
-                  {
-                    title: 'UGC Recognized & NAAC Accredited',
-                    description: 'Quality-assured education meeting national standards with excellent academic reputation.'
-                  },
-                  {
-                    title: 'Expert Learning Facilitators',
-                    description: 'Highly qualified faculty with doctoral degrees, research publications, and industry experience.'
-                  },
-                  {
-                    title: 'Strong Placement Support',
-                    description: 'Dedicated placement cell with industry partnerships ensuring excellent career opportunities.'
-                  },
-                  {
-                    title: 'Industry-Aligned Curriculum',
-                    description: 'Regularly updated syllabus incorporating current industry trends and skill requirements.'
-                  },
-                  {
-                    title: 'Research & Publication Support',
-                    description: 'Opportunities for research projects, paper presentations, and academic publications.'
-                  }
+                  { title: 'UGC Recognized & NAAC Accredited', description: 'Quality-assured education meeting national standards with excellent academic reputation.' },
+                  { title: 'Expert Learning Facilitators', description: 'Highly qualified faculty with doctoral degrees, research publications, and industry experience.' },
+                  { title: 'Strong Placement Support', description: 'Dedicated placement cell with industry partnerships ensuring excellent career opportunities.' },
+                  { title: 'Industry-Aligned Curriculum', description: 'Regularly updated syllabus incorporating current industry trends and skill requirements.' },
+                  { title: 'Research & Publication Support', description: 'Opportunities for research projects, paper presentations, and academic publications.' }
                 ].map((reason, idx) => (
-                  <div key={idx} className="flex gap-4 p-4 bg-white rounded-xl border border-brand-yellow/20 hover:shadow-lg transition-all">
-                    <div className="w-11 h-11 bg-brand-yellow rounded-lg flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green" />
+                  <div key={idx} className="flex gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/80 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                    <div className="w-11 h-11 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-green/15">
+                      <CheckCircle2 className="w-5 h-5 text-white" />
                     </div>
                     <div>
                       <h4 className="font-bold text-brand-green mb-1">{reason.title}</h4>
@@ -683,7 +615,7 @@ export default function BAEnglishPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </RevealSection>
           </div>
         </div>
       </section>
@@ -692,58 +624,46 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-white" id="faculty">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded after:mx-auto">
-                Our Learning Facilitators
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Meet our experienced and dedicated department team
-              </p>
-            </div>
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Faculty" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Our Learning{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Facilitators
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Meet our experienced and dedicated department team
+                </p>
+              </div>
+            </RevealSection>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Marquee pauseOnHover draggable speed={30} className="[--gap:1.5rem]">
               {[
-                {
-                  name: 'Dr. Priya Sundaram',
-                  designation: 'Head of Department',
-                  qualification: 'Ph.D. in English Literature',
-                  image: 'https://placehold.co/300x280/0b6d41/FFFFFF?text=HOD+English'
-                },
-                {
-                  name: 'Dr. Rajesh Kumar',
-                  designation: 'Associate Professor',
-                  qualification: 'Ph.D. in Linguistics',
-                  image: 'https://placehold.co/300x280/ffde59/0b6d41?text=Professor'
-                },
-                {
-                  name: 'Ms. Anitha Ramachandran',
-                  designation: 'Assistant Professor',
-                  qualification: 'M.Phil., NET Qualified',
-                  image: 'https://placehold.co/300x280/0b6d41/FFFFFF?text=Professor'
-                },
-                {
-                  name: 'Mr. Vikram Subramanian',
-                  designation: 'Assistant Professor',
-                  qualification: 'M.A., SLET Qualified',
-                  image: 'https://placehold.co/300x280/0b6d41/FFFFFF?text=Professor'
-                }
+                { name: 'Dr. Priya Sundaram', designation: 'Head of Department', qualification: 'Ph.D. in English Literature' },
+                { name: 'Dr. Rajesh Kumar', designation: 'Associate Professor', qualification: 'Ph.D. in Linguistics' },
+                { name: 'Ms. Anitha Ramachandran', designation: 'Assistant Professor', qualification: 'M.Phil., NET Qualified' },
+                { name: 'Mr. Vikram Subramanian', designation: 'Assistant Professor', qualification: 'M.A., SLET Qualified' }
               ].map((faculty, idx) => (
-                <div key={idx} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">
-                  <div className="relative h-56 overflow-hidden">
-                    <img
-                      src={faculty.image}
+                <div key={idx} className="w-[260px] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group flex flex-col h-[340px]">
+                  <div className="relative h-56 overflow-hidden flex-shrink-0">
+                    <Image
+                      src="/images/faculties/placeholder-avatar.jpg"
                       alt={faculty.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-green/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <div className="p-5 text-center">
+                  <div className="p-5 text-center flex-1 flex flex-col justify-center">
                     <h4 className="text-lg font-bold text-brand-green mb-1">{faculty.name}</h4>
-                    <p className="text-sm font-semibold text-brand-yellow mb-1">{faculty.designation}</p>
+                    <p className="text-sm font-semibold text-emerald-500 mb-1">{faculty.designation}</p>
                     <p className="text-xs text-gray-600">{faculty.qualification}</p>
                   </div>
                 </div>
               ))}
-            </div>
+            </Marquee>
           </div>
         </div>
       </section>
@@ -752,66 +672,48 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-brand-cream" id="faq">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded after:mx-auto">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-lg text-gray-600">
-                Find answers to common queries about the BA English programme
-              </p>
-            </div>
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="FAQ" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Frequently Asked{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Questions
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Find answers to common queries about the BA English programme
+                </p>
+              </div>
+            </RevealSection>
 
             <div className="space-y-4">
               {[
-                {
-                  question: 'What is the duration of the BA English programme?',
-                  answer: 'The BA English (Honours) programme is a 3-year full-time undergraduate degree comprising six semesters. Each academic year consists of two semesters, with examinations conducted at the end of each semester. The programme follows the Choice Based Credit System (CBCS) pattern as prescribed by the UGC.'
-                },
-                {
-                  question: 'What are the career opportunities after BA English?',
-                  answer: 'BA English graduates have diverse career opportunities including Content Writing and Copywriting, Journalism and Media, Publishing and Editing, Teaching (after B.Ed.), Public Relations and Corporate Communications, Translation and Interpretation, Civil Services (IAS, IPS, IFS), and Advertising and Marketing.'
-                },
-                {
-                  question: 'What is the eligibility criteria for BA English admission?',
-                  answer: 'Candidates must have completed Higher Secondary (10+2) from a recognized board with English as a compulsory subject. A minimum aggregate of 50% marks is required for general category candidates, while 45% is required for reserved categories (SC/ST/OBC). Candidates from any stream (Arts, Science, or Commerce) are eligible to apply.'
-                },
-                {
-                  question: 'What is the fee structure for BA English?',
-                  answer: 'The fee structure varies based on the category of admission. Please contact the admission office for the current academic year\'s detailed fee structure. The college offers various scholarship opportunities for meritorious students and those from economically weaker sections. Government scholarships are also facilitated through the institution.'
-                },
-                {
-                  question: 'Can I pursue higher studies after BA English?',
-                  answer: 'Yes, BA English opens multiple pathways for higher education including MA English (Literature/Linguistics), M.Phil. and Ph.D. in English, B.Ed. for teaching career, MBA (Management Studies), Mass Communication and Journalism, Law (LLB), and Diploma in Creative Writing.'
-                },
-                {
-                  question: 'Does the college provide placement assistance?',
-                  answer: 'Yes, our dedicated Placement Cell actively supports learners through campus recruitment drives, soft skills training, resume building workshops, mock interviews, and industry interaction sessions. We have partnerships with leading companies in media, publishing, IT, education, and corporate sectors. The placement rate for BA English graduates has consistently been above 85%.'
-                },
-                {
-                  question: 'What makes this BA English programme unique?',
-                  answer: 'Our BA English programme stands out due to its industry-aligned curriculum, emphasis on practical skills like digital content creation and journalism, dedicated language laboratory, expert learning facilitators with research experience, strong placement support, and focus on holistic development through co-curricular activities. The programme also offers specialization options in areas like Creative Writing, ELT, and Media Studies.'
-                },
-                {
-                  question: 'Are internships mandatory in the BA English programme?',
-                  answer: 'Yes, the programme includes a mandatory internship component in the fifth semester. Learners gain practical experience in fields such as journalism, content writing, publishing, teaching, or corporate communications. The department assists in securing internship placements with reputed organizations, newspapers, magazines, and educational institutions.'
-                }
+                { question: 'What is the duration of the BA English programme?', answer: 'The BA English (Honours) programme is a 3-year full-time undergraduate degree comprising six semesters. Each academic year consists of two semesters, with examinations conducted at the end of each semester. The programme follows the Choice Based Credit System (CBCS) pattern as prescribed by the UGC.' },
+                { question: 'What are the career opportunities after BA English?', answer: 'BA English graduates have diverse career opportunities including Content Writing and Copywriting, Journalism and Media, Publishing and Editing, Teaching (after B.Ed.), Public Relations and Corporate Communications, Translation and Interpretation, Civil Services (IAS, IPS, IFS), and Advertising and Marketing.' },
+                { question: 'What is the eligibility criteria for BA English admission?', answer: 'Candidates must have completed Higher Secondary (10+2) from a recognized board with English as a compulsory subject. A minimum aggregate of 50% marks is required for general category candidates, while 45% is required for reserved categories (SC/ST/OBC). Candidates from any stream (Arts, Science, or Commerce) are eligible to apply.' },
+                { question: 'What is the fee structure for BA English?', answer: 'The fee structure varies based on the category of admission. Please contact the admission office for the current academic year\'s detailed fee structure. The college offers various scholarship opportunities for meritorious students and those from economically weaker sections. Government scholarships are also facilitated through the institution.' },
+                { question: 'Can I pursue higher studies after BA English?', answer: 'Yes, BA English opens multiple pathways for higher education including MA English (Literature/Linguistics), M.Phil. and Ph.D. in English, B.Ed. for teaching career, MBA (Management Studies), Mass Communication and Journalism, Law (LLB), and Diploma in Creative Writing.' },
+                { question: 'Does the college provide placement assistance?', answer: 'Yes, our dedicated Placement Cell actively supports learners through campus recruitment drives, soft skills training, resume building workshops, mock interviews, and industry interaction sessions. We have partnerships with leading companies in media, publishing, IT, education, and corporate sectors. The placement rate for BA English graduates has consistently been above 85%.' },
+                { question: 'What makes this BA English programme unique?', answer: 'Our BA English programme stands out due to its industry-aligned curriculum, emphasis on practical skills like digital content creation and journalism, dedicated language laboratory, expert learning facilitators with research experience, strong placement support, and focus on holistic development through co-curricular activities. The programme also offers specialization options in areas like Creative Writing, ELT, and Media Studies.' },
+                { question: 'Are internships mandatory in the BA English programme?', answer: 'Yes, the programme includes a mandatory internship component in the fifth semester. Learners gain practical experience in fields such as journalism, content writing, publishing, teaching, or corporate communications. The department assists in securing internship placements with reputed organizations, newspapers, magazines, and educational institutions.' }
               ].map((faq, idx) => (
-                <div key={idx} className="bg-white rounded-xl border border-brand-yellow/20 hover:border-brand-yellow transition-all overflow-hidden">
-                  <button
-                    onClick={() => setActiveFAQ(activeFAQ === idx ? -1 : idx)}
-                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-brand-cream/30 transition-colors"
-                  >
-                    <span className="font-semibold text-brand-green">{faq.question}</span>
-                    <div className={`w-6 h-6 relative flex-shrink-0 transition-transform ${activeFAQ === idx ? 'rotate-45' : ''}`}>
-                      <span className="absolute inset-0 flex items-center justify-center text-brand-yellow text-2xl font-light">+</span>
-                    </div>
-                  </button>
-                  <div className={`transition-all duration-300 ${activeFAQ === idx ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                    <div className="px-6 pb-5 text-gray-600 leading-relaxed">
-                      {faq.answer}
+                <RevealSection key={idx} delay={idx * 60}>
+                  <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-white/80 hover:border-brand-green/20 transition-all overflow-hidden">
+                    <button
+                      onClick={() => setActiveFAQ(activeFAQ === idx ? -1 : idx)}
+                      className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-brand-green/5 transition-colors"
+                    >
+                      <span className="font-semibold text-brand-green">{faq.question}</span>
+                      <ChevronDown className={`w-5 h-5 text-brand-green flex-shrink-0 transition-transform duration-300 ${activeFAQ === idx ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`transition-all duration-300 ${activeFAQ === idx ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                      <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                        {faq.answer}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </RevealSection>
               ))}
             </div>
           </div>
@@ -819,39 +721,35 @@ export default function BAEnglishPage() {
       </section>
 
       {/* Admission CTA */}
-      <section className="py-16 bg-brand-green text-white relative overflow-hidden" id="admission">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(255,222,89,0.1)_0%,_transparent_50%),radial-gradient(circle_at_80%_20%,_rgba(255,222,89,0.1)_0%,_transparent_50%)]"></div>
+      <section className="py-16 bg-white relative overflow-hidden" id="admission">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-green/5 via-transparent to-emerald-500/5"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Begin Your Journey in English Studies</h2>
-            <p className="text-lg mb-8 text-white/95">
-              Join our BA English programme and unlock a world of opportunities in literature, language, and communication.
-            </p>
+          <RevealSection>
+            <div className="max-w-3xl mx-auto text-center">
+              <SectionBadge text="Enroll Now" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Begin Your Journey in{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  English Studies
+                </span>
+              </h2>
+              <p className="text-lg mb-8 text-gray-600">
+                Join our BA English programme and unlock a world of opportunities in literature, language, and communication.
+              </p>
 
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <a href="#" className="inline-flex items-center gap-2 bg-brand-yellow hover:bg-brand-yellow/90 text-brand-green px-8 py-4 rounded-lg font-semibold shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
-                Apply for Admission
-              </a>
-              <a href="#" className="inline-flex items-center gap-2 bg-transparent hover:bg-white text-white hover:text-brand-green border-2 border-white px-8 py-4 rounded-lg font-semibold transition-all">
-                Download Brochure
-              </a>
-            </div>
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <a href="#" className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-green to-emerald-500 hover:from-brand-green/90 hover:to-emerald-500/90 text-white px-8 py-4 rounded-lg font-semibold shadow-xl shadow-brand-green/25 hover:shadow-2xl transition-all hover:-translate-y-1">
+                  Apply for Admission
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href="#" className="inline-flex items-center gap-2 bg-transparent hover:bg-brand-green text-brand-green hover:text-white border-2 border-brand-green px-8 py-4 rounded-lg font-semibold transition-all">
+                  Download Brochure
+                </a>
+              </div>
 
-            <div className="flex flex-wrap justify-center gap-6 pt-8 border-t border-white/20">
-              <div className="flex items-center gap-2 text-sm">
-                <span>📧</span>
-                <span>admissions@college.edu</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <span>📞</span>
-                <span>+91 98765 43210</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Admissions Open 2025-26</span>
-              </div>
+
             </div>
-          </div>
+          </RevealSection>
         </div>
       </section>
 
@@ -859,59 +757,53 @@ export default function BAEnglishPage() {
       <section className="py-16 bg-brand-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-brand-yellow after:mt-3 after:rounded after:mx-auto">
-                Explore Related Programmes
-              </h2>
-              <p className="text-lg text-gray-600">
-                Discover other arts and humanities programmes at our college
-              </p>
-            </div>
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Explore More" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Explore Related{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Programmes
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Discover other arts and humanities programmes at our college
+                </p>
+              </div>
+            </RevealSection>
 
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                {
-                  title: 'MA English',
-                  description: 'Advanced postgraduate studies in English Literature and Linguistics',
-                  duration: '2 Years',
-                  image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=MA+English'
-                },
-                {
-                  title: 'BA History',
-                  description: 'Study of world civilizations, Indian history, and historiography',
-                  duration: '3 Years',
-                  image: 'https://placehold.co/400x180/ffde59/0b6d41?text=BA+History'
-                },
-                {
-                  title: 'BA Economics',
-                  description: 'Comprehensive study of micro and macroeconomics with statistical analysis',
-                  duration: '3 Years',
-                  image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BA+Economics'
-                }
+                { title: 'MA English', description: 'Advanced postgraduate studies in English Literature and Linguistics', duration: '2 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=MA+English' },
+                { title: 'BA History', description: 'Study of world civilizations, Indian history, and historiography', duration: '3 Years', image: 'https://placehold.co/400x180/059669/FFFFFF?text=BA+History' },
+                { title: 'BA Economics', description: 'Comprehensive study of micro and macroeconomics with statistical analysis', duration: '3 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BA+Economics' }
               ].map((programme, idx) => (
-                <a key={idx} href="#" className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-yellow/20 group">
-                  <div className="relative h-44 overflow-hidden">
-                    <img
-                      src={programme.image}
-                      alt={programme.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-brand-green mb-2 group-hover:text-brand-yellow transition-colors">{programme.title}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{programme.description}</p>
-                    <div className="flex items-center gap-4 text-sm text-gray-500">
-                      <div className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        <span>{programme.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Users className="w-4 h-4" />
-                        <span>Full-time</span>
+                <RevealSection key={idx} delay={idx * 150}>
+                  <a href="#" className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">
+                    <div className="relative h-44 overflow-hidden">
+                      <img
+                        src={programme.image}
+                        alt={programme.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-green/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-brand-green mb-2 group-hover:text-emerald-500 transition-colors">{programme.title}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{programme.description}</p>
+                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          <span>{programme.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Users className="w-4 h-4" />
+                          <span>Full-time</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </RevealSection>
               ))}
             </div>
           </div>

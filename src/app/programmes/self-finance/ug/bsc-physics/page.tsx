@@ -1,75 +1,69 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import {
-  GraduationCap,
-  Users,
-  BookOpen,
-  TrendingUp,
-  CheckCircle,
-  Award,
-  Briefcase,
-  Target,
-  Clock,
-  Calendar,
-  FileText,
-  BarChart,
-  DollarSign,
-  Globe,
-  Building,
-  UserCheck,
-  Brain,
-  Lightbulb,
-  PieChart,
-  Calculator,
-  Database,
-  LineChart,
-  Shield,
-  Zap,
-  ChevronDown,
-  Download,
-  ExternalLink,
-  Atom,
-  Microscope,
-  FlaskConical,
-  Waves
-} from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { BookOpen, Users, Award, Briefcase, GraduationCap, Building2, CheckCircle2, Clock, FileText, Globe, ChevronDown, ArrowRight, Sparkles, Target, Atom, Microscope, FlaskConical, Database, Zap, Brain, Calendar, UserCheck, DollarSign, TrendingUp } from 'lucide-react';
+import CountUp from '@/components/ui/CountUp';
+import Marquee from '@/components/ui/Marquee';
 
-export default function BScPhysicsPage() {
-  const [activeYear, setActiveYear] = useState(1);
-  const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+/* ─── Scroll-reveal hook ─── */
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
-
-    // Spotlight effect for cards
-    const handleMouseMove = (e: MouseEvent) => {
-      const cards = document.querySelectorAll('.spotlight-card');
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        (card as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
-        (card as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
-      });
-    };
-
-    const cards = document.querySelectorAll('.spotlight-card');
-    cards.forEach((card) => {
-      card.addEventListener('mousemove', handleMouseMove as EventListener);
-    });
-
-    return () => {
-      cards.forEach((card) => {
-        card.removeEventListener('mousemove', handleMouseMove as EventListener);
-      });
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
   }, []);
 
-  const toggleFAQ = (index: number) => {
-    setActiveFAQ(activeFAQ === index ? null : index);
-  };
+  return { ref, isVisible };
+}
+
+/* ─── Reveal wrapper ─── */
+function RevealSection({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ─── GlassCard component ─── */
+function GlassCard({ children, className = '', hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
+  return (
+    <div className={`bg-white/40 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(11,109,65,0.08)] border border-white/60 ${hover ? 'hover:bg-white/60 hover:shadow-[0_8px_32px_rgba(11,109,65,0.15)] hover:-translate-y-2' : ''} transition-all duration-300 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+/* ─── Section badge ─── */
+function SectionBadge({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 bg-brand-green/10 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-green/15 text-brand-green mb-4">
+      <Sparkles className="w-3.5 h-3.5" />
+      {text}
+    </span>
+  );
+}
+
+export default function BScPhysicsPage() {
+  const [activeYear, setActiveYear] = useState(1);
+  const [activeFAQ, setActiveFAQ] = useState(0);
 
   const faqs = [
     {
@@ -131,567 +125,391 @@ export default function BScPhysicsPage() {
       />
 
       <div className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section className="relative bg-[#eaf1e2] overflow-hidden">
-          {/* Decorative Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#0b6d41]/5"></div>
-          </div>
+        {/* Hero Banner Section */}
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+          {/* Background image */}
+          <Image
+            src="/images/programmes/bsc-physics/hero.jpg"
+            alt="B.Sc Physics programme"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
 
-          <div className="container relative z-10 mx-auto px-4 md:px-6 py-12 md:py-16">
-            <div className="max-w-5xl mx-auto text-center">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-[#0b6d41]/10 backdrop-blur-sm px-5 py-2.5 rounded-full text-sm font-medium mb-6 border border-[#0b6d41]/20">
-                <GraduationCap className="w-4 h-4 text-[#0b6d41]" />
-                <span className="text-[#0b6d41]">UGC Recognized Programme</span>
-              </div>
+          <div className="container mx-auto px-4 relative z-10">
+            <RevealSection>
+              <div className="max-w-4xl mx-auto text-center">
+                <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-white/90 text-gray-900">
+                  <GraduationCap className="w-4 h-4 text-brand-green" />
+                  UGC Recognized Programme
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+                  Bachelor of Science in{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Physics
+                  </span>
+                </h1>
+                <p className="text-xl md:text-2xl font-medium mb-6 text-gray-700">
+                  Unlock the Mysteries of the Universe Through Science
+                </p>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#0b6d41] leading-tight">
-                Bachelor of Science in<br />Physics
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-700 mb-10 font-light">
-                Unlock the Mysteries of the Universe Through Science
-              </p>
-
-              {/* Meta Info */}
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Clock className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">3 Years Duration</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Users className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">Full-Time Programme</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-lg border border-[#0b6d41]/20 shadow-sm">
-                  <Calendar className="w-5 h-5 text-[#0b6d41]" />
-                  <span className="font-medium text-gray-700">6 Semesters</span>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <button className="bg-[#ffde59] hover:bg-[#f5d447] text-[#0b6d41] px-8 py-3.5 rounded-lg font-bold transition-all hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
-                  Apply Now
-                </button>
-                <button className="bg-white border-2 border-[#0b6d41] hover:bg-[#0b6d41] hover:text-white text-[#0b6d41] px-8 py-3.5 rounded-lg font-semibold transition-all flex items-center gap-2 shadow-sm">
-                  <FileText className="w-5 h-5" />
-                  View Curriculum
-                </button>
-              </div>
-
-              {/* Highlight Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-                {[
-                  {
-                    icon: GraduationCap,
-                    title: "NAAC",
-                    subtitle: "Accredited Institution",
-                    description: "Quality assured education",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: FlaskConical,
-                    title: "Modern",
-                    subtitle: "Physics Labs",
-                    description: "State-of-the-art facilities",
-                    color: "bg-[#ffde59]"
-                  },
-                  {
-                    icon: Briefcase,
-                    title: "90%+",
-                    subtitle: "Placement Record",
-                    description: "Career opportunities",
-                    color: "bg-[#0b6d41]"
-                  },
-                  {
-                    icon: Atom,
-                    title: "ISRO",
-                    subtitle: "Industry Connect",
-                    description: "Research collaborations",
-                    color: "bg-[#ffde59]"
-                  }
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="spotlight-card relative bg-white text-gray-800 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 overflow-hidden"
-                    style={{
-                      opacity: isVisible ? 1 : 0,
-                      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                      transition: `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`
-                    }}
-                  >
-                    {/* Spotlight Effect - CSS Only */}
-                    <div
-                      className="spotlight-effect absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                      style={{
-                        background: item.color === 'bg-[#ffde59]'
-                          ? 'radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 222, 89, 0.2), transparent 70%)'
-                          : 'radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(11, 109, 65, 0.2), transparent 70%)'
-                      }}
-                    />
-
-                    {/* Card Content */}
-                    <div className="relative z-10">
-                      <div className="flex justify-center mb-4">
-                        <div className={`${item.color} w-14 h-14 rounded-full flex items-center justify-center shadow-lg`}>
-                          <item.icon className={`w-7 h-7 ${item.color === 'bg-[#ffde59]' ? 'text-[#0b6d41]' : 'text-white'}`} />
-                        </div>
-                      </div>
-                      <h3 className={`text-xl font-bold mb-1 ${item.color === 'bg-[#ffde59]' ? 'text-[#ffde59]' : 'text-[#0b6d41]'}`}>{item.title}</h3>
-                      <h4 className="font-semibold text-gray-800 mb-2">{item.subtitle}</h4>
-                      <p className="text-sm text-gray-600">{item.description}</p>
-                    </div>
+                <div className="flex flex-wrap justify-center gap-4 mb-8">
+                  <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                    <Clock className="w-5 h-5 text-brand-green" />
+                    <span>3 Years Duration</span>
                   </div>
-                ))}
+                  <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                    <FileText className="w-5 h-5 text-brand-green" />
+                    <span>6 Semesters</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                    <Users className="w-5 h-5 text-brand-green" />
+                    <span>Full-Time Programme</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-4">
+                  <a href="#admission" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-7 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                    Apply Now
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                  <a href="#curriculum" className="inline-flex items-center gap-2 bg-white/70 hover:bg-brand-green text-gray-900 hover:text-white border-2 border-white/80 hover:border-brand-green px-7 py-3 rounded-lg font-semibold backdrop-blur-sm transition-all">
+                    View Curriculum
+                  </a>
+                </div>
               </div>
+            </RevealSection>
+          </div>
+        </section>
+
+        {/* Quick Info Cards */}
+        <section className="relative z-10 -mt-12 pb-8">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+              {[
+                { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC', title: 'Accredited Institution', desc: 'Quality assured education' },
+                { icon: <FlaskConical className="w-7 h-7" />, stat: 'Modern', title: 'Physics Labs', desc: 'State-of-the-art facilities' },
+                { icon: <Briefcase className="w-7 h-7" />, stat: '90%+', title: 'Placement Record', desc: 'Career opportunities assured' },
+                { icon: <Atom className="w-7 h-7" />, stat: 'ISRO', title: 'Industry Connect', desc: 'Research collaborations' },
+              ].map((card, idx) => (
+                <RevealSection key={idx} delay={idx * 100}>
+                  <GlassCard className="p-6 text-center">
+                    <div className="w-14 h-14 mx-auto mb-4 bg-brand-green/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-brand-green/15 text-brand-green group-hover:text-emerald-600 transition-colors">
+                      {card.icon}
+                    </div>
+                    <span className="block text-3xl font-bold text-brand-green mb-1">{card.stat}</span>
+                    <h3 className="font-bold text-brand-green mb-1">{card.title}</h3>
+                    <p className="text-sm text-gray-600">{card.desc}</p>
+                  </GlassCard>
+                </RevealSection>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Programme Overview */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="max-w-5xl mx-auto">
-                {/* Main Content */}
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-2">Programme Overview</h2>
-                  <div className="w-16 h-1 bg-[#ffde59] mb-8 rounded"></div>
+        <section className="py-16 bg-brand-cream">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
+              <RevealSection className="lg:col-span-3">
+                <SectionBadge text="About the Programme" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                  Programme{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Overview
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+                  The Bachelor of Science in Physics is a comprehensive three-year undergraduate programme designed to provide Learners with in-depth knowledge of fundamental physics, quantum mechanics, electromagnetism, thermodynamics, and modern physics. This UGC-recognized programme offers a perfect blend of theoretical foundations and practical laboratory experience, preparing graduates for diverse career pathways in scientific research and technology.
+                </p>
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  Our progressive education philosophy ensures that Learners develop scientific temperament, analytical thinking, and problem-solving skills through experiential learning. The curriculum integrates classical physics with modern computational techniques, electronics, and material science, equipping graduates with skills demanded by research institutions, technology industries, and academic organizations worldwide.
+                </p>
 
-                  <div className="space-y-4 mb-10">
-                    <p className="text-gray-700 leading-relaxed">
-                      The Bachelor of Science in Physics is a comprehensive three-year undergraduate programme designed to provide Learners with in-depth knowledge of fundamental physics, quantum mechanics, electromagnetism, thermodynamics, and modern physics. This UGC-recognized programme offers a perfect blend of theoretical foundations and practical laboratory experience, preparing graduates for diverse career pathways in scientific research and technology.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed">
-                      Our progressive education philosophy ensures that Learners develop scientific temperament, analytical thinking, and problem-solving skills through experiential learning. The curriculum integrates classical physics with modern computational techniques, electronics, and material science, equipping graduates with skills demanded by research institutions, technology industries, and academic organizations worldwide.
-                    </p>
-                  </div>
-
-                  {/* Feature Grid - 2x2 */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#ffde59]">
-                      <CheckCircle className="w-5 h-5 text-[#ffde59] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Industry-Aligned Curriculum</p>
-                      </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {['Industry-Aligned Curriculum', 'Expert Learning Facilitators', 'Advanced Laboratory Training', 'Research Project Experience'].map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-gray-700">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                      <span>{item}</span>
                     </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#ffde59]">
-                      <CheckCircle className="w-5 h-5 text-[#ffde59] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Expert Learning Facilitators</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#ffde59]">
-                      <CheckCircle className="w-5 h-5 text-[#ffde59] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Advanced Laboratory Training</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-l-4 border-[#ffde59]">
-                      <CheckCircle className="w-5 h-5 text-[#ffde59] flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-gray-800 font-medium">Research Project Experience</p>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              </div>
+              </RevealSection>
+
+              <RevealSection className="lg:col-span-2" delay={200}>
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <img
+                    src="https://placehold.co/600x450/0b6d41/FFFFFF?text=Physics+Laboratory"
+                    alt="Physics Laboratory"
+                    className="w-full h-auto"
+                  />
+                  <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                    Since 1954
+                  </span>
+                </div>
+              </RevealSection>
             </div>
           </div>
         </section>
 
         {/* Eligibility & Admission Criteria */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-white" id="eligibility">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Eligibility & Admission Criteria
-                </h2>
-                <p className="text-gray-600 text-lg">
-                  Requirements for joining the B.Sc Physics programme
-                </p>
-              </div>
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Admissions" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Eligibility &{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Admission Criteria
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Requirements for joining the B.Sc Physics programme
+                  </p>
+                </div>
+              </RevealSection>
 
-              {/* Grid of 6 Cards */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Academic Qualification */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <GraduationCap className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Academic Qualification
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Higher Secondary (10+2) from recognized board</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Physics & Mathematics as compulsory subjects</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Minimum 50% aggregate marks</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>45% for reserved categories</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 2: Accepted Streams */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <BookOpen className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Accepted Streams
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Science stream with Physics mandatory</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Physics, Chemistry & Mathematics (PCM)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Physics, Chemistry, Mathematics & Computer Science</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Vocational Science courses with Physics</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 3: Documents Required */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <FileText className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Documents Required
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>10th & 12th Mark Sheets</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Transfer Certificate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Community Certificate</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Passport Size Photographs</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Aadhaar Card Copy</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 4: Admission Process */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <Calendar className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Admission Process
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Online/Offline Application</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Document Verification</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Merit-based Selection</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Fee Payment & Enrollment</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 5: Age Criteria */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <UserCheck className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Age Criteria
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>No upper age limit for admission</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Candidates who have completed 17 years of age as on December 31st of the admission year are eligible</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card 6: Scholarships Available */}
-                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="h-1 bg-gradient-to-r from-[#0b6d41] to-[#0d8a52]"></div>
-                  <div className="p-6">
-                    <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                      <DollarSign className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-[#0b6d41] mb-4">
-                      Scholarships Available
-                    </h3>
-                    <ul className="space-y-2.5 text-gray-700">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Merit Scholarships (Top 10%)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Government Scholarships</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Financial Aid for EWS</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#ffde59] mt-1.5">•</span>
-                        <span>Sports Quota Benefits</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                {[
+                  {
+                    icon: <GraduationCap className="w-8 h-8 text-white" />,
+                    title: 'Academic Qualification',
+                    items: ['Higher Secondary (10+2) from recognized board', 'Physics & Mathematics as compulsory subjects', 'Minimum 50% aggregate marks', '45% for reserved categories']
+                  },
+                  {
+                    icon: <BookOpen className="w-8 h-8 text-white" />,
+                    title: 'Accepted Streams',
+                    items: ['Science stream with Physics mandatory', 'Physics, Chemistry & Mathematics (PCM)', 'Physics, Chemistry, Mathematics & Computer Science', 'Vocational Science courses with Physics']
+                  },
+                  {
+                    icon: <FileText className="w-8 h-8 text-white" />,
+                    title: 'Documents Required',
+                    items: ['10th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photographs', 'Aadhaar Card Copy']
+                  },
+                  {
+                    icon: <Calendar className="w-8 h-8 text-white" />,
+                    title: 'Admission Process',
+                    items: ['Online/Offline Application', 'Document Verification', 'Merit-based Selection', 'Fee Payment & Enrollment']
+                  },
+                  {
+                    icon: <UserCheck className="w-8 h-8 text-white" />,
+                    title: 'Age Criteria',
+                    items: ['No upper age limit for admission', 'Candidates who have completed 17 years of age as on December 31st of the admission year are eligible']
+                  },
+                  {
+                    icon: <DollarSign className="w-8 h-8 text-white" />,
+                    title: 'Scholarships Available',
+                    items: ['Merit Scholarships (Top 10%)', 'Government Scholarships', 'Financial Aid for EWS', 'Sports Quota Benefits']
+                  }
+                ].map((card, idx) => (
+                  <RevealSection key={idx} delay={idx * 100}>
+                    <GlassCard className="p-8 h-full">
+                      <div className="w-16 h-16 bg-gradient-to-br from-brand-green to-emerald-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20">
+                        {card.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-brand-green mb-4">{card.title}</h3>
+                      <ul className="space-y-2 text-gray-700">
+                        {card.items.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-emerald-500 mt-1">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Course Curriculum with Tabs */}
-        <section className="py-16 md:py-20">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-12 text-center">Course Curriculum</h2>
+        {/* Programme Curriculum */}
+        <section className="py-16 bg-brand-cream" id="curriculum">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Curriculum" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Programme{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Curriculum
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive syllabus covering classical and modern physics with hands-on laboratory experience
+                  </p>
+                </div>
+              </RevealSection>
 
-            {/* Tab Navigation */}
-            <div className="flex justify-center mb-8">
-              <div className="inline-flex bg-white border border-gray-200 rounded-xl p-1 shadow-sm">
-                {[1, 2, 3].map((year) => (
-                  <button
-                    key={year}
-                    onClick={() => setActiveYear(year)}
-                    className={`px-8 py-3 rounded-lg font-semibold transition-all ${
-                      activeYear === year
-                        ? 'bg-[#0b6d41] text-white shadow-md'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-[#fbfbee]'
-                    }`}
-                  >
-                    Year {year}
-                  </button>
-                ))}
-              </div>
-            </div>
+              <RevealSection>
+                <div className="flex justify-center gap-2 mb-8">
+                  {[1, 2, 3].map((year) => (
+                    <button
+                      key={year}
+                      onClick={() => setActiveYear(year)}
+                      className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
+                          ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                          : 'bg-white text-brand-green hover:bg-brand-green/5'
+                        }`}
+                    >
+                      Year {year}
+                    </button>
+                  ))}
+                </div>
+              </RevealSection>
 
-            {/* Tab Content */}
-            <div className="max-w-7xl mx-auto">
-              {/* Year 1 */}
               {activeYear === 1 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester I */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester I</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Mechanics & Properties of Matter", code: "PHY101" },
-                        { name: "Mathematical Physics I", code: "PHY102" },
-                        { name: "Electricity & Magnetism", code: "PHY103" },
-                        { name: "Practical: Mechanics Lab", code: "PHY104P" },
-                        { name: "Allied Mathematics I", code: "MAT101" },
-                        { name: "Environmental Studies", code: "EVS101" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: 'Semester I',
+                      subjects: [
+                        { name: 'Mechanics & Properties of Matter', code: 'PHY101' },
+                        { name: 'Mathematical Physics I', code: 'PHY102' },
+                        { name: 'Electricity & Magnetism', code: 'PHY103' },
+                        { name: 'Practical: Mechanics Lab', code: 'PHY104P' },
+                        { name: 'Allied Mathematics I', code: 'MAT101' },
+                        { name: 'Environmental Studies', code: 'EVS101' }
+                      ]
+                    },
+                    {
+                      title: 'Semester II',
+                      subjects: [
+                        { name: 'Thermal Physics', code: 'PHY201' },
+                        { name: 'Waves & Oscillations', code: 'PHY202' },
+                        { name: 'Mathematical Physics II', code: 'PHY203' },
+                        { name: 'Practical: Thermal & Electricity Lab', code: 'PHY204P' },
+                        { name: 'Allied Mathematics II', code: 'MAT102' },
+                        { name: 'Value Education', code: 'VAL101' }
+                      ]
+                    }
+                  ].map((sem, idx) => (
+                    <RevealSection key={idx} delay={idx * 150}>
+                      <GlassCard className="overflow-hidden" hover={false}>
+                        <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                          <h4 className="text-xl font-bold">{sem.title}</h4>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Semester II */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester II</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Thermal Physics", code: "PHY201" },
-                        { name: "Waves & Oscillations", code: "PHY202" },
-                        { name: "Mathematical Physics II", code: "PHY203" },
-                        { name: "Practical: Thermal & Electricity Lab", code: "PHY204P" },
-                        { name: "Allied Mathematics II", code: "MAT102" },
-                        { name: "Value Education", code: "VAL101" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
+                        <div className="p-6">
+                          <ul className="space-y-3">
+                            {sem.subjects.map((subject, i) => (
+                              <li key={i} className="flex items-center justify-between text-gray-700">
+                                <div className="flex items-start gap-2">
+                                  <span className="text-emerald-500 mt-1">•</span>
+                                  <span>{subject.name}</span>
+                                </div>
+                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                      </GlassCard>
+                    </RevealSection>
+                  ))}
                 </div>
               )}
 
-              {/* Year 2 */}
               {activeYear === 2 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester III */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester III</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Optics", code: "PHY301" },
-                        { name: "Electromagnetism", code: "PHY302" },
-                        { name: "Digital Electronics", code: "PHY303" },
-                        { name: "Practical: Optics Lab", code: "PHY304P" },
-                        { name: "Allied Chemistry I", code: "CHE101" },
-                        { name: "Soft Skills Development", code: "SKL301" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: 'Semester III',
+                      subjects: [
+                        { name: 'Optics', code: 'PHY301' },
+                        { name: 'Electromagnetism', code: 'PHY302' },
+                        { name: 'Digital Electronics', code: 'PHY303' },
+                        { name: 'Practical: Optics Lab', code: 'PHY304P' },
+                        { name: 'Allied Chemistry I', code: 'CHE101' },
+                        { name: 'Soft Skills Development', code: 'SKL301' }
+                      ]
+                    },
+                    {
+                      title: 'Semester IV',
+                      subjects: [
+                        { name: 'Classical Mechanics', code: 'PHY401' },
+                        { name: 'Analog Electronics', code: 'PHY402' },
+                        { name: 'Statistical Mechanics', code: 'PHY403' },
+                        { name: 'Practical: Electronics Lab', code: 'PHY404P' },
+                        { name: 'Allied Chemistry II', code: 'CHE102' },
+                        { name: 'Extension Activities', code: 'EXT401' }
+                      ]
+                    }
+                  ].map((sem, idx) => (
+                    <RevealSection key={idx} delay={idx * 150}>
+                      <GlassCard className="overflow-hidden" hover={false}>
+                        <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                          <h4 className="text-xl font-bold">{sem.title}</h4>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Semester IV */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester IV</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Classical Mechanics", code: "PHY401" },
-                        { name: "Analog Electronics", code: "PHY402" },
-                        { name: "Statistical Mechanics", code: "PHY403" },
-                        { name: "Practical: Electronics Lab", code: "PHY404P" },
-                        { name: "Allied Chemistry II", code: "CHE102" },
-                        { name: "Extension Activities", code: "EXT401" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
+                        <div className="p-6">
+                          <ul className="space-y-3">
+                            {sem.subjects.map((subject, i) => (
+                              <li key={i} className="flex items-center justify-between text-gray-700">
+                                <div className="flex items-start gap-2">
+                                  <span className="text-emerald-500 mt-1">•</span>
+                                  <span>{subject.name}</span>
+                                </div>
+                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                      </GlassCard>
+                    </RevealSection>
+                  ))}
                 </div>
               )}
 
-              {/* Year 3 */}
               {activeYear === 3 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fadeIn">
-                  {/* Semester V */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester V</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Quantum Mechanics I", code: "PHY501" },
-                        { name: "Atomic & Molecular Physics", code: "PHY502" },
-                        { name: "Solid State Physics", code: "PHY503" },
-                        { name: "Computational Physics", code: "PHY504" },
-                        { name: "Practical: Modern Physics Lab", code: "PHY505P" },
-                        { name: "Elective: Astrophysics / Material Science", code: "PHY506E" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: 'Semester V',
+                      subjects: [
+                        { name: 'Quantum Mechanics I', code: 'PHY501' },
+                        { name: 'Atomic & Molecular Physics', code: 'PHY502' },
+                        { name: 'Solid State Physics', code: 'PHY503' },
+                        { name: 'Computational Physics', code: 'PHY504' },
+                        { name: 'Practical: Modern Physics Lab', code: 'PHY505P' },
+                        { name: 'Elective: Astrophysics / Material Science', code: 'PHY506E' }
+                      ]
+                    },
+                    {
+                      title: 'Semester VI',
+                      subjects: [
+                        { name: 'Quantum Mechanics II', code: 'PHY601' },
+                        { name: 'Nuclear & Particle Physics', code: 'PHY602' },
+                        { name: 'Relativity & Cosmology', code: 'PHY603' },
+                        { name: 'Research Methodology', code: 'PHY604' },
+                        { name: 'Project Work & Viva', code: 'PHY605P' },
+                        { name: 'Elective: Nanophysics / Renewable Energy', code: 'PHY606E' }
+                      ]
+                    }
+                  ].map((sem, idx) => (
+                    <RevealSection key={idx} delay={idx * 150}>
+                      <GlassCard className="overflow-hidden" hover={false}>
+                        <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                          <h4 className="text-xl font-bold">{sem.title}</h4>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Semester VI */}
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                    <div className="bg-[#0b6d41] text-white px-6 py-4">
-                      <h3 className="text-xl font-bold">Semester VI</h3>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      {[
-                        { name: "Quantum Mechanics II", code: "PHY601" },
-                        { name: "Nuclear & Particle Physics", code: "PHY602" },
-                        { name: "Relativity & Cosmology", code: "PHY603" },
-                        { name: "Research Methodology", code: "PHY604" },
-                        { name: "Project Work & Viva", code: "PHY605P" },
-                        { name: "Elective: Nanophysics / Renewable Energy", code: "PHY606E" }
-                      ].map((subject, index) => (
-                        <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[#ffde59]"></div>
-                            <span className="text-gray-700 font-medium">{subject.name}</span>
-                          </div>
-                          <span className="text-[#0b6d41] font-semibold text-sm">{subject.code}</span>
+                        <div className="p-6">
+                          <ul className="space-y-3">
+                            {sem.subjects.map((subject, i) => (
+                              <li key={i} className="flex items-center justify-between text-gray-700">
+                                <div className="flex items-start gap-2">
+                                  <span className="text-emerald-500 mt-1">•</span>
+                                  <span>{subject.name}</span>
+                                </div>
+                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                      </GlassCard>
+                    </RevealSection>
+                  ))}
                 </div>
               )}
             </div>
@@ -699,557 +517,271 @@ export default function BScPhysicsPage() {
         </section>
 
         {/* Programme Learning Outcomes */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-white" id="outcomes">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Programme Learning Outcomes
-                </h2>
-                <p className="text-gray-600 text-lg">
-                  Skills and competencies you will develop through this programme
-                </p>
-              </div>
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Outcomes" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Programme Learning{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Outcomes
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Skills and competencies you will develop through this programme
+                  </p>
+                </div>
+              </RevealSection>
 
-              {/* Grid of 6 Cards */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Analytical Thinking */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Brain className="w-6 h-6 text-[#0b6d41]" />
-                    </div>
-                    <span className="text-[#ffde59] text-sm font-bold">01</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Analytical Thinking
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Master systematic approaches to physical problem-solving, mathematical modeling, experimental design, and data interpretation using statistical and computational tools.
-                  </p>
-                </div>
-
-                {/* Card 2: Theoretical Foundation */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <BookOpen className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">02</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Theoretical Foundation
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Develop comprehensive knowledge of classical and modern physics including mechanics, electromagnetism, quantum physics, and relativity with mathematical rigor.
-                  </p>
-                </div>
-
-                {/* Card 3: Laboratory Proficiency */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <FlaskConical className="w-6 h-6 text-[#0b6d41]" />
-                    </div>
-                    <span className="text-[#ffde59] text-sm font-bold">03</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Laboratory Proficiency
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Acquire hands-on skills in experimental physics, precision measurements, instrumentation, electronics fabrication, and modern laboratory techniques.
-                  </p>
-                </div>
-
-                {/* Card 4: Computational Skills */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Database className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">04</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Computational Skills
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Comprehend numerical methods, programming languages, simulation techniques, and data analysis methodologies essential for modern physics research.
-                  </p>
-                </div>
-
-                {/* Card 5: Electronics Expertise */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Zap className="w-6 h-6 text-[#0b6d41]" />
-                    </div>
-                    <span className="text-[#ffde59] text-sm font-bold">05</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Electronics Expertise
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Apply analog and digital electronics concepts including circuit design, microcontroller programming, and instrumentation for scientific applications.
-                  </p>
-                </div>
-
-                {/* Card 6: Professional Communication */}
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-[#0b6d41] text-sm font-bold">06</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#0b6d41] mb-3">
-                    Professional Communication
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    Effectively communicate scientific findings through research papers, presentations, and technical reports while collaborating in multidisciplinary research teams.
-                  </p>
-                </div>
+                {[
+                  { icon: <Brain className="w-6 h-6 text-white" />, title: 'Analytical Thinking', description: 'Master systematic approaches to physical problem-solving, mathematical modeling, experimental design, and data interpretation using statistical and computational tools.' },
+                  { icon: <BookOpen className="w-6 h-6 text-white" />, title: 'Theoretical Foundation', description: 'Develop comprehensive knowledge of classical and modern physics including mechanics, electromagnetism, quantum physics, and relativity with mathematical rigor.' },
+                  { icon: <FlaskConical className="w-6 h-6 text-white" />, title: 'Laboratory Proficiency', description: 'Acquire hands-on skills in experimental physics, precision measurements, instrumentation, electronics fabrication, and modern laboratory techniques.' },
+                  { icon: <Database className="w-6 h-6 text-white" />, title: 'Computational Skills', description: 'Comprehend numerical methods, programming languages, simulation techniques, and data analysis methodologies essential for modern physics research.' },
+                  { icon: <Zap className="w-6 h-6 text-white" />, title: 'Electronics Expertise', description: 'Apply analog and digital electronics concepts including circuit design, microcontroller programming, and instrumentation for scientific applications.' },
+                  { icon: <Users className="w-6 h-6 text-white" />, title: 'Professional Communication', description: 'Effectively communicate scientific findings through research papers, presentations, and technical reports while collaborating in multidisciplinary research teams.' }
+                ].map((outcome, idx) => (
+                  <RevealSection key={idx} delay={idx * 100}>
+                    <GlassCard className="relative p-6 group h-full">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 shadow-lg shadow-brand-green/20 group-hover:shadow-brand-green/30 transition-shadow">
+                        {outcome.icon}
+                      </div>
+                      <h3 className="text-lg font-bold text-brand-green mb-2">{outcome.title}</h3>
+                      <p className="text-gray-600 text-sm">{outcome.description}</p>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* Career Opportunities */}
-        <section className="py-16 md:py-20 bg-[#eaf1e2]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-brand-cream" id="careers">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#0b6d41]">
-                  Career Opportunities
-                </h2>
-                <p className="text-gray-700 text-lg">
-                  Diverse career pathways in science, technology, and research sectors
-                </p>
-              </div>
-
-              {/* Grid of 8 Career Cards */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                {/* Card 1: Research Scientist */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#ffde59] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Microscope className="w-7 h-7 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Research Scientist
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    ISRO, DRDO, BARC, CSIR, and national laboratories
-                  </p>
-                </div>
-
-                {/* Card 2: Educator / Lecturer */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <GraduationCap className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Educator / Lecturer
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Schools, colleges, coaching institutes, and universities
-                  </p>
-                </div>
-
-                {/* Card 3: Electronics Engineer */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#ffde59] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Zap className="w-7 h-7 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Electronics Engineer
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Semiconductor industries, R&D labs, and tech companies
-                  </p>
-                </div>
-
-                {/* Card 4: Data Scientist */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Database className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Data Scientist
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    IT companies, analytics firms, and research organizations
-                  </p>
-                </div>
-
-                {/* Card 5: Medical Physicist */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#ffde59] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Target className="w-7 h-7 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Medical Physicist
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Hospitals, diagnostic centers, and radiotherapy units
-                  </p>
-                </div>
-
-                {/* Card 6: Government Services */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Building className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Government Services
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    UPSC, State PSC, Indian Forest Service, and regulatory bodies
-                  </p>
-                </div>
-
-                {/* Card 7: Aerospace Industry */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#ffde59] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Globe className="w-7 h-7 text-[#0b6d41]" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Aerospace Industry
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    HAL, Boeing, Airbus, and space technology companies
-                  </p>
-                </div>
-
-                {/* Card 8: Energy Sector */}
-                <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all text-center">
-                  <div className="bg-[#0b6d41] w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Atom className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#0b6d41]">
-                    Energy Sector
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Nuclear power, renewable energy, and power corporations
-                  </p>
-                </div>
-              </div>
-
-              {/* Recruiting Sectors */}
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-6 text-[#0b6d41]">Key Employment Sectors</h3>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {[
-                    "Aerospace & Space Research",
-                    "Nuclear Energy",
-                    "Electronics & Semiconductors",
-                    "Information Technology",
-                    "Telecommunications",
-                    "Defence Research",
-                    "Medical Physics",
-                    "Renewable Energy",
-                    "Nanotechnology",
-                    "Education & Academia",
-                    "Government Sector",
-                    "Data Analytics"
-                  ].map((sector, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-white border border-gray-300 text-gray-700 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-white hover:shadow-md transition-all"
-                    >
-                      {sector}
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Careers" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Career{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Opportunities
                     </span>
-                  ))}
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Diverse career pathways in science, technology, and research sectors
+                  </p>
                 </div>
+              </RevealSection>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                {[
+                  { icon: <Microscope className="w-6 h-6" />, title: 'Research Scientist', desc: 'ISRO, DRDO, BARC, CSIR, and national laboratories' },
+                  { icon: <GraduationCap className="w-6 h-6" />, title: 'Educator / Lecturer', desc: 'Schools, colleges, coaching institutes, and universities' },
+                  { icon: <Zap className="w-6 h-6" />, title: 'Electronics Engineer', desc: 'Semiconductor industries, R&D labs, and tech companies' },
+                  { icon: <Database className="w-6 h-6" />, title: 'Data Scientist', desc: 'IT companies, analytics firms, and research organizations' },
+                  { icon: <Target className="w-6 h-6" />, title: 'Medical Physicist', desc: 'Hospitals, diagnostic centers, and radiotherapy units' },
+                  { icon: <Building2 className="w-6 h-6" />, title: 'Government Services', desc: 'UPSC, State PSC, Indian Forest Service, and regulatory bodies' },
+                  { icon: <Globe className="w-6 h-6" />, title: 'Aerospace Industry', desc: 'HAL, Boeing, Airbus, and space technology companies' },
+                  { icon: <Atom className="w-6 h-6" />, title: 'Energy Sector', desc: 'Nuclear power, renewable energy, and power corporations' }
+                ].map((career, idx) => (
+                  <RevealSection key={idx} delay={idx * 80}>
+                    <GlassCard className="p-6 group h-full">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 text-white group-hover:shadow-lg group-hover:shadow-brand-green/20 transition-all">
+                        {career.icon}
+                      </div>
+                      <h3 className="font-bold text-brand-green mb-2">{career.title}</h3>
+                      <p className="text-sm text-gray-600">{career.desc}</p>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
+
+              <RevealSection>
+                <GlassCard className="p-8" hover={false}>
+                  <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Key Employment Sectors</h3>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {[
+                      'Aerospace & Space Research', 'Nuclear Energy', 'Electronics & Semiconductors',
+                      'Information Technology', 'Telecommunications', 'Defence Research',
+                      'Medical Physics', 'Renewable Energy', 'Nanotechnology',
+                      'Education & Academia', 'Government Sector', 'Data Analytics'
+                    ].map((sector, idx) => (
+                      <span key={idx} className="px-4 py-2 bg-brand-green/5 hover:bg-gradient-to-r hover:from-brand-green hover:to-emerald-500 hover:text-white text-brand-green rounded-full text-sm font-medium transition-all cursor-default border border-brand-green/15">
+                        {sector}
+                      </span>
+                    ))}
+                  </div>
+                </GlassCard>
+              </RevealSection>
             </div>
           </div>
         </section>
 
         {/* Department Facilities */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-white" id="facilities">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              {/* Section Header */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-3">
-                  Department Facilities
-                </h2>
-                <p className="text-gray-600 text-lg">
-                  State-of-the-art infrastructure supporting world-class education
-                </p>
-              </div>
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Infrastructure" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Department{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Facilities
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    State-of-the-art infrastructure supporting world-class education
+                  </p>
+                </div>
+              </RevealSection>
 
-              {/* Grid of 6 Facility Cards */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card 1: Advanced Physics Laboratory */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-white">Physics Lab</h3>
-                  </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
-                      Advanced Physics Laboratory
-                    </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Fully equipped laboratory with precision instruments, spectrometers, interferometers, and modern experimental setups for hands-on learning.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Card 2: Electronics Laboratory */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#ffde59] to-[#f5d447] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Electronics Lab</h3>
-                  </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
-                      Electronics Laboratory
-                    </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Modern electronics lab with oscilloscopes, function generators, digital trainers, and microcontroller development boards for circuit design and analysis.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Card 3: Computational Physics Lab */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-white">Computer Lab</h3>
-                  </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
-                      Computational Physics Lab
-                    </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      High-performance computing facility with specialized software for numerical simulations, data analysis, and scientific programming.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Card 4: Optics & Laser Laboratory */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-white">Optics Lab</h3>
-                  </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
-                      Optics & Laser Laboratory
-                    </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Specialized lab equipped with lasers, optical benches, holography setups, and fiber optics equipment for advanced optical experiments.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Card 5: Material Science Lab */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#ffde59] to-[#f5d447] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-[#0b6d41]">Material Science</h3>
-                  </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
-                      Material Science Lab
-                    </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Research facility for material characterization with XRD, spectroscopy equipment, and sample preparation facilities for advanced studies.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Card 6: Departmental Library */}
-                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] p-8 text-center">
-                    <h3 className="text-2xl font-bold text-white">Library</h3>
-                  </div>
-                  <div className="bg-white p-6">
-                    <h4 className="text-lg font-bold text-[#0b6d41] mb-3">
-                      Departmental Library
-                    </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Well-stocked library with physics textbooks, research journals, e-resources, and access to international physics databases for reference and research.
-                    </p>
-                  </div>
-                </div>
+                {[
+                  { title: 'Advanced Physics Laboratory', description: 'Fully equipped laboratory with precision instruments, spectrometers, interferometers, and modern experimental setups for hands-on learning.' },
+                  { title: 'Electronics Laboratory', description: 'Modern electronics lab with oscilloscopes, function generators, digital trainers, and microcontroller development boards for circuit design and analysis.' },
+                  { title: 'Computational Physics Lab', description: 'High-performance computing facility with specialized software for numerical simulations, data analysis, and scientific programming.' },
+                  { title: 'Optics & Laser Laboratory', description: 'Specialized lab equipped with lasers, optical benches, holography setups, and fiber optics equipment for advanced optical experiments.' },
+                  { title: 'Material Science Lab', description: 'Research facility for material characterization with XRD, spectroscopy equipment, and sample preparation facilities for advanced studies.' },
+                  { title: 'Departmental Library', description: 'Well-stocked library with physics textbooks, research journals, e-resources, and access to international physics databases for reference and research.' }
+                ].map((facility, idx) => (
+                  <RevealSection key={idx} delay={idx * 100}>
+                    <GlassCard className="p-6 group h-full">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 text-white shadow-lg shadow-brand-green/20 group-hover:shadow-brand-green/30 transition-shadow">
+                        <FlaskConical className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-lg font-bold text-brand-green mb-2">{facility.title}</h3>
+                      <p className="text-gray-600 text-sm">{facility.description}</p>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* Why Choose JKKN */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="py-16 bg-brand-cream">
+          <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Left Side - Dark Box */}
-                <div className="bg-gradient-to-br from-[#0b6d41] to-[#085830] rounded-2xl p-16 flex items-center justify-center min-h-[500px]">
-                  <h3 className="text-4xl font-bold text-white text-center">
-                    Why Choose JKKN
-                  </h3>
-                </div>
-
-                {/* Right Side - Content */}
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-2">
-                    Why Choose Our B.Sc Physics Programme?
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Why JKKN" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Why Choose Our{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      B.Sc Physics Programme?
+                    </span>
                   </h2>
-                  <div className="w-16 h-1 bg-[#ffde59] mb-8 rounded"></div>
-
-                  <div className="space-y-6">
-                    {/* Reason 1 */}
-                    <div className="flex items-start gap-4">
-                      <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <GraduationCap className="w-6 h-6 text-[#0b6d41]" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
-                          Expert Learning Facilitators
-                        </h4>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          Learn from experienced faculty with doctoral degrees and active research in specialized physics fields.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Reason 2 */}
-                    <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Microscope className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
-                          Research-Oriented Learning
-                        </h4>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          Engage in research projects with collaboration opportunities with national laboratories like ISRO and DRDO.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Reason 3 */}
-                    <div className="flex items-start gap-4">
-                      <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Briefcase className="w-6 h-6 text-[#0b6d41]" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
-                          Excellent Placement Support
-                        </h4>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          Strong industry connections ensuring placement opportunities in leading technology and research organizations.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Reason 4 */}
-                    <div className="flex items-start gap-4">
-                      <div className="bg-[#0b6d41] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <FlaskConical className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
-                          Modern Infrastructure
-                        </h4>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          Access to well-equipped laboratories, computational facilities, and latest scientific instruments.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Reason 5 */}
-                    <div className="flex items-start gap-4">
-                      <div className="bg-[#ffde59] w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <TrendingUp className="w-6 h-6 text-[#0b6d41]" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-[#0b6d41] mb-2">
-                          Higher Education Pathways
-                        </h4>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          Strong foundation for M.Sc Physics, integrated PhD programmes, and competitive exams like IIT-JAM, GATE, and CSIR-NET.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
+              </RevealSection>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  { icon: <GraduationCap className="w-6 h-6 text-white" />, title: 'Expert Learning Facilitators', description: 'Learn from experienced faculty with doctoral degrees and active research in specialized physics fields.' },
+                  { icon: <Microscope className="w-6 h-6 text-white" />, title: 'Research-Oriented Learning', description: 'Engage in research projects with collaboration opportunities with national laboratories like ISRO and DRDO.' },
+                  { icon: <Briefcase className="w-6 h-6 text-white" />, title: 'Excellent Placement Support', description: 'Strong industry connections ensuring placement opportunities in leading technology and research organizations.' },
+                  { icon: <FlaskConical className="w-6 h-6 text-white" />, title: 'Modern Infrastructure', description: 'Access to well-equipped laboratories, computational facilities, and latest scientific instruments.' },
+                  { icon: <TrendingUp className="w-6 h-6 text-white" />, title: 'Higher Education Pathways', description: 'Strong foundation for M.Sc Physics, integrated PhD programmes, and competitive exams like IIT-JAM, GATE, and CSIR-NET.' },
+                  { icon: <Award className="w-6 h-6 text-white" />, title: 'NAAC Accreditation', description: 'Quality-assured education with government recognition and industry partnerships ensuring excellent learning outcomes.' }
+                ].map((reason, idx) => (
+                  <RevealSection key={idx} delay={idx * 100}>
+                    <GlassCard className="p-6 group h-full">
+                      <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 shadow-lg shadow-brand-green/20 group-hover:shadow-brand-green/30 transition-shadow">
+                        {reason.icon}
+                      </div>
+                      <h3 className="text-lg font-bold text-brand-green mb-2">{reason.title}</h3>
+                      <p className="text-gray-600 text-sm">{reason.description}</p>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* FAQ Section with Accordion */}
-        <section className="py-16 md:py-20 bg-[#fbfbee]">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0b6d41] mb-12 text-center">Frequently Asked Questions</h2>
-
-            <div className="max-w-4xl mx-auto space-y-4">
-              {faqs.map((faq, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-lg shadow-sm border-l-4 border-[#0b6d41] overflow-hidden"
-                >
-                  <button
-                    onClick={() => toggleFAQ(index)}
-                    className="w-full p-6 text-left flex items-center justify-between hover:bg-[#fbfbee] transition-colors"
-                    aria-expanded={activeFAQ === index}
-                  >
-                    <h3 className="font-semibold text-[#0b6d41] pr-4">{faq.question}</h3>
-                    <ChevronDown
-                      className={`w-5 h-5 text-[#ffde59] flex-shrink-0 transition-transform ${
-                        activeFAQ === index ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      activeFAQ === index ? 'max-h-96' : 'max-h-0'
-                    }`}
-                  >
-                    <div className="p-6 pt-0 text-gray-600">
-                      {faq.answer}
-                    </div>
-                  </div>
+        {/* FAQ Section */}
+        <section className="py-16 bg-white" id="faq">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="FAQs" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Frequently Asked{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Questions
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600">
+                    Common queries about the B.Sc Physics programme
+                  </p>
                 </div>
-              ))}
+              </RevealSection>
+
+              <div className="space-y-4">
+                {faqs.map((faq, idx) => (
+                  <RevealSection key={idx} delay={idx * 50}>
+                    <GlassCard hover={false} className="overflow-hidden">
+                      <button
+                        onClick={() => setActiveFAQ(activeFAQ === idx ? -1 : idx)}
+                        className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-white/20 transition-colors"
+                      >
+                        <span className="font-semibold text-brand-green pr-4">{faq.question}</span>
+                        <ChevronDown
+                          className={`w-5 h-5 text-emerald-500 flex-shrink-0 transition-transform duration-300 ${activeFAQ === idx ? 'rotate-180' : ''
+                            }`}
+                        />
+                      </button>
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ${activeFAQ === idx ? 'max-h-96' : 'max-h-0'
+                          }`}
+                      >
+                        <div className="px-6 pb-5 text-gray-700 leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </div>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0b6d41]">Begin Your Journey in Physical Sciences</h2>
-            <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-              Join our B.Sc Physics programme and explore the fundamental laws that govern the universe with hands-on research experience
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-[#ffde59] hover:bg-[#f5d447] text-[#0b6d41] px-8 py-4 rounded-lg font-bold text-lg transition-all hover:shadow-xl hover:-translate-y-1">
-                Apply for Admission
-              </button>
-              <button className="bg-white border-2 border-[#0b6d41] hover:bg-[#0b6d41] hover:text-white text-[#0b6d41] px-8 py-4 rounded-lg font-semibold text-lg transition-all">
-                Download Brochure
-              </button>
-            </div>
+        <section className="py-16 bg-brand-cream" id="admission">
+          <div className="container mx-auto px-4">
+            <RevealSection>
+              <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Begin Your Journey in{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Physical Sciences
+                  </span>
+                </h2>
+                <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+                  Join our B.Sc Physics programme and explore the fundamental laws that govern the universe with hands-on research experience
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <a href="#" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                    Apply for Admission
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                  <a href="#" className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-brand-green border-2 border-brand-green px-8 py-4 rounded-lg font-semibold transition-all">
+                    Download Brochure
+                  </a>
+                </div>
+              </div>
+            </RevealSection>
           </div>
         </section>
       </div>
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out;
-        }
-      `}</style>
     </>
   );
 }

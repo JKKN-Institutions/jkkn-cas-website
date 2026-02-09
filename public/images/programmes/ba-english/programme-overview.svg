@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+  <rect width="600" height="450" fill="#f0fdf4"/>
+  <rect x="0" y="0" width="600" height="450" fill="url(#grad)" opacity="0.5"/>
+  <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0b6d41;stop-opacity:0.15"/><stop offset="100%" style="stop-color:#059669;stop-opacity:0.08"/></linearGradient></defs>
+  <circle cx="300" cy="180" r="60" fill="#0b6d41" opacity="0.12"/>
+  <path d="M275 200 L300 160 L325 200 Z" fill="#0b6d41" opacity="0.3"/>
+  <rect x="285" y="200" width="30" height="20" rx="2" fill="#0b6d41" opacity="0.25"/>
+  <text x="300" y="270" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="600" fill="#0b6d41" opacity="0.5">English Literature Library</text>
+  <text x="300" y="295" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#6b7280" opacity="0.6">Replace with actual image</text>
+</svg>

@@ -1,972 +1,806 @@
 'use client';
 
-import React, { useState } from 'react';
-import { GraduationCap, Clock, Award, Users, BookOpen, FlaskConical, Microscope, TestTube, Atom, Building2, Beaker, Trophy, CheckCircle2, Calendar, FileText, School, Target, Brain, Lightbulb, TrendingUp } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { BookOpen, Users, Award, Briefcase, GraduationCap, CheckCircle2, Clock, FileText, Globe, ChevronDown, ArrowRight, Sparkles, Target, FlaskConical, Microscope, TestTube, Atom, Building2, Beaker, Brain, Lightbulb, School } from 'lucide-react';
+import CountUp from '@/components/ui/CountUp';
+import Marquee from '@/components/ui/Marquee';
+
+/* ─── Scroll-reveal hook ─── */
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
+/* ─── Reveal wrapper ─── */
+function RevealSection({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ─── GlassCard component ─── */
+function GlassCard({ children, className = '', hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
+  return (
+    <div className={`bg-white/40 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(11,109,65,0.08)] border border-white/60 ${hover ? 'hover:bg-white/60 hover:shadow-[0_8px_32px_rgba(11,109,65,0.15)] hover:-translate-y-2' : ''} transition-all duration-300 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+/* ─── Section badge ─── */
+function SectionBadge({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 bg-brand-green/10 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-green/15 text-brand-green mb-4">
+      <Sparkles className="w-3.5 h-3.5" />
+      {text}
+    </span>
+  );
+}
 
 export default function BScChemistryPage() {
   const [activeYear, setActiveYear] = useState(1);
+  const [activeFAQ, setActiveFAQ] = useState(0);
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Banner */}
-      <section className="relative bg-gradient-to-br from-brand-green via-emerald-700 to-teal-600 text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-brand-yellow rounded-full blur-3xl"></div>
-        </div>
+      {/* Hero Banner Section */}
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+        {/* Background image */}
+        <Image
+          src="/images/programmes/ba-english/Chemistry.png"
+          alt="BSc Chemistry programme"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/30">
-              <Award className="w-4 h-4" />
-              <span className="text-sm font-semibold">UGC Recognized Programme</span>
-            </div>
+          <RevealSection>
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-white/90 text-gray-900">
+                <GraduationCap className="w-4 h-4 text-brand-green" />
+                UGC Recognized Programme
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+                Bachelor of Science in{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Chemistry
+                </span>
+              </h1>
+              <p className="text-xl md:text-2xl font-medium mb-6 text-gray-700">
+                Exploring Matter, Reactions & Innovations
+              </p>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Bachelor of Science in<br />Chemistry
-            </h1>
-
-            <p className="text-xl md:text-2xl mb-8 text-white/95">
-              Exploring Matter, Reactions & Innovations
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <Clock className="w-5 h-5" />
-                <span className="text-sm">3 Years / 6 Semesters</span>
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <Clock className="w-5 h-5 text-brand-green" />
+                  <span>3 Years Duration</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <FileText className="w-5 h-5 text-brand-green" />
+                  <span>6 Semesters</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
+                  <Users className="w-5 h-5 text-brand-green" />
+                  <span>Full-Time Programme</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <BookOpen className="w-5 h-5" />
-                <span className="text-sm">Full-Time Programme</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                <GraduationCap className="w-5 h-5" />
-                <span className="text-sm">Aided Programme</span>
-              </div>
-            </div>
 
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-brand-yellow text-brand-green px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-all hover:shadow-lg hover:-translate-y-0.5">
-                Apply Now
-              </button>
-              <button className="bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold border-2 border-white/50 hover:bg-white/20 transition-all">
-                Download Brochure
-              </button>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="#admission" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-7 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                  Apply Now
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href="#curriculum" className="inline-flex items-center gap-2 bg-white/70 hover:bg-brand-green text-gray-900 hover:text-white border-2 border-white/80 hover:border-brand-green px-7 py-3 rounded-lg font-semibold backdrop-blur-sm transition-all">
+                  View Curriculum
+                </a>
+              </div>
             </div>
-          </div>
+          </RevealSection>
         </div>
       </section>
 
       {/* Quick Info Cards */}
-      <section className="relative -mt-12 pb-16">
+      <section className="relative z-10 -mt-12 pb-8">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Award className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold text-brand-green mb-2">Accredited Institution</h3>
-              <p className="text-gray-600 text-sm">NAAC A+ Grade</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Users className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold text-brand-green mb-2">Faculty Ratio</h3>
-              <p className="text-gray-600 text-sm">1:15 Student Ratio</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Trophy className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold text-brand-green mb-2">Placement Record</h3>
-              <p className="text-gray-600 text-sm">85% Success Rate</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold text-brand-green mb-2">Average Package</h3>
-              <p className="text-gray-600 text-sm">₹3.5 LPA</p>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {[
+              { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC', title: 'Accredited Institution', desc: 'Quality assured education' },
+              { icon: <Users className="w-7 h-7" />, stat: '15:1', title: 'Learner-Facilitator Ratio', desc: 'Personalized attention' },
+              { icon: <Briefcase className="w-7 h-7" />, stat: '85%+', title: 'Placement Record', desc: 'Career opportunities assured' },
+              { icon: <Award className="w-7 h-7" />, stat: '₹3.5L', title: 'Average Package', desc: 'Competitive starting salary' },
+            ].map((card, idx) => (
+              <RevealSection key={idx} delay={idx * 100}>
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 mx-auto mb-4 bg-brand-green/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-brand-green/15 text-brand-green group-hover:text-emerald-600 transition-colors">
+                    {card.icon}
+                  </div>
+                  <span className="block text-3xl font-bold text-brand-green mb-1">{card.stat}</span>
+                  <h3 className="font-bold text-brand-green mb-1">{card.title}</h3>
+                  <p className="text-sm text-gray-600">{card.desc}</p>
+                </GlassCard>
+              </RevealSection>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Programme Overview */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-6">
-                Programme Overview
-              </h2>
-              <div className="w-16 h-1 bg-brand-yellow mb-6"></div>
-
-              <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                The Bachelor of Science in Chemistry programme offers a comprehensive study of chemical sciences, exploring the composition, structure, properties, and reactions of matter. Our curriculum combines theoretical knowledge with extensive practical training in modern laboratories.
-              </p>
-
-              <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                Students develop strong analytical, research, and problem-solving skills through hands-on experiments, project work, and industry exposure. The programme prepares graduates for diverse careers in chemical industries, pharmaceuticals, research, education, and environmental sciences.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-                <div className="flex items-start gap-3 bg-white p-4 rounded-lg border-l-4 border-brand-green">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green flex-shrink-0 mt-1" />
-                  <span className="text-gray-700 font-medium">State-of-the-art Chemistry Labs</span>
-                </div>
-                <div className="flex items-start gap-3 bg-white p-4 rounded-lg border-l-4 border-brand-green">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green flex-shrink-0 mt-1" />
-                  <span className="text-gray-700 font-medium">Experienced Faculty Members</span>
-                </div>
-                <div className="flex items-start gap-3 bg-white p-4 rounded-lg border-l-4 border-brand-green">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green flex-shrink-0 mt-1" />
-                  <span className="text-gray-700 font-medium">Research Opportunities</span>
-                </div>
-                <div className="flex items-start gap-3 bg-white p-4 rounded-lg border-l-4 border-brand-green">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green flex-shrink-0 mt-1" />
-                  <span className="text-gray-700 font-medium">Industry Collaborations</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="bg-brand-green rounded-2xl p-12 text-center shadow-xl">
-                <FlaskConical className="w-24 h-24 text-brand-yellow mx-auto mb-6" />
-                <h3 className="text-3xl font-bold text-white mb-4">Chemistry Laboratory</h3>
-                <p className="text-white/90 text-lg">Modern equipment and facilities for hands-on learning</p>
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-brand-yellow rounded-xl p-6 shadow-lg">
-                <p className="text-brand-green font-bold text-2xl">50+</p>
-                <p className="text-brand-green text-sm">Experiments & Practicals</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Programme Eligibility */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
-              Eligibility & Admission Criteria
-            </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-yellow-500 to-teal-500 mx-auto mb-3"></div>
-            <p className="text-gray-600 text-lg">Requirements for joining the B.Sc Chemistry programme</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all">
-              <div className="h-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-teal-500"></div>
-              <div className="p-8">
-                <div className="w-16 h-16 bg-teal-600 rounded-xl flex items-center justify-center mb-6">
-                  <School className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-brand-green mb-4">Academic Qualification</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Pass in Higher Secondary (10+2) examination from a recognized board with minimum aggregate marks as per institution norms.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all">
-              <div className="h-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-teal-500"></div>
-              <div className="p-8">
-                <div className="w-16 h-16 bg-teal-600 rounded-xl flex items-center justify-center mb-6">
-                  <BookOpen className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-brand-green mb-4">Subject Requirements</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="w-2 h-2 bg-brand-yellow rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Chemistry as mandatory subject</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="w-2 h-2 bg-brand-yellow rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Physics or Mathematics preferred</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="w-2 h-2 bg-brand-yellow rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Science stream students</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all">
-              <div className="h-1 bg-gradient-to-r from-yellow-500 via-orange-500 to-teal-500"></div>
-              <div className="p-8">
-                <div className="w-16 h-16 bg-teal-600 rounded-xl flex items-center justify-center mb-6">
-                  <FileText className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-brand-green mb-4">Documents Required</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="w-2 h-2 bg-brand-yellow rounded-full mt-2 flex-shrink-0"></span>
-                    <span>10th & 12th Mark Sheets</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="w-2 h-2 bg-brand-yellow rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Transfer Certificate</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="w-2 h-2 bg-brand-yellow rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Community Certificate</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Programme Curriculum */}
       <section className="py-16 bg-brand-cream">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
-              Programme Curriculum
-            </h2>
-            <div className="w-20 h-1 bg-brand-yellow mx-auto"></div>
-          </div>
-
-          {/* Tab Buttons */}
-          <div className="flex justify-center gap-4 mb-8 flex-wrap">
-            <button
-              onClick={() => setActiveYear(1)}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all ${
-                activeYear === 1
-                  ? 'bg-brand-green text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
-              }`}
-            >
-              Year 1
-            </button>
-            <button
-              onClick={() => setActiveYear(2)}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all ${
-                activeYear === 2
-                  ? 'bg-brand-green text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
-              }`}
-            >
-              Year 2
-            </button>
-            <button
-              onClick={() => setActiveYear(3)}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all ${
-                activeYear === 3
-                  ? 'bg-brand-green text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
-              }`}
-            >
-              Year 3
-            </button>
-          </div>
-
-          {/* Year 1 Content */}
-          {activeYear === 1 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Semester I */}
-              <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                <div className="bg-gradient-to-r from-brand-green to-emerald-600 text-white p-4 flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  <h4 className="text-lg font-bold">Semester I</h4>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Inorganic Chemistry I</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Organic Chemistry I</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Physical Chemistry I</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">General English</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Allied Mathematics</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Environmental Studies</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Semester II */}
-              <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                <div className="bg-gradient-to-r from-brand-green to-emerald-600 text-white p-4 flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  <h4 className="text-lg font-bold">Semester II</h4>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Inorganic Chemistry I (Continued)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Organic Chemistry I (Continued)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Physical Chemistry I (Continued)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Tamil/Hindi</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Allied Physics</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Year 2 Content */}
-          {activeYear === 2 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Semester III */}
-              <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                <div className="bg-gradient-to-r from-brand-green to-emerald-600 text-white p-4 flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  <h4 className="text-lg font-bold">Semester III</h4>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Inorganic Chemistry II</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Organic Chemistry II</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Physical Chemistry II</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Analytical Chemistry</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Allied Subject III</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Semester IV */}
-              <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                <div className="bg-gradient-to-r from-brand-green to-emerald-600 text-white p-4 flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  <h4 className="text-lg font-bold">Semester IV</h4>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Inorganic Chemistry II (Continued)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Organic Chemistry II (Continued)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Physical Chemistry II (Continued)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Environmental Science</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Allied Subject IV</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Year 3 Content */}
-          {activeYear === 3 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Semester V */}
-              <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                <div className="bg-gradient-to-r from-brand-green to-emerald-600 text-white p-4 flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  <h4 className="text-lg font-bold">Semester V</h4>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Spectroscopy & Molecular Structure</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Industrial Chemistry</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Biochemistry</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Green Chemistry</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Elective I</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Semester VI */}
-              <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                <div className="bg-gradient-to-r from-brand-green to-emerald-600 text-white p-4 flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  <h4 className="text-lg font-bold">Semester VI</h4>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Advanced Organic Chemistry</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Advanced Inorganic Chemistry</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Research Project</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Elective II</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-brand-green flex-shrink-0" />
-                      <span className="text-gray-700">Internship/Industrial Training</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Learning Outcomes */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
-              Programme Learning Outcomes
-            </h2>
-            <div className="w-20 h-1 bg-brand-yellow mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white border border-gray-200 rounded-xl p-8 hover:border-brand-yellow hover:shadow-lg transition-all relative">
-              <div className="absolute top-6 right-6 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-brand-yellow font-bold">
-                01
-              </div>
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mb-6">
-                <Atom className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-xl font-bold text-brand-green mb-3 pr-12">
-                Chemical Knowledge
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Comprehensive understanding of chemical principles, reactions, and molecular structures across all chemistry branches.
-              </p>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-xl p-8 hover:border-brand-yellow hover:shadow-lg transition-all relative">
-              <div className="absolute top-6 right-6 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-brand-yellow font-bold">
-                02
-              </div>
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mb-6">
-                <Microscope className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-xl font-bold text-brand-green mb-3 pr-12">
-                Analytical Skills
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Proficiency in using modern analytical instruments and techniques for chemical analysis and research.
-              </p>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-xl p-8 hover:border-brand-yellow hover:shadow-lg transition-all relative">
-              <div className="absolute top-6 right-6 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-brand-yellow font-bold">
-                03
-              </div>
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mb-6">
-                <TestTube className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-xl font-bold text-brand-green mb-3 pr-12">
-                Laboratory Expertise
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Hands-on experience with chemical experiments, safety protocols, and laboratory management practices.
-              </p>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-xl p-8 hover:border-brand-yellow hover:shadow-lg transition-all relative">
-              <div className="absolute top-6 right-6 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-brand-yellow font-bold">
-                04
-              </div>
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mb-6">
-                <Brain className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-xl font-bold text-brand-green mb-3 pr-12">
-                Research Aptitude
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Ability to design experiments, conduct research, and contribute to scientific knowledge in chemistry.
-              </p>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-xl p-8 hover:border-brand-yellow hover:shadow-lg transition-all relative">
-              <div className="absolute top-6 right-6 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-brand-yellow font-bold">
-                05
-              </div>
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mb-6">
-                <Lightbulb className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-xl font-bold text-brand-green mb-3 pr-12">
-                Problem Solving
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Critical thinking and analytical problem-solving skills for chemical and industrial challenges.
-              </p>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-xl p-8 hover:border-brand-yellow hover:shadow-lg transition-all relative">
-              <div className="absolute top-6 right-6 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-brand-yellow font-bold">
-                06
-              </div>
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mb-6">
-                <Target className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-xl font-bold text-brand-green mb-3 pr-12">
-                Industry Readiness
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Practical knowledge and skills needed for careers in chemical industries and pharmaceutical sectors.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Career Opportunities */}
-      <section className="py-16 bg-gradient-to-br from-brand-green via-emerald-700 to-teal-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 right-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-96 h-96 bg-brand-yellow rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Career Opportunities</h2>
-            <div className="w-20 h-1 bg-brand-yellow mx-auto mb-4"></div>
-            <p className="text-white/90 text-lg max-w-2xl mx-auto">
-              Diverse career paths in chemical sciences, pharmaceuticals, research, and industry
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <FlaskConical className="w-8 h-8 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Chemical Analyst</h3>
-              <p className="text-white/75 text-sm">Quality control and analysis</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Beaker className="w-8 h-8 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Research Scientist</h3>
-              <p className="text-white/75 text-sm">R&D laboratories</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Building2 className="w-8 h-8 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Production Chemist</h3>
-              <p className="text-white/75 text-sm">Chemical industries</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <GraduationCap className="w-8 h-8 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Chemistry Teacher</h3>
-              <p className="text-white/75 text-sm">Academic institutions</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <TestTube className="w-8 h-8 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Pharmaceutical Analyst</h3>
-              <p className="text-white/75 text-sm">Pharma companies</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Microscope className="w-8 h-8 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Lab Technician</h3>
-              <p className="text-white/75 text-sm">Testing laboratories</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Target className="w-8 h-8 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Quality Controller</h3>
-              <p className="text-white/75 text-sm">Manufacturing units</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 hover:-translate-y-1 transition-all">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-yellow to-yellow-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="w-8 h-8 text-brand-green" />
-              </div>
-              <h3 className="text-lg font-bold mb-2">Environmental Chemist</h3>
-              <p className="text-white/75 text-sm">Environmental agencies</p>
-            </div>
-          </div>
-
-          <div className="mt-16 pt-12 border-t border-white/20">
-            <h3 className="text-2xl font-bold text-center mb-8">Employment Sectors</h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                'Pharmaceutical Companies',
-                'Chemical Industries',
-                'Research Institutions',
-                'Quality Control Labs',
-                'Environmental Agencies',
-                'Food & Beverage Industry',
-                'Cosmetics Industry',
-                'Petroleum Sector',
-                'Academic Institutions',
-                'Forensic Laboratories',
-                'Government Departments',
-                'Biotechnology Firms'
-              ].map((sector, index) => (
-                <span
-                  key={index}
-                  className="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-sm hover:bg-white/20 transition-all"
-                >
-                  {sector}
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
+            <RevealSection className="lg:col-span-3">
+              <SectionBadge text="About the Programme" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Programme{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Overview
                 </span>
+              </h2>
+              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+                The Bachelor of Science in Chemistry programme offers a comprehensive study of chemical sciences, exploring the composition, structure, properties, and reactions of matter. Our curriculum combines theoretical knowledge with extensive practical training in modern laboratories equipped with advanced instrumentation and research facilities.
+              </p>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                Students develop strong analytical, research, and problem-solving skills through hands-on experiments, project work, and industry exposure. The programme prepares graduates for diverse careers in chemical industries, pharmaceuticals, research institutions, environmental sciences, quality control, and education sectors.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                {['State-of-the-art Labs', 'Expert Learning Facilitators', 'Research Opportunities', 'Industry Collaborations'].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-gray-700">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </RevealSection>
+
+            <RevealSection className="lg:col-span-2" delay={200}>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://placehold.co/600x450/0b6d41/FFFFFF?text=Chemistry+Laboratory"
+                  alt="Chemistry Laboratory"
+                  className="w-full h-auto"
+                />
+                <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                  Since 1954
+                </span>
+              </div>
+            </RevealSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Eligibility & Admission Criteria */}
+      <section className="py-16 bg-white" id="eligibility">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Admissions" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Eligibility &{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Admission Criteria
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Requirements for joining the B.Sc Chemistry programme
+                </p>
+              </div>
+            </RevealSection>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  icon: <School className="w-8 h-8 text-white" />,
+                  title: 'Academic Qualification',
+                  items: ['Higher Secondary (10+2) from recognized board', 'Minimum aggregate marks as per norms', '45% for reserved categories', 'Science stream students']
+                },
+                {
+                  icon: <BookOpen className="w-8 h-8 text-white" />,
+                  title: 'Subject Requirements',
+                  items: ['Chemistry as mandatory subject', 'Physics or Mathematics preferred', 'Science stream with Chemistry', 'Laboratory experience beneficial']
+                },
+                {
+                  icon: <FileText className="w-8 h-8 text-white" />,
+                  title: 'Documents Required',
+                  items: ['10th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photographs', 'Aadhaar Card Copy']
+                }
+              ].map((card, idx) => (
+                <RevealSection key={idx} delay={idx * 150}>
+                  <GlassCard className="p-8 h-full">
+                    <div className="w-16 h-16 bg-gradient-to-br from-brand-green to-emerald-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20">
+                      {card.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-brand-green mb-4">{card.title}</h3>
+                    <ul className="space-y-2 text-gray-700">
+                      {card.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-emerald-500 mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </GlassCard>
+                </RevealSection>
               ))}
             </div>
           </div>
         </div>
       </section>
 
+      {/* Programme Curriculum */}
+      <section className="py-16 bg-brand-cream" id="curriculum">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Curriculum" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Programme{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Curriculum
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Comprehensive syllabus designed to build expertise in chemical sciences
+                </p>
+              </div>
+            </RevealSection>
+
+            <RevealSection>
+              <div className="flex justify-center gap-2 mb-8">
+                {[1, 2, 3].map((year) => (
+                  <button
+                    key={year}
+                    onClick={() => setActiveYear(year)}
+                    className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
+                        ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                        : 'bg-white text-brand-green hover:bg-brand-green/5'
+                      }`}
+                  >
+                    Year {year}
+                  </button>
+                ))}
+              </div>
+            </RevealSection>
+
+            {activeYear === 1 && (
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: 'Semester I',
+                    subjects: ['Inorganic Chemistry I', 'Organic Chemistry I', 'Physical Chemistry I', 'General English', 'Allied Mathematics', 'Environmental Studies']
+                  },
+                  {
+                    title: 'Semester II',
+                    subjects: ['Inorganic Chemistry I (Continued)', 'Organic Chemistry I (Continued)', 'Physical Chemistry I (Continued)', 'Tamil/Hindi', 'Allied Physics']
+                  }
+                ].map((sem, idx) => (
+                  <RevealSection key={idx} delay={idx * 150}>
+                    <GlassCard className="overflow-hidden" hover={false}>
+                      <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                        <h4 className="text-xl font-bold">{sem.title}</h4>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-3">
+                          {sem.subjects.map((subject, i) => (
+                            <li key={i} className="flex items-start gap-2 text-gray-700">
+                              <span className="text-emerald-500 mt-1">•</span>
+                              <span>{subject}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
+              </div>
+            )}
+
+            {activeYear === 2 && (
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: 'Semester III',
+                    subjects: ['Inorganic Chemistry II', 'Organic Chemistry II', 'Physical Chemistry II', 'Analytical Chemistry', 'Allied Subject III']
+                  },
+                  {
+                    title: 'Semester IV',
+                    subjects: ['Inorganic Chemistry II (Continued)', 'Organic Chemistry II (Continued)', 'Physical Chemistry II (Continued)', 'Environmental Science', 'Allied Subject IV']
+                  }
+                ].map((sem, idx) => (
+                  <RevealSection key={idx} delay={idx * 150}>
+                    <GlassCard className="overflow-hidden" hover={false}>
+                      <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                        <h4 className="text-xl font-bold">{sem.title}</h4>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-3">
+                          {sem.subjects.map((subject, i) => (
+                            <li key={i} className="flex items-start gap-2 text-gray-700">
+                              <span className="text-emerald-500 mt-1">•</span>
+                              <span>{subject}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
+              </div>
+            )}
+
+            {activeYear === 3 && (
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: 'Semester V',
+                    subjects: ['Spectroscopy & Molecular Structure', 'Industrial Chemistry', 'Biochemistry', 'Green Chemistry', 'Elective I']
+                  },
+                  {
+                    title: 'Semester VI',
+                    subjects: ['Advanced Organic Chemistry', 'Advanced Inorganic Chemistry', 'Research Project', 'Elective II', 'Internship/Industrial Training']
+                  }
+                ].map((sem, idx) => (
+                  <RevealSection key={idx} delay={idx * 150}>
+                    <GlassCard className="overflow-hidden" hover={false}>
+                      <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                        <h4 className="text-xl font-bold">{sem.title}</h4>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-3">
+                          {sem.subjects.map((subject, i) => (
+                            <li key={i} className="flex items-start gap-2 text-gray-700">
+                              <span className="text-emerald-500 mt-1">•</span>
+                              <span>{subject}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Programme Learning Outcomes */}
+      <section className="py-16 bg-white" id="outcomes">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Outcomes" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Programme Learning{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Outcomes
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Skills and competencies you will develop through this programme
+                </p>
+              </div>
+            </RevealSection>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { icon: <Atom className="w-6 h-6 text-white" />, title: 'Chemical Knowledge', description: 'Comprehensive understanding of chemical principles, reactions, and molecular structures across all chemistry branches.' },
+                { icon: <Microscope className="w-6 h-6 text-white" />, title: 'Analytical Skills', description: 'Proficiency in using modern analytical instruments and techniques for chemical analysis and research.' },
+                { icon: <TestTube className="w-6 h-6 text-white" />, title: 'Laboratory Expertise', description: 'Hands-on experience with chemical experiments, safety protocols, and laboratory management practices.' },
+                { icon: <Brain className="w-6 h-6 text-white" />, title: 'Research Aptitude', description: 'Ability to design experiments, conduct research, and contribute to scientific knowledge in chemistry.' },
+                { icon: <Lightbulb className="w-6 h-6 text-white" />, title: 'Problem Solving', description: 'Critical thinking and analytical problem-solving skills for chemical and industrial challenges.' },
+                { icon: <Target className="w-6 h-6 text-white" />, title: 'Industry Readiness', description: 'Practical knowledge and skills needed for careers in chemical industries and pharmaceutical sectors.' }
+              ].map((outcome, idx) => (
+                <RevealSection key={idx} delay={idx * 100}>
+                  <GlassCard className="relative p-6 group h-full">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 shadow-lg shadow-brand-green/20 group-hover:shadow-brand-green/30 transition-shadow">
+                      {outcome.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-brand-green mb-2">{outcome.title}</h3>
+                    <p className="text-gray-600 text-sm">{outcome.description}</p>
+                  </GlassCard>
+                </RevealSection>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Career Opportunities */}
+      <section className="py-16 bg-brand-cream" id="careers">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Careers" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Career{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Opportunities
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Diverse career paths in chemical sciences, pharmaceuticals, research, and industry
+                </p>
+              </div>
+            </RevealSection>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {[
+                { icon: <FlaskConical className="w-6 h-6" />, title: 'Chemical Analyst', desc: 'Quality control and analysis in laboratories' },
+                { icon: <Beaker className="w-6 h-6" />, title: 'Research Scientist', desc: 'R&D in research institutions and labs' },
+                { icon: <Building2 className="w-6 h-6" />, title: 'Production Chemist', desc: 'Chemical manufacturing and production' },
+                { icon: <GraduationCap className="w-6 h-6" />, title: 'Chemistry Teacher', desc: 'Teaching at schools and colleges' },
+                { icon: <TestTube className="w-6 h-6" />, title: 'Pharmaceutical Analyst', desc: 'Drug development and quality control' },
+                { icon: <Microscope className="w-6 h-6" />, title: 'Lab Technician', desc: 'Laboratory testing and analysis' },
+                { icon: <Target className="w-6 h-6" />, title: 'Quality Controller', desc: 'Quality assurance in industries' },
+                { icon: <BookOpen className="w-6 h-6" />, title: 'Environmental Chemist', desc: 'Environmental analysis and protection' }
+              ].map((career, idx) => (
+                <RevealSection key={idx} delay={idx * 80}>
+                  <GlassCard className="p-6 group h-full">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center mb-4 text-white group-hover:shadow-lg group-hover:shadow-brand-green/20 transition-all">
+                      {career.icon}
+                    </div>
+                    <h3 className="font-bold text-brand-green mb-2">{career.title}</h3>
+                    <p className="text-sm text-gray-600">{career.desc}</p>
+                  </GlassCard>
+                </RevealSection>
+              ))}
+            </div>
+
+            <RevealSection>
+              <GlassCard className="p-8" hover={false}>
+                <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Employment Sectors</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {[
+                    'Pharmaceutical Companies', 'Chemical Industries', 'Research Institutions', 'Quality Control Labs',
+                    'Environmental Agencies', 'Food & Beverage Industry', 'Cosmetics Industry', 'Petroleum Sector',
+                    'Academic Institutions', 'Forensic Laboratories', 'Government Departments', 'Biotechnology Firms'
+                  ].map((sector, idx) => (
+                    <span key={idx} className="px-4 py-2 bg-brand-green/5 hover:bg-gradient-to-r hover:from-brand-green hover:to-emerald-500 hover:text-white text-brand-green rounded-full text-sm font-medium transition-all cursor-default border border-brand-green/15">
+                      {sector}
+                    </span>
+                  ))}
+                </div>
+              </GlassCard>
+            </RevealSection>
+          </div>
+        </div>
+      </section>
+
       {/* Learning Facilities */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white" id="facilities">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
-              Learning Facilities
-            </h2>
-            <div className="w-20 h-1 bg-brand-yellow mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                <FlaskConical className="w-10 h-10 text-white" />
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Infrastructure" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Learning{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Facilities
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  State-of-the-art infrastructure to support your academic journey
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-brand-green mb-2">Advanced Laboratories</h3>
-              <p className="text-gray-600 text-sm">Modern chemistry labs with latest equipment</p>
-            </div>
+            </RevealSection>
 
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                <BookOpen className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-brand-green mb-2">Digital Library</h3>
-              <p className="text-gray-600 text-sm">Extensive chemistry research resources</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                <Microscope className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-brand-green mb-2">Research Center</h3>
-              <p className="text-gray-600 text-sm">Dedicated research and project facilities</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-brand-green to-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                <Users className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-brand-green mb-2">Seminar Hall</h3>
-              <p className="text-gray-600 text-sm">Modern halls for academic events</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { title: 'Advanced Laboratories', description: 'Modern chemistry labs with latest equipment for organic, inorganic, physical, and analytical chemistry with safety protocols.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Chemistry+Lab' },
+                { title: 'Digital Library', description: 'Extensive chemistry research resources, journals, reference books, and digital databases for academic study.', image: 'https://placehold.co/400x200/059669/FFFFFF?text=Digital+Library' },
+                { title: 'Research Center', description: 'Dedicated research and project facilities with modern instruments for undergraduate and postgraduate research.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Research+Center' },
+                { title: 'Seminar Hall', description: 'Air-conditioned seminar hall with modern presentation facilities for academic discussions, guest lectures, and workshops.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Seminar+Hall' },
+                { title: 'Instrumentation Room', description: 'Advanced analytical instruments including spectrophotometers, pH meters, centrifuges, and chromatography equipment.', image: 'https://placehold.co/400x200/059669/FFFFFF?text=Instruments' },
+                { title: 'Smart Learning Studios', description: 'Technology-enabled learning spaces with interactive boards, projectors, and high-speed internet connectivity.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Smart+Classroom' }
+              ].map((facility, idx) => (
+                <RevealSection key={idx} delay={idx * 100}>
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={facility.image}
+                        alt={facility.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-green/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold text-brand-green mb-2">{facility.title}</h3>
+                      <p className="text-gray-600 text-sm">{facility.description}</p>
+                    </div>
+                  </div>
+                </RevealSection>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Why Choose Us */}
+      <section className="py-16 bg-brand-cream" id="why-choose">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
-              Why Choose Our B.Sc Chemistry Programme?
-            </h2>
-            <div className="w-20 h-1 bg-brand-yellow mx-auto"></div>
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <RevealSection>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://placehold.co/600x500/0b6d41/FFFFFF?text=Campus+Life"
+                  alt="Campus Life"
+                  className="w-full h-auto"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-green/95 to-transparent p-8">
+                  <div className="grid grid-cols-3 gap-4 text-center text-white">
+                    <div>
+                      <h4 className="text-3xl font-bold text-emerald-300 mb-1">
+                        <CountUp end={70} suffix="+" />
+                      </h4>
+                      <p className="text-xs">Years of Excellence</p>
+                    </div>
+                    <div>
+                      <h4 className="text-3xl font-bold text-emerald-300 mb-1">
+                        <CountUp end={5000} suffix="+" />
+                      </h4>
+                      <p className="text-xs">Active Learners</p>
+                    </div>
+                    <div>
+                      <h4 className="text-3xl font-bold text-emerald-300 mb-1">
+                        <CountUp end={500} suffix="+" />
+                      </h4>
+                      <p className="text-xs">Learning Facilitators</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </RevealSection>
+
+            <RevealSection delay={200}>
+              <SectionBadge text="Why Us" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Why Choose Our B.Sc{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Chemistry Programme?
+                </span>
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Our progressive education approach ensures holistic development, preparing you for success in academics and career.
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  { title: 'UGC Recognized & NAAC Accredited', description: 'Quality-assured education meeting national standards with excellent academic reputation.' },
+                  { title: 'Comprehensive Curriculum', description: 'Balance of theoretical knowledge and hands-on laboratory experience with modern equipment.' },
+                  { title: 'Expert Learning Facilitators', description: 'Highly qualified faculty with doctoral degrees, research publications, and industry experience.' },
+                  { title: 'Advanced Laboratory Infrastructure', description: 'Well-equipped labs with modern instruments for organic, inorganic, physical, and analytical chemistry.' },
+                  { title: 'Industry Collaborations', description: 'Partnerships with chemical and pharmaceutical companies providing real-world exposure and placements.' }
+                ].map((reason, idx) => (
+                  <div key={idx} className="flex gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/80 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                    <div className="w-11 h-11 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-green/15">
+                      <CheckCircle2 className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-brand-green mb-1">{reason.title}</h4>
+                      <p className="text-sm text-gray-600">{reason.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </RevealSection>
           </div>
+        </div>
+      </section>
 
-          <div className="max-w-4xl mx-auto space-y-6">
-            <div className="bg-white rounded-lg p-6 border-l-4 border-brand-yellow shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-brand-yellow/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-brand-green mb-2">
-                    Comprehensive Curriculum with Practical Focus
-                  </h3>
-                  <p className="text-gray-600">
-                    Balance of theoretical knowledge and hands-on laboratory experience with modern equipment and techniques.
-                  </p>
-                </div>
+      {/* Faculty Section */}
+      <section className="py-16 bg-white" id="faculty">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Faculty" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Our Learning{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Facilitators
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Meet our experienced and dedicated department team
+                </p>
               </div>
-            </div>
+            </RevealSection>
 
-            <div className="bg-white rounded-lg p-6 border-l-4 border-brand-yellow shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-brand-yellow/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green" />
+            <Marquee pauseOnHover draggable speed={30} className="[--gap:1.5rem]">
+              {[
+                { name: 'Dr. Lakshmi Narayanan', designation: 'Head of Department', qualification: 'Ph.D. in Organic Chemistry' },
+                { name: 'Dr. Meenakshi Sundaram', designation: 'Associate Professor', qualification: 'Ph.D. in Inorganic Chemistry' },
+                { name: 'Ms. Priya Bharathi', designation: 'Assistant Professor', qualification: 'M.Phil., NET Qualified' },
+                { name: 'Mr. Karthik Rajan', designation: 'Assistant Professor', qualification: 'M.Sc., SLET Qualified' }
+              ].map((faculty, idx) => (
+                <div key={idx} className="w-[260px] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group flex flex-col h-[340px]">
+                  <div className="relative h-56 overflow-hidden flex-shrink-0">
+                    <Image
+                      src="/images/faculties/placeholder-avatar.jpg"
+                      alt={faculty.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-green/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="p-5 text-center flex-1 flex flex-col justify-center">
+                    <h4 className="text-lg font-bold text-brand-green mb-1">{faculty.name}</h4>
+                    <p className="text-sm font-semibold text-emerald-500 mb-1">{faculty.designation}</p>
+                    <p className="text-xs text-gray-600">{faculty.qualification}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-brand-green mb-2">
-                    Experienced and Qualified Faculty
-                  </h3>
-                  <p className="text-gray-600">
-                    Learn from accomplished professors and researchers with extensive industry and academic experience.
-                  </p>
-                </div>
-              </div>
-            </div>
+              ))}
+            </Marquee>
+          </div>
+        </div>
+      </section>
 
-            <div className="bg-white rounded-lg p-6 border-l-4 border-brand-yellow shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-brand-yellow/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-brand-green mb-2">
-                    State-of-the-Art Laboratory Infrastructure
-                  </h3>
-                  <p className="text-gray-600">
-                    Well-equipped labs with modern instruments for organic, inorganic, physical, and analytical chemistry.
-                  </p>
-                </div>
+      {/* FAQ Section */}
+      <section className="py-16 bg-brand-cream" id="faq">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="FAQ" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Frequently Asked{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Questions
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Find answers to common queries about the B.Sc Chemistry programme
+                </p>
               </div>
-            </div>
+            </RevealSection>
 
-            <div className="bg-white rounded-lg p-6 border-l-4 border-brand-yellow shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-brand-yellow/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-brand-green mb-2">
-                    Industry Collaborations and Internships
-                  </h3>
-                  <p className="text-gray-600">
-                    Partnerships with chemical and pharmaceutical companies providing real-world exposure and placement opportunities.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 border-l-4 border-brand-yellow shadow-sm hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-brand-yellow/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle2 className="w-6 h-6 text-brand-green" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-brand-green mb-2">
-                    Research Opportunities and Project Work
-                  </h3>
-                  <p className="text-gray-600">
-                    Engage in research projects, publish papers, and present at conferences to build a strong academic profile.
-                  </p>
-                </div>
-              </div>
+            <div className="space-y-4">
+              {[
+                { question: 'What is the duration of the B.Sc Chemistry programme?', answer: 'The B.Sc Chemistry programme is a 3-year full-time undergraduate degree comprising six semesters with both theoretical and practical components. Each academic year consists of two semesters, with examinations conducted at the end of each semester following the Choice Based Credit System (CBCS) pattern.' },
+                { question: 'What are the career opportunities after B.Sc Chemistry?', answer: 'Graduates can pursue careers in pharmaceutical companies, chemical industries, quality control laboratories, research institutions, environmental agencies, teaching, and can also opt for higher studies like M.Sc Chemistry, M.Phil., Ph.D., or professional courses in pharmaceutical sciences, analytical chemistry, and environmental sciences.' },
+                { question: 'What is the eligibility criteria for admission?', answer: 'Candidates must have completed Higher Secondary (10+2) from a recognized board with Chemistry as a mandatory subject and preferably Physics or Mathematics. Science stream students with minimum aggregate marks are eligible to apply. The minimum percentage varies by category (General/OBC/SC/ST).' },
+                { question: 'What laboratory facilities are available?', answer: 'The department has well-equipped laboratories for Organic, Inorganic, Physical, and Analytical Chemistry with modern instruments including spectrophotometers, pH meters, centrifuges, chromatography equipment, and other advanced instruments for hands-on learning and research projects.' },
+                { question: 'Are there opportunities for research and projects?', answer: 'Yes, students undertake research projects in the final year and are encouraged to participate in scientific research, paper presentations, and academic conferences. The department provides research facilities and guidance from experienced faculty members to develop research aptitude and analytical skills.' },
+                { question: 'Does the college provide placement assistance?', answer: 'Yes, our dedicated Placement Cell actively supports learners through campus recruitment drives, soft skills training, resume building workshops, mock interviews, and industry interaction sessions. We have partnerships with leading chemical, pharmaceutical, and research companies for internships and career opportunities.' },
+                { question: 'What makes this B.Sc Chemistry programme unique?', answer: 'Our programme stands out due to its comprehensive curriculum balancing theory and practice, state-of-the-art laboratory infrastructure, expert learning facilitators with research experience, strong industry collaborations, emphasis on research projects, and holistic development through co-curricular activities in chemistry clubs and scientific societies.' }
+              ].map((faq, idx) => (
+                <RevealSection key={idx} delay={idx * 60}>
+                  <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-white/80 hover:border-brand-green/20 transition-all overflow-hidden">
+                    <button
+                      onClick={() => setActiveFAQ(activeFAQ === idx ? -1 : idx)}
+                      className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-brand-green/5 transition-colors"
+                    >
+                      <span className="font-semibold text-brand-green">{faq.question}</span>
+                      <ChevronDown className={`w-5 h-5 text-brand-green flex-shrink-0 transition-transform duration-300 ${activeFAQ === idx ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`transition-all duration-300 ${activeFAQ === idx ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                      <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                        {faq.answer}
+                      </div>
+                    </div>
+                  </div>
+                </RevealSection>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Frequently Asked Questions */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
-              Frequently Asked Questions
-            </h2>
-            <div className="w-20 h-1 bg-brand-yellow mx-auto"></div>
-          </div>
-
-          <div className="max-w-3xl mx-auto space-y-4">
-            <details className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-all group">
-              <summary className="font-bold text-brand-green cursor-pointer flex items-center justify-between">
-                What is the duration of the B.Sc Chemistry programme?
-                <span className="text-2xl group-open:rotate-45 transition-transform">+</span>
-              </summary>
-              <p className="text-gray-600 mt-4 leading-relaxed">
-                The B.Sc Chemistry programme is a 3-year full-time undergraduate degree comprising six semesters with both theoretical and practical components.
+      {/* Admission CTA */}
+      <section className="py-16 bg-white relative overflow-hidden" id="admission">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-green/5 via-transparent to-emerald-500/5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <RevealSection>
+            <div className="max-w-3xl mx-auto text-center">
+              <SectionBadge text="Enroll Now" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Begin Your Journey in{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                  Chemical Sciences
+                </span>
+              </h2>
+              <p className="text-lg mb-8 text-gray-600">
+                Join our B.Sc Chemistry programme and unlock exciting opportunities in research, industry, and innovation.
               </p>
-            </details>
 
-            <details className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-all group">
-              <summary className="font-bold text-brand-green cursor-pointer flex items-center justify-between">
-                What are the career opportunities after B.Sc Chemistry?
-                <span className="text-2xl group-open:rotate-45 transition-transform">+</span>
-              </summary>
-              <p className="text-gray-600 mt-4 leading-relaxed">
-                Graduates can pursue careers in pharmaceutical companies, chemical industries, quality control laboratories, research institutions, environmental agencies, teaching, and can also opt for higher studies like M.Sc, M.Phil, or Ph.D.
-              </p>
-            </details>
-
-            <details className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-all group">
-              <summary className="font-bold text-brand-green cursor-pointer flex items-center justify-between">
-                What is the eligibility criteria for admission?
-                <span className="text-2xl group-open:rotate-45 transition-transform">+</span>
-              </summary>
-              <p className="text-gray-600 mt-4 leading-relaxed">
-                Candidates must have completed Higher Secondary (10+2) from a recognized board with Chemistry as a mandatory subject and preferably Physics or Mathematics. Science stream students with minimum aggregate marks are eligible to apply.
-              </p>
-            </details>
-
-            <details className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-all group">
-              <summary className="font-bold text-brand-green cursor-pointer flex items-center justify-between">
-                What laboratory facilities are available?
-                <span className="text-2xl group-open:rotate-45 transition-transform">+</span>
-              </summary>
-              <p className="text-gray-600 mt-4 leading-relaxed">
-                The department has well-equipped laboratories for Organic, Inorganic, Physical, and Analytical Chemistry with modern instruments including spectrophotometers, pH meters, centrifuges, and other advanced equipment for hands-on learning.
-              </p>
-            </details>
-
-            <details className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-all group">
-              <summary className="font-bold text-brand-green cursor-pointer flex items-center justify-between">
-                Are there opportunities for research and projects?
-                <span className="text-2xl group-open:rotate-45 transition-transform">+</span>
-              </summary>
-              <p className="text-gray-600 mt-4 leading-relaxed">
-                Yes, students undertake research projects in the final year and are encouraged to participate in scientific research, paper presentations, and academic conferences to develop research aptitude and analytical skills.
-              </p>
-            </details>
-          </div>
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <a href="#" className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-green to-emerald-500 hover:from-brand-green/90 hover:to-emerald-500/90 text-white px-8 py-4 rounded-lg font-semibold shadow-xl shadow-brand-green/25 hover:shadow-2xl transition-all hover:-translate-y-1">
+                  Apply for Admission
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href="#" className="inline-flex items-center gap-2 bg-transparent hover:bg-brand-green text-brand-green hover:text-white border-2 border-brand-green px-8 py-4 rounded-lg font-semibold transition-all">
+                  Download Brochure
+                </a>
+              </div>
+            </div>
+          </RevealSection>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-brand-yellow via-yellow-400 to-brand-yellow">
+      {/* Related Programmes */}
+      <section className="py-16 bg-brand-cream">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
-              Begin Your Journey in Chemical Sciences
-            </h2>
-            <p className="text-gray-700 text-lg mb-8">
-              Join our B.Sc Chemistry programme and unlock exciting opportunities in research, industry, and innovation.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-brand-green text-white px-8 py-4 rounded-lg font-semibold hover:bg-emerald-800 transition-all hover:shadow-lg hover:-translate-y-0.5">
-                Apply for Admission
-              </button>
-              <button className="bg-white text-brand-green px-8 py-4 rounded-lg font-semibold border-2 border-brand-green hover:bg-gray-50 transition-all">
-                Contact Department
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Explore Related Programmes */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
-              Explore Related Programmes
-            </h2>
-            <div className="w-20 h-1 bg-brand-yellow mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 bg-brand-green/10 rounded-lg flex items-center justify-center mb-4">
-                <Atom className="w-7 h-7 text-brand-green" />
+          <div className="max-w-6xl mx-auto">
+            <RevealSection>
+              <div className="text-center mb-12">
+                <SectionBadge text="Explore More" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Explore Related{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                    Programmes
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Discover other science programmes at our college
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-brand-green mb-2">B.Sc Physics</h3>
-              <p className="text-gray-600 mb-4">Explore the fundamental laws of nature and physical phenomena</p>
-              <a href="/programmes/aided/ug/bsc-physics" className="text-brand-green font-semibold hover:text-emerald-700 inline-flex items-center gap-2">
-                Learn More
-                <span>→</span>
-              </a>
-            </div>
+            </RevealSection>
 
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 bg-brand-green/10 rounded-lg flex items-center justify-center mb-4">
-                <Microscope className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-xl font-bold text-brand-green mb-2">B.Sc Mathematics</h3>
-              <p className="text-gray-600 mb-4">Master mathematical concepts and computational techniques</p>
-              <a href="/programmes/aided/ug/bsc-mathematics" className="text-brand-green font-semibold hover:text-emerald-700 inline-flex items-center gap-2">
-                Learn More
-                <span>→</span>
-              </a>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 bg-brand-green/10 rounded-lg flex items-center justify-center mb-4">
-                <BookOpen className="w-7 h-7 text-brand-green" />
-              </div>
-              <h3 className="text-xl font-bold text-brand-green mb-2">B.Sc Biochemistry</h3>
-              <p className="text-gray-600 mb-4">Study chemical processes within living organisms</p>
-              <a href="/programmes/aided/ug/bsc-biochemistry" className="text-brand-green font-semibold hover:text-emerald-700 inline-flex items-center gap-2">
-                Learn More
-                <span>→</span>
-              </a>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { title: 'B.Sc Physics', description: 'Explore the fundamental laws of nature and physical phenomena', duration: '3 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BSc+Physics' },
+                { title: 'B.Sc Mathematics', description: 'Master mathematical concepts and computational techniques', duration: '3 Years', image: 'https://placehold.co/400x180/059669/FFFFFF?text=BSc+Mathematics' },
+                { title: 'B.Sc Zoology', description: 'Study animal biology, biodiversity, and life sciences', duration: '3 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BSc+Zoology' }
+              ].map((programme, idx) => (
+                <RevealSection key={idx} delay={idx * 150}>
+                  <a href="#" className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">
+                    <div className="relative h-44 overflow-hidden">
+                      <img
+                        src={programme.image}
+                        alt={programme.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-green/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-brand-green mb-2 group-hover:text-emerald-500 transition-colors">{programme.title}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{programme.description}</p>
+                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          <span>{programme.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Users className="w-4 h-4" />
+                          <span>Full-time</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </RevealSection>
+              ))}
             </div>
           </div>
         </div>

@@ -25,6 +25,9 @@
 }
 
 @theme {
+  /* Font Family */
+  --font-sans: var(--font-poppins), 'Poppins', system-ui, sans-serif;
+
   /* Brand Colors - using correct Tailwind v4 syntax */
   --color-brand-green: #0b6d41;
   --color-brand-yellow: #ffde59;
@@ -81,7 +84,13 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
+  }
+  input,
+  textarea,
+  select,
+  button {
+    font-family: inherit;
   }
 }
 

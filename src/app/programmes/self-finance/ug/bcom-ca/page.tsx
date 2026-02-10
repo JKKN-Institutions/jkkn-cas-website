@@ -58,9 +58,8 @@ function RevealSection({ children, className = '', delay = 0 }: { children: Reac
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      } ${className}`}
+      className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -257,7 +256,7 @@ export default function BComCAPage() {
                 <GraduationCap className="w-4 h-4 text-brand-green" />
                 Self-Finance Programme
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 text-gray-900">
                 Bachelor of Commerce in{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Computer Application
@@ -296,37 +295,62 @@ export default function BComCAPage() {
         </div>
       </section>
 
+      {/* Quick Info Cards */}
+      <section className="relative z-10 -mt-12 pb-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {[
+              { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC', title: 'Accredited Institution', desc: 'Quality assured education' },
+              { icon: <Users className="w-7 h-7" />, stat: '15:1', title: 'Learner-Facilitator Ratio', desc: 'Personalized attention' },
+              { icon: <Briefcase className="w-7 h-7" />, stat: '95%', title: 'Placement Record', desc: 'Career opportunities assured' },
+              { icon: <Award className="w-7 h-7" />, stat: '₹4.5L', title: 'Average Package', desc: 'Competitive starting salary' },
+            ].map((card, idx) => (
+              <RevealSection key={idx} delay={idx * 100}>
+                <GlassCard className="p-6 text-center">
+                  <div className="w-14 h-14 mx-auto mb-4 bg-brand-green/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-brand-green/15 text-brand-green transition-colors">
+                    {card.icon}
+                  </div>
+                  <span className="block text-3xl font-bold text-brand-green mb-1">{card.stat}</span>
+                  <h3 className="font-bold text-brand-green mb-1">{card.title}</h3>
+                  <p className="text-sm text-gray-600">{card.desc}</p>
+                </GlassCard>
+              </RevealSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Quick Stats Section */}
-      <section className="py-16 bg-white relative">
+      {/* <section className="py-16 bg-white relative">
         <div className="container mx-auto px-4 md:px-6">
           <RevealSection>
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <GlassCard className="p-6 text-center">
-                  <div className="text-4xl font-bold text-brand-green mb-2">
+                  <div className="text-3xl font-bold text-brand-green mb-2">
                     <CountUp end={70} duration={2000} />+
                   </div>
                   <div className="text-sm text-gray-600 font-medium">Years of Excellence</div>
                 </GlassCard>
                 <GlassCard className="p-6 text-center">
-                  <div className="text-4xl font-bold text-brand-green mb-2">
+                  <div className="text-3xl font-bold text-brand-green mb-2">
                     <CountUp end={90} duration={2000} />%
                   </div>
                   <div className="text-sm text-gray-600 font-medium">Placement Record</div>
                 </GlassCard>
                 <GlassCard className="p-6 text-center">
-                  <div className="text-4xl font-bold text-brand-green mb-2">CA/CMA</div>
+                  <div className="text-3xl font-bold text-brand-green mb-2">CA/CMA</div>
                   <div className="text-sm text-gray-600 font-medium">Foundation Ready</div>
                 </GlassCard>
                 <GlassCard className="p-6 text-center">
-                  <div className="text-4xl font-bold text-brand-green mb-2">Big 4</div>
+                  <div className="text-3xl font-bold text-brand-green mb-2">Big 4</div>
                   <div className="text-sm text-gray-600 font-medium">Firm Placements</div>
                 </GlassCard>
               </div>
             </div>
           </RevealSection>
         </div>
-      </section>
+      </section> */}
 
       {/* Programme Overview */}
       <section className="py-16 bg-brand-cream">
@@ -334,7 +358,7 @@ export default function BComCAPage() {
           <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
             <RevealSection className="lg:col-span-3">
               <SectionBadge text="About the Programme" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                 Programme{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Overview
@@ -382,7 +406,7 @@ export default function BComCAPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Admissions" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Eligibility &{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Admission Criteria
@@ -399,7 +423,7 @@ export default function BComCAPage() {
                 {
                   icon: <GraduationCap className="w-8 h-8 text-white" />,
                   title: 'Academic Qualification',
-                  items: ['Higher Secondary (10+2) from recognized board', 'Commerce/Science/Arts stream eligible', 'Minimum 50% aggregate marks', '45% for OBC, 40% for SC/ST']
+                  items: ['Higher Secondary +2 from recognized board', 'Commerce/Science/Arts stream eligible', 'Minimum 50% aggregate marks', '45% for OBC, 40% for SC/ST']
                 },
                 {
                   icon: <FileText className="w-8 h-8 text-white" />,
@@ -409,7 +433,7 @@ export default function BComCAPage() {
                 {
                   icon: <BookOpen className="w-8 h-8 text-white" />,
                   title: 'Documents Required',
-                  items: ['10th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photographs', 'Aadhaar Card Copy']
+                  items: ['10th,11th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photos', 'Aadhaar Card Copy', 'Bank Details']
                 }
               ].map((card, idx) => (
                 <RevealSection key={idx} delay={idx * 150}>
@@ -441,7 +465,7 @@ export default function BComCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Academic Structure" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Course Curriculum
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
@@ -456,11 +480,10 @@ export default function BComCAPage() {
                   <button
                     key={year}
                     onClick={() => setActiveYear(year)}
-                    className={`px-8 py-3 rounded-xl font-semibold transition-all ${
-                      activeYear === year
-                        ? 'bg-brand-green text-white shadow-xl shadow-brand-green/25 scale-105'
-                        : 'bg-white/60 backdrop-blur-sm text-gray-700 hover:bg-white/80 border border-gray-200'
-                    }`}
+                    className={`px-8 py-3 rounded-xl font-semibold transition-all ${activeYear === year
+                      ? 'bg-brand-green text-white shadow-xl shadow-brand-green/25 scale-105'
+                      : 'bg-white/60 backdrop-blur-sm text-gray-700 hover:bg-white/80 border border-gray-200'
+                      }`}
                   >
                     Year {year}
                   </button>
@@ -502,7 +525,7 @@ export default function BComCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="What You'll Gain" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Programme Learning Outcomes
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
@@ -593,7 +616,7 @@ export default function BComCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Future Prospects" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Career Opportunities
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
@@ -717,7 +740,7 @@ export default function BComCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Infrastructure" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Department Facilities
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
@@ -836,7 +859,7 @@ export default function BComCAPage() {
                 <div className="relative">
                   <GlassCard className="p-16 min-h-[500px] flex items-center justify-center bg-gradient-to-br from-brand-green/90 to-emerald-600/90" hover={false}>
                     <div className="text-center">
-                      <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6">
                         Why Choose JKKN
                       </h3>
                       <div className="w-24 h-1.5 bg-white/80 mx-auto rounded-full"></div>
@@ -847,7 +870,7 @@ export default function BComCAPage() {
                 {/* Right Side */}
                 <div>
                   <SectionBadge text="Our Advantages" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-4">
                     Why Choose Our B.Com Accounting and Finance Programme?
                   </h2>
                   <div className="w-16 h-1 bg-brand-green rounded-full mb-8"></div>
@@ -950,7 +973,7 @@ export default function BComCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Our Team" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Expert Faculty Members
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
@@ -995,7 +1018,7 @@ export default function BComCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Got Questions?" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Frequently Asked Questions
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
@@ -1013,15 +1036,13 @@ export default function BComCAPage() {
                   >
                     <h3 className="font-semibold text-brand-green pr-4">{faq.question}</h3>
                     <ChevronDown
-                      className={`w-5 h-5 text-brand-green flex-shrink-0 transition-transform ${
-                        activeFAQ === index ? 'rotate-180' : ''
-                      }`}
+                      className={`w-5 h-5 text-brand-green flex-shrink-0 transition-transform ${activeFAQ === index ? 'rotate-180' : ''
+                        }`}
                     />
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      activeFAQ === index ? 'max-h-96' : 'max-h-0'
-                    }`}
+                    className={`overflow-hidden transition-all duration-300 ${activeFAQ === index ? 'max-h-96' : 'max-h-0'
+                      }`}
                   >
                     <div className="p-6 pt-0 text-gray-600">
                       {faq.answer}
@@ -1035,23 +1056,23 @@ export default function BComCAPage() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-brand-green to-emerald-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-5"></div>
         <div className="container mx-auto px-4 md:px-6 text-center relative">
           <RevealSection>
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="text-3xl md:text-3xl font-bold text-brand-green mb-6">
                 Ready to Start Your Accounting & Finance Journey?
               </h2>
-              <p className="text-xl text-emerald-50 mb-8 leading-relaxed">
+              <p className="text-xl text-gray-700 mb-8 leading-relaxed">
                 Join JKKN's B.Com CA programme and build a successful career in accounting, finance, and technology
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <button className="group bg-white hover:bg-brand-cream text-brand-green px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-2xl hover:-translate-y-1 flex items-center gap-2">
+                <button className="group bg-brand-green hover:bg-brand-green/90 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-2xl hover:-translate-y-1 flex items-center gap-2">
                   Apply Now
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <button className="bg-transparent border-2 border-white hover:bg-white hover:text-brand-green text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                <button className="bg-white border-2 border-brand-green hover:bg-brand-green text-brand-green hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-2xl hover:-translate-y-1">
                   Schedule Campus Visit
                 </button>
               </div>

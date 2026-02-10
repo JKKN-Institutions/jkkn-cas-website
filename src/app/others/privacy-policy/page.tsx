@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
         </nav>
 
         {/* Main Title */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Privacy Policy</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Privacy Policy</h1>
 
         <div className="bg-white rounded-lg shadow-lg p-8 space-y-8">
           {/* Introduction */}

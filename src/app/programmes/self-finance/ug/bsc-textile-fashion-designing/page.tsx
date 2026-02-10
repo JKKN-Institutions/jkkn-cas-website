@@ -141,10 +141,10 @@ export default function BSCTextileFashionDesigningPage() {
                   <GraduationCap className="w-4 h-4 text-brand-green" />
                   UGC Recognized Programme
                 </span>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 text-gray-900">
                   Bachelor of Science in{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
-                    Textile and Fashion Design
+                    Textile and Fashion Designing
                   </span>
                 </h1>
                 <p className="text-xl md:text-2xl font-medium mb-6 text-gray-700">
@@ -211,14 +211,14 @@ export default function BSCTextileFashionDesigningPage() {
             <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
               <RevealSection className="lg:col-span-3">
                 <SectionBadge text="About the Programme" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                   Programme{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Overview
                   </span>
                 </h2>
                 <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                  The B.Sc. in Textile and Fashion Design is a dynamic undergraduate programme that blends creative artistry with technical expertise in textile science and fashion innovation. This comprehensive course equips students with the skills to conceptualize, design, and create fashion garments while understanding the science behind fabrics, production processes, and sustainable practices.
+                  The B.Sc. in Textile and Fashion Designing  is a dynamic Undergraduate programme that blends creative artistry with technical expertise in textile science and fashion innovation. This comprehensive course equips students with the skills to conceptualize, design, and create fashion garments while understanding the science behind fabrics, production processes, and sustainable practices.
                 </p>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   Students gain hands-on experience through state-of-the-art design studios, CAD laboratories, and industry internships. The curriculum covers everything from fashion illustration and pattern making to merchandising, branding, and entrepreneurship, preparing graduates for diverse roles in the global fashion and textile industry.
@@ -257,7 +257,7 @@ export default function BSCTextileFashionDesigningPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Admissions" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Eligibility &{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Admission Criteria
@@ -331,7 +331,7 @@ export default function BSCTextileFashionDesigningPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Curriculum" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Programme{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Curriculum
@@ -350,8 +350,8 @@ export default function BSCTextileFashionDesigningPage() {
                       key={year}
                       onClick={() => setActiveYear(year)}
                       className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
-                          ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
-                          : 'bg-white text-brand-green hover:bg-brand-green/5'
+                        ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                        : 'bg-white text-brand-green hover:bg-brand-green/5'
                         }`}
                     >
                       Year {year}
@@ -520,7 +520,7 @@ export default function BSCTextileFashionDesigningPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Outcomes" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Programme Learning{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Outcomes
@@ -563,7 +563,7 @@ export default function BSCTextileFashionDesigningPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Careers" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Career{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Opportunities
@@ -626,7 +626,7 @@ export default function BSCTextileFashionDesigningPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Infrastructure" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Department{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Facilities
@@ -669,7 +669,7 @@ export default function BSCTextileFashionDesigningPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Why JKKN" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Why Choose JKKN for{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Fashion Design?
@@ -709,14 +709,14 @@ export default function BSCTextileFashionDesigningPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="FAQs" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Frequently Asked{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Questions
                     </span>
                   </h2>
                   <p className="text-lg text-gray-600">
-                    Common queries about the B.Sc Textile and Fashion Design programme
+                    Common queries about the B.Sc Textile and Fashion Designing  programme
                   </p>
                 </div>
               </RevealSection>
@@ -756,14 +756,14 @@ export default function BSCTextileFashionDesigningPage() {
           <div className="container mx-auto px-4">
             <RevealSection>
               <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Begin Your Creative Journey in{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Fashion Design
                   </span>
                 </h2>
                 <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-                  Join our B.Sc Textile and Fashion Design programme and turn your creative passion into a rewarding career
+                  Join our B.Sc Textile and Fashion Designing  programme and turn your creative passion into a rewarding career
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <a href="#" className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-green/90 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">

@@ -1,131 +1,217 @@
 import React from 'react';
-import { Building2, Grid3x3, GraduationCap, Users, Diamond } from 'lucide-react';
+import { Calendar, Building2, GraduationCap, Users } from 'lucide-react';
 import Image from 'next/image';
 
 export default function OurTrust() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 py-12 px-4">
-      <div className="container mx-auto max-w-5xl">
+    <div className="min-h-screen bg-[#fbfbee]">
+      {/* Hero Section */}
+      <section className="relative py-20 px-4 overflow-hidden bg-gradient-to-br from-[#fbfbee] via-[#f5f5e0] to-[#fbfbee]">
+        {/* Decorative circles */}
+        <div className="absolute top-10 right-10 w-64 h-64 bg-[#0b6d41]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-[#ffde59]/20 rounded-full blur-3xl"></div>
 
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Diamond className="w-3 h-3 text-brand-green fill-brand-green" />
-            <span className="text-xs text-brand-green font-semibold tracking-wider">EST. 1969</span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-brand-green mb-3">
-            OUR TRUST
-          </h1>
-          <p className="text-gray-600 text-base">
-            J.K.K. Rangammal Charitable Trust
-          </p>
-        </div>
-
-        {/* Founder Profile Card */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12">
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            {/* Profile Image */}
-            <div className="relative flex-shrink-0">
-              <div className="w-40 h-40 md:w-44 md:h-44 rounded-full bg-gradient-to-br from-amber-100 via-amber-200 to-amber-100 flex items-center justify-center relative overflow-hidden">
-                {/* Decorative ring */}
-                <div className="absolute inset-0 rounded-full border-[10px] border-amber-400/60"></div>
-                <div className="absolute inset-3 rounded-full border-[8px] border-amber-500/40"></div>
-
-                {/* Profile image placeholder - circular gradient */}
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-teal-700 to-teal-900 overflow-hidden">
-                  {/* Placeholder for actual image */}
-                </div>
-
-                {/* Badge */}
-                <div className="absolute -bottom-2 -right-2 w-11 h-11 bg-brand-yellow rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-                  <span className="text-brand-green font-bold text-lg">B</span>
-                </div>
-              </div>
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4">
+              <span className="text-xs text-[#0b6d41] font-semibold tracking-widest uppercase">EST. 1952</span>
             </div>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-4">
+              OUR TRUST
+            </h1>
+            <div className="w-24 h-1 bg-[#ffde59] mx-auto mb-4"></div>
+            <p className="text-[#0b6d41] text-lg font-medium">
+              J.K.K. Rangammal Charitable Trust
+            </p>
+          </div>
 
-            {/* Profile Content */}
-            <div className="flex-1 text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
-                SHRI. J.K.K. NATARAJAH
-              </h2>
-              <p className="text-xs text-orange-600 font-medium uppercase tracking-wide mb-6">
-                Founder of J.K.K. Rangammal Charitable Trust
-              </p>
-
-              <div className="space-y-3">
-                <p className="text-sm leading-relaxed">
-                  <span className="text-orange-500 italic">"In the sixties, female children in kammarapalayam had to walk 2-4 km for their schooling so</span>{' '}
-                  <span className="text-teal-700">late elderly Shri.n of Bhavani, fetching the need for women's education, a visionary</span>{' '}
-                  <span className="text-gray-900">philanthropist of the zone, Shri.J.K.K. Natarajah, initiated a girls' school in the town in 1965."</span>
-                </p>
-
-                <div className="flex justify-center md:justify-start">
-                  <div className="inline-block">
-                    <div className="text-2xl font-bold text-brand-green leading-none mb-1">JKKN</div>
-                    <div className="text-[10px] text-pink-500 font-medium">One Inspiring Family</div>
+          {/* Founder Card */}
+          <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 md:p-10 mb-12 border border-[#0b6d41]/20 shadow-2xl">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              {/* Profile Image with Golden Border */}
+              <div className="relative flex-shrink-0">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full relative">
+                  {/* Golden decorative border */}
+                  <div className="absolute inset-0 rounded-full border-4 border-[#ffde59] p-1">
+                    <div className="w-full h-full rounded-full border-4 border-[#d4a829] overflow-hidden bg-white">
+                      {/* Profile image placeholder */}
+                      <div className="w-full h-full bg-gradient-to-br from-[#0b6d41]/20 to-[#0b6d41]/40"></div>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {/* Profile Content */}
+              <div className="flex-1 text-center md:text-left">
+                <div className="mb-3">
+                  <div className="inline-block px-4 py-1 bg-[#ffde59] rounded-full mb-3">
+                    <span className="text-[#0b6d41] text-xs font-bold uppercase tracking-wide">Founder</span>
+                  </div>
+                </div>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-2">
+                  SHRI. J.K.K. NATARAJAH CHETTIAR
+                </h2>
+                <p className="text-black text-sm font-medium">
+                  Founder of J.K.K. Rangammal Charitable Trust
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Statistics Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+            {/* Year Established */}
+            <div className="bg-white/60 backdrop-blur-md rounded-xl p-6 text-center border border-[#0b6d41]/20 hover:bg-white/80 transition shadow-xl">
+              <div className="w-12 h-12 bg-[#ffde59] rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-6 h-6 text-[#0b6d41]" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-2">1,952</h3>
+              <p className="text-black text-xs uppercase tracking-wide font-semibold">Year Established</p>
+            </div>
+
+            {/* Institutions */}
+            <div className="bg-white/60 backdrop-blur-md rounded-xl p-6 text-center border border-[#0b6d41]/20 hover:bg-white/80 transition shadow-xl">
+              <div className="w-12 h-12 bg-[#ffde59] rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Building2 className="w-6 h-6 text-[#0b6d41]" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-2">9</h3>
+              <p className="text-black text-xs uppercase tracking-wide font-semibold">Institutions</p>
+            </div>
+
+            {/* Alumni */}
+            <div className="bg-white/60 backdrop-blur-md rounded-xl p-6 text-center border border-[#0b6d41]/20 hover:bg-white/80 transition shadow-xl">
+              <div className="w-12 h-12 bg-[#ffde59] rounded-lg flex items-center justify-center mx-auto mb-4">
+                <GraduationCap className="w-6 h-6 text-[#0b6d41]" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-2">50,000+</h3>
+              <p className="text-black text-xs uppercase tracking-wide font-semibold">Alumni</p>
+            </div>
+
+            {/* Faculty & Staff */}
+            <div className="bg-white/60 backdrop-blur-md rounded-xl p-6 text-center border border-[#0b6d41]/20 hover:bg-white/80 transition shadow-xl">
+              <div className="w-12 h-12 bg-[#ffde59] rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Users className="w-6 h-6 text-[#0b6d41]" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-2">7,000+</h3>
+              <p className="text-black text-xs uppercase tracking-wide font-semibold">Current Students</p>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Legacy of Service Section */}
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-6">
-            A Legacy of Service
-          </h2>
-          <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-            <span className="text-brand-green">The J.K.K. Rangammal Charitable Trust was established in 1969</span>{' '}
-            <span className="text-gray-900">
-              with the motto of providing literacy and women's empowerment. Walking in the footsteps of her father, Smt. N. Sendamaraai, Managing Trustee, expanded the service by providing multi-disciplinary education to both genders.
-            </span>{' '}
-            <span className="text-brand-green">
-              Now, under the umbrella, there are ten institutions, including Dental, Pharmacy, Nursing, Diploma, Engineering, Arts, and Science colleges.
-            </span>
-          </p>
-        </div>
+      {/* Our Story Section */}
+      <section className="py-16 px-4 bg-[#fbfbee] relative overflow-hidden">
+        {/* Decorative blur circles */}
+        <div className="absolute top-0 left-20 w-96 h-96 bg-[#0b6d41]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-20 w-96 h-96 bg-[#ffde59]/20 rounded-full blur-3xl"></div>
 
-        {/* Statistics Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1 - Year Established */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center mb-4">
-              <Building2 className="w-5 h-5 text-brand-green" />
+        <div className="container mx-auto max-w-5xl relative z-10">
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4">
+              <span className="text-[#0b6d41] text-sm font-semibold">● Our Legacy</span>
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-1">1,969</h3>
-            <p className="text-gray-500 text-xs uppercase tracking-wide font-medium">Year Established</p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-8">
+              Our Story
+            </h2>
           </div>
 
-          {/* Card 2 - Institutions */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center mb-4">
-              <Grid3x3 className="w-5 h-5 text-brand-green" />
-            </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-1">10+</h3>
-            <p className="text-gray-500 text-xs uppercase tracking-wide font-medium">Institutions</p>
-          </div>
+          <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-[#0b6d41]/20 shadow-2xl">
+            <div className="space-y-6 text-black text-base leading-relaxed">
+              <p>
+                In the 1960s, female children in Kumarapalayam had to walk 2.5 km to the nearby town of Bhavani for their schooling. Some families hesitated to send their daughters on such long journeys. Realizing the need for women's education, a visionary philanthropist of the zone, Shri. J.K.K. Natarajah Chettiar, initiated a girls' school in Kumarapalayam that started functioning. Recognizing the need for women's education, Shri. J.K.K. Natarajah, a visionary philanthropist, initiated a girls' school in the town.
+              </p>
 
-          {/* Card 3 - Alumni */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center mb-4">
-              <GraduationCap className="w-5 h-5 text-brand-green" />
-            </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-1">50,000+</h3>
-            <p className="text-gray-500 text-xs uppercase tracking-wide font-medium">Alumni</p>
-          </div>
+              <p>
+                The Trust, J.K.K. Rangammal Charitable Trust (Regd.) No.21 was established in 1969. With the motto of providing literacy and an emphasis on women's empowerment, it was named after the mother of Shri. N. Mahalingam, Managing Trustee. Shri. N. Sendamaraai, his daughter and daughter of Shri. N. Mahalingam, Managing Trustee, expanded the service by providing multidisciplinary education to both genders so that rural India could also be competitive with the rest of the country. With each phase, with the support of like-minded people, under the umbrella of the Trust, now there are ten institutions, inclusive of Dental College, Pharmacy College, Nursing College, Diploma College, Engineering Colleges, and Arts and Science Colleges.
+              </p>
 
-          {/* Card 4 - Current Students */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center mb-4">
-              <Users className="w-5 h-5 text-brand-green" />
+              <p>
+                Through these colleges, various health camps are also held in rural areas. Study tours to gain field experience in management and teaching fields are conducted. The students are provided with mentorship, training, and internship opportunities, and there exists a well-organized placement cell that works in coordination with the industry so that trained personnel are not lost but placed properly. Trust promotes research with industry interface and innovation and progress on account of that.
+              </p>
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-1">5,000+</h3>
-            <p className="text-gray-500 text-xs uppercase tracking-wide font-medium">Current Students</p>
           </div>
         </div>
+      </section>
 
-      </div>
+      {/* Key Milestones Section */}
+      <section className="py-16 px-4 bg-[#fbfbee]">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-4">
+              Key Milestones
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            {/* Milestone 1 */}
+            <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-[#0b6d41]/20 hover:bg-white/80 transition shadow-xl">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#ffde59] rounded-full flex items-center justify-center">
+                  <span className="text-[#0b6d41] font-bold text-lg">1</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-[#0b6d41] mb-2">1952</h3>
+                  <h4 className="text-lg font-semibold text-[#0b6d41] mb-2">Girls School Founded</h4>
+                  <p className="text-black text-sm">
+                    Shri. J.K.K. Natarajah Chettiar established the first girls' school in Kumarapalayam
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Milestone 2 */}
+            <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-[#0b6d41]/20 hover:bg-white/80 transition shadow-xl">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#ffde59] rounded-full flex items-center justify-center">
+                  <span className="text-[#0b6d41] font-bold text-lg">2</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-[#0b6d41] mb-2">1969</h3>
+                  <h4 className="text-lg font-semibold text-[#0b6d41] mb-2">Trust Established</h4>
+                  <p className="text-black text-sm">
+                    J.K.K. Rangammal Charitable Trust was officially registered
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Milestone 3 */}
+            <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-[#0b6d41]/20 hover:bg-white/80 transition shadow-xl">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#ffde59] rounded-full flex items-center justify-center">
+                  <span className="text-[#0b6d41] font-bold text-lg">3</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-[#0b6d41] mb-2">1995</h3>
+                  <h4 className="text-lg font-semibold text-[#0b6d41] mb-2">College Expansion</h4>
+                  <p className="text-black text-sm">
+                    Expanded to include Arts and Science College, providing multidisciplinary education
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Milestone 4 */}
+            <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-[#0b6d41]/20 hover:bg-white/80 transition shadow-xl">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#ffde59] rounded-full flex items-center justify-center">
+                  <span className="text-[#0b6d41] font-bold text-lg">4</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-[#0b6d41] mb-2">2025</h3>
+                  <h4 className="text-lg font-semibold text-[#0b6d41] mb-2">Multi-Disciplinary Growth</h4>
+                  <p className="text-black text-sm">
+                    Now operating 9 institutions including Dental, Pharmacy, Nursing, Engineering, and more
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
     </div>
   );
 }

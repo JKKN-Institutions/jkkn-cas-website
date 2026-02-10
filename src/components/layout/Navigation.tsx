@@ -929,12 +929,12 @@ export default function Navigation() {
             />
           </Link>
 
-          {/* Mobile hamburger button */}
+          {/* Mobile hamburger button - HIDDEN: Using bottom navigation on mobile */}
           <button
             onClick={toggleMobileMenu}
             aria-label="Open navigation menu"
             aria-expanded={mobileMenuOpen}
-            className="md:hidden text-gray-700 hover:text-brand-green transition"
+            className="hidden text-gray-700 hover:text-brand-green transition"
           >
             <Menu className="h-6 w-6" />
           </button>
@@ -2351,8 +2351,8 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile menu overlay & sidebar */}
-      {mobileMenuOpen && (
+      {/* Mobile menu overlay & sidebar - DISABLED: Using bottom navigation on mobile */}
+      {false && mobileMenuOpen && (
         <>
           {/* Backdrop */}
           <div

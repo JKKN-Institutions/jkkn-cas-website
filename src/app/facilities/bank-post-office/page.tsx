@@ -27,7 +27,7 @@ export default function BankPostOfficePage() {
     <main className="min-h-screen bg-brand-cream">
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-12 text-center">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-12 text-center">
           BANK & POST OFFICE
         </h1>
 
@@ -51,7 +51,7 @@ export default function BankPostOfficePage() {
 
         {/* Banking Facilities Card */}
         <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-brand-green mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
             BANKING FACILITIES:
           </h2>
           <ul className="space-y-4">
@@ -68,7 +68,7 @@ export default function BankPostOfficePage() {
 
         {/* Postal Services Card */}
         <div className="bg-white rounded-lg shadow-md p-6 md:p-8 mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-brand-green mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
             POSTAL SERVICES:
           </h2>
           <ul className="space-y-4">

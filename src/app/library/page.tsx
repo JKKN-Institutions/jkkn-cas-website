@@ -200,7 +200,7 @@ export default function LibraryPage() {
 
         {/* Page Header */}
         <div className="mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#0b6d41] mb-2">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-2">
             LIBRARY
           </h1>
           <div className="w-16 h-1 bg-[#ffde59]"></div>
@@ -211,7 +211,7 @@ export default function LibraryPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <BookOpen className="h-6 w-6 text-[#0b6d41]" />
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0b6d41]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                 About the Library
               </h2>
             </div>
@@ -247,7 +247,7 @@ export default function LibraryPage() {
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-3 mb-4">
                 <Clock className="h-6 w-6 text-[#0b6d41]" />
-                <h3 className="text-lg md:text-xl font-bold text-[#0b6d41]">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                   Library Hours
                 </h3>
               </div>
@@ -270,7 +270,7 @@ export default function LibraryPage() {
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-3 mb-4">
                 <Mail className="h-6 w-6 text-[#0b6d41]" />
-                <h3 className="text-lg md:text-xl font-bold text-[#0b6d41]">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                   Contact Information
                 </h3>
               </div>
@@ -309,7 +309,7 @@ export default function LibraryPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <CheckCircle2 className="h-6 w-6 text-[#0b6d41]" />
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0b6d41]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                 Library Rules and Regulations
               </h2>
             </div>
@@ -330,7 +330,7 @@ export default function LibraryPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <BookMarked className="h-6 w-6 text-[#0b6d41]" />
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0b6d41]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                 Library Services
               </h2>
             </div>
@@ -358,7 +358,7 @@ export default function LibraryPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <Newspaper className="h-6 w-6 text-[#0b6d41]" />
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0b6d41]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                 Journals and Magazines
               </h2>
             </div>
@@ -387,7 +387,7 @@ export default function LibraryPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <Database className="h-6 w-6 text-[#0b6d41]" />
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0b6d41]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                 E-Resources & Databases
               </h2>
             </div>
@@ -422,7 +422,7 @@ export default function LibraryPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <BarChart className="h-6 w-6 text-[#0b6d41]" />
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0b6d41]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                 Library Resources
               </h2>
             </div>
@@ -482,7 +482,7 @@ export default function LibraryPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <GraduationCap className="h-6 w-6 text-[#0b6d41]" />
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0b6d41]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41]">
                 Library Staff
               </h2>
             </div>

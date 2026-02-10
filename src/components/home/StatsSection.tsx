@@ -42,7 +42,7 @@ export default function StatsSection() {
                 <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-brand-green/10 mb-3 md:mb-4 group-hover:bg-brand-green/20 transition">
                   <Icon className="h-5 w-5 md:h-6 md:w-6 text-brand-green" />
                 </div>
-                <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-green mb-1">
+                <div className="text-2xl sm:text-xl md:text-2xl lg:text-3xl font-bold text-brand-green mb-1">
                   <CountUp end={stat.end} suffix={stat.suffix} duration={2000} />
                 </div>
                 <div className="text-xs sm:text-sm md:text-base text-gray-600 font-medium">

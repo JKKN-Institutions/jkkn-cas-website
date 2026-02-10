@@ -67,12 +67,12 @@ export default function Home() {
               </div>
 
               {/* Main Title */}
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-6 leading-tight">
                 Nurturing Future Leaders Through Progressive Education
               </h2>
 
               {/* Description Paragraphs - black color only */}
-              <div className="space-y-4 text-sm sm:text-base md:text-lg text-black leading-relaxed">
+              <div className="space-y-4 text-xs sm:text-sm md:text-base text-black leading-relaxed">
                 <p>
                   J.K.K. Nattraja College of Arts and Science, established in 1995, is a premier institution committed to transforming lives through accessible, progressive education. As part of J.K.K. Nattraja Educational Institutions&apos; 100-year legacy (JKKN100), we blend traditional values with modern, industry-ready curriculum.
                 </p>
@@ -133,7 +133,7 @@ export default function Home() {
             <div className="text-[#0b6d41] text-sm font-semibold tracking-wide uppercase mb-4">
               ACADEMIC PROGRAMS
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-6">
               Industry-Integrated Programs for<br />
               Tomorrow's Leaders
             </h2>
@@ -168,7 +168,7 @@ export default function Home() {
                   <Code className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">B.Sc Computer Science</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">B.Sc Computer Science</h3>
                   <p className="text-sm text-gray-500">3 Years | 60 Seats</p>
                 </div>
               </div>
@@ -193,7 +193,7 @@ export default function Home() {
                   <Cpu className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">BCA - Computer Applications</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">BCA - Computer Applications</h3>
                   <p className="text-sm text-gray-500">3 Years | 60 Seats</p>
                 </div>
               </div>
@@ -217,7 +217,7 @@ export default function Home() {
                   <BarChart className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">B.Sc Data Science</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">B.Sc Data Science</h3>
                   <p className="text-sm text-gray-500">3 Years | 60 Seats</p>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function Home() {
                   <Briefcase className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">B.Com</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">B.Com</h3>
                   <p className="text-sm text-gray-500">3 Years | 60 Seats</p>
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default function Home() {
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">BBA - Business Administration</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">BBA - Business Administration</h3>
                   <p className="text-sm text-gray-500">3 Years | 60 Seats</p>
                 </div>
               </div>
@@ -289,7 +289,7 @@ export default function Home() {
                   <Award className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">MBA</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">MBA</h3>
                   <p className="text-sm text-gray-500">2 Years | 60 Seats</p>
                 </div>
               </div>
@@ -313,7 +313,7 @@ export default function Home() {
                   <Cpu className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">MCA</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">MCA</h3>
                   <p className="text-sm text-gray-500">2 Years | 60 Seats</p>
                 </div>
               </div>
@@ -337,7 +337,7 @@ export default function Home() {
                   <Code className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">M.Sc Computer Science</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">M.Sc Computer Science</h3>
                   <p className="text-sm text-gray-500">2 Years | 60 Seats</p>
                 </div>
               </div>
@@ -361,7 +361,7 @@ export default function Home() {
                   <Target className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">B.Sc Mathematics</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">B.Sc Mathematics</h3>
                   <p className="text-sm text-gray-500">3 Years | 60 Seats</p>
                 </div>
               </div>
@@ -396,7 +396,7 @@ export default function Home() {
             <div className="text-[#0b6d41] text-sm font-semibold tracking-wide uppercase mb-4">
               WHY CHOOSE JKKN
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-6">
               Your Success Is Our Mission
             </h2>
             <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
@@ -508,7 +508,7 @@ export default function Home() {
                 CAREER SUCCESS
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-brand-green">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-brand-green">
               Outstanding Placement Record
             </h2>
             <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
@@ -521,32 +521,32 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16">
             {/* Stat 1: Placement Rate */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-              <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-2">95%+</div>
+              <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0b6d41] mb-2">95%+</div>
               <div className="text-sm md:text-base text-gray-600">Placement Rate</div>
             </div>
 
             {/* Stat 2: Highest Package */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-              <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-2">₹18 LPA</div>
+              <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0b6d41] mb-2">₹18 LPA</div>
               <div className="text-sm md:text-base text-gray-600">Highest Package</div>
             </div>
 
             {/* Stat 3: Average Package */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-              <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-2">₹4.5 LPA</div>
+              <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0b6d41] mb-2">₹4.5 LPA</div>
               <div className="text-sm md:text-base text-gray-600">Average Package</div>
             </div>
 
             {/* Stat 4: Recruiters */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-              <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-2">100+</div>
+              <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0b6d41] mb-2">100+</div>
               <div className="text-sm md:text-base text-gray-600">Recruiters</div>
             </div>
           </div>
 
           {/* Top Recruiters */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-brand-green">Our Top Recruiters</h3>
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 text-brand-green">Our Top Recruiters</h3>
 
             {/* Recruiters Grid */}
             <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-4">
@@ -602,7 +602,7 @@ export default function Home() {
             <div className="text-[#0b6d41] text-sm font-semibold tracking-wide uppercase mb-4">
               CAMPUS INFRASTRUCTURE
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6d41] mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-6">
               World-Class Facilities for Holistic<br />
               Development
             </h2>
@@ -619,7 +619,7 @@ export default function Home() {
               <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
                 <Cpu className="h-10 w-10 text-[#0b6d41]" />
               </div>
-              <h3 className="text-xl font-bold text-[#0b6d41] mb-4">Advanced Computer Labs</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-4">Advanced Computer Labs</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 500+ high-performance systems with latest software, high-speed internet, and 24/7 access for project work
               </p>
@@ -630,7 +630,7 @@ export default function Home() {
               <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
                 <Target className="h-10 w-10 text-[#0b6d41]" />
               </div>
-              <h3 className="text-xl font-bold text-[#0b6d41] mb-4">Science Laboratories</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-4">Science Laboratories</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Well-equipped Physics, Chemistry, Microbiology, and Biotechnology labs with modern instruments
               </p>
@@ -641,7 +641,7 @@ export default function Home() {
               <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
                 <Code className="h-10 w-10 text-[#0b6d41]" />
               </div>
-              <h3 className="text-xl font-bold text-[#0b6d41] mb-4">AI & IoT Research Lab</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-4">AI & IoT Research Lab</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Dedicated lab for AI/ML, IoT projects with Raspberry Pi, Arduino, sensors, and cloud computing access
               </p>
@@ -652,7 +652,7 @@ export default function Home() {
               <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
                 <BookOpen className="h-10 w-10 text-[#0b6d41]" />
               </div>
-              <h3 className="text-xl font-bold text-[#0b6d41] mb-4">Digital Library</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-4">Digital Library</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 80,000+ books, e-journals, NPTEL courses, and online databases with comfortable reading space
               </p>
@@ -663,7 +663,7 @@ export default function Home() {
               <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
                 <Target className="h-10 w-10 text-[#0b6d41]" />
               </div>
-              <h3 className="text-xl font-bold text-[#0b6d41] mb-4">Smart Learning Studios</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-4">Smart Learning Studios</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Technology-enabled classrooms with projectors, smart boards, and video conferencing facilities
               </p>
@@ -674,7 +674,7 @@ export default function Home() {
               <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
                 <Award className="h-10 w-10 text-[#0b6d41]" />
               </div>
-              <h3 className="text-xl font-bold text-[#0b6d41] mb-4">Sports Complex</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#0b6d41] mb-4">Sports Complex</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Indoor and outdoor sports facilities including cricket ground, basketball court, and yoga center
               </p>
@@ -690,7 +690,7 @@ export default function Home() {
             <div className="text-[#0b6d41] text-sm font-semibold tracking-wide uppercase mb-4">
               LEARNER STORIES
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               What Our <span className="text-[#0b6d41]">Learners Say</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -767,7 +767,7 @@ export default function Home() {
               <div className="text-[#0b6d41] text-sm font-semibold tracking-wide uppercase mb-4">
                 ADMISSIONS 2025-26
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                 Begin Your Journey<br />
                 to <span className="text-[#0b6d41]">Success</span>
               </h2>
@@ -780,7 +780,7 @@ export default function Home() {
                     1
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Choose Your Program</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Choose Your Program</h3>
                     <p className="text-gray-600">Select from our wide range of undergraduate and postgraduate programs</p>
                   </div>
                 </div>
@@ -789,7 +789,7 @@ export default function Home() {
                     2
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Apply Online</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Apply Online</h3>
                     <p className="text-gray-600">Complete your application through our simple online admission process</p>
                   </div>
                 </div>
@@ -798,7 +798,7 @@ export default function Home() {
                     3
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Get Admitted</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Get Admitted</h3>
                     <p className="text-gray-600">Receive your admission confirmation and join our vibrant community</p>
                   </div>
                 </div>
@@ -807,7 +807,7 @@ export default function Home() {
                     4
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Start Learning</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Start Learning</h3>
                     <p className="text-gray-600">Begin your transformative educational journey with expert guidance</p>
                   </div>
                 </div>
@@ -856,7 +856,7 @@ export default function Home() {
             <div className="text-[#0b6d41] text-sm font-semibold tracking-wide uppercase mb-4">
               FREQUENTLY ASKED QUESTIONS
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Have Questions? We Have <span className="text-[#0b6d41]">Answers</span>
             </h2>
             <p className="text-xl text-gray-600">
@@ -911,7 +911,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 bg-brand-cream">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-brand-green">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-brand-green">
             Ready to Transform Your Future?
           </h2>
           <p className="text-xl mb-8 text-gray-700">

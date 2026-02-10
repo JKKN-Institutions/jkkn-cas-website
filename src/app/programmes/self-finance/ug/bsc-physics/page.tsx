@@ -144,7 +144,7 @@ export default function BScPhysicsPage() {
                   <GraduationCap className="w-4 h-4 text-brand-green" />
                   UGC Recognized Programme
                 </span>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 text-gray-900">
                   Bachelor of Science in{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Physics
@@ -214,7 +214,7 @@ export default function BScPhysicsPage() {
             <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
               <RevealSection className="lg:col-span-3">
                 <SectionBadge text="About the Programme" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                   Programme{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Overview
@@ -260,7 +260,7 @@ export default function BScPhysicsPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Admissions" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Eligibility &{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Admission Criteria
@@ -334,7 +334,7 @@ export default function BScPhysicsPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Curriculum" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Programme{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Curriculum
@@ -523,7 +523,7 @@ export default function BScPhysicsPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Outcomes" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Programme Learning{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Outcomes
@@ -566,7 +566,7 @@ export default function BScPhysicsPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Careers" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Career{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Opportunities
@@ -629,7 +629,7 @@ export default function BScPhysicsPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Infrastructure" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Department{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Facilities
@@ -672,7 +672,7 @@ export default function BScPhysicsPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="Why JKKN" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Why Choose Our{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       B.Sc Physics Programme?
@@ -712,7 +712,7 @@ export default function BScPhysicsPage() {
               <RevealSection>
                 <div className="text-center mb-12">
                   <SectionBadge text="FAQs" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                     Frequently Asked{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                       Questions
@@ -759,7 +759,7 @@ export default function BScPhysicsPage() {
           <div className="container mx-auto px-4">
             <RevealSection>
               <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Begin Your Journey in{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Physical Sciences

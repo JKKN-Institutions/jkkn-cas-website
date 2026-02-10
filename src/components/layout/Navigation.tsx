@@ -920,12 +920,12 @@ export default function Navigation() {
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between md:justify-between justify-center items-center py-2 md:py-4">
           <Link href="/" className="flex items-center">
             <img
               src="/logo.svg"
               alt="JKKN College Logo"
-              className="h-20 w-20"
+              className="h-12 md:h-20 w-12 md:w-20"
             />
           </Link>
 

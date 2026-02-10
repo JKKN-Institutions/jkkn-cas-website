@@ -156,7 +156,7 @@ export default function MComPage() {
 
       <div className="min-h-screen bg-gradient-to-b from-brand-cream via-white to-brand-cream">
         {/* Hero Section */}
-        <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24" style={{ backgroundColor: '#eaf1e2' }}>
           <Image
             src="/images/programmes/mcom/hero.jpg"
             alt="M.Com programme"
@@ -175,7 +175,7 @@ export default function MComPage() {
                   UGC Recognized Postgraduate Programme
                 </span>
 
-                <h1 className="text-3xl md:text-3xl font-black mb-6 text-white drop-shadow-2xl leading-tight">
+                <h1 className="text-3xl md:text-3xl font-black mb-6 text-brand-green drop-shadow-2xl leading-tight">
                   Master of Commerce<br />(M.Com)
                 </h1>
 

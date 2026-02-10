@@ -68,7 +68,7 @@ export default function MScCSDataAnalyticsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24" style={{ backgroundColor: '#eaf1e2' }}>
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-green via-emerald-600 to-teal-700"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(255,255,255,0.1)_0%,_transparent_50%)]"></div>
@@ -82,9 +82,9 @@ export default function MScCSDataAnalyticsPage() {
                 <GraduationCap className="w-4 h-4 text-brand-green" />
                 UGC Recognized Programme
               </span>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
                 Master of Science in{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400">
+                <span className="text-brand-green">
                   Computer Science
                 </span>
               </h1>

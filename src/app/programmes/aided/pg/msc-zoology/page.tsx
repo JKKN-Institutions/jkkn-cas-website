@@ -68,7 +68,7 @@ export default function MScZoologyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24" style={{ backgroundColor: '#eaf1e2' }}>
         {/* Background gradient instead of image */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-green via-emerald-600 to-emerald-500"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.15)_0%,transparent_50%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.15)_0%,transparent_50%)]"></div>
@@ -81,9 +81,9 @@ export default function MScZoologyPage() {
                 <GraduationCap className="w-4 h-4 text-brand-green" />
                 UGC Recognized Programme
               </span>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
                 Master of Science in{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-100">
+                <span className="text-brand-green">
                   Zoology
                 </span>
               </h1>

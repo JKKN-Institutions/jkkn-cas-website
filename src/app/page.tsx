@@ -74,7 +74,7 @@ export default function Home() {
               {/* Description Paragraphs - black color only */}
               <div className="space-y-4 text-xs sm:text-sm md:text-base text-black leading-relaxed">
                 <p>
-                  J.K.K. Nattraja College of Arts and Science, established in 1995, is a premier institution committed to transforming lives through accessible, progressive education. As part of J.K.K. Nattraja Educational Institutions&apos; 100-year legacy (JKKN100), we blend traditional values with modern, industry-ready curriculum.
+                  JKKN College of Arts and Science, established in 1995, is a premier institution committed to transforming lives through accessible, progressive education. As part of J.K.K. Nattraja Educational Institutions&apos; 100-year legacy (JKKN100), we blend traditional values with modern, industry-ready curriculum.
                 </p>
                 <p>
                   Our NAAC accreditation and UGC recognition reflect our commitment to academic excellence. With experienced Learning Facilitators, state-of-the-art infrastructure, and strong industry partnerships, we prepare Learners not just for jobs, but for successful careers.
@@ -521,7 +521,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16">
             {/* Stat 1: Placement Rate */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-              <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0b6d41] mb-2">95%+</div>
+              <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0b6d41] mb-2">95%</div>
               <div className="text-sm md:text-base text-gray-600">Placement Rate</div>
             </div>
 
@@ -539,7 +539,7 @@ export default function Home() {
 
             {/* Stat 4: Recruiters */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-              <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0b6d41] mb-2">100+</div>
+              <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0b6d41] mb-2">50+</div>
               <div className="text-sm md:text-base text-gray-600">Recruiters</div>
             </div>
           </div>

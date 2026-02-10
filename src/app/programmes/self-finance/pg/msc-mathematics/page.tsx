@@ -68,17 +68,7 @@ export default function MScMathematicsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
-        {/* Background image */}
-        <Image
-          src="/images/programmes/msc-mathematics/hero.jpg"
-          alt="MSc Mathematics programme"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
-
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24" style={{ backgroundColor: '#eaf1e2' }}>
         <div className="container mx-auto px-4 relative z-10">
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center">
@@ -86,9 +76,9 @@ export default function MScMathematicsPage() {
                 <GraduationCap className="w-4 h-4 text-brand-green" />
                 UGC Recognized Postgraduate Programme
               </span>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 text-gray-900">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
                 Master of Science in{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                <span className="text-brand-green">
                   Mathematics
                 </span>
               </h1>

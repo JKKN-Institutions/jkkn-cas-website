@@ -68,7 +68,7 @@ export default function BScZoologyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24" style={{ backgroundColor: '#eaf1e2' }}>
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-green via-[#0a5a36] to-[#0d8450]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,222,89,0.15)_0%,transparent_50%),radial-gradient(circle_at_80%_20%,rgba(11,109,65,0.15)_0%,transparent_50%)]"></div>
@@ -81,7 +81,7 @@ export default function BScZoologyPage() {
                 <Award className="w-4 h-4 text-brand-yellow" />
                 UGC Recognized Programme
               </span>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 drop-shadow-lg">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green drop-shadow-lg">
                 Bachelor of Science in Zoology
               </h1>
               <p className="text-xl md:text-2xl font-medium mb-6 text-white/95 drop-shadow-md tracking-wide">

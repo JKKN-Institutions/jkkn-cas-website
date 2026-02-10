@@ -133,6 +133,17 @@ export function BottomNavbar() {
   // Handle nav item click - simplified toggle logic with atomic state update
   const handleNavClick = useCallback(
     (groupId: string) => {
+      // Find the group to check if it has submenus
+      const group = allNavGroups.find((g) => g.id === groupId);
+
+      // If group has only 1 menu item, navigate directly instead of showing submenu
+      if (group && group.menus.length === 1) {
+        router.push(group.menus[0].href);
+        setExpanded(false);
+        setMoreMenuOpen(false);
+        return;
+      }
+
       // If submenu is open and showing THIS group's items, close it
       if (isExpanded && activeNavId === groupId) {
         setExpanded(false);
@@ -142,7 +153,7 @@ export function BottomNavbar() {
         switchToNav(groupId);
       }
     },
-    [activeNavId, isExpanded, switchToNav, setExpanded, setMoreMenuOpen]
+    [activeNavId, isExpanded, switchToNav, setExpanded, setMoreMenuOpen, allNavGroups, router]
   );
 
   // Handle submenu item click - navigate and close submenu

@@ -280,8 +280,8 @@ export default function BScVisualCommunicationPage() {
                     key={year}
                     onClick={() => setActiveYear(year)}
                     className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
-                        ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
-                        : 'bg-white text-brand-green hover:bg-brand-green/5'
+                      ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                      : 'bg-white text-brand-green hover:bg-brand-green/5'
                       }`}
                   >
                     Year {year}
@@ -750,62 +750,7 @@ export default function BScVisualCommunicationPage() {
         </div>
       </section>
 
-      {/* Related Programmes */}
-      <section className="py-16 bg-brand-cream">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <RevealSection>
-              <div className="text-center mb-12">
-                <SectionBadge text="Explore More" />
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                  Explore Related{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
-                    Programmes
-                  </span>
-                </h2>
-                <p className="text-lg text-gray-600">
-                  Discover other creative and technology programmes at our college
-                </p>
-              </div>
-            </RevealSection>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { title: 'BCA', description: 'Bachelor of Computer Applications with focus on software development and programming', duration: '3 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BCA' },
-                { title: 'B.Sc Computer Science', description: 'Comprehensive programme in computer science fundamentals and applications', duration: '3 Years', image: 'https://placehold.co/400x180/059669/FFFFFF?text=CS' },
-                { title: 'BBA', description: 'Business administration programme with marketing and management focus', duration: '3 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BBA' }
-              ].map((programme, idx) => (
-                <RevealSection key={idx} delay={idx * 150}>
-                  <a href="#" className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">
-                    <div className="relative h-44 overflow-hidden">
-                      <img
-                        src={programme.image}
-                        alt={programme.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-green/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-brand-green mb-2 group-hover:text-emerald-500 transition-colors">{programme.title}</h3>
-                      <p className="text-gray-600 text-sm mb-4">{programme.description}</p>
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          <span>{programme.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
-                          <span>Full-time</span>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </RevealSection>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

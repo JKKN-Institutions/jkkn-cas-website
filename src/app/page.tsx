@@ -77,7 +77,7 @@ export default function Home() {
                   J.K.K. Nattraja College of Arts and Science, established in 1995, is a premier institution committed to transforming lives through accessible, progressive education. As part of J.K.K. Nattraja Educational Institutions&apos; 100-year legacy (JKKN100), we blend traditional values with modern, industry-ready curriculum.
                 </p>
                 <p>
-                  Our NAAC A+ accreditation and UGC recognition reflect our commitment to academic excellence. With experienced Learning Facilitators, state-of-the-art infrastructure, and strong industry partnerships, we prepare Learners not just for jobs, but for successful careers.
+                  Our NAAC accreditation and UGC recognition reflect our commitment to academic excellence. With experienced Learning Facilitators, state-of-the-art infrastructure, and strong industry partnerships, we prepare Learners not just for jobs, but for successful careers.
                 </p>
               </div>
 
@@ -918,9 +918,14 @@ export default function Home() {
             Join JKKN College today and start your journey towards a successful career
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-brand-green text-white px-8 py-4 rounded-full font-semibold hover:bg-[#095c37] transition">
+            <a
+              href="https://admission.jkkn.ac.in/form/jkkn-institution-admission-yxs3w8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-brand-green text-white px-8 py-4 rounded-full font-semibold hover:bg-[#095c37] transition text-center"
+            >
               Apply for Admission
-            </button>
+            </a>
             <button className="bg-white text-brand-green px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition border border-gray-300">
               Schedule Campus Visit
             </button>

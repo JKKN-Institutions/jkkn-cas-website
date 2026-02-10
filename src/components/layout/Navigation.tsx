@@ -1414,8 +1414,8 @@ export default function Navigation() {
               )}
             </div>
 
-            {/* Department Dropdown */}
-            <div
+            {/* Department Dropdown - HIDDEN */}
+            {/* <div
               className="relative"
               onMouseEnter={handleDepartmentsMouseEnter}
               onMouseLeave={handleDepartmentsMouseLeave}
@@ -1443,7 +1443,6 @@ export default function Navigation() {
                   className="absolute top-full left-0 pt-2 w-56"
                 >
                   <div className="bg-white rounded-lg shadow-lg border border-gray-200 py-2">
-                    {/* Aided Departments Nested Submenu */}
                     <div
                       className="relative"
                       onMouseEnter={() => setAidedDeptOpen(true)}
@@ -1574,7 +1573,6 @@ export default function Navigation() {
                       )}
                     </div>
 
-                    {/* Self Finance Departments Nested Submenu */}
                     <div
                       className="relative"
                       onMouseEnter={() => setSelfFinanceDeptOpen(true)}
@@ -1699,7 +1697,7 @@ export default function Navigation() {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* IQAC Dropdown */}
             <div
@@ -2764,7 +2762,8 @@ export default function Navigation() {
               </div>
 
               {/* Department accordion */}
-              <div className="border-b border-gray-200">
+              {/* Department - HIDDEN */}
+              {/* <div className="border-b border-gray-200">
                 <button
                   onClick={toggleMobileDepartments}
                   className="w-full flex items-center justify-between py-3 px-4 text-gray-700 hover:bg-brand-cream hover:text-brand-green rounded-lg transition"
@@ -2775,7 +2774,6 @@ export default function Navigation() {
 
                 {mobileDepartmentsExpanded && (
                   <div className="pb-2">
-                    {/* Aided Departments nested accordion */}
                     <div className="ml-4">
                       <button
                         onClick={toggleMobileAidedDept}
@@ -2889,7 +2887,6 @@ export default function Navigation() {
                       )}
                     </div>
 
-                    {/* Self Finance Departments nested accordion */}
                     <div className="ml-4">
                       <button
                         onClick={toggleMobileSelfFinanceDept}
@@ -2997,7 +2994,7 @@ export default function Navigation() {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <Link
                 href="/documents/examinations/Autonomous_Semester-Timetable_AprilMay-_2025.pdf"

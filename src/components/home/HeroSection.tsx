@@ -43,9 +43,14 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <button className="bg-brand-yellow text-brand-green px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-brand-yellow/90 transition shadow-xl hover:shadow-2xl hover:scale-105 transform">
+              <a
+                href="https://admission.jkkn.ac.in/form/jkkn-institution-admission-yxs3w8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-brand-yellow text-brand-green px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-brand-yellow/90 transition shadow-xl hover:shadow-2xl hover:scale-105 transform text-center"
+              >
                 Apply for 2025-26
-              </button>
+              </a>
               <button className="bg-transparent border-2 border-white text-white px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:bg-white/10 transition backdrop-blur-sm">
                 Explore Programs
               </button>

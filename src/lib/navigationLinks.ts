@@ -239,100 +239,100 @@ export function getNavigationGroups(pathname: string): BottomNavGroup[] {
       ]
     },
 
-    // Group 3: Departments
-    {
-      id: 'departments',
-      groupLabel: 'Departments',
-      icon: Building2,
-      menus: [
-        // Aided Departments
-        {
-          href: '/departments/aided/english',
-          label: 'English',
-          icon: Building2,
-          parentLabel: 'Aided',
-          active: pathname === '/departments/aided/english'
-        },
-        {
-          href: '/departments/aided/tamil',
-          label: 'Tamil',
-          icon: Building2,
-          parentLabel: 'Aided',
-          active: pathname === '/departments/aided/tamil'
-        },
-        {
-          href: '/departments/aided/history',
-          label: 'History',
-          icon: Building2,
-          parentLabel: 'Aided',
-          active: pathname === '/departments/aided/history'
-        },
-        {
-          href: '/departments/aided/chemistry',
-          label: 'Chemistry',
-          icon: Building2,
-          parentLabel: 'Aided',
-          active: pathname === '/departments/aided/chemistry'
-        },
-        {
-          href: '/departments/aided/mathematics',
-          label: 'Mathematics',
-          icon: Building2,
-          parentLabel: 'Aided',
-          active: pathname === '/departments/aided/mathematics'
-        },
-        {
-          href: '/departments/aided/zoology',
-          label: 'Zoology',
-          icon: Building2,
-          parentLabel: 'Aided',
-          active: pathname === '/departments/aided/zoology'
-        },
-        {
-          href: '/departments/aided/commerce',
-          label: 'Commerce',
-          icon: Building2,
-          parentLabel: 'Aided',
-          active: pathname === '/departments/aided/commerce'
-        },
-        {
-          href: '/departments/aided/computer-science',
-          label: 'Computer Science',
-          icon: Building2,
-          parentLabel: 'Aided',
-          active: pathname === '/departments/aided/computer-science'
-        },
-        // Self-Finance Departments
-        {
-          href: '/departments/self-finance/bba',
-          label: 'BBA',
-          icon: Building2,
-          parentLabel: 'Self-Finance',
-          active: pathname === '/departments/self-finance/bba'
-        },
-        {
-          href: '/departments/self-finance/bca',
-          label: 'BCA',
-          icon: Building2,
-          parentLabel: 'Self-Finance',
-          active: pathname === '/departments/self-finance/bca'
-        },
-        {
-          href: '/departments/self-finance/it',
-          label: 'IT',
-          icon: Building2,
-          parentLabel: 'Self-Finance',
-          active: pathname === '/departments/self-finance/it'
-        },
-        {
-          href: '/departments/self-finance/commerce-ca',
-          label: 'Commerce CA',
-          icon: Building2,
-          parentLabel: 'Self-Finance',
-          active: pathname === '/departments/self-finance/commerce-ca'
-        }
-      ]
-    },
+    // Group 3: Departments - HIDDEN
+    // {
+    //   id: 'departments',
+    //   groupLabel: 'Departments',
+    //   icon: Building2,
+    //   menus: [
+    //     // Aided Departments
+    //     {
+    //       href: '/departments/aided/english',
+    //       label: 'English',
+    //       icon: Building2,
+    //       parentLabel: 'Aided',
+    //       active: pathname === '/departments/aided/english'
+    //     },
+    //     {
+    //       href: '/departments/aided/tamil',
+    //       label: 'Tamil',
+    //       icon: Building2,
+    //       parentLabel: 'Aided',
+    //       active: pathname === '/departments/aided/tamil'
+    //     },
+    //     {
+    //       href: '/departments/aided/history',
+    //       label: 'History',
+    //       icon: Building2,
+    //       parentLabel: 'Aided',
+    //       active: pathname === '/departments/aided/history'
+    //     },
+    //     {
+    //       href: '/departments/aided/chemistry',
+    //       label: 'Chemistry',
+    //       icon: Building2,
+    //       parentLabel: 'Aided',
+    //       active: pathname === '/departments/aided/chemistry'
+    //     },
+    //     {
+    //       href: '/departments/aided/mathematics',
+    //       label: 'Mathematics',
+    //       icon: Building2,
+    //       parentLabel: 'Aided',
+    //       active: pathname === '/departments/aided/mathematics'
+    //     },
+    //     {
+    //       href: '/departments/aided/zoology',
+    //       label: 'Zoology',
+    //       icon: Building2,
+    //       parentLabel: 'Aided',
+    //       active: pathname === '/departments/aided/zoology'
+    //     },
+    //     {
+    //       href: '/departments/aided/commerce',
+    //       label: 'Commerce',
+    //       icon: Building2,
+    //       parentLabel: 'Aided',
+    //       active: pathname === '/departments/aided/commerce'
+    //     },
+    //     {
+    //       href: '/departments/aided/computer-science',
+    //       label: 'Computer Science',
+    //       icon: Building2,
+    //       parentLabel: 'Aided',
+    //       active: pathname === '/departments/aided/computer-science'
+    //     },
+    //     // Self-Finance Departments
+    //     {
+    //       href: '/departments/self-finance/bba',
+    //       label: 'BBA',
+    //       icon: Building2,
+    //       parentLabel: 'Self-Finance',
+    //       active: pathname === '/departments/self-finance/bba'
+    //     },
+    //     {
+    //       href: '/departments/self-finance/bca',
+    //       label: 'BCA',
+    //       icon: Building2,
+    //       parentLabel: 'Self-Finance',
+    //       active: pathname === '/departments/self-finance/bca'
+    //     },
+    //     {
+    //       href: '/departments/self-finance/it',
+    //       label: 'IT',
+    //       icon: Building2,
+    //       parentLabel: 'Self-Finance',
+    //       active: pathname === '/departments/self-finance/it'
+    //     },
+    //     {
+    //       href: '/departments/self-finance/commerce-ca',
+    //       label: 'Commerce CA',
+    //       icon: Building2,
+    //       parentLabel: 'Self-Finance',
+    //       active: pathname === '/departments/self-finance/commerce-ca'
+    //     }
+    //   ]
+    // },
 
     // Group 4: IQAC & Quality
     {

@@ -78,7 +78,7 @@ export default function BSCMicrobiologyPage() {
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
                 Bachelor of Science in{' '}
-                <parameter name="text-brand-green">
+                <span className="text-brand-green">
                   Microbiology
                 </span>
               </h1>

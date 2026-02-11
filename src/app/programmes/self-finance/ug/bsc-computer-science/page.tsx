@@ -68,7 +68,7 @@ export default function BScComputerSciencePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24" style={{ backgroundColor: '#eaf1e2' }}>
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12" style={{ backgroundColor: '#eaf1e2' }}>
         <div className="container mx-auto px-4 relative z-10">
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center">

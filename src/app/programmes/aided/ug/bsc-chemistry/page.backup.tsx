@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { BookOpen, Users, Award, Briefcase, Library, GraduationCap, Building2, Lightbulb, CheckCircle2, Clock, FileText, Globe, ChevronDown, ArrowRight, Sparkles, Target, Code, Database, Cloud, Shield, Brain, Cpu } from 'lucide-react';
+import { BookOpen, Users, Award, Briefcase, GraduationCap, CheckCircle2, Clock, FileText, Globe, ChevronDown, ArrowRight, Sparkles, Target, FlaskConical, Microscope, TestTube, Atom, Building2, Beaker, Brain, Lightbulb, School } from 'lucide-react';
 import CountUp from '@/components/ui/CountUp';
 import Marquee from '@/components/ui/Marquee';
 
@@ -61,14 +61,14 @@ function SectionBadge({ text }: { text: string }) {
   );
 }
 
-export default function MScComputerSciencePage() {
+export default function BScChemistryPage() {
   const [activeYear, setActiveYear] = useState(1);
   const [activeFAQ, setActiveFAQ] = useState(0);
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12" style={{ backgroundColor: '#eaf1e2' }}>
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24" style={{ backgroundColor: '#eaf1e2' }}>
         <div className="container mx-auto px-4 relative z-10">
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center">
@@ -77,23 +77,23 @@ export default function MScComputerSciencePage() {
                 UGC Recognized Programme
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
-                Master of Science in{' '}
+                Bachelor of Science in{' '}
                 <span className="text-brand-green">
-                  Computer Science
+                  Chemistry
                 </span>
               </h1>
               <p className="text-xl md:text-2xl font-medium mb-6 text-gray-700">
-                Transform Your Career with Advanced Computing Excellence
+                Exploring Matter, Reactions & Innovations
               </p>
 
               <div className="flex flex-wrap justify-center gap-4 mb-8">
                 <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
                   <Clock className="w-5 h-5 text-brand-green" />
-                  <span>2 Years Duration</span>
+                  <span>3 Years Duration</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
                   <FileText className="w-5 h-5 text-brand-green" />
-                  <span>4 Semesters</span>
+                  <span>6 Semesters</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/80 text-gray-900">
                   <Users className="w-5 h-5 text-brand-green" />
@@ -121,9 +121,9 @@ export default function MScComputerSciencePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {[
               { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC', title: 'Accredited Institution', desc: 'Quality assured education' },
-              { icon: <Users className="w-7 h-7" />, stat: '10:1', title: 'Learner-Facilitator Ratio', desc: 'Personalized attention' },
-              { icon: <Briefcase className="w-7 h-7" />, stat: '95%+', title: 'Placement Record', desc: 'Industry opportunities' },
-              { icon: <Award className="w-7 h-7" />, stat: '₹6L+', title: 'Average Package', desc: 'Competitive salary' },
+              { icon: <Users className="w-7 h-7" />, stat: '15:1', title: 'Learner-Facilitator Ratio', desc: 'Personalized attention' },
+              { icon: <Briefcase className="w-7 h-7" />, stat: '85%+', title: 'Placement Record', desc: 'Career opportunities assured' },
+              { icon: <Award className="w-7 h-7" />, stat: '₹3.5L', title: 'Average Package', desc: 'Competitive starting salary' },
             ].map((card, idx) => (
               <RevealSection key={idx} delay={idx * 100}>
                 <GlassCard className="p-6 text-center">
@@ -153,14 +153,14 @@ export default function MScComputerSciencePage() {
                 </span>
               </h2>
               <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                The Master of Science in Computer Science is a rigorous two-year postgraduate programme designed to provide Learners with advanced knowledge in cutting-edge technologies including Artificial Intelligence, Machine Learning, Data Science, Cloud Computing, and Cybersecurity. This UGC-recognized programme offers an optimal blend of theoretical depth and practical application, preparing graduates for leadership roles in the technology industry.
+                The Bachelor of Science in Chemistry programme offers a comprehensive study of chemical sciences, exploring the composition, structure, properties, and reactions of matter. Our curriculum combines theoretical knowledge with extensive practical training in modern laboratories equipped with advanced instrumentation and research facilities.
               </p>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Our progressive education philosophy ensures that Learners develop advanced programming skills, research aptitude, and analytical thinking through experiential learning. The curriculum integrates core computer science fundamentals with emerging technologies, industry projects, and research opportunities, equipping graduates with competencies demanded by multinational corporations, research institutions, and technology startups.
+                Students develop strong analytical, research, and problem-solving skills through hands-on experiments, project work, and industry exposure. The programme prepares graduates for diverse careers in chemical industries, pharmaceuticals, research institutions, environmental sciences, quality control, and education sectors.
               </p>
 
               <div className="grid sm:grid-cols-2 gap-3">
-                {['Industry-Aligned Curriculum with Latest Technologies', 'Hands-on AI/ML and Data Science Projects', 'Research-Oriented Dissertation Work', 'Expert Learning Facilitators from Industry'].map((item, idx) => (
+                {['State-of-the-art Labs', 'Expert Learning Facilitators', 'Research Opportunities', 'Industry Collaborations'].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2 text-gray-700">
                     <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                     <span>{item}</span>
@@ -172,12 +172,12 @@ export default function MScComputerSciencePage() {
             <RevealSection className="lg:col-span-2" delay={200}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://placehold.co/600x450/0b6d41/FFFFFF?text=M.Sc+Computer+Science"
-                  alt="MSc Computer Science Laboratory"
+                  src="https://placehold.co/600x450/0b6d41/FFFFFF?text=Chemistry+Laboratory"
+                  alt="Chemistry Laboratory"
                   className="w-full h-auto"
                 />
                 <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
-                  Established Excellence
+                  Since 1954
                 </span>
               </div>
             </RevealSection>
@@ -199,7 +199,7 @@ export default function MScComputerSciencePage() {
                   </span>
                 </h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Requirements for joining the M.Sc Computer Science programme
+                  Requirements for joining the B.Sc Chemistry programme
                 </p>
               </div>
             </RevealSection>
@@ -207,19 +207,19 @@ export default function MScComputerSciencePage() {
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
-                  icon: <GraduationCap className="w-8 h-8 text-white" />,
-                  title: 'Educational Qualification',
-                  items: ['B.Sc Computer Science', 'Bachelor of Computer Applications (BCA)', 'B.Sc Information Technology', 'B.E/B.Tech in CS/IT or equivalent', 'Minimum 50% aggregate marks']
-                },
-                {
-                  icon: <FileText className="w-8 h-8 text-white" />,
-                  title: 'Subject Requirements',
-                  items: ['Programming fundamentals knowledge', 'Mathematics/Statistics background', 'Computer Science core subjects', 'Basic understanding of algorithms', 'Database concepts familiarity']
+                  icon: <School className="w-8 h-8 text-white" />,
+                  title: 'Academic Qualification',
+                  items: ['Higher Secondary (10+2) from recognized board', 'Minimum aggregate marks as per norms', '45% for reserved categories', 'Science stream students']
                 },
                 {
                   icon: <BookOpen className="w-8 h-8 text-white" />,
-                  title: 'Admission Process',
-                  items: ['Online/Offline application submission', 'Merit-based selection process', 'Entrance test (if applicable)', 'Personal interview round', 'Document verification']
+                  title: 'Subject Requirements',
+                  items: ['Chemistry as mandatory subject', 'Physics or Mathematics preferred', 'Science stream with Chemistry', 'Laboratory experience beneficial']
+                },
+                {
+                  icon: <FileText className="w-8 h-8 text-white" />,
+                  title: 'Documents Required',
+                  items: ['10th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photographs', 'Aadhaar Card Copy']
                 }
               ].map((card, idx) => (
                 <RevealSection key={idx} delay={idx * 150}>
@@ -258,14 +258,14 @@ export default function MScComputerSciencePage() {
                   </span>
                 </h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  Comprehensive coursework designed for industry relevance and research excellence
+                  Comprehensive syllabus designed to build expertise in chemical sciences
                 </p>
               </div>
             </RevealSection>
 
             <RevealSection>
               <div className="flex justify-center gap-2 mb-8">
-                {[1, 2].map((year) => (
+                {[1, 2, 3].map((year) => (
                   <button
                     key={year}
                     onClick={() => setActiveYear(year)}
@@ -285,11 +285,11 @@ export default function MScComputerSciencePage() {
                 {[
                   {
                     title: 'Semester I',
-                    subjects: ['Advanced Data Structures', 'Design and Analysis of Algorithms', 'Database Management Systems', 'Object-Oriented Programming with Java', 'Computer Networks', 'Practical: Data Structures Lab']
+                    subjects: ['Inorganic Chemistry I', 'Organic Chemistry I', 'Physical Chemistry I', 'General English', 'Allied Mathematics', 'Environmental Studies']
                   },
                   {
                     title: 'Semester II',
-                    subjects: ['Operating Systems', 'Artificial Intelligence', 'Software Engineering', 'Web Technologies & Frameworks', 'Python Programming', 'Practical: AI & Python Lab']
+                    subjects: ['Inorganic Chemistry I (Continued)', 'Organic Chemistry I (Continued)', 'Physical Chemistry I (Continued)', 'Tamil/Hindi', 'Allied Physics']
                   }
                 ].map((sem, idx) => (
                   <RevealSection key={idx} delay={idx * 150}>
@@ -318,11 +318,44 @@ export default function MScComputerSciencePage() {
                 {[
                   {
                     title: 'Semester III',
-                    subjects: ['Machine Learning', 'Data Science & Big Data Analytics', 'Cloud Computing', 'Cybersecurity Fundamentals', 'Practical: ML & Data Science Lab', 'Elective: IoT / Blockchain / NLP']
+                    subjects: ['Inorganic Chemistry II', 'Organic Chemistry II', 'Physical Chemistry II', 'Analytical Chemistry', 'Allied Subject III']
                   },
                   {
                     title: 'Semester IV',
-                    subjects: ['Deep Learning & Neural Networks', 'Research Methodology', 'Elective: Computer Vision / DevOps', 'Industry Internship', 'Dissertation / Project Work', 'Viva Voce Examination']
+                    subjects: ['Inorganic Chemistry II (Continued)', 'Organic Chemistry II (Continued)', 'Physical Chemistry II (Continued)', 'Environmental Science', 'Allied Subject IV']
+                  }
+                ].map((sem, idx) => (
+                  <RevealSection key={idx} delay={idx * 150}>
+                    <GlassCard className="overflow-hidden" hover={false}>
+                      <div className="bg-gradient-to-r from-brand-green to-emerald-500 text-white px-6 py-4">
+                        <h4 className="text-xl font-bold">{sem.title}</h4>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-3">
+                          {sem.subjects.map((subject, i) => (
+                            <li key={i} className="flex items-start gap-2 text-gray-700">
+                              <span className="text-emerald-500 mt-1">•</span>
+                              <span>{subject}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </GlassCard>
+                  </RevealSection>
+                ))}
+              </div>
+            )}
+
+            {activeYear === 3 && (
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: 'Semester V',
+                    subjects: ['Spectroscopy & Molecular Structure', 'Industrial Chemistry', 'Biochemistry', 'Green Chemistry', 'Elective I']
+                  },
+                  {
+                    title: 'Semester VI',
+                    subjects: ['Advanced Organic Chemistry', 'Advanced Inorganic Chemistry', 'Research Project', 'Elective II', 'Internship/Industrial Training']
                   }
                 ].map((sem, idx) => (
                   <RevealSection key={idx} delay={idx * 150}>
@@ -370,12 +403,12 @@ export default function MScComputerSciencePage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: <Code className="w-6 h-6 text-white" />, title: 'Advanced Programming', description: 'Master multiple programming paradigms, advanced algorithms, and data structures to develop efficient, scalable software solutions.' },
-                { icon: <Brain className="w-6 h-6 text-white" />, title: 'AI & Machine Learning', description: 'Apply artificial intelligence and machine learning techniques to solve complex real-world problems and build intelligent systems.' },
-                { icon: <Database className="w-6 h-6 text-white" />, title: 'Data Science Expertise', description: 'Analyze large datasets using statistical methods, visualization tools, and big data technologies to derive actionable insights.' },
-                { icon: <Cloud className="w-6 h-6 text-white" />, title: 'Cloud & DevOps Skills', description: 'Design and deploy applications on cloud platforms using modern DevOps practices, containerization, and CI/CD pipelines.' },
-                { icon: <Shield className="w-6 h-6 text-white" />, title: 'Cybersecurity Awareness', description: 'Understand security threats, implement protective measures, and design secure software systems following best practices.' },
-                { icon: <Lightbulb className="w-6 h-6 text-white" />, title: 'Research & Innovation', description: 'Conduct independent research, publish scholarly papers, and contribute to technological innovation in computer science.' }
+                { icon: <Atom className="w-6 h-6 text-white" />, title: 'Chemical Knowledge', description: 'Comprehensive understanding of chemical principles, reactions, and molecular structures across all chemistry branches.' },
+                { icon: <Microscope className="w-6 h-6 text-white" />, title: 'Analytical Skills', description: 'Proficiency in using modern analytical instruments and techniques for chemical analysis and research.' },
+                { icon: <TestTube className="w-6 h-6 text-white" />, title: 'Laboratory Expertise', description: 'Hands-on experience with chemical experiments, safety protocols, and laboratory management practices.' },
+                { icon: <Brain className="w-6 h-6 text-white" />, title: 'Research Aptitude', description: 'Ability to design experiments, conduct research, and contribute to scientific knowledge in chemistry.' },
+                { icon: <Lightbulb className="w-6 h-6 text-white" />, title: 'Problem Solving', description: 'Critical thinking and analytical problem-solving skills for chemical and industrial challenges.' },
+                { icon: <Target className="w-6 h-6 text-white" />, title: 'Industry Readiness', description: 'Practical knowledge and skills needed for careers in chemical industries and pharmaceutical sectors.' }
               ].map((outcome, idx) => (
                 <RevealSection key={idx} delay={idx * 100}>
                   <GlassCard className="relative p-6 group h-full">
@@ -406,21 +439,21 @@ export default function MScComputerSciencePage() {
                   </span>
                 </h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  Diverse career pathways await M.Sc Computer Science graduates
+                  Diverse career paths in chemical sciences, pharmaceuticals, research, and industry
                 </p>
               </div>
             </RevealSection>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               {[
-                { icon: <Code className="w-6 h-6" />, title: 'Software Developer', desc: 'Design and build applications at top tech companies and startups' },
-                { icon: <Database className="w-6 h-6" />, title: 'Data Scientist', desc: 'Extract insights from big data using advanced analytics techniques' },
-                { icon: <Brain className="w-6 h-6" />, title: 'ML Engineer', desc: 'Build and deploy machine learning models at scale' },
-                { icon: <Cloud className="w-6 h-6" />, title: 'Cloud Architect', desc: 'Design and manage enterprise cloud infrastructure solutions' },
-                { icon: <Shield className="w-6 h-6" />, title: 'Cybersecurity Analyst', desc: 'Protect organizations from cyber threats and vulnerabilities' },
-                { icon: <GraduationCap className="w-6 h-6" />, title: 'Research Scientist', desc: 'Pursue Ph.D. and academic careers at premier institutions' },
-                { icon: <Cpu className="w-6 h-6" />, title: 'Database Administrator', desc: 'Manage and optimize enterprise database systems' },
-                { icon: <Award className="w-6 h-6" />, title: 'AI/NLP Engineer', desc: 'Develop intelligent chatbots and language processing systems' }
+                { icon: <FlaskConical className="w-6 h-6" />, title: 'Chemical Analyst', desc: 'Quality control and analysis in laboratories' },
+                { icon: <Beaker className="w-6 h-6" />, title: 'Research Scientist', desc: 'R&D in research institutions and labs' },
+                { icon: <Building2 className="w-6 h-6" />, title: 'Production Chemist', desc: 'Chemical manufacturing and production' },
+                { icon: <GraduationCap className="w-6 h-6" />, title: 'Chemistry Teacher', desc: 'Teaching at schools and colleges' },
+                { icon: <TestTube className="w-6 h-6" />, title: 'Pharmaceutical Analyst', desc: 'Drug development and quality control' },
+                { icon: <Microscope className="w-6 h-6" />, title: 'Lab Technician', desc: 'Laboratory testing and analysis' },
+                { icon: <Target className="w-6 h-6" />, title: 'Quality Controller', desc: 'Quality assurance in industries' },
+                { icon: <BookOpen className="w-6 h-6" />, title: 'Environmental Chemist', desc: 'Environmental analysis and protection' }
               ].map((career, idx) => (
                 <RevealSection key={idx} delay={idx * 80}>
                   <GlassCard className="p-6 group h-full">
@@ -436,12 +469,12 @@ export default function MScComputerSciencePage() {
 
             <RevealSection>
               <GlassCard className="p-8" hover={false}>
-                <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Key Employment Sectors</h3>
+                <h3 className="text-2xl font-bold text-brand-green mb-6 text-center">Employment Sectors</h3>
                 <div className="flex flex-wrap justify-center gap-3">
                   {[
-                    'Information Technology', 'Software Development', 'Data Analytics', 'Artificial Intelligence',
-                    'Cloud Services', 'Cybersecurity', 'FinTech', 'Healthcare IT',
-                    'E-Commerce', 'EdTech', 'Research & Academia', 'Government IT Services'
+                    'Pharmaceutical Companies', 'Chemical Industries', 'Research Institutions', 'Quality Control Labs',
+                    'Environmental Agencies', 'Food & Beverage Industry', 'Cosmetics Industry', 'Petroleum Sector',
+                    'Academic Institutions', 'Forensic Laboratories', 'Government Departments', 'Biotechnology Firms'
                   ].map((sector, idx) => (
                     <span key={idx} className="px-4 py-2 bg-brand-green/5 hover:bg-gradient-to-r hover:from-brand-green hover:to-emerald-500 hover:text-white text-brand-green rounded-full text-sm font-medium transition-all cursor-default border border-brand-green/15">
                       {sector}
@@ -462,25 +495,25 @@ export default function MScComputerSciencePage() {
               <div className="text-center mb-12">
                 <SectionBadge text="Infrastructure" />
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                  Department{' '}
+                  Learning{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Facilities
                   </span>
                 </h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  State-of-the-art infrastructure supporting world-class education
+                  State-of-the-art infrastructure to support your academic journey
                 </p>
               </div>
             </RevealSection>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { title: 'Advanced Computing Laboratory', description: 'High-performance workstations with latest processors, GPUs for deep learning, and cutting-edge development environments for hands-on learning.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Computer+Lab' },
-                { title: 'AI & Machine Learning Lab', description: 'Dedicated laboratory with GPU clusters, TensorFlow, PyTorch frameworks, and specialized hardware for AI model training and deployment.', image: 'https://placehold.co/400x200/059669/FFFFFF?text=AI+ML+Lab' },
-                { title: 'Cloud Computing Lab', description: 'Access to AWS, Azure, and Google Cloud platforms with virtualization infrastructure for cloud-native application development and deployment.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Cloud+Lab' },
-                { title: 'Networking & Security Lab', description: 'Cisco networking equipment, firewall configurations, penetration testing tools, and security monitoring systems for practical cybersecurity training.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Networking+Lab' },
-                { title: 'Software Development Lab', description: 'Modern IDEs, version control systems, agile project management tools, and collaboration platforms for full-stack development projects.', image: 'https://placehold.co/400x200/059669/FFFFFF?text=Software+Lab' },
-                { title: 'Digital Library & Research Center', description: 'Access to IEEE, ACM digital libraries, research databases, online courses, and dedicated spaces for collaborative research work.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Digital+Library' }
+                { title: 'Advanced Laboratories', description: 'Modern chemistry labs with latest equipment for organic, inorganic, physical, and analytical chemistry with safety protocols.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Chemistry+Lab' },
+                { title: 'Digital Library', description: 'Extensive chemistry research resources, journals, reference books, and digital databases for academic study.', image: 'https://placehold.co/400x200/059669/FFFFFF?text=Digital+Library' },
+                { title: 'Research Center', description: 'Dedicated research and project facilities with modern instruments for undergraduate and postgraduate research.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Research+Center' },
+                { title: 'Seminar Hall', description: 'Air-conditioned seminar hall with modern presentation facilities for academic discussions, guest lectures, and workshops.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Seminar+Hall' },
+                { title: 'Instrumentation Room', description: 'Advanced analytical instruments including spectrophotometers, pH meters, centrifuges, and chromatography equipment.', image: 'https://placehold.co/400x200/059669/FFFFFF?text=Instruments' },
+                { title: 'Smart Learning Studios', description: 'Technology-enabled learning spaces with interactive boards, projectors, and high-speed internet connectivity.', image: 'https://placehold.co/400x200/0b6d41/FFFFFF?text=Smart+Classroom' }
               ].map((facility, idx) => (
                 <RevealSection key={idx} delay={idx * 100}>
                   <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">
@@ -543,22 +576,22 @@ export default function MScComputerSciencePage() {
             <RevealSection delay={200}>
               <SectionBadge text="Why Us" />
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Why Choose Our M.Sc{' '}
+                Why Choose Our B.Sc{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
-                  Computer Science Programme?
+                  Chemistry Programme?
                 </span>
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                Our progressive education approach ensures holistic development, preparing you for success in technology careers and research.
+                Our progressive education approach ensures holistic development, preparing you for success in academics and career.
               </p>
 
               <div className="space-y-4">
                 {[
                   { title: 'UGC Recognized & NAAC Accredited', description: 'Quality-assured education meeting national standards with excellent academic reputation.' },
-                  { title: 'Industry-Expert Learning Facilitators', description: 'Highly qualified faculty with doctoral degrees, research publications, and industry experience in emerging technologies.' },
-                  { title: 'Advanced Laboratory Facilities', description: 'State-of-the-art labs with GPU clusters, cloud access, and cutting-edge development tools.' },
-                  { title: 'Strong Industry Partnerships', description: 'Internship opportunities with top tech companies, startups, and research institutions.' },
-                  { title: 'Research & Innovation Focus', description: 'Opportunities for research publications, project presentations, and collaborative research work.' }
+                  { title: 'Comprehensive Curriculum', description: 'Balance of theoretical knowledge and hands-on laboratory experience with modern equipment.' },
+                  { title: 'Expert Learning Facilitators', description: 'Highly qualified faculty with doctoral degrees, research publications, and industry experience.' },
+                  { title: 'Advanced Laboratory Infrastructure', description: 'Well-equipped labs with modern instruments for organic, inorganic, physical, and analytical chemistry.' },
+                  { title: 'Industry Collaborations', description: 'Partnerships with chemical and pharmaceutical companies providing real-world exposure and placements.' }
                 ].map((reason, idx) => (
                   <div key={idx} className="flex gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/80 hover:shadow-lg hover:-translate-y-0.5 transition-all">
                     <div className="w-11 h-11 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-green/15">
@@ -597,10 +630,10 @@ export default function MScComputerSciencePage() {
 
             <Marquee pauseOnHover draggable speed={30} className="[--gap:1.5rem]">
               {[
-                { name: 'Dr. Rajesh Kumar', designation: 'Head of Department', qualification: 'Ph.D. in Computer Science (AI/ML)' },
-                { name: 'Dr. Priya Sharma', designation: 'Associate Professor', qualification: 'Ph.D. in Data Science' },
-                { name: 'Mr. Arun Prakash', designation: 'Assistant Professor', qualification: 'M.Tech, Ph.D. (Pursuing)' },
-                { name: 'Ms. Divya Reddy', designation: 'Assistant Professor', qualification: 'M.Sc CS, UGC NET Qualified' }
+                { name: 'Dr. Lakshmi Narayanan', designation: 'Head of Department', qualification: 'Ph.D. in Organic Chemistry' },
+                { name: 'Dr. Meenakshi Sundaram', designation: 'Associate Professor', qualification: 'Ph.D. in Inorganic Chemistry' },
+                { name: 'Ms. Priya Bharathi', designation: 'Assistant Professor', qualification: 'M.Phil., NET Qualified' },
+                { name: 'Mr. Karthik Rajan', designation: 'Assistant Professor', qualification: 'M.Sc., SLET Qualified' }
               ].map((faculty, idx) => (
                 <div key={idx} className="w-[260px] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group flex flex-col h-[340px]">
                   <div className="relative h-56 overflow-hidden flex-shrink-0">
@@ -638,21 +671,20 @@ export default function MScComputerSciencePage() {
                   </span>
                 </h2>
                 <p className="text-lg text-gray-600">
-                  Find answers to common queries about the M.Sc Computer Science programme
+                  Find answers to common queries about the B.Sc Chemistry programme
                 </p>
               </div>
             </RevealSection>
 
             <div className="space-y-4">
               {[
-                { question: 'What is the duration of the M.Sc Computer Science programme?', answer: 'The M.Sc Computer Science programme is a 2-year full-time postgraduate degree comprising four semesters with practical laboratory sessions, project work, and industry internship. Each academic year consists of two semesters, with comprehensive examinations conducted at the end of each semester. The programme follows a credit-based system with continuous assessment and semester-end evaluations.' },
-                { question: 'What are the career opportunities after M.Sc Computer Science?', answer: 'Graduates can pursue diverse careers as Software Developers, Data Scientists, Machine Learning Engineers, Cloud Architects, Cybersecurity Analysts, AI Researchers, Database Administrators, System Architects, and DevOps Engineers. Additionally, graduates can pursue Ph.D. programmes at prestigious institutions, work in research organizations, or join academia as faculty members.' },
-                { question: 'What is the eligibility criteria for M.Sc Computer Science admission?', answer: 'Candidates must have completed Bachelor\'s degree (B.Sc Computer Science, BCA, B.Sc IT, B.E/B.Tech in CS/IT, or equivalent) from a recognized university with minimum 50% aggregate marks. Basic knowledge of programming, mathematics, and computer science fundamentals is required. Some institutions may conduct entrance tests or interviews for admission.' },
-                { question: 'What is the fee structure for M.Sc Computer Science?', answer: 'The fee structure varies based on the category of admission. Please contact the admission office for the current academic year\'s detailed fee structure. The college offers various scholarship opportunities for meritorious students and those from economically weaker sections. Government scholarships and educational loans are also facilitated through the institution.' },
-                { question: 'Does the programme include practical projects and internships?', answer: 'Yes, the programme includes extensive practical components including laboratory sessions in every semester, mini-projects, a major dissertation project, and a mandatory industry internship. Learners work on real-world projects involving AI/ML, data science, cloud computing, and software development. The department maintains partnerships with leading tech companies for internship placements.' },
-                { question: 'What specializations are available in the M.Sc Computer Science programme?', answer: 'The programme offers elective courses allowing specialization in areas including Artificial Intelligence & Machine Learning, Data Science & Big Data Analytics, Cloud Computing & DevOps, Cybersecurity & Information Security, Internet of Things (IoT), Blockchain Technology, Natural Language Processing, and Computer Vision. Learners can choose electives based on their career interests.' },
-                { question: 'Are there research opportunities in the M.Sc Computer Science programme?', answer: 'Yes, the programme emphasizes research and innovation. Learners undertake a research-oriented dissertation in the final semester, have opportunities to publish papers in conferences and journals, participate in hackathons and coding competitions, and collaborate with faculty on ongoing research projects. The department encourages learners to pursue Ph.D. programmes after completion.' },
-                { question: 'What is the placement support provided by the college?', answer: 'Our dedicated Placement Cell actively supports learners through campus recruitment drives with top tech companies, technical interview preparation, resume building workshops, soft skills training, and industry interaction sessions. We have partnerships with leading IT companies, startups, and multinational corporations. The placement rate for M.Sc Computer Science graduates consistently exceeds 90% with excellent salary packages.' }
+                { question: 'What is the duration of the B.Sc Chemistry programme?', answer: 'The B.Sc Chemistry programme is a 3-year full-time undergraduate degree comprising six semesters with both theoretical and practical components. Each academic year consists of two semesters, with examinations conducted at the end of each semester following the Choice Based Credit System (CBCS) pattern.' },
+                { question: 'What are the career opportunities after B.Sc Chemistry?', answer: 'Graduates can pursue careers in pharmaceutical companies, chemical industries, quality control laboratories, research institutions, environmental agencies, teaching, and can also opt for higher studies like M.Sc Chemistry, M.Phil., Ph.D., or professional courses in pharmaceutical sciences, analytical chemistry, and environmental sciences.' },
+                { question: 'What is the eligibility criteria for admission?', answer: 'Candidates must have completed Higher Secondary (10+2) from a recognized board with Chemistry as a mandatory subject and preferably Physics or Mathematics. Science stream students with minimum aggregate marks are eligible to apply. The minimum percentage varies by category (General/OBC/SC/ST).' },
+                { question: 'What laboratory facilities are available?', answer: 'The department has well-equipped laboratories for Organic, Inorganic, Physical, and Analytical Chemistry with modern instruments including spectrophotometers, pH meters, centrifuges, chromatography equipment, and other advanced instruments for hands-on learning and research projects.' },
+                { question: 'Are there opportunities for research and projects?', answer: 'Yes, students undertake research projects in the final year and are encouraged to participate in scientific research, paper presentations, and academic conferences. The department provides research facilities and guidance from experienced faculty members to develop research aptitude and analytical skills.' },
+                { question: 'Does the college provide placement assistance?', answer: 'Yes, our dedicated Placement Cell actively supports learners through campus recruitment drives, soft skills training, resume building workshops, mock interviews, and industry interaction sessions. We have partnerships with leading chemical, pharmaceutical, and research companies for internships and career opportunities.' },
+                { question: 'What makes this B.Sc Chemistry programme unique?', answer: 'Our programme stands out due to its comprehensive curriculum balancing theory and practice, state-of-the-art laboratory infrastructure, expert learning facilitators with research experience, strong industry collaborations, emphasis on research projects, and holistic development through co-curricular activities in chemistry clubs and scientific societies.' }
               ].map((faq, idx) => (
                 <RevealSection key={idx} delay={idx * 60}>
                   <div className="bg-white/60 backdrop-blur-sm rounded-xl border border-white/80 hover:border-brand-green/20 transition-all overflow-hidden">
@@ -686,11 +718,11 @@ export default function MScComputerSciencePage() {
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Begin Your Journey in{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
-                  Advanced Computing
+                  Chemical Sciences
                 </span>
               </h2>
               <p className="text-lg mb-8 text-gray-600">
-                Join our M.Sc Computer Science programme and unlock a world of opportunities in technology, AI, and innovation.
+                Join our B.Sc Chemistry programme and unlock exciting opportunities in research, industry, and innovation.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -721,16 +753,16 @@ export default function MScComputerSciencePage() {
                   </span>
                 </h2>
                 <p className="text-lg text-gray-600">
-                  Discover other technology programmes at our college
+                  Discover other science programmes at our college
                 </p>
               </div>
             </RevealSection>
 
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { title: 'B.Sc Computer Science', description: 'Undergraduate programme in computer science fundamentals and programming', duration: '3 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BSc+CS' },
-                { title: 'BCA', description: 'Bachelor of Computer Applications with focus on software development', duration: '3 Years', image: 'https://placehold.co/400x180/059669/FFFFFF?text=BCA' },
-                { title: 'M.Com', description: 'Postgraduate programme in commerce with IT applications', duration: '2 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=MCom' }
+                { title: 'B.Sc Physics', description: 'Explore the fundamental laws of nature and physical phenomena', duration: '3 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BSc+Physics' },
+                { title: 'B.Sc Mathematics', description: 'Master mathematical concepts and computational techniques', duration: '3 Years', image: 'https://placehold.co/400x180/059669/FFFFFF?text=BSc+Mathematics' },
+                { title: 'B.Sc Zoology', description: 'Study animal biology, biodiversity, and life sciences', duration: '3 Years', image: 'https://placehold.co/400x180/0b6d41/FFFFFF?text=BSc+Zoology' }
               ].map((programme, idx) => (
                 <RevealSection key={idx} delay={idx * 150}>
                   <a href="#" className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group">

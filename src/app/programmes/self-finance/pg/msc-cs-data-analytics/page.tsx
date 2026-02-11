@@ -68,7 +68,7 @@ export default function MScCSDataAnalyticsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24" style={{ backgroundColor: '#eaf1e2' }}>
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12" style={{ backgroundColor: '#eaf1e2' }}>
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-green via-emerald-600 to-teal-700"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(255,255,255,0.1)_0%,_transparent_50%)]"></div>

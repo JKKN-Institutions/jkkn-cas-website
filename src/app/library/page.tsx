@@ -196,7 +196,7 @@ const STAFF_MEMBERS: StaffMember[] = [
 export default function LibraryPage() {
   return (
     <div className="min-h-screen bg-[#f5f5f5]">
-      <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
 
         {/* Page Header */}
         <div className="mb-10">
@@ -490,9 +490,12 @@ export default function LibraryPage() {
             {/* Librarian Photo and Info */}
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-6 text-center">
               <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-[#0b6d41] bg-gray-200">
-                <div className="w-full h-full flex items-center justify-center">
-                  <User className="h-16 w-16 text-gray-400" />
-                </div>
+                <Image
+                  src="/images/Dr.S.Sasikala.png"
+                  alt={STAFF_MEMBERS[0].name}
+                  fill
+                  className="object-cover"
+                />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-1">
                 {STAFF_MEMBERS[0].name}

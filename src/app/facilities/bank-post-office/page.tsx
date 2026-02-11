@@ -31,15 +31,35 @@ export default function BankPostOfficePage() {
           BANK & POST OFFICE
         </h1>
 
-        {/* Hero Image */}
-        <div className="relative w-full aspect-video rounded-lg shadow-lg overflow-hidden mb-12 bg-gray-200">
-          <Image
-            src="/images/bank-post-office/bank-exterior.jpg"
-            alt="Bank and Post Office facility at JKKN College campus"
-            fill
-            className="object-cover"
-            priority
-          />
+        {/* Bank & Post Office Images Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/bank_postoffice-1.webp"
+              alt="Bank and Post Office facility exterior"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/bank_postoffice-2.webp"
+              alt="Bank counter and services area"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/bank_postoffice-3.webp"
+              alt="Post office services and facility"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
         </div>
 
         {/* Introduction Card */}
@@ -84,10 +104,7 @@ export default function BankPostOfficePage() {
         </div>
       </div>
 
-      <FloatingChatButtons
-        facebookUrl="https://m.me/jkkncas"
-        whatsappNumber="919345855001"
-      />
+    
     </main>
   );
 }

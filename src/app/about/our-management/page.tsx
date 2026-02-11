@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface ManagementMember {
   name: string;
@@ -11,17 +12,20 @@ const managementTeam: ManagementMember[] = [
   {
     name: "SMT. N. SENDAMARAAI",
     position: "CHAIRPERSON",
-    bio: "Leadership and Excellence is not merely our motto but the foundation of our values, a testament to our state-of-the-art infrastructure and unwavering commitment to quality education."
+    bio: "Leadership and Excellence is not merely our motto but the foundation of our values, a testament to our state-of-the-art infrastructure and unwavering commitment to quality education.",
+    image: "/images/Our_Management-1.webp"
   },
   {
     name: "SHRI. S. OMMSHARRAVANA",
     position: "DIRECTOR",
-    bio: "Our mission empowers students to contribute their best to society and the nation. We are committed to innovative education methodologies that enable quality learning."
+    bio: "Our mission empowers students to contribute their best to society and the nation. We are committed to innovative education methodologies that enable quality learning.",
+    image: "/images/Our_Management-2.webp"
   },
   {
     name: "MRS. O. ISVARYA LAKSHMI",
     position: "JOINT DIRECTOR",
-    bio: "Together, we strive to create an environment where excellence thrives and every student achieves their fullest potential."
+    bio: "Together, we strive to create an environment where excellence thrives and every student achieves their fullest potential.",
+    image: "/images/Our_Management-1.webp"
   }
 ];
 
@@ -56,11 +60,20 @@ export default function OurManagementPage() {
               key={index}
               className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 md:p-8 flex flex-col items-center"
             >
-              {/* Profile Image Placeholder */}
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-brand-green to-emerald-600 mb-6 flex items-center justify-center overflow-hidden">
-                <div className="text-white text-4xl md:text-5xl font-bold">
-                  {member.name.charAt(0)}
-                </div>
+              {/* Profile Image */}
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full mb-6 flex items-center justify-center overflow-hidden relative">
+                {member.image ? (
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="text-white text-4xl md:text-5xl font-bold">
+                    {member.name.charAt(0)}
+                  </div>
+                )}
               </div>
 
               {/* Name */}

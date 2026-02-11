@@ -33,35 +33,38 @@ export default function VisionMission() {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  {/* Outer eye shape */}
+                  {/* Outer eye shape - solid green */}
                   <path
                     d="M100 60C60 60 25 85 10 100C25 115 60 140 100 140C140 140 175 115 190 100C175 85 140 60 100 60Z"
                     fill="#0b6d41"
-                    stroke="#0b6d41"
-                    strokeWidth="3"
                   />
-                  {/* Inner eye circle */}
+                  {/* White circle for iris/sclera */}
                   <circle
                     cx="100"
                     cy="100"
-                    r="30"
-                    fill="none"
-                    stroke="#0b6d41"
-                    strokeWidth="6"
+                    r="32"
+                    fill="white"
                   />
-                  {/* Pupil */}
+                  {/* Outer ring of iris */}
                   <circle
                     cx="100"
                     cy="100"
-                    r="15"
+                    r="26"
                     fill="#0b6d41"
                   />
-                  {/* Highlight in pupil */}
+                  {/* Inner dark pupil */}
                   <circle
-                    cx="105"
-                    cy="95"
-                    r="5"
-                    fill="#fbfbee"
+                    cx="100"
+                    cy="100"
+                    r="12"
+                    fill="#064428"
+                  />
+                  {/* Small highlight */}
+                  <circle
+                    cx="104"
+                    cy="96"
+                    r="4"
+                    fill="white"
                   />
                 </svg>
               </div>

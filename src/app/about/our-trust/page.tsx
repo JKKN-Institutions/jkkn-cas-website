@@ -31,9 +31,14 @@ export default function OurTrust() {
                 <div className="absolute inset-0 rounded-full border-[10px] border-amber-400/60"></div>
                 <div className="absolute inset-3 rounded-full border-[8px] border-amber-500/40"></div>
 
-                {/* Profile image placeholder - circular gradient */}
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-teal-700 to-teal-900 overflow-hidden">
-                  {/* Placeholder for actual image */}
+                {/* Profile image */}
+                <div className="w-32 h-32 rounded-full overflow-hidden relative">
+                  <Image
+                    src="/images/Our_Trust.webp"
+                    alt="Shri. J.K.K. Natarajah"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
 
                 {/* Badge */}

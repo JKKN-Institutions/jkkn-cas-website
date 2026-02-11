@@ -19,7 +19,7 @@ export default function ClassroomPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
             <Image
-              src="/images/classroom/classroom-1.jpg"
+              src="/images/digital-classroom-1.png"
               alt="Student in blue uniform using digital learning technology"
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -28,7 +28,7 @@ export default function ClassroomPage() {
           </div>
           <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
             <Image
-              src="/images/classroom/classroom-2.jpg"
+              src="/images/digital-classroom-2.png"
               alt="Student in yellow uniform engaged in digital classroom learning"
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -37,7 +37,7 @@ export default function ClassroomPage() {
           </div>
           <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
             <Image
-              src="/images/classroom/classroom-3.jpg"
+              src="/images/digital-classroom-3.webp"
               alt="Students in classroom setting with modern learning facilities"
               fill
               sizes="(max-width: 768px) 100vw, 33vw"

@@ -40,31 +40,49 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 mt-6">
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                JKKN Dental College and Hospital
+                <a href="https://dental.jkkn.ac.in/">
+                  JKKN Dental College and Hospital
+                </a>
               </li>
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                JKKN College of Allied Health Sciences
+                <a href="https://ahs.jkkn.ac.in/">
+                  JKKN College of Allied Health Sciences
+                </a>
               </li>
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                JKKN College of Pharmacy
+                <a href="https://pharmacy.jkkn.ac.in/">
+                  JKKN College of Pharmacy
+                </a>
               </li>
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                Sresakthimayeil Institute of Nursing and Research
+                <a href="https://nursing.sresakthimayeil.jkkn.ac.in/">
+                  Sresakthimayeil Institute of Nursing and Research
+                </a>
               </li>
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                JKKN College of Education
+                <a href="https://edu.jkkn.ac.in/">
+                  JKKN College of Education
+                </a>
               </li>
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                JKKN College of Arts and Science (Autonomous)
+                <a href="https://cas.jkkn.ac.in/">
+                  JKKN College of Arts and Science (Autonomous)
+                </a>
               </li>
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                JKKN College of Engineering and Technology
+                <a href="https://engg.jkkn.ac.in/">
+                  JKKN College of Engineering and Technology
+                </a>
               </li>
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                JKKN Matriculation Higher Secondary School
+                <a href="https://school.jkkn.ac.in/">
+                  JKKN Matriculation Higher Secondary School
+                </a>
               </li>
               <li className="hover:text-brand-yellow transition cursor-pointer">
-                Nattraja Vidyalaya
+                <a href="https://nv.jkkn.ac.in/">
+                  Nattraja Vidyalaya
+                </a>
               </li>
             </ul>
           </div>
@@ -102,35 +120,28 @@ export default function Footer() {
               </h3>
               <div className="flex gap-4 mt-6">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/jkknarts"
                   className="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-brand-yellow hover:text-brand-green transition"
                   aria-label="Facebook"
                 >
                   <Facebook className="h-5 w-5" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/jkknarts"
                   className="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-brand-yellow hover:text-brand-green transition"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/school/jkknarts"
                   className="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-brand-yellow hover:text-brand-green transition"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
                 <a
-                  href="#"
-                  className="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-brand-yellow hover:text-brand-green transition"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="h-5 w-5" />
-                </a>
-                <a
-                  href="#"
+                  href="https://www.youtube.com/jkkninstitutions"
                   className="w-10 h-10 bg-white/10 rounded flex items-center justify-center hover:bg-brand-yellow hover:text-brand-green transition"
                   aria-label="YouTube"
                 >

@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function OurInstitutionPage() {
   return (
     <div className="min-h-screen bg-[#f5f5f5]">
-      <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-2">
@@ -13,10 +13,10 @@ export default function OurInstitutionPage() {
         </div>
 
         {/* Main Image */}
-        <div className="mb-8 rounded-lg overflow-hidden">
-          <div className="relative w-full h-64 md:h-96 lg:h-[400px] bg-gray-200">
+        <div className="mb-8 rounded-lg overflow-hidden max-w-5xl mx-auto">
+          <div className="relative w-full h-64 md:h-96 lg:h-[450px] bg-gray-200">
             <Image
-              src="/images/jkkn-entrance.jpg"
+              src="/images/jkkn_campus.jpg"
               alt="JKKN Institution Entrance"
               fill
               className="object-cover"

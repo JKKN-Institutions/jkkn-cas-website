@@ -29,7 +29,7 @@ export default function FoodCourtPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
             <Image
-              src="/images/food-court/exterior.jpg"
+              src="/images/foodcourt-1.webp"
               alt="Food court building exterior view"
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -38,7 +38,7 @@ export default function FoodCourtPage() {
           </div>
           <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
             <Image
-              src="/images/food-court/interior-1.jpg"
+              src="/images/foodcourt-2.webp"
               alt="Food court dining area with seating"
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -47,7 +47,7 @@ export default function FoodCourtPage() {
           </div>
           <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
             <Image
-              src="/images/food-court/interior-2.jpg"
+              src="/images/foodcourt-3.webp"
               alt="Food court interior seating and atmosphere"
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -75,12 +75,6 @@ export default function FoodCourtPage() {
             </div>
           ))}
         </div>
-
-        {/* Floating Chat Buttons */}
-        <FloatingChatButtons
-          facebookUrl="https://m.me/jkkncas"
-          whatsappNumber="919345855001"
-        />
       </div>
     </div>
   );

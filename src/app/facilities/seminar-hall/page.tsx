@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Seminar Hall | JKKN College of Arts and Science',
@@ -12,6 +13,37 @@ export default function SeminarHallPage() {
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-12">
           Seminar Hall
         </h1>
+
+        {/* Three-column Image Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden bg-gray-200">
+            <Image
+              src="/images/seminar-hall-1.jpg"
+              alt="Seminar hall with attendees and presenter"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden bg-gray-200">
+            <Image
+              src="/images/seminar-hall-2.jpg"
+              alt="Students attending seminar session"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden bg-gray-200">
+            <Image
+              src="/images/seminar-hall-3.jpg"
+              alt="Seminar hall interior with participants"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
 
         <div className="space-y-6 text-base md:text-lg leading-relaxed text-gray-700">
           <p className="text-justify">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Sports Club | JKKN College of Arts and Science",
@@ -13,6 +14,37 @@ export default function SportsClubPage() {
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-12">
           Sports club
         </h1>
+
+        {/* Sports Images Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/sports-1.jpg"
+              alt="Sports event with students gathered in the college ground"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/sports-2.jpg"
+              alt="Students engaged in outdoor sports activities"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+            <Image
+              src="/images/sports-3.jpg"
+              alt="Sports ground with students participating in games"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
 
         {/* Hero Intro */}
         <p className="text-base md:text-lg text-gray-700 text-justify leading-relaxed mb-8">

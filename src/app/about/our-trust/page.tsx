@@ -25,19 +25,24 @@ export default function OurTrust() {
             </p>
           </div>
 
-          {/* Founder Card */}
-          <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 md:p-10 mb-12 border border-[#0b6d41]/20 shadow-2xl">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              {/* Profile Image with Golden Border */}
-              <div className="relative flex-shrink-0">
-                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full relative">
-                  {/* Golden decorative border */}
-                  <div className="absolute inset-0 rounded-full border-4 border-[#ffde59] p-1">
-                    <div className="w-full h-full rounded-full border-4 border-[#d4a829] overflow-hidden bg-white">
-                      {/* Profile image placeholder */}
-                      <div className="w-full h-full bg-gradient-to-br from-[#0b6d41]/20 to-[#0b6d41]/40"></div>
-                    </div>
-                  </div>
+        {/* Founder Profile Card */}
+        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12">
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+            {/* Profile Image */}
+            <div className="relative flex-shrink-0">
+              <div className="w-40 h-40 md:w-44 md:h-44 rounded-full bg-gradient-to-br from-amber-100 via-amber-200 to-amber-100 flex items-center justify-center relative overflow-hidden">
+                {/* Decorative ring */}
+                <div className="absolute inset-0 rounded-full border-[10px] border-amber-400/60"></div>
+                <div className="absolute inset-3 rounded-full border-[8px] border-amber-500/40"></div>
+
+                {/* Profile image */}
+                <div className="w-32 h-32 rounded-full overflow-hidden relative">
+                  <Image
+                    src="/images/Our_Trust.webp"
+                    alt="Shri. J.K.K. Natarajah"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
 

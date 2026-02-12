@@ -17,20 +17,20 @@ export default function HeroSection() {
             <div className="inline-flex items-center gap-2 mb-4 lg:mb-5 px-4 py-1.5 sm:px-5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 w-fit">
               <Award className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-yellow" />
               <span className="text-xs sm:text-sm font-medium text-white">
-                NAAC A+ Accredited | UGC Recognized | Periyar University Affiliated
+                NAAC Accredited | UGC Recognized | Periyar University Affiliated
               </span>
             </div>
 
             {/* Main Heading */}
             <div className="mb-3 lg:mb-5">
               <h1 className="font-bold leading-tight">
-                <span className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl block">
-                  JKKN College for
+                <span className="text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl block">
+                  JKKN College of
                 </span>
-                <span className="text-brand-yellow text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl block mt-1">
+                <span className="text-brand-yellow text-2xl md:text-3xl lg:text-4xl xl:text-5xl block mt-1">
                   Arts &amp; Science
                 </span>
-                <span className="text-white/90 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl italic block mt-1">
+                <span className="text-white/90 text-xl md:text-2xl lg:text-3xl xl:text-4xl italic block mt-1">
                   (Autonomous)
                 </span>
               </h1>
@@ -43,9 +43,14 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <button className="bg-brand-yellow text-brand-green px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-brand-yellow/90 transition shadow-xl hover:shadow-2xl hover:scale-105 transform">
-                Apply for 2025-26
-              </button>
+              <a
+                href="https://admission.jkkn.ac.in/form/jkkn-institution-admission-yxs3w8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-brand-yellow text-brand-green px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-brand-yellow/90 transition shadow-xl hover:shadow-2xl hover:scale-105 transform text-center"
+              >
+                Apply for 2026-27
+              </a>
               <button className="bg-transparent border-2 border-white text-white px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:bg-white/10 transition backdrop-blur-sm">
                 Explore Programs
               </button>

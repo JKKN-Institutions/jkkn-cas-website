@@ -68,17 +68,7 @@ export default function MComAidedPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
-        {/* Background image */}
-        <Image
-          src="/images/programmes/mcom-aided/hero.jpg"
-          alt="M.Com programme"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
-
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12" style={{ backgroundColor: '#eaf1e2' }}>
         <div className="container mx-auto px-4 relative z-10">
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center">
@@ -86,9 +76,9 @@ export default function MComAidedPage() {
                 <GraduationCap className="w-4 h-4 text-brand-green" />
                 UGC Recognized Programme
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
                 Master of{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                <span className="text-brand-green">
                   Commerce
                 </span>{' '}
                 (M.Com)
@@ -161,7 +151,7 @@ export default function MComAidedPage() {
           <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
             <RevealSection className="lg:col-span-3">
               <SectionBadge text="About the Programme" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                 Programme{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Overview
@@ -207,7 +197,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Admissions" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Eligibility &{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Admission Criteria
@@ -266,7 +256,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Curriculum" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Programme{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Curriculum
@@ -405,7 +395,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Specializations" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Available{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Specializations
@@ -448,7 +438,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Outcomes" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Programme Learning{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Outcomes
@@ -491,7 +481,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Careers" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Career{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Opportunities
@@ -553,7 +543,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Career Advancement" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Professional{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Certifications
@@ -598,7 +588,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Infrastructure" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Learning{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Facilities
@@ -679,7 +669,7 @@ export default function MComAidedPage() {
 
             <RevealSection delay={200}>
               <SectionBadge text="Why Us" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Why Choose Our{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   M.Com Programme?
@@ -721,7 +711,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Faculty" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Our Learning{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Facilitators
@@ -769,7 +759,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="FAQ" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Frequently Asked{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Questions
@@ -820,7 +810,7 @@ export default function MComAidedPage() {
           <RevealSection>
             <div className="max-w-3xl mx-auto text-center">
               <SectionBadge text="Enroll Now" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Elevate Your Career in{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Commerce & Finance
@@ -851,7 +841,7 @@ export default function MComAidedPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Explore More" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Explore Related{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Programmes

@@ -68,7 +68,7 @@ export default function BScZoologyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12" style={{ backgroundColor: '#eaf1e2' }}>
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-green via-[#0a5a36] to-[#0d8450]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,222,89,0.15)_0%,transparent_50%),radial-gradient(circle_at_80%_20%,rgba(11,109,65,0.15)_0%,transparent_50%)]"></div>
@@ -81,7 +81,7 @@ export default function BScZoologyPage() {
                 <Award className="w-4 h-4 text-brand-yellow" />
                 UGC Recognized Programme
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 drop-shadow-lg">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green drop-shadow-lg">
                 Bachelor of Science in Zoology
               </h1>
               <p className="text-xl md:text-2xl font-medium mb-6 text-white/95 drop-shadow-md tracking-wide">
@@ -148,7 +148,7 @@ export default function BScZoologyPage() {
           <div className="max-w-6xl mx-auto">
             <RevealSection>
               <SectionBadge text="About the Programme" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                 Programme{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Overview
@@ -183,7 +183,7 @@ export default function BScZoologyPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center text-white">
               <MapPin className="w-16 h-16 mx-auto mb-6 text-brand-yellow" />
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Field Study Trip</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Field Study Trip</h2>
               <p className="text-lg text-white/90 mb-8">
                 Annual educational excursions to wildlife sanctuaries, marine biology stations, zoos, biodiversity parks, and research institutes. Students gain practical field experience in animal behavior observation, ecological surveys, and conservation practices.
               </p>
@@ -206,7 +206,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Admissions" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Eligibility &{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Admission Criteria
@@ -265,7 +265,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Curriculum" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Programme{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Curriculum
@@ -444,7 +444,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Outcomes" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Programme Learning{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Outcomes
@@ -487,7 +487,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Careers" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Career{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Opportunities
@@ -549,7 +549,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Infrastructure" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Department{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Facilities
@@ -590,7 +590,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Why Us" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Why Choose Our B.Sc{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Zoology Programme?
@@ -632,7 +632,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Faculty" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Our Learning{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Facilitators
@@ -680,7 +680,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="FAQ" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Frequently Asked{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Questions
@@ -730,7 +730,7 @@ export default function BScZoologyPage() {
           <RevealSection>
             <div className="max-w-3xl mx-auto text-center">
               <SectionBadge text="Enroll Now" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Begin Your Journey in{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Zoological Sciences
@@ -761,7 +761,7 @@ export default function BScZoologyPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Explore More" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Explore Related{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Programmes

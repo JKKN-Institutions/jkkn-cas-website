@@ -156,7 +156,7 @@ export default function MComPage() {
 
       <div className="min-h-screen bg-gradient-to-b from-brand-cream via-white to-brand-cream">
         {/* Hero Section */}
-        <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+        <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12" style={{ backgroundColor: '#eaf1e2' }}>
           <Image
             src="/images/programmes/mcom/hero.jpg"
             alt="M.Com programme"
@@ -175,7 +175,7 @@ export default function MComPage() {
                   UGC Recognized Postgraduate Programme
                 </span>
 
-                <h1 className="text-5xl md:text-7xl font-black mb-6 text-white drop-shadow-2xl leading-tight">
+                <h1 className="text-3xl md:text-3xl font-black mb-6 text-brand-green drop-shadow-2xl leading-tight">
                   Master of Commerce<br />(M.Com)
                 </h1>
 
@@ -225,7 +225,7 @@ export default function MComPage() {
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                   <SectionBadge>Programme Overview</SectionBadge>
-                  <h2 className="text-4xl md:text-5xl font-black text-brand-green mb-6">
+                  <h2 className="text-xl md:text-2xl font-black text-brand-green mb-6">
                     Advanced Postgraduate Excellence
                   </h2>
                   <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -271,7 +271,7 @@ export default function MComPage() {
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                   <SectionBadge>Admission Information</SectionBadge>
-                  <h2 className="text-4xl md:text-5xl font-black text-brand-green mb-6">
+                  <h2 className="text-xl md:text-2xl font-black text-brand-green mb-6">
                     Eligibility & Admission Criteria
                   </h2>
                   <p className="text-xl text-gray-600">
@@ -369,7 +369,7 @@ export default function MComPage() {
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                   <SectionBadge>Academic Structure</SectionBadge>
-                  <h2 className="text-4xl md:text-5xl font-black text-brand-green mb-6">
+                  <h2 className="text-xl md:text-2xl font-black text-brand-green mb-6">
                     Course Curriculum
                   </h2>
                   <p className="text-xl text-gray-600">
@@ -505,7 +505,7 @@ export default function MComPage() {
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                   <SectionBadge>Skills Development</SectionBadge>
-                  <h2 className="text-4xl md:text-5xl font-black text-brand-green mb-6">
+                  <h2 className="text-xl md:text-2xl font-black text-brand-green mb-6">
                     Programme Learning Outcomes
                   </h2>
                   <p className="text-xl text-gray-600">
@@ -580,7 +580,7 @@ export default function MComPage() {
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                   <SectionBadge>Career Pathways</SectionBadge>
-                  <h2 className="text-4xl md:text-5xl font-black text-brand-green mb-6">
+                  <h2 className="text-xl md:text-2xl font-black text-brand-green mb-6">
                     Career Opportunities
                   </h2>
                   <p className="text-xl text-gray-600">
@@ -649,7 +649,7 @@ export default function MComPage() {
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                   <SectionBadge>Infrastructure</SectionBadge>
-                  <h2 className="text-4xl md:text-5xl font-black text-brand-green mb-6">
+                  <h2 className="text-xl md:text-2xl font-black text-brand-green mb-6">
                     Department Facilities
                   </h2>
                   <p className="text-xl text-gray-600">
@@ -728,7 +728,7 @@ export default function MComPage() {
                     <Sparkles className="w-4 h-4" />
                     Our Advantages
                   </span>
-                  <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+                  <h2 className="text-xl md:text-2xl font-black text-white mb-6">
                     Why Choose Our M.Com Programme?
                   </h2>
                 </div>
@@ -787,7 +787,7 @@ export default function MComPage() {
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-16">
                   <SectionBadge>Got Questions?</SectionBadge>
-                  <h2 className="text-4xl md:text-5xl font-black text-brand-green mb-6">
+                  <h2 className="text-xl md:text-2xl font-black text-brand-green mb-6">
                     Frequently Asked Questions
                   </h2>
                 </div>
@@ -839,7 +839,7 @@ export default function MComPage() {
           <div className="container mx-auto px-4 relative z-10">
             <RevealSection>
               <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+                <h2 className="text-3xl md:text-3xl font-black text-white mb-6 leading-tight">
                   Ready to Advance Your Career with M.Com?
                 </h2>
                 <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed">

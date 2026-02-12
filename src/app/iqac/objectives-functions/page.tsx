@@ -5,7 +5,7 @@ export default function IQACObjectivesFunctions() {
     <main className="min-h-screen bg-brand-cream py-12 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-8">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-8">
           Objectives/Functions
         </h1>
 
@@ -18,7 +18,7 @@ export default function IQACObjectivesFunctions() {
 
         {/* Functions Section */}
         <section>
-          <h2 className="text-2xl md:text-3xl font-semibold text-brand-green mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-brand-green mb-6">
             IQAC Functions – As per UGC Guidelines
           </h2>
 

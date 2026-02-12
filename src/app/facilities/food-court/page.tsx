@@ -21,7 +21,7 @@ export default function FoodCourtPage() {
     <div className="min-h-screen bg-brand-cream">
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-12">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-12">
           FOOD COURT
         </h1>
 

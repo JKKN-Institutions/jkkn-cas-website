@@ -920,21 +920,21 @@ export default function Navigation() {
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between md:justify-between justify-center items-center py-2 md:py-4">
           <Link href="/" className="flex items-center">
             <img
               src="/logo.svg"
               alt="JKKN College Logo"
-              className="h-20 w-20"
+              className="h-12 md:h-20 w-12 md:w-20"
             />
           </Link>
 
-          {/* Mobile hamburger button */}
+          {/* Mobile hamburger button - HIDDEN: Using bottom navigation on mobile */}
           <button
             onClick={toggleMobileMenu}
             aria-label="Open navigation menu"
             aria-expanded={mobileMenuOpen}
-            className="md:hidden text-gray-700 hover:text-brand-green transition"
+            className="hidden text-gray-700 hover:text-brand-green transition"
           >
             <Menu className="h-6 w-6" />
           </button>
@@ -1414,8 +1414,8 @@ export default function Navigation() {
               )}
             </div>
 
-            {/* Department Dropdown */}
-            <div
+            {/* Department Dropdown - HIDDEN */}
+            {/* <div
               className="relative"
               onMouseEnter={handleDepartmentsMouseEnter}
               onMouseLeave={handleDepartmentsMouseLeave}
@@ -1443,7 +1443,6 @@ export default function Navigation() {
                   className="absolute top-full left-0 pt-2 w-56"
                 >
                   <div className="bg-white rounded-lg shadow-lg border border-gray-200 py-2">
-                    {/* Aided Departments Nested Submenu */}
                     <div
                       className="relative"
                       onMouseEnter={() => setAidedDeptOpen(true)}
@@ -1574,7 +1573,6 @@ export default function Navigation() {
                       )}
                     </div>
 
-                    {/* Self Finance Departments Nested Submenu */}
                     <div
                       className="relative"
                       onMouseEnter={() => setSelfFinanceDeptOpen(true)}
@@ -1699,7 +1697,7 @@ export default function Navigation() {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* IQAC Dropdown */}
             <div
@@ -2351,8 +2349,8 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile menu overlay & sidebar */}
-      {mobileMenuOpen && (
+      {/* Mobile menu overlay & sidebar - DISABLED: Using bottom navigation on mobile */}
+      {false && mobileMenuOpen && (
         <>
           {/* Backdrop */}
           <div
@@ -2764,7 +2762,8 @@ export default function Navigation() {
               </div>
 
               {/* Department accordion */}
-              <div className="border-b border-gray-200">
+              {/* Department - HIDDEN */}
+              {/* <div className="border-b border-gray-200">
                 <button
                   onClick={toggleMobileDepartments}
                   className="w-full flex items-center justify-between py-3 px-4 text-gray-700 hover:bg-brand-cream hover:text-brand-green rounded-lg transition"
@@ -2775,7 +2774,6 @@ export default function Navigation() {
 
                 {mobileDepartmentsExpanded && (
                   <div className="pb-2">
-                    {/* Aided Departments nested accordion */}
                     <div className="ml-4">
                       <button
                         onClick={toggleMobileAidedDept}
@@ -2889,7 +2887,6 @@ export default function Navigation() {
                       )}
                     </div>
 
-                    {/* Self Finance Departments nested accordion */}
                     <div className="ml-4">
                       <button
                         onClick={toggleMobileSelfFinanceDept}
@@ -2997,7 +2994,7 @@ export default function Navigation() {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <Link
                 href="/documents/examinations/Autonomous_Semester-Timetable_AprilMay-_2025.pdf"

@@ -11,7 +11,7 @@ export default function SportsClubPage() {
     <div className="min-h-screen bg-brand-cream">
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-12">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-12">
           Sports club
         </h1>
 
@@ -57,7 +57,7 @@ export default function SportsClubPage() {
           <div className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 space-y-3">
             <div className="flex items-start gap-3">
               <span className="text-brand-green text-xl font-bold">•</span>
-              <h3 className="text-lg md:text-xl font-bold text-brand-green">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green">
                 World-class Facilities:
               </h3>
             </div>
@@ -70,7 +70,7 @@ export default function SportsClubPage() {
           <div className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 space-y-3">
             <div className="flex items-start gap-3">
               <span className="text-brand-green text-xl font-bold">•</span>
-              <h3 className="text-lg md:text-xl font-bold text-brand-green">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green">
                 Expert Instructors:
               </h3>
             </div>
@@ -83,7 +83,7 @@ export default function SportsClubPage() {
           <div className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 space-y-3">
             <div className="flex items-start gap-3">
               <span className="text-brand-green text-xl font-bold">•</span>
-              <h3 className="text-lg md:text-xl font-bold text-brand-green">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green">
                 Cutting-edge Equipment:
               </h3>
             </div>
@@ -96,7 +96,7 @@ export default function SportsClubPage() {
           <div className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 space-y-3">
             <div className="flex items-start gap-3">
               <span className="text-brand-green text-xl font-bold">•</span>
-              <h3 className="text-lg md:text-xl font-bold text-brand-green">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green">
                 Free Memberships:
               </h3>
             </div>
@@ -109,7 +109,7 @@ export default function SportsClubPage() {
           <div className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 space-y-3">
             <div className="flex items-start gap-3">
               <span className="text-brand-green text-xl font-bold">•</span>
-              <h3 className="text-lg md:text-xl font-bold text-brand-green">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green">
                 Community Spirit:
               </h3>
             </div>

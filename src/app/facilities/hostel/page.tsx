@@ -44,7 +44,7 @@ export default function HostelPage() {
         </div>
 
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-6 text-left">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6 text-left">
           Hostel
         </h1>
 

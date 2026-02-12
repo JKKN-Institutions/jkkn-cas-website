@@ -255,17 +255,7 @@ export default function BCAPage() {
   return (
     <>
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
-        {/* Background image */}
-        <Image
-          src="/images/programmes/bca-hero.jpg"
-          alt="BCA programme"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-black/30 to-transparent"></div>
-
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12" style={{ backgroundColor: '#eaf1e2' }}>
         <div className="container mx-auto px-4 relative z-10">
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center">
@@ -273,9 +263,9 @@ export default function BCAPage() {
                 <GraduationCap className="w-4 h-4 text-brand-green" />
                 Self-Finance Programme
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
                 Bachelor of{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                <span className="text-brand-green">
                   Computer Applications
                 </span>
               </h1>
@@ -319,25 +309,25 @@ export default function BCAPage() {
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <GlassCard className="p-6 text-center">
-                  <div className="text-4xl font-bold text-brand-green mb-2">
+                  <div className="text-3xl font-bold text-brand-green mb-2">
                     <CountUp end={70} duration={2000} />+
                   </div>
                   <div className="text-sm text-gray-600 font-medium">Years of Excellence</div>
                 </GlassCard>
                 <GlassCard className="p-6 text-center">
-                  <div className="text-4xl font-bold text-brand-green mb-2">
+                  <div className="text-3xl font-bold text-brand-green mb-2">
                     <CountUp end={90} duration={2000} />%
                   </div>
                   <div className="text-sm text-gray-600 font-medium">Placement Record</div>
                 </GlassCard>
                 <GlassCard className="p-6 text-center">
-                  <div className="text-4xl font-bold text-brand-green mb-2">
+                  <div className="text-3xl font-bold text-brand-green mb-2">
                     <CountUp end={6} duration={2000} />+
                   </div>
                   <div className="text-sm text-gray-600 font-medium">Specialized Labs</div>
                 </GlassCard>
                 <GlassCard className="p-6 text-center">
-                  <div className="text-4xl font-bold text-brand-green mb-2">
+                  <div className="text-3xl font-bold text-brand-green mb-2">
                     <CountUp end={100} duration={2000} />+
                   </div>
                   <div className="text-sm text-gray-600 font-medium">Industry Partners</div>
@@ -354,7 +344,7 @@ export default function BCAPage() {
           <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
             <RevealSection className="lg:col-span-3">
               <SectionBadge text="About the Programme" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                 Programme{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Overview
@@ -402,7 +392,7 @@ export default function BCAPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Admissions" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Eligibility &{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Admission Criteria
@@ -461,7 +451,7 @@ export default function BCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Academic Structure" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Comprehensive Curriculum
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
@@ -530,7 +520,7 @@ export default function BCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="What You'll Gain" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Learning Outcomes
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
@@ -618,7 +608,7 @@ export default function BCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Future Prospects" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Career Opportunities
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
@@ -745,7 +735,7 @@ export default function BCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Infrastructure" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 State-of-the-Art Facilities
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
@@ -861,7 +851,7 @@ export default function BCAPage() {
                 <div className="relative">
                   <GlassCard className="p-16 min-h-[500px] flex items-center justify-center bg-gradient-to-br from-brand-green/90 to-emerald-600/90" hover={false}>
                     <div className="text-center">
-                      <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6">
                         Why Choose JKKN
                       </h3>
                       <div className="w-24 h-1.5 bg-white/80 mx-auto rounded-full"></div>
@@ -872,7 +862,7 @@ export default function BCAPage() {
                 {/* Right Side - Content */}
                 <div>
                   <SectionBadge text="Our Advantages" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-brand-green mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-4">
                     Why Choose Our BCA Programme?
                   </h2>
                   <div className="w-16 h-1 bg-brand-green rounded-full mb-8"></div>
@@ -981,7 +971,7 @@ export default function BCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Our Team" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Expert Faculty Members
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full mb-6"></div>
@@ -1026,7 +1016,7 @@ export default function BCAPage() {
           <RevealSection>
             <div className="max-w-4xl mx-auto text-center mb-16">
               <SectionBadge text="Got Questions?" />
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Frequently Asked Questions
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-brand-green to-emerald-500 mx-auto rounded-full"></div>
@@ -1066,12 +1056,12 @@ export default function BCAPage() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-brand-green to-emerald-600 text-white relative overflow-hidden">
+      <section className="py-20 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 md:px-6 text-center relative">
           <RevealSection>
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="text-3xl md:text-3xl font-bold mb-6">
                 Ready to Start Your Software Development Journey?
               </h2>
               <p className="text-xl text-emerald-50 mb-8 leading-relaxed">

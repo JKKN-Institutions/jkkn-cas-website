@@ -5,13 +5,13 @@ export default function IQACVisionMission() {
     <main className="min-h-screen bg-brand-cream py-12 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-8">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-8">
           Vision & Mission
         </h1>
 
         {/* Vision Section */}
         <section className="mb-12">
-          <h2 className="text-2xl md:text-3xl font-semibold text-brand-green mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-brand-green mb-4">
             Vision:
           </h2>
           <p className="text-gray-700 text-base md:text-lg leading-relaxed">
@@ -24,7 +24,7 @@ export default function IQACVisionMission() {
 
         {/* Mission Section */}
         <section>
-          <h2 className="text-2xl md:text-3xl font-semibold text-brand-green mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-brand-green mb-4">
             Mission:
           </h2>
           <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">

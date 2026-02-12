@@ -6,7 +6,7 @@ export default function OurInstitutionPage() {
       <div className="container mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-2">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-2">
             OUR INSTITUTION
           </h1>
           <div className="w-16 h-1 bg-brand-yellow"></div>
@@ -29,7 +29,7 @@ export default function OurInstitutionPage() {
         <div className="space-y-6 text-gray-800">
           {/* Objectives Section */}
           <div className="mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-brand-green mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
               Objectives
             </h2>
             <div className="space-y-4">
@@ -85,7 +85,7 @@ export default function OurInstitutionPage() {
           </div>
 
           {/* About the College */}
-          <h2 className="text-2xl md:text-3xl font-bold text-brand-green mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-4">
             About the College
           </h2>
 

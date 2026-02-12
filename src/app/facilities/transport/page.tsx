@@ -44,7 +44,7 @@ export default function TransportPage() {
     <div className="min-h-screen bg-brand-cream">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12">
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-8 md:mb-12">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-8 md:mb-12">
           TRANSPORT
         </h1>
 
@@ -97,7 +97,7 @@ export default function TransportPage() {
 
               {/* Content */}
               <div className="flex-1">
-                <h2 className="font-bold text-lg md:text-xl text-brand-green mb-2">
+                <h2 className="font-bold text-2xl md:text-3xl lg:text-4xl text-brand-green mb-2">
                   {feature.title}
                 </h2>
                 <p className="text-gray-700 text-justify leading-relaxed">

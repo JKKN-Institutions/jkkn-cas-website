@@ -27,7 +27,7 @@ export default function Nirf2025Page() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
         {/* Page Title */}
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center">
           NIRF-2025
         </h1>
 
@@ -42,7 +42,7 @@ export default function Nirf2025Page() {
               className="group block"
             >
               <div className="bg-brand-green hover:shadow-xl hover:scale-105 transition-all duration-300 rounded-lg p-8 h-full flex items-center justify-center">
-                <h2 className="text-white text-xl md:text-2xl font-semibold text-center">
+                <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-semibold text-center">
                   {item.title}
                 </h2>
               </div>

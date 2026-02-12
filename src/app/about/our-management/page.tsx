@@ -4,6 +4,7 @@ import Image from 'next/image';
 interface ManagementMember {
   name: string;
   position: string;
+  organization: string;
   bio: string;
   image?: string;
 }
@@ -31,27 +32,24 @@ const managementTeam: ManagementMember[] = [
 
 export default function OurManagementPage() {
   return (
-    <main className="min-h-screen bg-brand-cream py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header Section */}
-        <header className="text-center mb-12">
-          <div className="inline-block mb-4">
-            <span className="text-sm uppercase tracking-wider text-brand-green font-semibold">
-              LEADERSHIP
-            </span>
+    <main className="min-h-screen bg-[#e1e9d4]">
+      {/* Hero Section */}
+      <section className="relative py-20 px-4 overflow-hidden">
+        {/* Decorative circles */}
+        <div className="absolute top-10 left-10 w-96 h-96 bg-[#c8d9b8] rounded-full opacity-30 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d1e0c0] rounded-full opacity-20 blur-3xl"></div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-4">
+              OUR MANAGEMENT
+            </h1>
+            <div className="w-24 h-1 bg-[#ffde59] mx-auto mb-4"></div>
+            <p className="text-[#0b6d41]/80 text-lg md:text-xl">
+              Leadership Team of JKKN Institutions
+            </p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-4">
-            OUR MANAGEMENT
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 mb-6">
-            Visionary Leadership Guiding JKKN
-          </p>
-          {/* Decorative underline */}
-          <div className="flex items-center justify-center gap-2 mb-8">
-            <div className="h-1 w-16 bg-brand-green rounded"></div>
-            <div className="h-1 w-8 bg-brand-yellow rounded"></div>
-          </div>
-        </header>
 
         {/* Management Cards Grid */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -76,24 +74,30 @@ export default function OurManagementPage() {
                 )}
               </div>
 
-              {/* Name */}
-              <h2 className="text-xl md:text-2xl font-bold text-brand-green mb-2 text-center">
-                {member.name}
-              </h2>
+                {/* Bio with Quote Marks */}
+                <div className="relative">
+                  {/* Opening quote */}
+                  <div className="absolute -top-2 -left-2 text-3xl text-[#ffde59]/30 font-serif leading-none">
+                    "
+                  </div>
 
-              {/* Position */}
-              <p className="text-sm uppercase text-brand-green tracking-wide font-semibold mb-4">
-                {member.position}
-              </p>
+                  {/* Bio text */}
+                  <p className="text-[#0b6d41]/90 text-sm md:text-base leading-relaxed text-center px-4 relative z-10">
+                    {member.bio}
+                  </p>
 
-              {/* Bio */}
-              <p className="text-gray-700 leading-relaxed text-center">
-                {member.bio}
-              </p>
-            </article>
-          ))}
-        </section>
-      </div>
+                  {/* Closing quote */}
+                  <div className="absolute -bottom-8 -right-2 text-3xl text-[#ffde59]/30 font-serif leading-none">
+                    "
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
     </main>
   );
 }

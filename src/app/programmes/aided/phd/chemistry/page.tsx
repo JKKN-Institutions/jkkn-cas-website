@@ -67,7 +67,7 @@ export default function PhDChemistryPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden py-24">
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12" style={{ backgroundColor: '#eaf1e2' }}>
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-green via-emerald-600 to-brand-green"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.15)_0%,transparent_50%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.15)_0%,transparent_50%)]"></div>
@@ -80,9 +80,9 @@ export default function PhDChemistryPage() {
                 <GraduationCap className="w-4 h-4 text-brand-green" />
                 UGC Recognized Doctoral Programme
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
                 Doctor of Philosophy (Ph.D) in{' '}
-                <span className="text-emerald-300">
+                <span className="text-brand-green">
                   Chemistry
                 </span>
               </h1>
@@ -150,7 +150,7 @@ export default function PhDChemistryPage() {
           <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 items-center">
             <RevealSection className="lg:col-span-3">
               <SectionBadge text="About the Programme" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
                 Programme{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Overview
@@ -196,7 +196,7 @@ export default function PhDChemistryPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Admissions" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Eligibility &{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Admission Criteria
@@ -255,7 +255,7 @@ export default function PhDChemistryPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Research" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Research{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Areas
@@ -301,7 +301,7 @@ export default function PhDChemistryPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Careers" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Career{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Opportunities
@@ -363,7 +363,7 @@ export default function PhDChemistryPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Infrastructure" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Research{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Facilities
@@ -444,7 +444,7 @@ export default function PhDChemistryPage() {
 
             <RevealSection delay={200}>
               <SectionBadge text="Why Us" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Why Choose JKKN for Ph.D{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Chemistry?
@@ -485,7 +485,7 @@ export default function PhDChemistryPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Faculty" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Our Research{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Guides
@@ -533,7 +533,7 @@ export default function PhDChemistryPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="FAQ" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Frequently Asked{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Questions
@@ -585,7 +585,7 @@ export default function PhDChemistryPage() {
           <RevealSection>
             <div className="max-w-3xl mx-auto text-center">
               <SectionBadge text="Enroll Now" />
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Begin Your Doctoral Journey in{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                   Chemistry
@@ -616,7 +616,7 @@ export default function PhDChemistryPage() {
             <RevealSection>
               <div className="text-center mb-12">
                 <SectionBadge text="Explore More" />
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Explore Related{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
                     Programmes

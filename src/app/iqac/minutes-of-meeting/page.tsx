@@ -37,7 +37,7 @@ export default function MinutesOfMeetingPage() {
 
         {/* Page Header */}
         <header className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-4">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-4">
             Minutes of IQAC Meeting
           </h1>
           <p className="text-lg text-gray-700 max-w-3xl">
@@ -63,7 +63,7 @@ export default function MinutesOfMeetingPage() {
                 </div>
 
                 {/* Title */}
-                <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex-grow">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 flex-grow">
                   Minutes of IQAC meeting - {meeting.year}
                 </h2>
 

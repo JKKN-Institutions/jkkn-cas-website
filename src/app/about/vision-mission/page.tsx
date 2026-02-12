@@ -7,7 +7,7 @@ export default function VisionMission() {
       <div className="container mx-auto max-w-6xl">
 
         {/* Page Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-brand-green mb-16">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-16">
           Vision And Mission
         </h1>
 
@@ -16,7 +16,7 @@ export default function VisionMission() {
           <div className="flex flex-col md:flex-row items-start justify-between gap-8 md:gap-12">
             {/* Vision Text Content */}
             <div className="flex-1">
-              <h2 className="text-2xl md:text-3xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Our Vision
               </h2>
               <p className="text-gray-700 text-base md:text-lg leading-relaxed">
@@ -77,7 +77,7 @@ export default function VisionMission() {
           <div className="flex flex-col md:flex-row items-start justify-between gap-8 md:gap-12">
             {/* Mission Text Content */}
             <div className="flex-1">
-              <h2 className="text-2xl md:text-3xl font-bold text-brand-green mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-6">
                 Our Mission
               </h2>
               <p className="text-gray-700 text-base md:text-lg leading-relaxed">

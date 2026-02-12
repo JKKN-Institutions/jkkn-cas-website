@@ -24,13 +24,13 @@ export default function HeroSection() {
             {/* Main Heading */}
             <div className="mb-3 lg:mb-5">
               <h1 className="font-bold leading-tight">
-                <span className="text-white text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl block">
-                  JKKN College for
+                <span className="text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl block">
+                  JKKN College of
                 </span>
-                <span className="text-brand-yellow text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl block mt-1">
+                <span className="text-brand-yellow text-2xl md:text-3xl lg:text-4xl xl:text-5xl block mt-1">
                   Arts &amp; Science
                 </span>
-                <span className="text-white/90 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl italic block mt-1">
+                <span className="text-white/90 text-xl md:text-2xl lg:text-3xl xl:text-4xl italic block mt-1">
                   (Autonomous)
                 </span>
               </h1>

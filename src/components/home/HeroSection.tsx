@@ -16,28 +16,28 @@ export default function HeroSection() {
             {/* Top Badge */}
             <div className="inline-flex items-center gap-2 mb-4 lg:mb-5 px-4 py-1.5 sm:px-5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 w-fit">
               <Award className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-yellow" />
-              <span className="text-xs sm:text-sm font-medium text-white">
+              <span className="text-[12px] sm:text-[14px] font-medium leading-4 sm:leading-5 text-white uppercase">
                 NAAC Accredited | UGC Recognized | Periyar University Affiliated
               </span>
             </div>
 
             {/* Main Heading */}
             <div className="mb-3 lg:mb-5">
-              <h1 className="font-bold leading-tight">
-                <span className="text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl block">
+              <h1 className="font-bold leading-tight tracking-[-0.9px]">
+                <span className="text-white text-[24px] sm:text-[30px] lg:text-[36px] leading-[32px] sm:leading-[40px] lg:leading-[45px] block">
                   JKKN College of
                 </span>
-                <span className="text-brand-yellow text-2xl md:text-3xl lg:text-4xl xl:text-5xl block mt-1">
+                <span className="text-brand-yellow text-[24px] sm:text-[30px] lg:text-[36px] leading-[32px] sm:leading-[40px] lg:leading-[45px] block mt-1">
                   Arts &amp; Science
                 </span>
-                <span className="text-white/90 text-xl md:text-2xl lg:text-3xl xl:text-4xl italic block mt-1">
+                <span className="text-white/90 text-[20px] sm:text-[24px] lg:text-[30px] leading-[28px] sm:leading-[32px] lg:leading-[36px] italic block mt-1 tracking-[-0.75px]">
                   (Autonomous)
                 </span>
               </h1>
             </div>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm md:text-base lg:text-lg mb-4 lg:mb-6 text-white/90 leading-relaxed max-w-xl">
+            <p className="text-[14px] sm:text-[18px] lg:text-[20px] leading-[20px] sm:leading-[29.25px] lg:leading-[28px] mb-4 lg:mb-6 text-white/90 font-normal max-w-xl">
               Empowering excellence since 1995. Unlock your potential with industry-integrated programs in Science, Commerce, Computer Applications, and Management. Join 3500+ Learners building successful careers with 95%+ placement at TCS, Infosys, Wipro &amp; more.
             </p>
 
@@ -47,11 +47,11 @@ export default function HeroSection() {
                 href="https://admission.jkkn.ac.in/form/jkkn-institution-admission-yxs3w8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-brand-yellow text-brand-green px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-brand-yellow/90 transition shadow-xl hover:shadow-2xl hover:scale-105 transform text-center"
+                className="bg-brand-yellow text-brand-green px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-semibold text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] hover:bg-brand-yellow/90 transition shadow-xl hover:shadow-2xl hover:scale-105 transform text-center"
               >
                 Apply for 2026-27
               </a>
-              <button className="bg-transparent border-2 border-white text-white px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:bg-white/10 transition backdrop-blur-sm">
+              <button className="bg-transparent border-2 border-white text-white px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-full font-semibold text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] hover:bg-white/10 transition backdrop-blur-sm">
                 Explore Programs
               </button>
             </div>

@@ -214,7 +214,7 @@ export default function BScVisualCommunicationPage() {
                 {
                   icon: <FileText className="w-8 h-8 text-white" />,
                   title: 'Accepted Streams',
-                  items: ['Arts stream with any combination', 'Science stream (PCM/PCB)', 'Commerce stream students', 'Vocational courses with creative subjects']
+                  items: ['Arts stream with any combination', 'Commerce stream students']
                 },
                 {
                   icon: <BookOpen className="w-8 h-8 text-white" />,
@@ -452,7 +452,7 @@ export default function BScVisualCommunicationPage() {
                 { icon: <Camera className="w-6 h-6" />, title: 'Photographer', desc: 'Commercial, fashion, and editorial photography' },
                 { icon: <Video className="w-6 h-6" />, title: 'Motion Graphics Artist', desc: 'Create animations and visual effects for media' },
                 { icon: <Globe className="w-6 h-6" />, title: 'Digital Marketer', desc: 'Social media content and brand communication' },
-                { icon: <Briefcase className="w-6 h-6" />, title: 'Art Director', desc: 'Lead creative teams in advertising agencies' },
+                { icon: <Briefcase className="w-6 h-6" />, title: 'Film Director', desc: 'Lead creative teams in advertising agencies' },
                 { icon: <Award className="w-6 h-6" />, title: 'Web Designer', desc: 'Design websites for IT companies and startups' }
               ].map((career, idx) => (
                 <RevealSection key={idx} delay={idx * 80}>

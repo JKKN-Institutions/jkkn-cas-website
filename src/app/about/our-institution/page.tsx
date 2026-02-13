@@ -16,7 +16,7 @@ export default function OurInstitutionPage() {
         <div className="mb-8 rounded-lg overflow-hidden">
           <div className="relative w-full h-64 md:h-96 lg:h-[400px] bg-gray-200">
             <Image
-              src="/images/jkkn-entrance.jpg"
+              src="/images/about/casinstitution.avif"
               alt="JKKN Institution Entrance"
               fill
               className="object-cover"

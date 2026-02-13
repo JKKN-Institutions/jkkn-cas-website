@@ -50,53 +50,62 @@ export default function OurManagementPage() {
             {managementTeam.map((member, index) => (
               <article
                 key={index}
-                className="bg-white/80 backdrop-blur-lg rounded-3xl p-8 md:p-10 border border-[#0b6d41]/10 shadow-2xl hover:bg-white/90 transition"
+                className="group relative bg-white/40 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-white/60 shadow-[0_8px_32px_0_rgba(11,109,65,0.15)] hover:shadow-[0_8px_32px_0_rgba(11,109,65,0.25)] transition-all duration-300 hover:scale-[1.02] hover:bg-white/50"
               >
-                {/* Profile Image with Golden Border */}
-                <div className="flex flex-col items-center mb-6">
-                  <div className="relative w-40 h-40 md:w-48 md:h-48 mb-6">
-                    {/* Golden decorative border - multiple layers */}
-                    <div className="absolute inset-0 rounded-full border-[6px] border-[#ffde59]">
-                      <div className="absolute inset-2 rounded-full border-[6px] border-[#d4a829]">
-                        <div className="absolute inset-2 rounded-full border-[4px] border-[#ffde59]/60">
-                          <div className="w-full h-full rounded-full overflow-hidden bg-white">
-                            {/* Profile image placeholder */}
-                            <div className="w-full h-full bg-gradient-to-br from-blue-200 to-blue-400"></div>
+                {/* Glass shine effect */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-50 pointer-events-none"></div>
+
+                {/* Content wrapper */}
+                <div className="relative z-10">
+                  {/* Profile Image with Golden Border */}
+                  <div className="flex flex-col items-center mb-6">
+                    <div className="relative w-40 h-40 md:w-48 md:h-48 mb-6 group-hover:scale-105 transition-transform duration-300">
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 rounded-full bg-[#ffde59]/20 blur-xl group-hover:bg-[#ffde59]/30 transition-all duration-300"></div>
+
+                      {/* Golden decorative border - multiple layers with glass effect */}
+                      <div className="absolute inset-0 rounded-full border-[6px] border-[#ffde59] shadow-[0_0_20px_rgba(255,222,89,0.3)]">
+                        <div className="absolute inset-2 rounded-full border-[6px] border-[#d4a829] bg-gradient-to-br from-[#ffde59]/20 via-transparent to-transparent">
+                          <div className="absolute inset-2 rounded-full border-[4px] border-[#ffde59]/60 backdrop-blur-sm">
+                            <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-inner">
+                              {/* Profile image placeholder */}
+                              <div className="w-full h-full bg-gradient-to-br from-blue-200 to-blue-400"></div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
+                    {/* Name */}
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-3 text-center">
+                      {member.name}
+                    </h2>
+
+                    {/* Position with Icon - Glass Badge */}
+                    <div className="flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-[#ffde59]/10 backdrop-blur-md border border-[#ffde59]/30 shadow-lg">
+                      <Crown className="w-4 h-4 text-[#ffde59] drop-shadow-lg" />
+                      <p className="text-[#0b6d41] text-sm font-semibold uppercase tracking-wide drop-shadow-sm">
+                        {member.position} - {member.organization}
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Name */}
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0b6d41] mb-3 text-center">
-                    {member.name}
-                  </h2>
+                  {/* Bio with Quote Marks - Glass Panel */}
+                  <div className="relative bg-white/30 backdrop-blur-sm rounded-2xl p-6 border border-white/40 shadow-inner">
+                    {/* Opening quote */}
+                    <div className="absolute -top-2 -left-2 text-3xl text-[#ffde59]/30 font-serif leading-none">
+                      "
+                    </div>
 
-                  {/* Position with Icon */}
-                  <div className="flex items-center gap-2 mb-6">
-                    <Crown className="w-4 h-4 text-[#ffde59]" />
-                    <p className="text-[#ffde59] text-sm font-semibold uppercase tracking-wide">
-                      {member.position} - {member.organization}
+                    {/* Bio text */}
+                    <p className="text-black text-sm md:text-base leading-relaxed text-center px-4 relative z-10">
+                      {member.bio}
                     </p>
-                  </div>
-                </div>
 
-                {/* Bio with Quote Marks */}
-                <div className="relative">
-                  {/* Opening quote */}
-                  <div className="absolute -top-2 -left-2 text-3xl text-[#ffde59]/30 font-serif leading-none">
-                    "
-                  </div>
-
-                  {/* Bio text */}
-                  <p className="text-[#0b6d41]/90 text-sm md:text-base leading-relaxed text-center px-4 relative z-10">
-                    {member.bio}
-                  </p>
-
-                  {/* Closing quote */}
-                  <div className="absolute -bottom-8 -right-2 text-3xl text-[#ffde59]/30 font-serif leading-none">
-                    "
+                    {/* Closing quote */}
+                    <div className="absolute -bottom-8 -right-2 text-3xl text-[#ffde59]/30 font-serif leading-none">
+                      "
+                    </div>
                   </div>
                 </div>
               </article>

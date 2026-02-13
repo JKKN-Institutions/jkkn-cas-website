@@ -11,7 +11,7 @@ import {
   Phone,
   LucideIcon
 } from 'lucide-react';
-import { BottomNavGroup, FlatMenuItem } from '@/components/BottomNav/types';
+import { BottomNavGroup, FlatMenuItem, HierarchicalMenuItem } from '@/components/BottomNav/types';
 
 // Navigation structure for CAS website
 export function getNavigationGroups(pathname: string): BottomNavGroup[] {
@@ -64,179 +64,290 @@ export function getNavigationGroups(pathname: string): BottomNavGroup[] {
       ]
     },
 
-    // Group 3: Programmes
+    // Group 3: Programmes (Hierarchical drill-down navigation)
     {
       id: 'programmes',
       groupLabel: 'Programmes',
       icon: GraduationCap,
-      menus: [
-        // Aided UG
+      isHierarchical: true,
+      hierarchicalMenus: [
+        // Level 1: Aided
         {
-          href: '/programmes/aided/ug/ba-english',
-          label: 'B.A. English',
+          id: 'aided',
+          label: 'Aided',
           icon: GraduationCap,
-          parentLabel: 'Aided UG',
-          active: pathname === '/programmes/aided/ug/ba-english'
+          children: [
+            // Level 2: UG
+            {
+              id: 'aided-ug',
+              label: 'UG',
+              icon: GraduationCap,
+              children: [
+                // Level 3: Individual courses
+                {
+                  id: 'aided-ug-ba-english',
+                  label: 'B.A. English',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/ug/ba-english',
+                  active: pathname === '/programmes/aided/ug/ba-english'
+                },
+                {
+                  id: 'aided-ug-ba-history',
+                  label: 'B.A. History',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/ug/ba-history',
+                  active: pathname === '/programmes/aided/ug/ba-history'
+                },
+                {
+                  id: 'aided-ug-bsc-chemistry',
+                  label: 'B.Sc. Chemistry',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/ug/bsc-chemistry',
+                  active: pathname === '/programmes/aided/ug/bsc-chemistry'
+                },
+                {
+                  id: 'aided-ug-bsc-maths',
+                  label: 'B.Sc. Mathematics',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/ug/bsc-maths',
+                  active: pathname === '/programmes/aided/ug/bsc-maths'
+                },
+                {
+                  id: 'aided-ug-bsc-zoology',
+                  label: 'B.Sc. Zoology',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/ug/bsc-zoology',
+                  active: pathname === '/programmes/aided/ug/bsc-zoology'
+                },
+                {
+                  id: 'aided-ug-bcom',
+                  label: 'B.Com',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/ug/bcom',
+                  active: pathname === '/programmes/aided/ug/bcom'
+                }
+              ]
+            },
+            // Level 2: PG
+            {
+              id: 'aided-pg',
+              label: 'PG',
+              icon: GraduationCap,
+              children: [
+                {
+                  id: 'aided-pg-mca',
+                  label: 'MCA',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/pg/mca',
+                  active: pathname === '/programmes/aided/pg/mca'
+                },
+                {
+                  id: 'aided-pg-ma-english',
+                  label: 'M.A. English',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/pg/ma-english',
+                  active: pathname === '/programmes/aided/pg/ma-english'
+                },
+                {
+                  id: 'aided-pg-mcom',
+                  label: 'M.Com',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/pg/mcom',
+                  active: pathname === '/programmes/aided/pg/mcom'
+                },
+                {
+                  id: 'aided-pg-msc-chemistry',
+                  label: 'M.Sc. Chemistry',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/pg/msc-chemistry',
+                  active: pathname === '/programmes/aided/pg/msc-chemistry'
+                },
+                {
+                  id: 'aided-pg-msc-computer-science',
+                  label: 'M.Sc. Computer Science',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/pg/msc-computer-science',
+                  active: pathname === '/programmes/aided/pg/msc-computer-science'
+                },
+                {
+                  id: 'aided-pg-msc-physics',
+                  label: 'M.Sc. Physics',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/pg/msc-physics',
+                  active: pathname === '/programmes/aided/pg/msc-physics'
+                },
+                {
+                  id: 'aided-pg-msc-zoology',
+                  label: 'M.Sc. Zoology',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/pg/msc-zoology',
+                  active: pathname === '/programmes/aided/pg/msc-zoology'
+                }
+              ]
+            },
+            // Level 2: PhD
+            {
+              id: 'aided-phd',
+              label: 'PhD',
+              icon: GraduationCap,
+              children: [
+                {
+                  id: 'aided-phd-chemistry',
+                  label: 'Chemistry',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/phd/chemistry',
+                  active: pathname === '/programmes/aided/phd/chemistry'
+                },
+                {
+                  id: 'aided-phd-tamil',
+                  label: 'Tamil',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/phd/tamil',
+                  active: pathname === '/programmes/aided/phd/tamil'
+                },
+                {
+                  id: 'aided-phd-zoology',
+                  label: 'Zoology',
+                  icon: GraduationCap,
+                  href: '/programmes/aided/phd/zoology',
+                  active: pathname === '/programmes/aided/phd/zoology'
+                }
+              ]
+            }
+          ]
         },
+        // Level 1: Self-Finance
         {
-          href: '/programmes/aided/ug/ba-history',
-          label: 'B.A. History',
+          id: 'self-finance',
+          label: 'Self-Finance',
           icon: GraduationCap,
-          parentLabel: 'Aided UG',
-          active: pathname === '/programmes/aided/ug/ba-history'
-        },
-        {
-          href: '/programmes/aided/ug/bsc-chemistry',
-          label: 'B.Sc. Chemistry',
-          icon: GraduationCap,
-          parentLabel: 'Aided UG',
-          active: pathname === '/programmes/aided/ug/bsc-chemistry'
-        },
-        {
-          href: '/programmes/aided/ug/bsc-maths',
-          label: 'B.Sc. Maths',
-          icon: GraduationCap,
-          parentLabel: 'Aided UG',
-          active: pathname === '/programmes/aided/ug/bsc-maths'
-        },
-        {
-          href: '/programmes/aided/ug/bsc-zoology',
-          label: 'B.Sc. Zoology',
-          icon: GraduationCap,
-          parentLabel: 'Aided UG',
-          active: pathname === '/programmes/aided/ug/bsc-zoology'
-        },
-        {
-          href: '/programmes/aided/ug/bcom',
-          label: 'B.Com',
-          icon: GraduationCap,
-          parentLabel: 'Aided UG',
-          active: pathname === '/programmes/aided/ug/bcom'
-        },
-        // Aided PG
-        {
-          href: '/programmes/aided/pg/mca',
-          label: 'MCA',
-          icon: GraduationCap,
-          parentLabel: 'Aided PG',
-          active: pathname === '/programmes/aided/pg/mca'
-        },
-        {
-          href: '/programmes/aided/pg/ma-english',
-          label: 'M.A. English',
-          icon: GraduationCap,
-          parentLabel: 'Aided PG',
-          active: pathname === '/programmes/aided/pg/ma-english'
-        },
-        {
-          href: '/programmes/aided/pg/msc-chemistry',
-          label: 'M.Sc. Chemistry',
-          icon: GraduationCap,
-          parentLabel: 'Aided PG',
-          active: pathname === '/programmes/aided/pg/msc-chemistry'
-        },
-        {
-          href: '/programmes/aided/pg/msc-maths',
-          label: 'M.Sc. Maths',
-          icon: GraduationCap,
-          parentLabel: 'Aided PG',
-          active: pathname === '/programmes/aided/pg/msc-maths'
-        },
-        {
-          href: '/programmes/aided/pg/mcom',
-          label: 'M.Com',
-          icon: GraduationCap,
-          parentLabel: 'Aided PG',
-          active: pathname === '/programmes/aided/pg/mcom'
-        },
-        // Aided PhD
-        {
-          href: '/programmes/aided/phd/commerce',
-          label: 'Commerce',
-          icon: GraduationCap,
-          parentLabel: 'Aided PhD',
-          active: pathname === '/programmes/aided/phd/commerce'
-        },
-        {
-          href: '/programmes/aided/phd/computer-science',
-          label: 'Computer Science',
-          icon: GraduationCap,
-          parentLabel: 'Aided PhD',
-          active: pathname === '/programmes/aided/phd/computer-science'
-        },
-        {
-          href: '/programmes/aided/phd/english',
-          label: 'English',
-          icon: GraduationCap,
-          parentLabel: 'Aided PhD',
-          active: pathname === '/programmes/aided/phd/english'
-        },
-        {
-          href: '/programmes/aided/phd/mathematics',
-          label: 'Mathematics',
-          icon: GraduationCap,
-          parentLabel: 'Aided PhD',
-          active: pathname === '/programmes/aided/phd/mathematics'
-        },
-        // Self-Finance UG
-        {
-          href: '/programmes/self-finance/ug/bba',
-          label: 'BBA',
-          icon: GraduationCap,
-          parentLabel: 'Self-Finance UG',
-          active: pathname === '/programmes/self-finance/ug/bba'
-        },
-        {
-          href: '/programmes/self-finance/ug/bca',
-          label: 'BCA',
-          icon: GraduationCap,
-          parentLabel: 'Self-Finance UG',
-          active: pathname === '/programmes/self-finance/ug/bca'
-        },
-        {
-          href: '/programmes/self-finance/ug/bsc-it',
-          label: 'B.Sc. IT',
-          icon: GraduationCap,
-          parentLabel: 'Self-Finance UG',
-          active: pathname === '/programmes/self-finance/ug/bsc-it'
-        },
-        {
-          href: '/programmes/self-finance/ug/bsc-cs',
-          label: 'B.Sc. CS',
-          icon: GraduationCap,
-          parentLabel: 'Self-Finance UG',
-          active: pathname === '/programmes/self-finance/ug/bsc-cs'
-        },
-        {
-          href: '/programmes/self-finance/ug/bcom-ca',
-          label: 'B.Com CA',
-          icon: GraduationCap,
-          parentLabel: 'Self-Finance UG',
-          active: pathname === '/programmes/self-finance/ug/bcom-ca'
-        },
-        // Self-Finance PG
-        {
-          href: '/programmes/self-finance/pg/mba',
-          label: 'MBA',
-          icon: GraduationCap,
-          parentLabel: 'Self-Finance PG',
-          active: pathname === '/programmes/self-finance/pg/mba'
-        },
-        {
-          href: '/programmes/self-finance/pg/msc-it',
-          label: 'M.Sc. IT',
-          icon: GraduationCap,
-          parentLabel: 'Self-Finance PG',
-          active: pathname === '/programmes/self-finance/pg/msc-it'
-        },
-        {
-          href: '/programmes/self-finance/pg/msc-cs',
-          label: 'M.Sc. CS',
-          icon: GraduationCap,
-          parentLabel: 'Self-Finance PG',
-          active: pathname === '/programmes/self-finance/pg/msc-cs'
+          children: [
+            // Level 2: UG
+            {
+              id: 'self-finance-ug',
+              label: 'UG',
+              icon: GraduationCap,
+              children: [
+                {
+                  id: 'self-finance-ug-bba',
+                  label: 'BBA',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bba',
+                  active: pathname === '/programmes/self-finance/ug/bba'
+                },
+                {
+                  id: 'self-finance-ug-bca',
+                  label: 'BCA',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bca',
+                  active: pathname === '/programmes/self-finance/ug/bca'
+                },
+                {
+                  id: 'self-finance-ug-bcom-accounting-finance',
+                  label: 'B.Com Accounting and Finance',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bcom-accounting-finance',
+                  active: pathname === '/programmes/self-finance/ug/bcom-accounting-finance'
+                },
+                {
+                  id: 'self-finance-ug-bcom-banking-insurance',
+                  label: 'B.Com Banking and Insurance',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bcom-banking-insurance',
+                  active: pathname === '/programmes/self-finance/ug/bcom-banking-insurance'
+                },
+                {
+                  id: 'self-finance-ug-bcom-ca',
+                  label: 'B.Com CA',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bcom-ca',
+                  active: pathname === '/programmes/self-finance/ug/bcom-ca'
+                },
+                {
+                  id: 'self-finance-ug-bsc-computer-science',
+                  label: 'B.Sc. Computer Science',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bsc-computer-science',
+                  active: pathname === '/programmes/self-finance/ug/bsc-computer-science'
+                },
+                {
+                  id: 'self-finance-ug-bsc-cs-cyber-security',
+                  label: 'B.Sc. CS (Cyber Security)',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bsc-cs-cyber-security',
+                  active: pathname === '/programmes/self-finance/ug/bsc-cs-cyber-security'
+                },
+                {
+                  id: 'self-finance-ug-bsc-microbiology',
+                  label: 'B.Sc. Microbiology',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bsc-microbiology',
+                  active: pathname === '/programmes/self-finance/ug/bsc-microbiology'
+                },
+                {
+                  id: 'self-finance-ug-bsc-physics',
+                  label: 'B.Sc. Physics',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bsc-physics',
+                  active: pathname === '/programmes/self-finance/ug/bsc-physics'
+                },
+                {
+                  id: 'self-finance-ug-bsc-textile-fashion-designing',
+                  label: 'B.Sc. Textile and Fashion Design',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bsc-textile-fashion-designing',
+                  active: pathname === '/programmes/self-finance/ug/bsc-textile-fashion-designing'
+                },
+                {
+                  id: 'self-finance-ug-bsc-visual-communication',
+                  label: 'B.Sc. Visual Communication',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/ug/bsc-visual-communication',
+                  active: pathname === '/programmes/self-finance/ug/bsc-visual-communication'
+                }
+              ]
+            },
+            // Level 2: PG
+            {
+              id: 'self-finance-pg',
+              label: 'PG',
+              icon: GraduationCap,
+              children: [
+                {
+                  id: 'self-finance-pg-mcom',
+                  label: 'M.Com',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/pg/mcom',
+                  active: pathname === '/programmes/self-finance/pg/mcom'
+                },
+                {
+                  id: 'self-finance-pg-msc-computer-science',
+                  label: 'M.Sc. Computer Science',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/pg/msc-computer-science',
+                  active: pathname === '/programmes/self-finance/pg/msc-computer-science'
+                },
+                {
+                  id: 'self-finance-pg-msc-cs-data-analytics',
+                  label: 'M.Sc. CS (Data Analytics)',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/pg/msc-cs-data-analytics',
+                  active: pathname === '/programmes/self-finance/pg/msc-cs-data-analytics'
+                },
+                {
+                  id: 'self-finance-pg-msc-mathematics',
+                  label: 'M.Sc. Mathematics',
+                  icon: GraduationCap,
+                  href: '/programmes/self-finance/pg/msc-mathematics',
+                  active: pathname === '/programmes/self-finance/pg/msc-mathematics'
+                }
+              ]
+            }
+          ]
         }
-      ]
+      ],
+      // Fallback flat menus (for backward compatibility)
+      menus: []
     },
 
     // Group 3: Departments - HIDDEN

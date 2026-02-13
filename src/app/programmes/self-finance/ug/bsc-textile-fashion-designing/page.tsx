@@ -265,17 +265,17 @@ export default function BSCTextileFashionDesigningPage() {
                   {
                     icon: <Award className="w-8 h-8 text-white" />,
                     title: 'Basic Eligibility',
-                    items: ['10+2 or equivalent from a recognized board', 'Minimum 50% aggregate marks']
+                    items: ['10+2 or equivalent from a recognized board', 'Minimum Passing marks']
                   },
                   {
                     icon: <BookOpen className="w-8 h-8 text-white" />,
                     title: 'Stream Acceptance',
-                    items: ['Students from Science, Commerce, or Arts streams are eligible to apply']
+                    items: ['Students from Science, Commerce, Arts and Any streams are eligible to apply']
                   },
                   {
                     icon: <UserCheck className="w-8 h-8 text-white" />,
                     title: 'Age Criteria',
-                    items: ['Candidates should be 17-25 years old at the time of admission']
+                    items: ['Candidates should be 17-45 years old at the time of admission']
                   },
                   {
                     icon: <FileText className="w-8 h-8 text-white" />,

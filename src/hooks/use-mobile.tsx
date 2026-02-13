@@ -1,6 +1,7 @@
 import * as React from "react"
 
-const MOBILE_BREAKPOINT = 1024
+// Updated to include tablets and small desktops (up to 1280px - xl breakpoint)
+const MOBILE_BREAKPOINT = 1280
 
 export function useIsMobile() {
   // Initialize with a check for SSR - default to false on server

@@ -97,29 +97,60 @@ export default function BComCAPage() {
   // Faculty data
   const facultyMembers = [
     {
-      name: "Dr. Sundarajan Rajan",
+      name: "Mrs.M.S.Punithamalar",
       designation: "HOD & Assistant Professor",
-      education: "PhD in Commerce, M.Com, CA Inter",
-      image: "/images/faculties/faculty-placeholder.jpg"
+      education: "M.Com(CA), MBA, M.Phil.,(Ph.D)",
+      image: "/images/faculties/Mrs.M.S.Punithamalar-300x199.png"
     },
     {
-      name: "Prof. Kavitha Murugan",
+      name: "Ms.G.Buvaneswari ",
       designation: "Assistant Professor",
-      education: "M.Com, M.Phil, NET Qualified",
-      image: "/images/faculties/faculty-placeholder.jpg"
+      education: "M.Com, B.ED, M.Phil",
+      image: "/images/faculties/Ms.G.Buvaneswari-300x199.png"
     },
     {
-      name: "Dr. Krishnan Iyer",
-      designation: "Associate Professor",
-      education: "PhD in Finance, CMA, M.Com",
-      image: "/images/faculties/faculty-placeholder.jpg"
-    },
-    {
-      name: "Ms. Priya Lakshmi",
+      name: "Mrs.N.Lingameena",
       designation: "Assistant Professor",
-      education: "M.Com, CA Foundation, Tally Certified",
-      image: "/images/faculties/faculty-placeholder.jpg"
+      education: "M.Com.,M.Phil.",
+      image: "/images/faculties/Mrs.N.Lingameena-300x199.png"
+    },
+    {
+      name: "Mr.A.Jegadishkumar",
+      designation: "Assistant Professor",
+      education: "M.Com.,B.Ed.,MBA",
+      image: "/images/faculties/Mr.A.Jegadishkumar-300x199.png"
+    },
+    {
+      name: "Ms.C.Agalya",
+      designation: "Assistant Professor",
+      education: "M.Com(CA).",
+      image: "/images/faculties/Ms.C.Agalya-300x199.png"
+    },
+    {
+      name: "Mrs.M.Sangeetha",
+      designation: "Assistant Professor",
+      education: "M.Com(CA)., B.Ed.",
+      image: "/images/faculties/Mrs.M.Sangeetha-300x199.png"
+    },
+    {
+      name: "Mr.S.Govindharaj",
+      designation: "Assistant Professor",
+      education: "M.Com., M.Phil., (Ph.D)",
+      image: "/images/faculties/Mr.S.Govindharaj-300x199.png"
+    },
+    {
+      name: "Dr.M.Palanisamy",
+      designation: "Assistant Professor",
+      education: "MA(ECO).,M.Phil.,Ph.D.",
+      image: "/images/faculties/Dr.M.Palanisamy-300x199.png"
+    },
+    {
+      name: "Mrs.G. Manimegalai",
+      designation: "Assistant Professor",
+      education: "M.COM,B.ED",
+      image: "/images/faculties/Manimegalai.jpg"
     }
+
   ];
 
   // Curriculum data

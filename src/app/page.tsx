@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/accordion";
 import HeroSection from '@/components/home/HeroSection';
 import StatsSection from '@/components/home/StatsSection';
+import AcademicProgramsSection from '@/components/home/AcademicProgramsSection';
 
 export default function Home() {
   return (
@@ -39,28 +40,14 @@ export default function Home() {
       <HeroSection />
 
       {/* Stats Section - Counting animation */}
-      <StatsSection />
+      {/* <StatsSection /> */}
 
       {/* About JKKN Arts & Science Section */}
       <section className="py-16 md:py-24 bg-[#fbfbee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
-            {/* Left - Image */}
-            <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
-                <img
-                  src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&h=600&fit=crop"
-                  alt="JKKN College Campus"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              {/* Accent decoration */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-yellow rounded-2xl -z-10 hidden lg:block"></div>
-              <div className="absolute -top-4 -left-4 w-20 h-20 bg-brand-green/10 rounded-2xl -z-10 hidden lg:block"></div>
-            </div>
-
-            {/* Right - Content */}
-            <div>
+            {/* Left - Content */}
+            <div className="order-1 lg:order-1">
               {/* Section Label */}
               <div className="text-[#0b6d41] text-[14px] font-semibold leading-[20px] tracking-wide uppercase mb-4">
                 ABOUT JKKN ARTS &amp; SCIENCE
@@ -74,7 +61,7 @@ export default function Home() {
               {/* Description Paragraphs - black color only */}
               <div className="space-y-4 text-[14px] sm:text-[18px] lg:text-[20px] leading-[20px] sm:leading-[29.25px] lg:leading-[28px] text-black font-normal">
                 <p>
-                  JKKN College of Arts and Science, established in 1995, is a premier institution committed to transforming lives through accessible, progressive education. As part of J.K.K. Nattraja Educational Institutions&apos; 100-year legacy (JKKN100), we blend traditional values with modern, industry-ready curriculum.
+                  JKKN College of Arts and Science, established in 1995, is a premier institution committed to transforming lives through accessible, progressive education. As part of JKKN Institutions&apos; 100-year legacy (JKKN100), we blend traditional values with modern, industry-ready curriculum.
                 </p>
                 <p>
                   Our NAAC accreditation and UGC recognition reflect our commitment to academic excellence. With experienced Learning Facilitators, state-of-the-art infrastructure, and strong industry partnerships, we prepare Learners not just for jobs, but for successful careers.
@@ -121,272 +108,26 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Right - Image */}
+            <div className="relative order-2 lg:order-2">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
+                <img
+                  src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&h=600&fit=crop"
+                  alt="JKKN College Campus"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Accent decoration */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-yellow rounded-2xl -z-10 hidden lg:block"></div>
+              <div className="absolute -top-4 -left-4 w-20 h-20 bg-brand-green/10 rounded-2xl -z-10 hidden lg:block"></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Academic Programs Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="text-[#0b6d41] text-[14px] font-semibold leading-[20px] tracking-wide uppercase mb-4">
-              ACADEMIC PROGRAMS
-            </div>
-            <h2 className="text-[24px] md:text-[30px] lg:text-[36px] leading-[32px] md:leading-[36px] lg:leading-[40px] font-bold tracking-[-0.75px] lg:tracking-[-0.9px] text-[#0b6d41] mb-6">
-              Industry-Integrated Programs for<br />
-              Tomorrow's Leaders
-            </h2>
-            <p className="text-[16px] md:text-[18px] leading-[24px] md:leading-[29.25px] font-normal text-gray-600 max-w-3xl mx-auto">
-              Choose from 18+ UGC approved undergraduate and postgraduate programs designed<br className="hidden md:block" />
-              with industry input to ensure career readiness
-            </p>
-          </div>
-
-          {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            <button className="px-6 py-2.5 bg-[#0b6d41] text-white rounded-full text-[14px] leading-[20px] font-semibold uppercase hover:bg-[#0b6d41] transition">
-              All Programs
-            </button>
-            <button className="px-6 py-2.5 bg-white text-gray-700 border border-gray-300 rounded-full text-[14px] leading-[20px] font-semibold uppercase hover:bg-[#fbfbee] transition">
-              Science
-            </button>
-            <button className="px-6 py-2.5 bg-white text-gray-700 border border-gray-300 rounded-full text-[14px] leading-[20px] font-semibold uppercase hover:bg-[#fbfbee] transition">
-              Commerce & Management
-            </button>
-            <button className="px-6 py-2.5 bg-white text-gray-700 border border-gray-300 rounded-full text-[14px] leading-[20px] font-semibold uppercase hover:bg-[#fbfbee] transition">
-              Computer Applications
-            </button>
-          </div>
-
-          {/* Program Cards Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-            {/* Card 1: B.Sc Computer Science */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#0b6d41] p-3 rounded-lg flex-shrink-0">
-                  <Code className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">B.Sc Computer Science</h3>
-                  <p className="text-[12px] leading-[16px] font-normal text-gray-500">3 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Comprehensive program covering programming, data structures, databases, AI/ML, web development, and software engineering with hands-on labs.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Python</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Java</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">AI/ML</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Cloud</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Card 2: BCA - Computer Applications */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#0b6d41] p-3 rounded-lg flex-shrink-0">
-                  <Cpu className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">BCA - Computer Applications</h3>
-                  <p className="text-[12px] leading-[16px] font-normal text-gray-500">3 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Professional program focused on software development, programming languages, database management, networking, and IT project management.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Full Stack</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Mobile Apps</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Networking</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Card 3: B.Sc Data Science */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#ffde59] p-3 rounded-lg flex-shrink-0">
-                  <BarChart className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">B.Sc Data Science</h3>
-                  <p className="text-[12px] leading-[16px] font-normal text-gray-500">3 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Cutting-edge program covering statistics, machine learning, big data analytics, and data visualization with real-world industry projects.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Machine Learning</span>
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Big Data</span>
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Analytics</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Card 4: B.Com */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#0b6d41] p-3 rounded-lg flex-shrink-0">
-                  <Briefcase className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">B.Com</h3>
-                  <p className="text-[12px] leading-[16px] font-normal text-gray-500">3 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Comprehensive commerce program covering accounting, taxation, corporate law, economics, and business management with CA/CMA/CS coaching.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Tally</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">GST</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">CA Foundation</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Card 5: BBA - Business Administration */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#0b6d41] p-3 rounded-lg flex-shrink-0">
-                  <TrendingUp className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">BBA - Business Administration</h3>
-                  <p className="text-[12px] leading-[16px] font-normal text-gray-500">3 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Management program covering marketing, HR, finance, operations, and entrepreneurship with industry internships and live projects.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Marketing</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Finance</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">HR</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Card 6: MBA */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#ffde59] p-3 rounded-lg flex-shrink-0">
-                  <Award className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">MBA</h3>
-                  <p className="text-sm text-gray-500">2 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Postgraduate management program with specializations in Marketing, Finance, HR, Operations, Analytics, and International Business.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">6 Specializations</span>
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">SAP Training</span>
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Internship</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Card 7: MCA */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#ffde59] p-3 rounded-lg flex-shrink-0">
-                  <Cpu className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">MCA</h3>
-                  <p className="text-sm text-gray-500">2 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Advanced computing program covering software engineering, cloud computing, AI/ML, cybersecurity, and enterprise solutions development.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Cloud</span>
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">AI/ML</span>
-                <span className="px-3 py-1 bg-yellow-100 text-[#ffde59] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Cybersecurity</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Card 8: M.Sc Computer Science */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#0b6d41] p-3 rounded-lg flex-shrink-0">
-                  <Code className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">M.Sc Computer Science</h3>
-                  <p className="text-sm text-gray-500">2 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Research-oriented program focused on advanced algorithms, machine learning, data science, and emerging technologies with research projects.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Research</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Deep Learning</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">IoT</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Card 9: B.Sc Mathematics */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="bg-[#0b6d41] p-3 rounded-lg flex-shrink-0">
-                  <Target className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-[18px] md:text-[24px] leading-[28px] md:leading-[32px] font-bold tracking-[-0.45px] md:tracking-[-0.6px] text-gray-900 mb-1">B.Sc Mathematics</h3>
-                  <p className="text-[12px] leading-[16px] font-normal text-gray-500">3 Years | 60 Seats</p>
-                </div>
-              </div>
-              <p className="text-[14px] leading-[20px] font-normal text-gray-600 mb-4">
-                Rigorous program in pure and applied mathematics with applications in data science, finance, and competitive exam preparation.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Applied Math</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">Statistics</span>
-                <span className="px-3 py-1 bg-green-100 text-[#0b6d41] text-[10px] leading-[13.33px] font-semibold rounded-full uppercase">UPSC Prep</span>
-              </div>
-              <button className="text-[#0b6d41] text-[14px] leading-[20px] font-semibold flex items-center hover:underline">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* View All Button */}
-          <div className="text-center">
-            <button className="bg-[#0b6d41] text-white px-8 py-3.5 rounded-full text-[16px] leading-[24px] font-semibold hover:bg-[#095c37] transition shadow-lg">
-              View All 18+ Programs
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* Academic Programs Section - With Category Tabs */}
+      <AcademicProgramsSection />
 
       {/* Why Choose JKKN Section */}
       <section className="py-16 md:py-24 bg-[#fbfbee]">
@@ -412,9 +153,9 @@ export default function Home() {
               <div className="bg-[#0b6d41] p-4 rounded-xl w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Award className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-[18px] leading-[28px] font-bold tracking-[-0.45px] text-gray-900 mb-3">NAAC A+ Accredited</h3>
+              <h3 className="text-[18px] leading-[28px] font-bold tracking-[-0.45px] text-gray-900 mb-3">NAAC Accredited</h3>
               <p className="text-[14px] leading-[20px] font-normal text-gray-600">
-                Nationally recognized excellence in teaching, infrastructure, and outcomes with UGC 2(f) & 12(B) status
+                Nationally recognized excellence in teaching and infrastructure.
               </p>
             </div>
 
@@ -423,7 +164,7 @@ export default function Home() {
               <div className="bg-[#0b6d41] p-4 rounded-xl w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-[18px] leading-[28px] font-bold tracking-[-0.45px] text-gray-900 mb-3">95%+ Placement</h3>
+              <h3 className="text-[18px] leading-[28px] font-bold tracking-[-0.45px] text-gray-900 mb-3">95% Placement</h3>
               <p className="text-[14px] leading-[20px] font-normal text-gray-600">
                 Exceptional placement record with 100+ recruiters including TCS, Infosys, Wipro, and leading MNCs
               </p>

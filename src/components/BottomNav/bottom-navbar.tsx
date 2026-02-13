@@ -10,6 +10,8 @@ import { useBottomNav, useBottomNavHydration } from '@/hooks/use-bottom-nav';
 import { getNavigationGroups } from '@/lib/navigationLinks';
 import { BottomNavItem } from './bottom-nav-item';
 import { BottomNavSubmenu } from './bottom-nav-submenu';
+import { BottomNavHierarchicalSubmenu } from './bottom-nav-hierarchical-submenu';
+import { BottomNavAccordionSubmenu } from './bottom-nav-accordion-submenu';
 import { BottomNavMoreMenu } from './bottom-nav-more-menu';
 import { ActivePageInfo } from './types';
 
@@ -51,13 +53,32 @@ export function BottomNavbar() {
 
   // Find the group that contains the current pathname
   const currentActiveGroup = useMemo(() => {
+    // Helper function to recursively search hierarchical menus
+    const searchHierarchicalMenus = (items: import('./types').HierarchicalMenuItem[]): boolean => {
+      for (const item of items) {
+        if (item.href && (pathname === item.href || pathname.startsWith(item.href + '/'))) {
+          return true;
+        }
+        if (item.children && searchHierarchicalMenus(item.children)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
     // Search all groups for a matching menu item
     for (const group of allNavGroups) {
+      // Check flat menus
       for (const menu of group.menus) {
         // Exact match or starts with (for nested routes)
         if (pathname === menu.href || pathname.startsWith(menu.href + '/')) {
           return group;
         }
+      }
+
+      // Check hierarchical menus
+      if (group.hierarchicalMenus && searchHierarchicalMenus(group.hierarchicalMenus)) {
+        return group;
       }
     }
     // Default to first group if no match found
@@ -68,6 +89,26 @@ export function BottomNavbar() {
   const currentActivePage = useMemo((): ActivePageInfo | null => {
     if (!currentActiveGroup) return null;
 
+    // Helper function to recursively search hierarchical menus
+    const searchHierarchicalPage = (items: import('./types').HierarchicalMenuItem[]): ActivePageInfo | null => {
+      for (const item of items) {
+        if (item.href && (pathname === item.href || pathname.startsWith(item.href + '/'))) {
+          return {
+            href: item.href,
+            label: item.label,
+            icon: item.icon,
+            groupLabel: currentActiveGroup.groupLabel
+          };
+        }
+        if (item.children) {
+          const found = searchHierarchicalPage(item.children);
+          if (found) return found;
+        }
+      }
+      return null;
+    };
+
+    // Check flat menus first
     for (const menu of currentActiveGroup.menus) {
       if (pathname === menu.href || pathname.startsWith(menu.href + '/')) {
         return {
@@ -78,6 +119,13 @@ export function BottomNavbar() {
         };
       }
     }
+
+    // Check hierarchical menus
+    if (currentActiveGroup.hierarchicalMenus) {
+      const found = searchHierarchicalPage(currentActiveGroup.hierarchicalMenus);
+      if (found) return found;
+    }
+
     return null;
   }, [pathname, currentActiveGroup]);
 
@@ -96,17 +144,40 @@ export function BottomNavbar() {
     return activeNavId;
   }, [currentActiveGroup, activeNavId, isExpanded]);
 
-  // Current active submenu items - based on effective active nav
-  const activeSubmenus = useMemo(() => {
+  // Current active group - based on effective active nav
+  const activeGroup = useMemo(() => {
     if (effectiveActiveNavId) {
       const selectedGroup = allNavGroups.find((g) => g.id === effectiveActiveNavId);
       if (selectedGroup) {
-        return selectedGroup.menus;
+        return selectedGroup;
       }
     }
     // Fallback to current pathname's group
-    return currentActiveGroup?.menus || [];
+    return currentActiveGroup || null;
   }, [effectiveActiveNavId, allNavGroups, currentActiveGroup]);
+
+  // Current active submenu items - based on effective active nav
+  const activeSubmenus = useMemo(() => {
+    return activeGroup?.menus || [];
+  }, [activeGroup]);
+
+  // Check if current group uses hierarchical navigation
+  const isHierarchicalNav = useMemo(() => {
+    const isHier = activeGroup?.isHierarchical || false;
+    if (isHier) {
+      console.log('Active group is hierarchical:', activeGroup?.groupLabel, 'Menus count:', activeGroup?.hierarchicalMenus?.length);
+    }
+    return isHier;
+  }, [activeGroup]);
+
+  // Hierarchical menu items
+  const hierarchicalMenus = useMemo(() => {
+    const menus = activeGroup?.hierarchicalMenus || [];
+    if (menus.length > 0) {
+      console.log('Hierarchical menus:', menus.map(m => m.label));
+    }
+    return menus;
+  }, [activeGroup]);
 
   // Update active page IMMEDIATELY when currentActivePage changes (before paint)
   useLayoutEffect(() => {
@@ -136,11 +207,22 @@ export function BottomNavbar() {
       // Find the group to check if it has submenus
       const group = allNavGroups.find((g) => g.id === groupId);
 
-      // If group has only 1 menu item, navigate directly instead of showing submenu
-      if (group && group.menus.length === 1) {
+      // Check if group has any menus (flat or hierarchical)
+      const hasMenus = group && (
+        (group.menus && group.menus.length > 0) ||
+        (group.hierarchicalMenus && group.hierarchicalMenus.length > 0)
+      );
+
+      // If group has only 1 flat menu item and no hierarchical menus, navigate directly
+      if (group && group.menus.length === 1 && !group.hierarchicalMenus) {
         router.push(group.menus[0].href);
         setExpanded(false);
         setMoreMenuOpen(false);
+        return;
+      }
+
+      // If group has no menus at all, do nothing
+      if (!hasMenus) {
         return;
       }
 
@@ -217,7 +299,7 @@ export function BottomNavbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.12, ease: 'easeOut' }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[75] lg:hidden"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[75] xl:hidden"
             onClick={() => {
               setExpanded(false);
             }}
@@ -239,8 +321,8 @@ export function BottomNavbar() {
         }}
         className={cn(
           'fixed bottom-0 left-0 right-0 z-[80]',
-          // Hide on desktop (lg+)
-          'lg:hidden',
+          // Hide on large desktop (xl+) - show on mobile, tablet, and small desktop
+          'xl:hidden',
           'bg-white border-t border-gray-200',
           'shadow-[0_-4px_20px_rgba(0,0,0,0.1)]'
         )}
@@ -248,26 +330,41 @@ export function BottomNavbar() {
           paddingBottom: 'env(safe-area-inset-bottom, 0px)'
         }}
       >
-        {/* Expanded submenu */}
-        <BottomNavSubmenu
-          items={activeSubmenus}
-          isOpen={isExpanded}
-          onItemClick={handleSubmenuClick}
-        />
+        {/* Expanded submenu - accordion or flat */}
+        {isHierarchicalNav ? (
+          <BottomNavAccordionSubmenu
+            items={hierarchicalMenus}
+            isOpen={isExpanded}
+            onItemClick={handleSubmenuClick}
+          />
+        ) : (
+          <BottomNavSubmenu
+            items={activeSubmenus}
+            isOpen={isExpanded}
+            onItemClick={handleSubmenuClick}
+          />
+        )}
 
         {/* Nav items */}
         <div className="flex items-center justify-around">
-          {primaryNavGroups.map((group) => (
-            <BottomNavItem
-              key={group.id}
-              id={group.id}
-              icon={group.icon}
-              label={group.groupLabel}
-              isActive={effectiveActiveNavId === group.id}
-              hasSubmenu={group.menus.length > 1}
-              onClick={() => handleNavClick(group.id)}
-            />
-          ))}
+          {primaryNavGroups.map((group) => {
+            const hasSubmenu = Boolean(
+              (group.menus && group.menus.length > 1) ||
+              (group.hierarchicalMenus && group.hierarchicalMenus.length > 0)
+            );
+
+            return (
+              <BottomNavItem
+                key={group.id}
+                id={group.id}
+                icon={group.icon}
+                label={group.groupLabel}
+                isActive={effectiveActiveNavId === group.id}
+                hasSubmenu={hasSubmenu}
+                onClick={() => handleNavClick(group.id)}
+              />
+            );
+          })}
 
           {/* More button if there are additional groups */}
           {moreNavGroups.length > 0 && (

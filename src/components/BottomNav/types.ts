@@ -8,11 +8,23 @@ export interface FlatMenuItem {
   active?: boolean;
 }
 
+// Hierarchical menu item for drill-down navigation
+export interface HierarchicalMenuItem {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+  href?: string; // Only present for leaf items (actual pages)
+  children?: HierarchicalMenuItem[]; // Nested items for drill-down
+  active?: boolean;
+}
+
 export interface BottomNavGroup {
   id: string;
   groupLabel: string;
   icon: LucideIcon;
   menus: FlatMenuItem[];
+  hierarchicalMenus?: HierarchicalMenuItem[]; // New: for drill-down navigation
+  isHierarchical?: boolean; // Flag to indicate this group uses drill-down
 }
 
 export interface BottomNavItemProps {

@@ -76,7 +76,7 @@ export default function BScPhysicsPage() {
     },
     {
       question: "What is the eligibility criteria for B.Sc Physics admission?",
-      answer: "Candidates must have completed Higher Secondary (10+2) from a recognized board with Physics and Mathematics as compulsory subjects. A minimum aggregate of 50% marks is required for general category candidates and 45% for reserved categories. Chemistry or Computer Science as an additional subject is preferred but not mandatory."
+      answer: "Candidates must have completed Higher Secondary (10+2) from a recognized board with Physics,Chemistry and Mathematics as compulsory subjects. A minimum aggregate of 50% marks is required for general category candidates and 45% for reserved categories. "
     },
     {
       question: "What higher studies options are available after B.Sc Physics?",
@@ -267,12 +267,12 @@ export default function BScPhysicsPage() {
                   {
                     icon: <GraduationCap className="w-8 h-8 text-white" />,
                     title: 'Academic Qualification',
-                    items: ['Higher Secondary (10+2) from recognized board', 'Physics & Mathematics as compulsory subjects', 'Minimum 50% aggregate marks', '45% for reserved categories']
+                    items: ['Higher Secondary (10+2) from recognized board', 'Physics,Chemistry & Mathematics as compulsory subjects', 'Minimum 50% aggregate marks', '45% for reserved categories']
                   },
                   {
                     icon: <BookOpen className="w-8 h-8 text-white" />,
                     title: 'Accepted Streams',
-                    items: ['Science stream with Physics mandatory', 'Physics, Chemistry & Mathematics (PCM)', 'Physics, Chemistry, Mathematics & Computer Science', 'Vocational Science courses with Physics']
+                    items: ['Science stream with Physics mandatory', 'Physics,Biology, Chemistry & Mathematics (PCM)', 'Physics, Chemistry, Mathematics & Computer Science', 'Vocational Science courses with Physics']
                   },
                   {
                     icon: <FileText className="w-8 h-8 text-white" />,
@@ -343,8 +343,8 @@ export default function BScPhysicsPage() {
                       key={year}
                       onClick={() => setActiveYear(year)}
                       className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
-                          ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
-                          : 'bg-white text-brand-green hover:bg-brand-green/5'
+                        ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                        : 'bg-white text-brand-green hover:bg-brand-green/5'
                         }`}
                     >
                       Year {year}
@@ -528,7 +528,7 @@ export default function BScPhysicsPage() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
                   { icon: <Brain className="w-6 h-6 text-white" />, title: 'Analytical Thinking', description: 'Master systematic approaches to physical problem-solving, mathematical modeling, experimental design, and data interpretation using statistical and computational tools.' },
-                  { icon: <BookOpen className="w-6 h-6 text-white" />, title: 'Theoretical Foundation', description: 'Develop comprehensive knowledge of classical and modern physics including mechanics, electromagnetism, quantum physics, and relativity with mathematical rigor.' },
+                  { icon: <BookOpen className="w-6 h-6 text-white" />, title: 'Theoretical Foundation', description: 'Develop comprehensive knowledge of classical and modern physics including mechanics, electromagnetism, quantum physics, and relativity with mathematical Physics.' },
                   { icon: <FlaskConical className="w-6 h-6 text-white" />, title: 'Laboratory Proficiency', description: 'Acquire hands-on skills in experimental physics, precision measurements, instrumentation, electronics fabrication, and modern laboratory techniques.' },
                   { icon: <Database className="w-6 h-6 text-white" />, title: 'Computational Skills', description: 'Comprehend numerical methods, programming languages, simulation techniques, and data analysis methodologies essential for modern physics research.' },
                   { icon: <Zap className="w-6 h-6 text-white" />, title: 'Electronics Expertise', description: 'Apply analog and digital electronics concepts including circuit design, microcontroller programming, and instrumentation for scientific applications.' },
@@ -677,7 +677,7 @@ export default function BScPhysicsPage() {
                   { icon: <Microscope className="w-6 h-6 text-white" />, title: 'Research-Oriented Learning', description: 'Engage in research projects with collaboration opportunities with national laboratories like ISRO and DRDO.' },
                   { icon: <Briefcase className="w-6 h-6 text-white" />, title: 'Excellent Placement Support', description: 'Strong industry connections ensuring placement opportunities in leading technology and research organizations.' },
                   { icon: <FlaskConical className="w-6 h-6 text-white" />, title: 'Modern Infrastructure', description: 'Access to well-equipped laboratories, computational facilities, and latest scientific instruments.' },
-                  { icon: <TrendingUp className="w-6 h-6 text-white" />, title: 'Higher Education Pathways', description: 'Strong foundation for M.Sc Physics, integrated PhD programmes, and competitive exams like IIT-JAM, GATE, and CSIR-NET.' },
+                  { icon: <TrendingUp className="w-6 h-6 text-white" />, title: 'Higher Education Pathways', description: 'Strong foundation for M.Sc Physics, integrated PhD programmes, and competitive exams like IIT-JAM, GATE, and CSIR-NET,M.Sc. Electronics,M.Sc. NanoScience,MBA,MCA,AstroPhysics,M.Sc. Medical Physics.' },
                   { icon: <Award className="w-6 h-6 text-white" />, title: 'NAAC Accreditation', description: 'Quality-assured education with government recognition and industry partnerships ensuring excellent learning outcomes.' }
                 ].map((reason, idx) => (
                   <RevealSection key={idx} delay={idx * 100}>

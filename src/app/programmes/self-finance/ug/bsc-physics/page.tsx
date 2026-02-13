@@ -180,7 +180,7 @@ export default function BScPhysicsPage() {
               {[
                 { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC', title: 'Accredited Institution', desc: 'Quality assured education' },
                 { icon: <FlaskConical className="w-7 h-7" />, stat: 'Modern', title: 'Physics Labs', desc: 'State-of-the-art facilities' },
-                { icon: <Briefcase className="w-7 h-7" />, stat: '90%+', title: 'Placement Record', desc: 'Career opportunities assured' },
+                { icon: <Briefcase className="w-7 h-7" />, stat: '95%', title: 'Placement Record', desc: 'Career opportunities assured' },
                 { icon: <Atom className="w-7 h-7" />, stat: 'ISRO', title: 'Industry Connect', desc: 'Research collaborations' },
               ].map((card, idx) => (
                 <RevealSection key={idx} delay={idx * 100}>
@@ -278,22 +278,8 @@ export default function BScPhysicsPage() {
                     icon: <FileText className="w-8 h-8 text-white" />,
                     title: 'Documents Required',
                     items: ['10th & 12th Mark Sheets', 'Transfer Certificate', 'Community Certificate', 'Passport Size Photographs', 'Aadhaar Card Copy']
-                  },
-                  {
-                    icon: <Calendar className="w-8 h-8 text-white" />,
-                    title: 'Admission Process',
-                    items: ['Online/Offline Application', 'Document Verification', 'Merit-based Selection', 'Fee Payment & Enrollment']
-                  },
-                  {
-                    icon: <UserCheck className="w-8 h-8 text-white" />,
-                    title: 'Age Criteria',
-                    items: ['No upper age limit for admission', 'Candidates who have completed 17 years of age as on December 31st of the admission year are eligible']
-                  },
-                  {
-                    icon: <DollarSign className="w-8 h-8 text-white" />,
-                    title: 'Scholarships Available',
-                    items: ['Merit Scholarships (Top 10%)', 'Government Scholarships', 'Financial Aid for EWS', 'Sports Quota Benefits']
                   }
+
                 ].map((card, idx) => (
                   <RevealSection key={idx} delay={idx * 100}>
                     <GlassCard className="p-8 h-full">
@@ -359,23 +345,31 @@ export default function BScPhysicsPage() {
                     {
                       title: 'Semester I',
                       subjects: [
-                        { name: 'Mechanics & Properties of Matter', code: 'PHY101' },
-                        { name: 'Mathematical Physics I', code: 'PHY102' },
-                        { name: 'Electricity & Magnetism', code: 'PHY103' },
-                        { name: 'Practical: Mechanics Lab', code: 'PHY104P' },
-                        { name: 'Allied Mathematics I', code: 'MAT101' },
-                        { name: 'Environmental Studies', code: 'EVS101' }
+                        { name: 'General Tamil - I', code: '24UGTA01' },
+                        { name: 'General English – I', code: '24UGEN01' },
+                        { name: 'Core – I, Properties of Matter & Sound', code: '24UPHC01' },
+                        { name: 'Core Practical – I, Properties of Matter Experiments', code: '24UPHCP01' },
+                        { name: 'Generic Elective Mathematics – I', code: '24UMAGE1' },
+                        { name: 'Non-Major Elective – I (NME), Physics For Everyday Life', code: '24UPHNM1' },
+                        { name: 'Foundation Course, Introductory Physics', code: '24UPHF01' },
+                        { name: 'Generic Elective Physics – I (Elective)', code: '24UPHGE1' },
+                        { name: 'Generic Elective Physics Practical – I (Elective)', code: '24UPHGEP01' }
                       ]
                     },
                     {
                       title: 'Semester II',
                       subjects: [
-                        { name: 'Thermal Physics', code: 'PHY201' },
-                        { name: 'Waves & Oscillations', code: 'PHY202' },
-                        { name: 'Mathematical Physics II', code: 'PHY203' },
-                        { name: 'Practical: Thermal & Electricity Lab', code: 'PHY204P' },
-                        { name: 'Allied Mathematics II', code: 'MAT102' },
-                        { name: 'Value Education', code: 'VAL101' }
+                        { name: 'General Tamil – II', code: '24UGTA02' },
+                        { name: 'General English – II', code: '24UGEN02' },
+                        { name: 'Core – II, Heat, Thermodynamics and Statistical Physics', code: '24UPHC02' },
+                        { name: 'Core Practical – II, Heat, Oscillations, Waves & Sound Experiments', code: '24UPHCP02' },
+                        { name: 'Generic Elective Mathematics – II', code: '24UMAGE2' },
+                        { name: 'Generic Elective Mathematics Practical', code: '24UMAGEP01' },
+                        { name: 'Non Major Elective – II (NME), Astrophysics', code: '24UPHNM2' },
+                        { name: 'SEC – I, Instrumentation', code: '24UPHS01' },
+                        { name: 'Disaster Management', code: '25UPHDIM01' },
+                        { name: 'Generic Elective Physics – II (Elective)', code: '24UPHGE2' },
+                        { name: 'Generic Elective Physics Practical – II (Elective)', code: '24UPHGEP02' }
                       ]
                     }
                   ].map((sem, idx) => (
@@ -387,12 +381,12 @@ export default function BScPhysicsPage() {
                         <div className="p-6">
                           <ul className="space-y-3">
                             {sem.subjects.map((subject, i) => (
-                              <li key={i} className="flex items-center justify-between text-gray-700">
+                              <li key={i} className="flex flex-col gap-1 text-gray-700">
                                 <div className="flex items-start gap-2">
                                   <span className="text-emerald-500 mt-1">•</span>
-                                  <span>{subject.name}</span>
+                                  <span className="flex-1">{subject.name}</span>
                                 </div>
-                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                                <span className="text-brand-green font-semibold text-xs ml-4 opacity-70">{subject.code}</span>
                               </li>
                             ))}
                           </ul>
@@ -409,23 +403,30 @@ export default function BScPhysicsPage() {
                     {
                       title: 'Semester III',
                       subjects: [
-                        { name: 'Optics', code: 'PHY301' },
-                        { name: 'Electromagnetism', code: 'PHY302' },
-                        { name: 'Digital Electronics', code: 'PHY303' },
-                        { name: 'Practical: Optics Lab', code: 'PHY304P' },
-                        { name: 'Allied Chemistry I', code: 'CHE101' },
-                        { name: 'Soft Skills Development', code: 'SKL301' }
+                        { name: 'General Tamil - III', code: '24UGTA03' },
+                        { name: 'General English – III', code: '24UGEN03' },
+                        { name: 'Core – III, General Mechanics and Classical Mechanics', code: '24UPHC03' },
+                        { name: 'Core Practical – III, Electricity Experiments', code: '24UPHCP03' },
+                        { name: 'Generic Elective Chemistry – I', code: '24UCHGE1' },
+                        { name: 'Generic Elective Chemistry Practical – I', code: '24UCHGEP01' },
+                        { name: 'SEC – II Entrepreneurial Based, Home Electrical Installation', code: '24UPHS02' },
+                        { name: 'SEC – III, Computational Methods and Programming in C', code: '24UPHS03' },
+                        { name: 'Environmental Studies', code: '24UEVS01' },
+                        { name: 'Health & Wellness', code: '24UHAWP01' }
                       ]
                     },
                     {
                       title: 'Semester IV',
                       subjects: [
-                        { name: 'Classical Mechanics', code: 'PHY401' },
-                        { name: 'Analog Electronics', code: 'PHY402' },
-                        { name: 'Statistical Mechanics', code: 'PHY403' },
-                        { name: 'Practical: Electronics Lab', code: 'PHY404P' },
-                        { name: 'Allied Chemistry II', code: 'CHE102' },
-                        { name: 'Extension Activities', code: 'EXT401' }
+                        { name: 'General Tamil – IV', code: '24UGTA04' },
+                        { name: 'General English – IV', code: '24UGEN04' },
+                        { name: 'Core – IV, Optics and Spectroscopy', code: '24UPHC04' },
+                        { name: 'Core Practical – IV, Light Experiments', code: '24UPHCP04' },
+                        { name: 'Generic Elective Chemistry – II', code: '24UCHGE2' },
+                        { name: 'Generic Elective Chemistry Practical – II', code: '24UCHGEP02' },
+                        { name: 'SEC – IV, Electronic Devices', code: '24UPHS04' },
+                        { name: 'SEC – V, Communication Systems', code: '24UPHS05' },
+                        { name: 'Environmental Studies', code: '24UEVS01' }
                       ]
                     }
                   ].map((sem, idx) => (
@@ -437,12 +438,12 @@ export default function BScPhysicsPage() {
                         <div className="p-6">
                           <ul className="space-y-3">
                             {sem.subjects.map((subject, i) => (
-                              <li key={i} className="flex items-center justify-between text-gray-700">
+                              <li key={i} className="flex flex-col gap-1 text-gray-700">
                                 <div className="flex items-start gap-2">
                                   <span className="text-emerald-500 mt-1">•</span>
-                                  <span>{subject.name}</span>
+                                  <span className="flex-1">{subject.name}</span>
                                 </div>
-                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                                <span className="text-brand-green font-semibold text-xs ml-4 opacity-70">{subject.code}</span>
                               </li>
                             ))}
                           </ul>
@@ -459,23 +460,27 @@ export default function BScPhysicsPage() {
                     {
                       title: 'Semester V',
                       subjects: [
-                        { name: 'Quantum Mechanics I', code: 'PHY501' },
-                        { name: 'Atomic & Molecular Physics', code: 'PHY502' },
-                        { name: 'Solid State Physics', code: 'PHY503' },
-                        { name: 'Computational Physics', code: 'PHY504' },
-                        { name: 'Practical: Modern Physics Lab', code: 'PHY505P' },
-                        { name: 'Elective: Astrophysics / Material Science', code: 'PHY506E' }
+                        { name: 'Core – V, Atomic Physics and Lasers', code: '24UPHC05' },
+                        { name: 'Core – VI, Relativity and Quantum Mechanics', code: '24UPHC06' },
+                        { name: 'Core – VII, Electricity and Magnetism', code: '24UPHC07' },
+                        { name: 'Discipline Elective – I, Energy Physics', code: '24UPHDE1' },
+                        { name: 'Discipline Elective – II, Materials Science', code: '24UPHDE2' },
+                        { name: 'Core Practical – V, General Experiments', code: '24UPHCP05' },
+                        { name: 'Value Education', code: '24UVE01' },
+                        { name: 'Internship / Industrial Visit / Field Visit', code: '24UPHIN01' }
                       ]
                     },
                     {
                       title: 'Semester VI',
                       subjects: [
-                        { name: 'Quantum Mechanics II', code: 'PHY601' },
-                        { name: 'Nuclear & Particle Physics', code: 'PHY602' },
-                        { name: 'Relativity & Cosmology', code: 'PHY603' },
-                        { name: 'Research Methodology', code: 'PHY604' },
-                        { name: 'Project Work & Viva', code: 'PHY605P' },
-                        { name: 'Elective: Nanophysics / Renewable Energy', code: 'PHY606E' }
+                        { name: 'Core – VIII, Nuclear and Particle Physics', code: '24UPHC08' },
+                        { name: 'Core Course – IX, Solid State Physics', code: '24UPHC09' },
+                        { name: 'Core Course – X, Digital Electronics & Microprocessor 8085', code: '24UPHC10' },
+                        { name: 'Discipline Elective – III, Nanoscience & Nanotechnology', code: '24UPHDE3' },
+                        { name: 'Core Practical – VI, Electronics Experiments', code: '24UPHCP06' },
+                        { name: 'Project', code: '—' },
+                        { name: 'Professional Competency Skills', code: '—' },
+                        { name: 'Extension Activity', code: '24UEX01' }
                       ]
                     }
                   ].map((sem, idx) => (
@@ -487,12 +492,12 @@ export default function BScPhysicsPage() {
                         <div className="p-6">
                           <ul className="space-y-3">
                             {sem.subjects.map((subject, i) => (
-                              <li key={i} className="flex items-center justify-between text-gray-700">
+                              <li key={i} className="flex flex-col gap-1 text-gray-700">
                                 <div className="flex items-start gap-2">
                                   <span className="text-emerald-500 mt-1">•</span>
-                                  <span>{subject.name}</span>
+                                  <span className="flex-1">{subject.name}</span>
                                 </div>
-                                <span className="text-brand-green font-semibold text-sm ml-2">{subject.code}</span>
+                                <span className="text-brand-green font-semibold text-xs ml-4 opacity-70">{subject.code}</span>
                               </li>
                             ))}
                           </ul>

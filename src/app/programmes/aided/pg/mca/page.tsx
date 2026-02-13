@@ -74,7 +74,7 @@ export default function MCAPage() {
             <div className="max-w-4xl mx-auto text-center">
               <span className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-white/90 text-gray-900">
                 <GraduationCap className="w-4 h-4 text-brand-green" />
-                UGC Recognized Postgraduate Programme
+                UGC & AICTE Approval Recognized Postgraduate Programme
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-brand-green">
                 Master of Computer Applications{' '}
@@ -120,9 +120,9 @@ export default function MCAPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {[
-              { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC A+', title: 'Accredited Excellence', desc: 'Top-tier quality education' },
+              { icon: <GraduationCap className="w-7 h-7" />, stat: 'NAAC', title: 'Accredited Excellence', desc: 'Top-tier quality education' },
               { icon: <Brain className="w-7 h-7" />, stat: 'AI/ML', title: 'Advanced Labs', desc: 'Cutting-edge research facilities' },
-              { icon: <Briefcase className="w-7 h-7" />, stat: '98%+', title: 'Placement Success', desc: 'Premium IT recruiters' },
+              { icon: <Briefcase className="w-7 h-7" />, stat: '95%', title: 'Placement Success', desc: 'Premium IT recruiters' },
               { icon: <Award className="w-7 h-7" />, stat: '₹6L+', title: 'Avg. Package', desc: 'Industry-leading salaries' },
             ].map((card, idx) => (
               <RevealSection key={idx} delay={idx * 100}>
@@ -209,17 +209,17 @@ export default function MCAPage() {
                 {
                   icon: <GraduationCap className="w-8 h-8 text-white" />,
                   title: 'Educational Qualification',
-                  items: ['BCA / B.Sc Computer Science / B.Sc IT', 'B.E. / B.Tech in any discipline', 'Any Bachelor\'s degree with Mathematics', 'Minimum 50% aggregate marks']
+                  items: ['BCA / B.Sc Computer Science / B.Sc IT', 'B.E. / B.Tech in any discipline', 'Any Bachelor\'s degree with Mathematics/Statistics/Business Mathematics at 12th level (or) at graduation level', 'Minimum 50% aggregate marks']
                 },
                 {
                   icon: <FileText className="w-8 h-8 text-white" />,
                   title: 'Academic Requirements',
-                  items: ['Mathematics at 10+2 or graduation level', 'Valid entrance exam scores (where applicable)', '45% for reserved category candidates', 'Recognized university degree']
+                  items: ['Valid entrance exam scores (where applicable)', '45% for reserved category candidates', 'Recognized university degree']
                 },
                 {
                   icon: <BookOpen className="w-8 h-8 text-white" />,
                   title: 'Documents Required',
-                  items: ['Graduation mark sheets & degree certificate', 'Transfer & migration certificates', 'Character certificate from institution', 'Valid photo ID & passport photos']
+                  items: ['10th and 12th Marksheet', 'Graduation mark sheets & degree certificate', 'Transfer & migration certificates', 'Conduct certificate from institution', 'Valid photo ID & passport size photos', 'Community Certificate']
                 }
               ].map((card, idx) => (
                 <RevealSection key={idx} delay={idx * 150}>
@@ -313,8 +313,8 @@ export default function MCAPage() {
                     key={year}
                     onClick={() => setActiveYear(year)}
                     className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
-                        ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
-                        : 'bg-white text-brand-green hover:bg-brand-green/5'
+                      ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                      : 'bg-white text-brand-green hover:bg-brand-green/5'
                       }`}
                   >
                     Year {year}
@@ -597,9 +597,9 @@ export default function MCAPage() {
 
               <div className="space-y-4">
                 {[
-                  { title: 'NAAC A+ Accredited Excellence', description: 'Top-tier recognition ensuring quality education, superior infrastructure, and academic standards' },
+                  { title: 'NAAC  Accredited Excellence', description: 'Top-tier recognition ensuring quality education, superior infrastructure, and academic standards' },
                   { title: 'Industry-Driven Curriculum', description: 'Curriculum co-designed with tech industry leaders covering AI, cloud, and emerging technologies' },
-                  { title: 'Premium Placements', description: '98%+ placement rate with average packages of 6+ LPA and top recruiters from Fortune 500 companies' },
+                  { title: 'Premium Placements', description: '95% placement rate with average packages of 6+ LPA and top recruiters from Fortune 500 companies' },
                   { title: 'Expert Learning Facilitators', description: 'PhD-qualified and industry-experienced Learning Facilitators with active research contributions' },
                   { title: 'Global Industry Connections', description: 'MoUs with leading tech companies, international certifications, and global internship opportunities' }
                 ].map((reason, idx) => (
@@ -640,15 +640,15 @@ export default function MCAPage() {
 
             <Marquee pauseOnHover draggable speed={30} className="[--gap:1.5rem]">
               {[
-                { name: 'Dr. Rajesh Kumar', designation: 'Head of Department', qualification: 'Ph.D. in Computer Science' },
-                { name: 'Dr. Priya Sundaram', designation: 'Associate Professor', qualification: 'Ph.D. in AI & ML' },
-                { name: 'Dr. Vikram Subramanian', designation: 'Assistant Professor', qualification: 'Ph.D. in Cloud Computing' },
-                { name: 'Ms. Anitha Ramachandran', designation: 'Assistant Professor', qualification: 'M.Tech., NET Qualified' }
+                { name: 'Dr. S. Aranganayagi', designation: 'Head of Department', qualification: 'M.C.A., Ph.D.', image: '/images/faculties/aided/Dr.-S.-Aranganayagi-240x300.png' },
+                { name: 'Dr. E. Haripriya', designation: 'Assistant Professor', qualification: 'M.C.A., M.Phil., M.E., Ph.D.,NET', image: '/images/faculties/aided/Dr.-E.-Haripriya-240x300.png' },
+                { name: 'Mrs. K. Veena', designation: 'Assistant Professor', qualification: 'M.C.A., M.Phil., SET', image: '/images/faculties/aided/Mrs.-K.-Veena-240x300.png' },
+                { name: 'Dr. V. Sasirekha', designation: 'Assistant Professor', qualification: 'M.C.A., M.Phil., Ph.D.', image: '/images/faculties/aided/Dr.-V.-Sasirekha-240x300.png' }
               ].map((faculty, idx) => (
                 <div key={idx} className="w-[260px] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group flex flex-col h-[340px]">
                   <div className="relative h-56 overflow-hidden flex-shrink-0">
                     <Image
-                      src="/images/faculties/placeholder-avatar.jpg"
+                      src={faculty.image}
                       alt={faculty.name}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -688,11 +688,11 @@ export default function MCAPage() {
 
             <div className="space-y-4">
               {[
-                { question: 'What is the duration of the MCA programme?', answer: 'The MCA programme is a 2-year full-time postgraduate degree comprising four semesters. The curriculum includes advanced coursework in the first three semesters, followed by a mandatory industry internship (8-12 weeks) and research dissertation in the final semester. This structure ensures comprehensive theoretical knowledge along with practical industry experience.' },
+                { question: 'What is the duration of the MCA programme?', answer: 'The MCA programme is a 2-year full-time postgraduate degree comprising four semesters. The curriculum includes advanced coursework in the first three semesters, followed by a mandatory industry internship 15days and research dissertation in the final semester. This structure ensures comprehensive theoretical knowledge along with practical industry experience.' },
                 { question: 'What is the eligibility for MCA admission?', answer: 'Candidates must have completed BCA, B.Sc Computer Science, B.Sc Information Technology, B.E./B.Tech, or any bachelor\'s degree from a recognized university with Mathematics at 10+2 or graduation level. Minimum aggregate marks of 50% (45% for reserved categories) are required. Candidates with relevant programming experience are given preference during the selection process.' },
                 { question: 'How is MCA different from BCA?', answer: 'MCA is a postgraduate programme offering advanced specializations, research opportunities, and deeper technical expertise. While BCA provides foundational computer application knowledge, MCA focuses on advanced topics like AI/ML, cloud architecture, and software engineering. MCA graduates typically command 40-60% higher salaries, qualify for senior technical and managerial positions, and can pursue doctoral studies or research careers.' },
                 { question: 'What are the career prospects after MCA?', answer: 'MCA graduates have excellent career prospects with opportunities as Software Architects, AI/ML Engineers, Data Scientists, Cloud Solutions Architects, Technical Project Managers, and Cybersecurity Analysts. Average starting packages range from 6-10 LPA, with top performers receiving 15-25 LPA offers from leading product companies. Graduates can also pursue higher education (Ph.D.) or start technology ventures.' },
-                { question: 'Is industry internship mandatory in MCA?', answer: 'Yes, a mandatory 8-12 week industry internship is an integral part of our MCA programme. The internship provides hands-on experience in real-world projects, industry exposure, and networking opportunities. Many Learners receive pre-placement offers from their internship companies. The placement cell assists in securing internships with leading IT companies, startups, and research organizations.' },
+                { question: 'Is industry internship mandatory in MCA?', answer: 'Yes, a mandatory 15days industry internship is an integral part of our MCA programme. The internship provides hands-on experience in real-world projects, industry exposure, and networking opportunities. Many Learners receive pre-placement offers from their internship companies. The placement cell assists in securing internships with leading IT companies, startups, and research organizations.' },
                 { question: 'Can I pursue MCA without computer science background?', answer: 'Yes, candidates from non-computer science backgrounds can pursue MCA if they have studied Mathematics at 10+2 or graduation level. The programme includes foundational courses in the first semester to bring all Learners to a common level. However, candidates with prior programming knowledge or IT-related qualifications may find the initial transition smoother. Bridge courses and additional support are provided for Learners who need extra preparation.' }
               ].map((faq, idx) => (
                 <RevealSection key={idx} delay={idx * 60}>

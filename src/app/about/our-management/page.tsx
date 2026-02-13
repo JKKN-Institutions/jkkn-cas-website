@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Crown, Building2, GraduationCap, MapPin } from 'lucide-react';
 
 interface ManagementMember {
@@ -14,13 +15,15 @@ const managementTeam: ManagementMember[] = [
     name: "SMT. N. SENDAMARAAI",
     position: "CHAIRPERSON",
     organization: "JKKN INSTITUTIONS",
-    bio: "As the Chairperson of JKKN Institutions, I am honoured to shoulder this immense responsibility, and I take great pride in our exceptional progress. We have earned the status of one of the most prestigious colleges in the region. 'Leadership and Excellence' is not merely our motto but the foundation of our values, a testament to our state-of-the-art infrastructure, distinguished faculty, and unwavering commitment to quality education."
+    bio: "As the Chairperson of JKKN Institutions, I am honoured to shoulder this immense responsibility, and I take great pride in our exceptional progress. We have earned the status of one of the most prestigious colleges in the region. 'Leadership and Excellence' is not merely our motto but the foundation of our values, a testament to our state-of-the-art infrastructure, distinguished faculty, and unwavering commitment to quality education.",
+    image: "/images/about/Chairperson Mam.avif"
   },
   {
     name: "SHRI. S. OMMSHARRAVANA",
     position: "DIRECTOR",
     organization: "JKKN INSTITUTIONS",
-    bio: "I extend my heartfelt congratulations to the college for its fervent and focused dedication to shaping future engineers of distinction. At JKKN, we are committed to innovative education methodologies that enable quality learning, foster independent thinking, and facilitate the development of well-rounded personalities. Our mission empowers students to contribute their best to society and the nation."
+    bio: "I extend my heartfelt congratulations to the college for its fervent and focused dedication to shaping future engineers of distinction. At JKKN, we are committed to innovative education methodologies that enable quality learning, foster independent thinking, and facilitate the development of well-rounded personalities. Our mission empowers students to contribute their best to society and the nation.",
+    image: "/images/about/director.avif"
   }
 ];
 
@@ -68,8 +71,18 @@ export default function OurManagementPage() {
                         <div className="absolute inset-2 rounded-full border-[6px] border-[#d4a829] bg-gradient-to-br from-[#ffde59]/20 via-transparent to-transparent">
                           <div className="absolute inset-2 rounded-full border-[4px] border-[#ffde59]/60 backdrop-blur-sm">
                             <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-inner">
-                              {/* Profile image placeholder */}
-                              <div className="w-full h-full bg-gradient-to-br from-blue-200 to-blue-400"></div>
+                              {/* Profile image */}
+                              {member.image ? (
+                                <Image
+                                  src={member.image}
+                                  alt={`${member.name} - ${member.position}`}
+                                  fill
+                                  className="object-cover"
+                                  sizes="(max-width: 768px) 160px, 192px"
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-blue-200 to-blue-400"></div>
+                              )}
                             </div>
                           </div>
                         </div>

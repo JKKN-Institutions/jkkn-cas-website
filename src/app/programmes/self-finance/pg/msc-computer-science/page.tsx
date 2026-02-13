@@ -270,8 +270,8 @@ export default function MScComputerSciencePage() {
                     key={year}
                     onClick={() => setActiveYear(year)}
                     className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
-                        ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
-                        : 'bg-white text-brand-green hover:bg-brand-green/5'
+                      ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                      : 'bg-white text-brand-green hover:bg-brand-green/5'
                       }`}
                   >
                     Year {year}
@@ -285,11 +285,28 @@ export default function MScComputerSciencePage() {
                 {[
                   {
                     title: 'Semester I',
-                    subjects: ['Advanced Data Structures', 'Design and Analysis of Algorithms', 'Database Management Systems', 'Object-Oriented Programming with Java', 'Computer Networks', 'Practical: Data Structures Lab']
+                    subjects: [
+                      '25PCSC01: Core I - Analysis and Design of Algorithms',
+                      '25PCSC02: Core II - Object Oriented Programming using C++',
+                      '25PCSC03: Core III - Python Programming',
+                      '25PCSCP01: Core Practical I - Algorithm and OOPS Lab',
+                      '25PCSCP02: Core Practical II - Python Programming Lab',
+                      '25PCSE01/02/03: Elective I (Choose any one) - Advanced Operating Systems / Advanced Software Engineering / Multimedia and its Applications',
+                      '25PCSE04/05/06: Elective II (Choose any one) - Artificial Intelligence and Machine Learning / Internet of Things / Mobile Computing'
+                    ]
                   },
                   {
                     title: 'Semester II',
-                    subjects: ['Operating Systems', 'Artificial Intelligence', 'Software Engineering', 'Web Technologies & Frameworks', 'Python Programming', 'Practical: AI & Python Lab']
+                    subjects: [
+                      '25PCSC04: Core IV - Data Mining and Warehousing',
+                      '25PCSC05: Core V - Advanced Java Programming',
+                      '25PCSCP03: Core Practical III - Data Mining Lab using R',
+                      '25PCSCP04: Core Practical IV - Advanced Java Programming Lab',
+                      '25PCSE07/08/09: Elective III (Choose any one) - Critical Thinking, Design Thinking and Problem Solving / Compiler Design / Robotic Process Automation for Business',
+                      '25PCSE10/11/12: Elective IV (Choose any one) - Big Data Analytics / Discrete Mathematics for Computing / Operations Research',
+                      '25P______: Extra Disciplinary Course (EDC) - I',
+                      '25PHR001: Fundamental Study of Human Rights'
+                    ]
                   }
                 ].map((sem, idx) => (
                   <RevealSection key={idx} delay={idx * 150}>
@@ -318,11 +335,28 @@ export default function MScComputerSciencePage() {
                 {[
                   {
                     title: 'Semester III',
-                    subjects: ['Machine Learning', 'Data Science & Big Data Analytics', 'Cloud Computing', 'Cybersecurity Fundamentals', 'Practical: ML & Data Science Lab', 'Elective: IoT / Blockchain / NLP']
+                    subjects: [
+                      '24PCSC06: Core VI - Digital Image Processing',
+                      '24PCSC07: Core VII - Cloud Computing',
+                      '24PCSC08: Core VIII - Network Security and Cryptography',
+                      '24PCSC09: Core IX - Data Science & Analytics',
+                      '24PCSE13/14/15: Elective V (Choose any one) - Grid Computing / Block Chain Technology / Web Services',
+                      '24P______: Extra Disciplinary Course (EDC-II)',
+                      '24PCSCP05: Core Practical V - Digital Image Processing Lab',
+                      '24PCSCP06: Core Practical VI - Cloud Computing Lab',
+                      'Internship: Industrial Activity (15 Days - First Year Even Semester Vacation)'
+                    ]
                   },
                   {
                     title: 'Semester IV',
-                    subjects: ['Deep Learning & Neural Networks', 'Research Methodology', 'Elective: Computer Vision / DevOps', 'Industry Internship', 'Dissertation / Project Work', 'Viva Voce Examination']
+                    subjects: [
+                      '24PCSC10: Core X - PHP Programming',
+                      '24PCSC11: Core XI - Advanced DBMS',
+                      '23PCSEP01/02/03: Elective VI Practical (Choose any one) - PHP Programming Lab / Advanced DBMS Lab / Web Technologies Lab',
+                      '24PCSPR01: Project Work and Viva-Voce',
+                      '24PCSSECP01/02: Skill Enhancement Course - Professional Competency Skill (Choose any one) - Data Visualization Lab / Soft Skill Development Lab',
+                      'Extension Activity'
+                    ]
                   }
                 ].map((sem, idx) => (
                   <RevealSection key={idx} delay={idx * 150}>
@@ -597,15 +631,17 @@ export default function MScComputerSciencePage() {
 
             <Marquee pauseOnHover draggable speed={30} className="[--gap:1.5rem]">
               {[
-                { name: 'Dr. Rajesh Kumar', designation: 'Head of Department', qualification: 'Ph.D. in Computer Science (AI/ML)' },
-                { name: 'Dr. Priya Sharma', designation: 'Associate Professor', qualification: 'Ph.D. in Data Science' },
-                { name: 'Mr. Arun Prakash', designation: 'Assistant Professor', qualification: 'M.Tech, Ph.D. (Pursuing)' },
-                { name: 'Ms. Divya Reddy', designation: 'Assistant Professor', qualification: 'M.Sc CS, UGC NET Qualified' }
+                { name: 'Dr.n.chandrakala', designation: 'Head of Department', qualification: 'M.SC.,M.PHIL.,PH.D', image: '/images/faculties/DR.N.CHANDRAKALA-300x199.png' },
+                { name: 'Mrs.P.Priyanka', designation: 'Assistant Professor', qualification: 'M.Sc., M.Phil.,B.Ed.,', image: '/images/faculties/Mrs.P.Priyanka-300x199.png' },
+                { name: 'Mrs.P.Kowsalya', designation: 'Assistant Professor', qualification: 'M.C.A.,', image: '/images/faculties/Mrs.P.Kowsalya-300x199.png' },
+                { name: 'Mrs.A.Vennila', designation: 'Assistant Professor', qualification: 'M.C.A.,', image: '/images/faculties/Mrs.A.Vennila-300x199.png' },
+                { name: 'Mr.R.Pugalendhi', designation: 'Assistant Professor', qualification: 'M.Sc.,', image: '/images/faculties/MR.R.PUGALENDHI-300x199.png' },
+                { name: 'Mrs.D.Savietha', designation: 'Assistant Professor', qualification: ' M.SC (CS).,', image: '/images/faculties/MRS.D.SAVIETHA-300x199.png' },
               ].map((faculty, idx) => (
                 <div key={idx} className="w-[260px] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group flex flex-col h-[340px]">
                   <div className="relative h-56 overflow-hidden flex-shrink-0">
                     <Image
-                      src="/images/faculties/placeholder-avatar.jpg"
+                      src={faculty.image || '/images/faculties/placeholder-avatar.jpg'}
                       alt={faculty.name}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"

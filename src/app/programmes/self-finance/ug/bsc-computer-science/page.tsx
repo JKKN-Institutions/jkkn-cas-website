@@ -65,6 +65,34 @@ export default function BScComputerSciencePage() {
   const [activeYear, setActiveYear] = useState(1);
   const [activeFAQ, setActiveFAQ] = useState(0);
 
+  // Faculty data
+  const facultyMembers = [
+    {
+      name: "Dr. Rajesh Kumar",
+      designation: "Head of Department",
+      education: "Ph.D. in Computer Science",
+      image: "/images/faculties/placeholder-avatar.jpg"
+    },
+    {
+      name: "Dr. Priya Sundaram",
+      designation: "Associate Professor",
+      education: "Ph.D. in Artificial Intelligence",
+      image: "/images/faculties/placeholder-avatar.jpg"
+    },
+    {
+      name: "Mr. Vikram Subramanian",
+      designation: "Assistant Professor",
+      education: "M.Tech., Industry Expert",
+      image: "/images/faculties/placeholder-avatar.jpg"
+    },
+    {
+      name: "Ms. Anitha Ramachandran",
+      designation: "Assistant Professor",
+      education: "M.Phil., Research Scholar",
+      image: "/images/faculties/placeholder-avatar.jpg"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner Section */}
@@ -270,8 +298,8 @@ export default function BScComputerSciencePage() {
                     key={year}
                     onClick={() => setActiveYear(year)}
                     className={`px-6 py-3 rounded-lg font-semibold transition-all ${activeYear === year
-                        ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
-                        : 'bg-white text-brand-green hover:bg-brand-green/5'
+                      ? 'bg-gradient-to-r from-brand-green to-emerald-500 text-white shadow-lg shadow-brand-green/25'
+                      : 'bg-white text-brand-green hover:bg-brand-green/5'
                       }`}
                   >
                     Year {year}
@@ -285,11 +313,25 @@ export default function BScComputerSciencePage() {
                 {[
                   {
                     title: 'Semester I',
-                    subjects: ['Programming in C', 'Digital Computer Fundamentals', 'Mathematical Foundations', 'Practical: C Programming Lab', 'Allied Mathematics I', 'Environmental Studies']
+                    subjects: [
+                      '25UGTA01 - General Tamil-I',
+                      '25UGEN01 - General English-I',
+                      '25UCSC01 - Core - I - Python Programming',
+                      '25UCSCP01 - Core Practical – I - Python Programming Lab',
+                      '25UCSNM1 - NME - I - Digital Advertising and Strategies',
+                      '25UCSS01 - SEC – I Computer Science with AI Acceleration – Foundations'
+                    ]
                   },
                   {
                     title: 'Semester II',
-                    subjects: ['Object Oriented Programming with C++', 'Data Structures', 'Operating Systems Concepts', 'Practical: Data Structures Lab', 'Allied Mathematics II', 'Value Education']
+                    subjects: [
+                      '25UGTA02 - General Tamil-II',
+                      '25UGEN02 - General English-II',
+                      '25UCSC02 - Core – II - Data Structure and Algorithms',
+                      '25UCSCP02 - Core Practical - II - Data Structure and Algorithms Lab',
+                      '25UCSNM2 - NME - II - Digital Skills for Employability',
+                      '25UCSS02 - SEC – II - Computer Science with AI Acceleration Implementation'
+                    ]
                   }
                 ].map((sem, idx) => (
                   <RevealSection key={idx} delay={idx * 150}>
@@ -318,11 +360,29 @@ export default function BScComputerSciencePage() {
                 {[
                   {
                     title: 'Semester III',
-                    subjects: ['Java Programming', 'Database Management Systems', 'Computer Networks', 'Practical: Java Programming Lab', 'Allied Statistics I', 'Soft Skills Development']
+                    subjects: [
+                      '24UGTA03 - General Tamil – III',
+                      '24UGEN03 - General English – III',
+                      '24UCSC03 - Core - III – Microprocessor and Microcontroller',
+                      '24UCSCP03 - Core Practical - III – Microprocessor and Microcontroller Lab',
+                      '24USTAGE1 - Generic Elective – III: Statistical Methods and its Applications - I',
+                      '24UCSS03 - SEC III – Web Designing',
+                      '24UCSS04 - SEC IV – Advanced Excel',
+                      '24UEVS01 - Environmental Studies'
+                    ]
                   },
                   {
                     title: 'Semester IV',
-                    subjects: ['Python Programming', 'Software Engineering', 'Web Technologies', 'Practical: DBMS & Web Lab', 'Allied Statistics II', 'Extension Activities']
+                    subjects: [
+                      '24UGTA04 - General Tamil – IV',
+                      '24UGEN04 - General English – IV',
+                      '24UCSC04 - Core-IV – Java Programming',
+                      '24UCSCP04 - Core Practical – IV – Java Programming Lab',
+                      '24USTAGE2 - Generic Elective – IV: Statistical Methods and its Applications - II',
+                      '24UCSS05 - SEC V – PHP Programming',
+                      '24UCSS06 - SEC VI – Multimedia Systems',
+                      '24UEVS01 - Environmental Studies'
+                    ]
                   }
                 ].map((sem, idx) => (
                   <RevealSection key={idx} delay={idx * 150}>
@@ -630,15 +690,17 @@ export default function BScComputerSciencePage() {
 
             <Marquee pauseOnHover draggable speed={30} className="[--gap:1.5rem]">
               {[
-                { name: 'Dr. Rajesh Kumar', designation: 'Head of Department', qualification: 'Ph.D. in Computer Science' },
-                { name: 'Dr. Priya Sundaram', designation: 'Associate Professor', qualification: 'Ph.D. in Artificial Intelligence' },
-                { name: 'Mr. Vikram Subramanian', designation: 'Assistant Professor', qualification: 'M.Tech., Industry Expert' },
-                { name: 'Ms. Anitha Ramachandran', designation: 'Assistant Professor', qualification: 'M.Phil., Research Scholar' }
+                { name: 'Dr.n.chandrakala', designation: 'Head of Department', qualification: 'M.SC.,M.PHIL.,PH.D', image: '/images/faculties/DR.N.CHANDRAKALA-300x199.png' },
+                { name: 'Mrs.P.Priyanka', designation: 'Assistant Professor', qualification: 'M.Sc., M.Phil.,B.Ed.,', image: '/images/faculties/Mrs.P.Priyanka-300x199.png' },
+                { name: 'Mrs.P.Kowsalya', designation: 'Assistant Professor', qualification: 'M.C.A.,', image: '/images/faculties/Mrs.P.Kowsalya-300x199.png' },
+                { name: 'Mrs.A.Vennila', designation: 'Assistant Professor', qualification: 'M.C.A.,', image: '/images/faculties/Mrs.A.Vennila-300x199.png' },
+                { name: 'Mr.R.Pugalendhi', designation: 'Assistant Professor', qualification: 'M.Sc.,', image: '/images/faculties/MR.R.PUGALENDHI-300x199.png' },
+                { name: 'Mrs.D.Savietha', designation: 'Assistant Professor', qualification: ' M.SC (CS).,', image: '/images/faculties/MRS.D.SAVIETHA-300x199.png' }
               ].map((faculty, idx) => (
                 <div key={idx} className="w-[260px] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group flex flex-col h-[340px]">
                   <div className="relative h-56 overflow-hidden flex-shrink-0">
                     <Image
-                      src="/images/faculties/placeholder-avatar.jpg"
+                      src={faculty.image || '/images/faculties/placeholder-avatar.jpg'}
                       alt={faculty.name}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"

@@ -798,8 +798,56 @@ export default function BComBankingInsurancePage() {
           </div>
         </section>
 
+        {/* Faculty Section */}
+        <section className="py-16 bg-brand-cream" id="faculty">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <RevealSection>
+                <div className="text-center mb-12">
+                  <SectionBadge text="Faculty" />
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                    Our Learning{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-500">
+                      Facilitators
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Meet our experienced and dedicated department team
+                  </p>
+                </div>
+              </RevealSection>
+
+              <Marquee pauseOnHover draggable speed={30} className="[--gap:1.5rem]">
+                {[
+                  { name: 'Dr. Faculty Name 1', designation: 'Head of Department', qualification: 'M.Com., Ph.D.', image: 'https://placehold.co/240x300/0b6d41/FFFFFF?text=Faculty+1' },
+                  { name: 'Dr. Faculty Name 2', designation: 'Assistant Professor', qualification: 'M.Com., M.Phil., Ph.D.', image: 'https://placehold.co/240x300/0b6d41/FFFFFF?text=Faculty+2' },
+                  { name: 'Mrs. Faculty Name 3', designation: 'Assistant Professor', qualification: 'M.Com., M.Phil., CAIIB', image: 'https://placehold.co/240x300/0b6d41/FFFFFF?text=Faculty+3' },
+                  { name: 'Mr. Faculty Name 4', designation: 'Assistant Professor', qualification: 'M.Com., MBA (Finance)', image: 'https://placehold.co/240x300/0b6d41/FFFFFF?text=Faculty+4' }
+                ].map((faculty, idx) => (
+                  <div key={idx} className="w-[260px] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-brand-cream group flex flex-col h-[340px]">
+                    <div className="relative h-56 overflow-hidden flex-shrink-0">
+                      <Image
+                        src={faculty.image}
+                        alt={faculty.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-green/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="p-5 text-center flex-1 flex flex-col justify-center">
+                      <h4 className="text-lg font-bold text-brand-green mb-1">{faculty.name}</h4>
+                      <p className="text-sm font-semibold text-emerald-500 mb-1">{faculty.designation}</p>
+                      <p className="text-xs text-gray-600">{faculty.qualification}</p>
+                    </div>
+                  </div>
+                ))}
+              </Marquee>
+            </div>
+          </div>
+        </section>
+
         {/* Why Choose JKKN */}
-        <section className="py-16 bg-brand-cream">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <RevealSection className="grid lg:grid-cols-2 gap-12 items-center">

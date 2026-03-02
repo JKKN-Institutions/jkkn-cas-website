@@ -181,7 +181,7 @@ export default function MAHistoryPage() {
                   className="w-full h-auto"
                 />
                 <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
-                  Postgraduate Excellence
+                  Since 1984
                 </span>
               </div>
             </RevealSection>
@@ -215,11 +215,7 @@ export default function MAHistoryPage() {
                   title: 'Educational Qualification',
                   items: ['Bachelor\'s degree in History', 'Or any related discipline', 'Minimum 50% aggregate marks', '45% for reserved category candidates', 'Recognized university degree']
                 },
-                {
-                  icon: <FileText className="w-8 h-8 text-white" />,
-                  title: 'Academic Requirements',
-                  items: ['Valid entrance exam scores (where applicable)', 'Merit-based selection process', 'Personal interview for shortlisted candidates']
-                },
+
                 {
                   icon: <BookOpen className="w-8 h-8 text-white" />,
                   title: 'Documents Required',
@@ -293,8 +289,8 @@ export default function MAHistoryPage() {
                       '24PHIC01: Core –1: History of Ancient and Early Medieval India - Prehistory to 1206 Common Era (CE)',
                       '24PHIC02: Core – 2: Socio Cultural History of Tamil Nadu up to 1565 CE',
                       '24PHIC03: Core – 3: History of World Civilizations (Excluding India)',
-                      '24PHIE01/02: Elective-I: Freedom Struggle in Tamil Nadu / Indian Art and Architecture',
-                      '24PHIE03/04: Elective-II: Administrative History of Tamil Nadu / Cultural Heritage of India'
+                      '24PHIE01/02: Elective-I: Freedom Struggle in Tamil Nadu',
+                      '24PHIE03/04: Elective-II: Administrative History of Tamil Nadu'
                     ]
                   },
                   {
@@ -303,8 +299,8 @@ export default function MAHistoryPage() {
                       '24PHIC04: Core – 4: History of Medieval India - 1206 - 1707 CE',
                       '24PHIC05: Core –5: Socio Cultural History of Tamil Nadu - 1565 - 1956',
                       '24PHIC06: Core – 6: Historiography and Historical Methods',
-                      '24PHIE05/06: Elective-III: History of Journalism / International Migrations and Diasporic Studies',
-                      '24PHIE07/08: Elective-IV: Indian Constitution / Environmental History of India',
+                      '24PHIE05/06: Elective-III: History of Journalism',
+                      '24PHIE07/08: Elective-IV: Indian Constitution',
                       '24PENED1: EDC: Intellectual History of Tamil Nadu',
                       '24PHR001: Common Paper: Fundamental Study of Human Rights'
                     ]
@@ -341,7 +337,7 @@ export default function MAHistoryPage() {
                       '24PHIC08: Intellectual History of India',
                       '24PHIC09: Economic History of India since 1857 C.E',
                       '24PHIC10: Tourism in Tamil Nadu',
-                      '24PHIE09/10: Principles and Techniques of Archaeology/Peasant and Labour Movement in India',
+                      '24PHIE09/10: Principles and Techniques of Archaeology',
                       '24PHIED2: Temples in Tamil Nadu',
                       'Internship/Industrial Activity: Internship/Industrial Activity'
                     ]
@@ -352,7 +348,7 @@ export default function MAHistoryPage() {
                       '24PHIC11: Contemporary India',
                       '24PHIC12: International Relations since 1945 C.E',
                       'Project',
-                      '24PHIED3/24PHIED4: Women in India through the Ages/Science and Technology in India since 1947 C.E',
+                      '24PHIED3/24PHIED4: Women in India through the Ages',
                       'Professional Competency Skill: Archival Management/Model Question Papers SET/NET',
                       'Extension Activity: Extension Activity'
                     ]
@@ -407,7 +403,7 @@ export default function MAHistoryPage() {
                 { icon: <Scroll className="w-6 h-6 text-white" />, title: 'Research Expertise', description: 'Master research methodologies including archival research, oral history, epigraphy, and numismatic analysis for independent scholarly work.' },
                 { icon: <Library className="w-6 h-6 text-white" />, title: 'Historiographical Knowledge', description: 'Understand diverse historical interpretations, theoretical frameworks, and scholarly debates in Indian and World historiography.' },
                 { icon: <Landmark className="w-6 h-6 text-white" />, title: 'Heritage Management', description: 'Gain expertise in museum curation, archaeological site management, and cultural heritage preservation methodologies.' },
-                { icon: <Archive className="w-6 h-6 text-white" />, title: 'Documentation Skills', description: 'Develop proficiency in archival documentation, manuscript analysis, and preservation of historical records and artifacts.' },
+                { icon: <Archive className="w-6 h-6 text-white" />, title: 'Documentation Skills', description: 'Develop proficiency in archival documentation, manuscript analysis, and preservation of historical records and artefacts.' },
                 { icon: <Users className="w-6 h-6 text-white" />, title: 'Academic Communication', description: 'Master scholarly writing, presentation skills, and effective communication of historical research to diverse audiences.' }
               ].map((outcome, idx) => (
                 <RevealSection key={idx} delay={idx * 100}>
@@ -565,20 +561,18 @@ export default function MAHistoryPage() {
                 {[
                   { title: 'NAAC Accredited Excellence', description: 'Top-tier recognition ensuring quality education, superior infrastructure, and academic standards' },
                   { title: 'Expert Learning Facilitators', description: 'PhD-qualified faculty with extensive research experience and active scholarly contributions' },
-                  { title: 'Research-Focused Curriculum', description: 'Comprehensive training in historiography, archival research, and field methodologies' },
-                  { title: 'Field Study Opportunities', description: 'Regular visits to historical sites, museums, archives, and archaeological excavations' },
-                  { title: 'Career & Higher Studies Support', description: 'Strong track record in placements, NET/SET coaching, and PhD admissions guidance' }
-                ].map((reason, idx) => (
-                  <div key={idx} className="flex gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/80 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-                    <div className="w-11 h-11 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-green/15">
-                      <CheckCircle2 className="w-5 h-5 text-white" />
+                  { title: 'Research-Focused Curriculum', description: 'Comprehensive training in historiography and develop critical historical thinking skills.' },
+                  { title: 'Field Study Opportunities', description: 'Regular visits to historical sites, museums, archives, and archaeological excavations' }].map((reason, idx) => (
+                    <div key={idx} className="flex gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/80 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                      <div className="w-11 h-11 bg-gradient-to-br from-brand-green to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-green/15">
+                        <CheckCircle2 className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-brand-green mb-1">{reason.title}</h4>
+                        <p className="text-sm text-gray-600">{reason.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-brand-green mb-1">{reason.title}</h4>
-                      <p className="text-sm text-gray-600">{reason.description}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </RevealSection>
           </div>
@@ -659,7 +653,7 @@ export default function MAHistoryPage() {
             <div className="space-y-4">
               {[
                 { question: 'What is the duration and structure of the MA History programme?', answer: 'The MA History programme is a 2-year full-time postgraduate degree comprising four semesters. The curriculum includes core papers in Indian and World History, specialization electives, research methodology, and a mandatory dissertation project in the final semester.' },
-                { question: 'Can I pursue PhD after completing MA History?', answer: 'Yes, MA History graduates are eligible to pursue M.Phil and PhD programmes in History, Ancient Indian Culture, Archaeology, and related fields. Our programme provides strong research training that prepares learners for doctoral studies at universities across India and abroad. We also offer NET/SET coaching to help learners qualify for research fellowships.' },
+                { question: 'Can I pursue PhD after completing MA History?', answer: 'Yes, MA History graduates are eligible to pursue  PhD programmes in History, Ancient Indian Culture, Archaeology, and related fields. Our programme provides strong research training that prepares learners for doctoral studies at universities across India and abroad.' },
                 { question: 'What are the career prospects after MA History?', answer: 'Graduates can pursue careers as historians, research scholars, museum curators, archivists, civil services officers, lecturers, archaeology consultants, heritage managers, and documentary filmmakers. The programme also prepares learners for competitive examinations like UPSC, NET, and SET.' },
                 { question: 'Does the MA History programme include fieldwork?', answer: 'Yes, the programme includes mandatory field visits to historical sites, museums, archives, and archaeological excavation sites as part of experiential learning. These field studies provide hands-on experience in historical research, artifact analysis, and heritage documentation.' },
                 { question: 'What research opportunities are available in the programme?', answer: 'Learners engage in extensive research through the dissertation project in the final semester. Additionally, they have access to research libraries, archival resources, and opportunities to participate in faculty-led research projects, seminars, and conferences.' },

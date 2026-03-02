@@ -178,7 +178,7 @@ export default function BAHistoryPage() {
                   className="w-full h-auto"
                 />
                 <span className="absolute top-4 right-4 bg-gradient-to-r from-brand-green to-emerald-500 text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
-                  Since 1952
+                  Since 1975
                 </span>
               </div>
             </RevealSection>
@@ -200,7 +200,7 @@ export default function BAHistoryPage() {
                   </span>
                 </h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Requirements for joining the BA History (Honours) programme
+                  Requirements for joining the BA History programme
                 </p>
               </div>
             </RevealSection>
@@ -291,7 +291,7 @@ export default function BAHistoryPage() {
                       { code: '24UGEN01', title: 'General English –I' },
                       { code: '24UHIC01', title: 'Core – I: History of Ancient India upto 1206 CE' },
                       { code: '24UHIC02', title: 'Core – II: History of Tamil Nadu upto 1311 CE' },
-                      { code: '24UHIDE1', title: 'Discipline Specific Course-I: Outlines of Comparative Governments-I / Generic Elective Course-1: Geography of India' },
+                      { code: '24UHIDE1', title: 'Generic Elective Course-1: Geography of India' },
                       { code: '24UHINM1', title: 'NME – I: Indian Polity' },
                       { code: '24UHIS01', title: 'SEC-I: Introduction to Tourism' }
                     ]
@@ -303,7 +303,7 @@ export default function BAHistoryPage() {
                       { code: '24UGEN02', title: 'General English – II' },
                       { code: '24UHIC03', title: 'Core - III: History of Medieval India 1206-1707 CE' },
                       { code: '24UHIC04', title: 'Core – IV: History of Tamil Nadu 1311 -1801 CE' },
-                      { code: '24UHIDE2', title: 'Discipline Specific Course-II: Outlines of Comparative Governments-II / Generic Elective Course-2: Geography of Tamil Nadu' },
+                      { code: '24UHIDE2', title: 'Generic Elective Course-2: Geography of Tamil Nadu' },
                       { code: '24UHINM2', title: 'NME – II: Basic Journalism' },
                       { code: '25UHIS02', title: 'SEC - II: Indian Constitution' },
                       { code: '25UDIM01', title: 'Disaster Management' }
@@ -342,7 +342,7 @@ export default function BAHistoryPage() {
                       { code: '24UGEN03', title: 'General English –III' },
                       { code: '24UHIC05', title: 'Core - V: History of India from 1707 CE to 1857 CE' },
                       { code: '24UHIC06', title: 'Core - VI: History of Tamil Nadu since 1801 CE' },
-                      { code: '24UHIDE3', title: 'Discipline Specific Course-III: Evolution of Indian Constitution from 1773 to 1947 CE / Generic Elective Course-III: Indian Economy Problems and Policies –I' },
+                      { code: '24UHIDE3', title: 'Generic Elective Course-III: Indian Economy Problems and Policies –I' },
                       { code: '24UHIS03', title: 'SEC-III: Museology' },
                       { code: '24UHIS04/05', title: 'SEC-IV: Basic Concepts of Archaeology / IKS in Architecture and Town Planning' },
                       { code: '24UEVS01', title: 'EVS' },
@@ -356,7 +356,7 @@ export default function BAHistoryPage() {
                       { code: '24UGEN04', title: 'General English – IV' },
                       { code: '24UHIC07', title: 'Core - VII: Freedom Struggle in India' },
                       { code: '24UHIC08', title: 'Core - VIII: History of Modern Europe from 1789 CE to 1919 CE' },
-                      { code: '24UHIDE4', title: 'Discipline Specific Course-IV: Evolution of Indian Constitution Since1947 CE / Generic Elective Course-IV: Indian Economy Problems and Policies –II' },
+                      { code: '24UHIDE4', title: 'Generic Elective Course-IV: Indian Economy Problems and Policies –II' },
                       { code: '24UHIS06', title: 'SEC – V: Computer Training' },
                       { code: '24UHIS07', title: 'SEC - VI: Introduction to Journalism' },
                       { code: '24UEVS01', title: 'EVS' }
@@ -395,7 +395,7 @@ export default function BAHistoryPage() {
                       { code: '24UHIC10', title: 'Core – X Selected Themes in History of U.S.A' },
                       { code: '24UHIC11', title: 'Core – XI: Regional History (History of Kongu Nadu)' },
                       { code: '24UHIPR1', title: 'Core – XII: Project (With viva voce)' },
-                      { code: '24UHIED5', title: 'Discipline Specific Course-V: Elements of Human Rights / Women Studies' },
+                      { code: '24UHIED5', title: 'Discipline Specific Course-V: Elements of Human Rights' },
                       { code: '24UHIED6', title: 'Discipline Specific Elective VI: History of Dravidian Movements' },
                       { code: '24UVED01', title: 'Value Education' },
                       { code: '24UHIIN01', title: 'Summer Internship /Ind. Training' }
@@ -408,7 +408,7 @@ export default function BAHistoryPage() {
                       { code: '24UHIC14', title: 'Core – XIV India and Her Neighbours' },
                       { code: '24UHIC15', title: 'Core – XV: History of Science and Technology in India' },
                       { code: '24UHIED7', title: 'Discipline Specific Elective VII: International Relations since 1919' },
-                      { code: '24UHIED8', title: 'Discipline Specific Elective VIII: History of China Japan' },
+                      { code: '24UHIED8', title: 'Discipline Specific Elective VIII: History of China and Japan Since 1900 CE' },
                       { code: '24UHIPC1', title: 'General Studies for Competitive Examination' },
                       { code: '24UEXA01', title: 'Extension Activity' }
                     ]
@@ -506,7 +506,7 @@ export default function BAHistoryPage() {
                 { icon: <Landmark className="w-6 h-6" />, title: 'Civil Services', desc: 'IAS, IPS, IFS, and State Civil Services through UPSC/TNPSC' },
                 { icon: <GraduationCap className="w-6 h-6" />, title: 'History Teacher', desc: 'Teach history at schools after completing B.Ed.' },
                 { icon: <Building2 className="w-6 h-6" />, title: 'Museum Curator', desc: 'Manage collections and exhibitions in museums' },
-                { icon: <MapPin className="w-6 h-6" />, title: 'Archaeologist', desc: 'Excavate and analyze historical sites and artifacts' },
+                { icon: <MapPin className="w-6 h-6" />, title: 'Archaeologist', desc: 'Excavate and analyze historical sites and artefacts' },
                 { icon: <Library className="w-6 h-6" />, title: 'Archivist', desc: 'Preserve and organize historical records and documents' },
                 { icon: <FileText className="w-6 h-6" />, title: 'Journalist', desc: 'Historical research and writing for media houses' },
                 { icon: <Award className="w-6 h-6" />, title: 'Heritage Manager', desc: 'Manage cultural heritage sites and tourism' },
@@ -624,7 +624,7 @@ export default function BAHistoryPage() {
               <div className="space-y-4">
                 {[
                   { title: 'UGC Recognized & NAAC Accredited', description: 'Quality-assured education meeting national standards with excellent academic reputation.' },
-                  { title: 'Expert Learning Facilitators', description: 'Highly qualified faculty with doctoral degrees, archaeological experience, and research publications.' },
+                  { title: 'Expert Learning Facilitators', description: 'Highly qualified faculty with doctoral degrees and research publications.' },
                   { title: 'UPSC & Competitive Exam Coaching', description: 'Dedicated coaching for civil services with proven track record of successful candidates.' },
                   { title: 'Heritage Tours & Fieldwork', description: 'Regular excursions to archaeological sites, museums, and historical monuments across India.' },
                   { title: 'Research & Publication Support', description: 'Opportunities for archival research, paper presentations, and academic publications in reputed journals.' }
@@ -686,7 +686,7 @@ export default function BAHistoryPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-green/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   <div className="p-5 text-center flex-1 flex flex-col justify-center">
-                    <h4 className="text-lg font-bold text-brand-green mb-1">{faculty.name}</h4>
+                    <h4 className="text-sm font-bold text-brand-green mb-1 whitespace-nowrap">{faculty.name}</h4>
                     <p className="text-sm font-semibold text-emerald-500 mb-1">{faculty.designation}</p>
                     <p className="text-xs text-gray-600">{faculty.qualification}</p>
                   </div>

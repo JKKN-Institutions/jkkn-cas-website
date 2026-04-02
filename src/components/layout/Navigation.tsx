@@ -34,9 +34,11 @@ export default function Navigation() {
   const [othersOpen, setOthersOpen] = useState(false);
   const [othersInteractionMode, setOthersInteractionMode] = useState<'hover' | 'click' | 'keyboard' | null>(null);
   const [nirfOpen, setNirfOpen] = useState(false);
+  const [nirf2026Open, setNirf2026Open] = useState(false);
   const [committeesOpen, setCommitteesOpen] = useState(false);
   const [mobileOthersExpanded, setMobileOthersExpanded] = useState(false);
   const [mobileNirfExpanded, setMobileNirfExpanded] = useState(false);
+  const [mobileNirf2026Expanded, setMobileNirf2026Expanded] = useState(false);
   const [mobileCommitteesExpanded, setMobileCommitteesExpanded] = useState(false);
 
   // Programmes Offered states
@@ -2293,6 +2295,48 @@ export default function Navigation() {
                             >
                               NIRF 2025
                             </Link>
+                            {/* NIRF 2026 Nested Submenu */}
+                            <div
+                              className="relative"
+                              onMouseEnter={() => setNirf2026Open(true)}
+                              onMouseLeave={() => setNirf2026Open(false)}
+                            >
+                              <div className="flex items-center justify-between px-4 py-2 text-gray-700 hover:bg-brand-green hover:text-white transition cursor-pointer text-sm">
+                                <span>NIRF 2026</span>
+                                <ChevronDown className="w-3 h-3 -rotate-90" />
+                              </div>
+
+                              {nirf2026Open && (
+                                <div className="absolute left-full top-0 pl-1 w-56 z-[120]">
+                                  <div className="bg-white rounded-lg shadow-lg border border-gray-200 py-2">
+                                    <Link
+                                      href="/documents/nirf/J.K.K Nataraja College of Arts & Science20260402-college.pdf"
+                                      role="menuitem"
+                                      tabIndex={0}
+                                      className="block px-4 py-2 text-gray-700 hover:bg-brand-green hover:text-white transition text-sm"
+                                    >
+                                      College
+                                    </Link>
+                                    <Link
+                                      href="/documents/nirf/J.K.K Nataraja College of Arts & Science20260402- Overall.pdf"
+                                      role="menuitem"
+                                      tabIndex={0}
+                                      className="block px-4 py-2 text-gray-700 hover:bg-brand-green hover:text-white transition text-sm"
+                                    >
+                                      Overall
+                                    </Link>
+                                    <Link
+                                      href="/documents/nirf/J.K.K Nataraja College of Arts & Science20260402-  Sustainable Institutions.pdf"
+                                      role="menuitem"
+                                      tabIndex={0}
+                                      className="block px-4 py-2 text-gray-700 hover:bg-brand-green hover:text-white transition text-sm"
+                                    >
+                                      Sustainable Institution
+                                    </Link>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       )}
@@ -3469,6 +3513,42 @@ export default function Navigation() {
                           >
                             NIRF 2025
                           </Link>
+                          {/* NIRF 2026 nested accordion */}
+                          <div className="ml-4">
+                            <button
+                              onClick={() => setMobileNirf2026Expanded(!mobileNirf2026Expanded)}
+                              className="w-full flex items-center justify-between py-2 px-4 text-gray-500 hover:bg-brand-cream hover:text-brand-green rounded-lg transition"
+                            >
+                              <span>NIRF 2026</span>
+                              <ChevronDown className={`w-4 h-4 transition-transform ${mobileNirf2026Expanded ? 'rotate-180' : ''}`} />
+                            </button>
+
+                            {mobileNirf2026Expanded && (
+                              <div className="pb-2">
+                                <Link
+                                  href="/documents/nirf/J.K.K Nataraja College of Arts & Science20260402-college.pdf"
+                                  onClick={toggleMobileMenu}
+                                  className="block py-2 px-8 text-gray-500 hover:bg-brand-cream hover:text-brand-green rounded-lg transition"
+                                >
+                                  College
+                                </Link>
+                                <Link
+                                  href="/documents/nirf/J.K.K Nataraja College of Arts & Science20260402- Overall.pdf"
+                                  onClick={toggleMobileMenu}
+                                  className="block py-2 px-8 text-gray-500 hover:bg-brand-cream hover:text-brand-green rounded-lg transition"
+                                >
+                                  Overall
+                                </Link>
+                                <Link
+                                  href="/documents/nirf/J.K.K Nataraja College of Arts & Science20260402-  Sustainable Institutions.pdf"
+                                  onClick={toggleMobileMenu}
+                                  className="block py-2 px-8 text-gray-500 hover:bg-brand-cream hover:text-brand-green rounded-lg transition"
+                                >
+                                  Sustainable Institution
+                                </Link>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       )}
                     </div>

@@ -692,6 +692,24 @@ export function getNavigationGroups(pathname: string): BottomNavGroup[] {
           active: false
         },
         {
+          href: '/documents/nirf/J.K.K Nataraja College of Arts & Science20260402-college.pdf',
+          label: 'NIRF 2026 - College',
+          icon: LayoutGrid,
+          active: false
+        },
+        {
+          href: '/documents/nirf/J.K.K Nataraja College of Arts & Science20260402- Overall.pdf',
+          label: 'NIRF 2026 - Overall',
+          icon: LayoutGrid,
+          active: false
+        },
+        {
+          href: '/documents/nirf/J.K.K Nataraja College of Arts & Science20260402-  Sustainable Institutions.pdf',
+          label: 'NIRF 2026 - Sustainable Institution',
+          icon: LayoutGrid,
+          active: false
+        },
+        {
           href: '/gallery',
           label: 'Gallery',
           icon: LayoutGrid,

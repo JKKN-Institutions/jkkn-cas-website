@@ -306,6 +306,18 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
             label: 'NIRF 2025',
             href: '/documents/nirf/NIRF-2025-COLLEGE.pdf',
           },
+          {
+            label: 'NIRF 2026 - College',
+            href: '/documents/nirf/J.K.K Nataraja College of Arts & Science20260402-college.pdf',
+          },
+          {
+            label: 'NIRF 2026 - Overall',
+            href: '/documents/nirf/J.K.K Nataraja College of Arts & Science20260402- Overall.pdf',
+          },
+          {
+            label: 'NIRF 2026 - Sustainable Institution',
+            href: '/documents/nirf/J.K.K Nataraja College of Arts & Science20260402-  Sustainable Institutions.pdf',
+          },
         ],
       },
     ],
